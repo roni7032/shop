@@ -40,10 +40,10 @@
 			$this->table->set_heading('No.','Nama','link');
 				$no=1;
 				foreach ($data as $key => $value) {
-					$link_value = anchor($value->link,'klik','target="_blank" class="btn btn-xs btn-warning"');
-					// $link .= anchor('jabatan/action/'.$value->id,'<i class="fa fa-eye">','class="btn btn-info"');
-						
-					$this->table->add_row($no++,$value->nama,$link_value);
+					// $link_value = anchor($value->link,'klik','target="_blank" class="btn btn-xs btn-warning"');
+					$link_value = anchor('jabatan/action?ac=set_sudah&id='.$value->id,'<i class="fa fa-eye"> GDrive','class="btn btn-xs btn-info" target="_blank"');
+					$nama=($value->sudah==='yes') ? '<span class="text-red">'.$value->nama.'</span>':'<span class="text-green">'.$value->nama.'</span>';
+					$this->table->add_row($no++,$nama,$link_value);
 				}
 			echo $this->table->generate();
 			?>

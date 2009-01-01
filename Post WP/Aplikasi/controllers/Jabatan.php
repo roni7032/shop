@@ -30,7 +30,7 @@ class Jabatan extends CI_Controller {
 	public function action(){
 		$ac=$this->input->get('ac');
 		$id=$this->input->get('id');
-		$table=$this->input->get('table');
+		// $table=$this->input->get('table');
 		switch($ac){
 			case 'add':
 				$dt=array(
@@ -70,24 +70,10 @@ class Jabatan extends CI_Controller {
 				$this->M_general->deldata('menu',$id);
 				redirect('welcome/menu');
 			break;
-			case 'view':
-				$dt=array(
-					'judul'=>'Menu',
-					'breadcrumb'=>array(
-						array(anchor('','Home'),''),
-						array('menu','class="active"')
-					),
-					'dtganti_text'=>$this->M_general->getData('ganti_text'),
-					'dtedit'=>$this->M_menu->getOne($id),
-				);
-				
-				$dtmenu['menu']=array();
-				
-				$dtmenu['role']=0;
-				$lempar['isi']=view_one('menu/one',$dt);
-				$lempar['js']=view_one('menu/js');
-				$lempar['menu']=view_one('menu/menu_top',$dtmenu);
-				$this->load->view('template/blog_top',$lempar);
+			case 'set_sudah':
+				$dtedit=$this->M_general->getEdit('jabatan',$id);
+				$this->M_general->updateData('jabatan',array('sudah'=>'yes'),$id);
+				redirect($dtedit->link);
 			break;
 			default:
 				$dt=array(
