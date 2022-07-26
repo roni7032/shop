@@ -1,0 +1,54 @@
+ok mas,
+
+website nya CloseCrowds.com
+Login wp-admin nya
+User: admin
+pass: P3k4nB4ru$,?.
+
+mega.nz
+bizacquire@yahoo.com
+P4l3mb4ng$,?.
+
+ke menu Downloads - All Downloads, mas nya cari posting Diverge AI, lalu klik edit untuk lihat isi nya - atau klik duplicate untuk mulai posting baru tanpa harus mulai dari awal.
+
+Tolong gunakan wodpress classic editor aja ya mas, jangan pakai elementor untuk edit nya
+
+Buat Edit:
+Description:
+Yang di bawah garis lurus "Instruction" nggak boleh di edit-edit lagi - di biarkan begitu saja.
+Content yang di copy paste dari Envato hanya "Deskripsi" dan "Feature"
+
+Mas tolong perhatikan yang Deskripsi, itu terkadang ada teks "Elementor kit" atau template kit. Kata ini kurang di mengerti oleh pengunjung. Jadi mas edit di ganti dengan kata yang lebih familiar seperti Elementor kit di ganti menjadi themes, atau web design atau template.
+
+Nangkep maksud saya nya ya mas?
+
+Lalu pilih kategori (disamakan seperti envato)
+
+Upload Image di "Feature" - sebelah kanan dan Product Gallery (agak di bawah)
+
+Input tags di sebelah kanan.
+Tags di sesuaikan dengan website. Contoh - website nya tentang Technologi atau tentang Food, tags nya jadi "Technology Website" "Create tech website", "wordpress website"   dan seterusnya, yang penting senada dengan theme website
+
+Untuk link download nya di ambil dari mega.nz.
+Nanti mas nya saya kasih login nya
+
+Untuk bikin Live Preview nya
+Formatnya seperti ini
+https://closecrowds.com/themes/?theme=AIRobotWebsite
+Mas nya tinggal ganti kata terakhir. Misal judul website dan posting nya dari ini
+https://elements.envato.com/ophelia-hotel-resort-elementor-template-kit-2GG3QWU
+Mas bikin link preview nya:
+https://closecrowds.com/themes/?theme=Ophelia-resort
+(Harus hanya dua kata; nama theme dan jenis bisnis nya dan harus ada tanda penghubung)
+Misal nama website "Keren" bisnis nya tentang Pertanian, maka link nya jadi:
+https://closecrowds.com/themes/?theme=Keren-farm
+
+Nanti mas nya kasih report nya ke saya atau buat report di google sheet.
+isinya:
+Link akhir posting: https://www.closecrowds.com/downloads/diverge-ai-robotics-website-themes/
+Link halaman produk: https://elements.envato.com/diverge-ai-robotics-elementor-template-kit-3RHE7EE
+Link live sumber : https://elementorpress.com/templatekit-pro/layout45/
+Link preview https://closecrowds.com/themes/?theme=AIRobotWebsite
+
+Coba mas nya buat satu posting dulu biar saya bisa review
+makasih ya
