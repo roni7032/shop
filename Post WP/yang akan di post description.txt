@@ -1,0 +1,15 @@
+<p>Anteri is suitable for those of you who have concrete services for personal or campany, so that your services are known and professional. Built with a contemporary and modern design and also easy to customize</p>
+<p><strong>Features</strong></p>
+<ul>
+    <li>Home</li>
+    <li>About</li>
+    <li>Services</li>
+    <li>Project</li>
+    <li>Pricing</li>
+    <li>404</li>
+    <li>Contact us</li>
+    <li>Off Canvas</li>
+    <li>Form Contact</li>
+    <li>Header</li>
+    <li>Footer</li>
+</ul>
