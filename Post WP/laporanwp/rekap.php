@@ -48,7 +48,7 @@
 					?></div>
 					<div class="form-group">
 						<?php 
-							echo form_submit('next', '<i class="fa fa-arrow-right"></i> Next','class="form-control btn btn-info pull-right"'); 
+							echo form_submit('next', ' Next','class="btn btn-info pull-right"'); 
 						?>
 					</div>
 					<?php
@@ -118,7 +118,7 @@
 					?></div>
 					<div class="form-group">
 						<?php 
-							echo form_submit('next', '<i class="fa fa-arrow-right"></i> Next','class="form-control btn btn-info pull-right"'); 
+							echo form_submit('next', ' Next','class="btn btn-info pull-right"'); 
 						?>
 					</div>
 					<?php
@@ -188,7 +188,7 @@
 					?></div>
 					<div class="form-group">
 						<?php 
-							echo form_submit('next', '<i class="fa fa-arrow-right"></i> Next','class="form-control btn btn-info pull-right"'); 
+							echo form_submit('next', ' Next','class="btn btn-info pull-right"'); 
 						?>
 					</div>
 					<?php
@@ -258,7 +258,7 @@
 					?></div>
 					<div class="form-group">
 						<?php 
-							echo form_submit('next', '<i class="fa fa-arrow-right"></i> Next','class="form-control btn btn-info pull-right"'); 
+							echo form_submit('next', ' Next','class="btn btn-info pull-right"'); 
 						?>
 					</div>
 					<?php
@@ -328,7 +328,7 @@
 					?></div>
 					<div class="form-group">
 						<?php 
-							echo form_submit('next', '<i class="fa fa-arrow-right"></i> Next','class="form-control btn btn-info pull-right"'); 
+							echo form_submit('next', ' Next','class="btn btn-info pull-right"'); 
 						?>
 					</div>
 					<?php
@@ -398,7 +398,7 @@
 					?></div>
 					<div class="form-group">
 						<?php 
-							echo form_submit('next', '<i class="fa fa-arrow-right"></i> Next','class="form-control btn btn-info pull-right"'); 
+							echo form_submit('next', ' Next','class="btn btn-info pull-right"'); 
 						?>
 					</div>
 					<?php
@@ -468,7 +468,7 @@
 					?></div>
 					<div class="form-group">
 						<?php 
-							echo form_submit('next', '<i class="fa fa-arrow-right"></i> Next','class="form-control btn btn-info pull-right"'); 
+							echo form_submit('next', ' Next','class="btn btn-info pull-right"'); 
 						?>
 					</div>
 					<?php
@@ -538,7 +538,7 @@
 					?></div>
 					<div class="form-group">
 						<?php 
-							echo form_submit('next', '<i class="fa fa-arrow-right"></i> Next','class="form-control btn btn-info pull-right"'); 
+							echo form_submit('next', ' Next','class="btn btn-info pull-right"'); 
 						?>
 					</div>
 					<?php
