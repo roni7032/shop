@@ -4,7 +4,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        BMH Marketing
+        Level 1
         <small>it all starts here</small>
       </h1>
       <ol class="breadcrumb">
@@ -30,7 +30,11 @@
 		<div class="row">
 			<div class="col-md-12">
 			<?php
-				echo form_open('laporanwp/simpan','id="laporanwp"'); ?>
+				$hidden=array(
+					'ac'=>'level_2',
+					'id'=>$dtedit->id
+				);
+				echo form_open('laporanwp/action','id="laporanwp" method="get"',$hidden); ?>
 					<div class="form-group">
 					<?php echo form_label('Judul', 'judul');
 					echo form_input(array(
@@ -42,9 +46,12 @@
 						'value'=>$dtedit->judul
 					));
 					?></div>
-					
+					<div class="form-group">
+						<?php 
+							echo form_submit('next', '<i class="fa fa-arrow-right"></i> Next','class="form-control btn btn-info pull-right"'); 
+						?>
+					</div>
 					<?php
-					echo anchor('laporanwp/action?ac=level_2&id='.$dtedit->id,'<i class="fa fa-arrow-right"></i> Level 2','class="btn btn-info pull-right"');
 					echo form_close(); 
 					?>
 			</div>
@@ -67,7 +74,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        BMH Marketing
+        Level 2
         <small>it all starts here</small>
       </h1>
       <ol class="breadcrumb">
@@ -93,7 +100,11 @@
 		<div class="row">
 			<div class="col-md-12">
 			<?php
-				echo form_open('laporanwp/simpan','id="laporanwp"'); ?>
+				$hidden=array(
+					'ac'=>'level_3',
+					'id'=>$dtedit->id
+				);
+				echo form_open('laporanwp/action','id="laporanwp" method="get"',$hidden);?>
 					<div class="form-group">
 					<?php echo form_label('Deskripsi', 'deskripsi');
 					echo form_textarea(array(
@@ -105,9 +116,12 @@
 						'value'=>$dtedit->deskripsi.$desc_1
 					));
 					?></div>
-					
+					<div class="form-group">
+						<?php 
+							echo form_submit('next', '<i class="fa fa-arrow-right"></i> Next','class="form-control btn btn-info pull-right"'); 
+						?>
+					</div>
 					<?php
-					echo anchor('laporanwp/action?ac=level_3&id='.$dtedit->id,'<i class="fa fa-arrow-right"></i> Level 3','class="btn btn-info pull-right"');
 					echo form_close(); 
 					?>
 			</div>
@@ -130,7 +144,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        BMH Marketing
+        Level 3
         <small>it all starts here</small>
       </h1>
       <ol class="breadcrumb">
@@ -156,7 +170,11 @@
 		<div class="row">
 			<div class="col-md-12">
 			<?php
-				echo form_open('laporanwp/simpan','id="laporanwp"'); ?>
+				$hidden=array(
+					'ac'=>'level_4',
+					'id'=>$dtedit->id
+				);
+				echo form_open('laporanwp/action','id="laporanwp" method="get"',$hidden);?>
 					<div class="form-group">
 					<?php echo form_label('Harga', 'harga');
 					echo form_input(array(
@@ -168,9 +186,12 @@
 						'value'=>$dtedit->harga
 					));
 					?></div>
-					
+					<div class="form-group">
+						<?php 
+							echo form_submit('next', '<i class="fa fa-arrow-right"></i> Next','class="form-control btn btn-info pull-right"'); 
+						?>
+					</div>
 					<?php
-					echo anchor('laporanwp/action?ac=level_4&id='.$dtedit->id,'<i class="fa fa-arrow-right"></i> Level 4','class="btn btn-info pull-right"');
 					echo form_close(); 
 					?>
 			</div>
@@ -193,7 +214,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        BMH Marketing
+        Level 4
         <small>it all starts here</small>
       </h1>
       <ol class="breadcrumb">
@@ -219,7 +240,11 @@
 		<div class="row">
 			<div class="col-md-12">
 			<?php
-				echo form_open('laporanwp/simpan','id="laporanwp"'); ?>
+				$hidden=array(
+					'ac'=>'level_5',
+					'id'=>$dtedit->id
+				);
+				echo form_open('laporanwp/action','id="laporanwp" method="get"',$hidden); ?>
 					<div class="form-group">
 					<?php echo form_label('URL Download', 'url_download');
 					echo form_input(array(
@@ -231,9 +256,12 @@
 						'value'=>$dtedit->mega_download
 					));
 					?></div>
-					
+					<div class="form-group">
+						<?php 
+							echo form_submit('next', '<i class="fa fa-arrow-right"></i> Next','class="form-control btn btn-info pull-right"'); 
+						?>
+					</div>
 					<?php
-					echo anchor('laporanwp/action?ac=level_5&id='.$dtedit->id,'<i class="fa fa-arrow-right"></i> Level 5','class="btn btn-info pull-right"');
 					echo form_close(); 
 					?>
 			</div>
@@ -256,7 +284,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        BMH Marketing
+        Level 5
         <small>it all starts here</small>
       </h1>
       <ol class="breadcrumb">
@@ -282,7 +310,11 @@
 		<div class="row">
 			<div class="col-md-12">
 			<?php
-				echo form_open('laporanwp/simpan','id="laporanwp"'); ?>
+				$hidden=array(
+					'ac'=>'level_6',
+					'id'=>$dtedit->id
+				);
+				echo form_open('laporanwp/action','id="laporanwp" method="get"',$hidden); ?>
 					<div class="form-group">
 					<?php echo form_label('Judul', 'judul');
 					echo form_input(array(
@@ -294,9 +326,12 @@
 						'value'=>$dtedit->judul
 					));
 					?></div>
-					
+					<div class="form-group">
+						<?php 
+							echo form_submit('next', '<i class="fa fa-arrow-right"></i> Next','class="form-control btn btn-info pull-right"'); 
+						?>
+					</div>
 					<?php
-					echo anchor('laporanwp/action?ac=level_6&id='.$dtedit->id,'<i class="fa fa-arrow-right"></i> Level 6','class="btn btn-info pull-right"');
 					echo form_close(); 
 					?>
 			</div>
@@ -319,7 +354,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        BMH Marketing
+        Level 6
         <small>it all starts here</small>
       </h1>
       <ol class="breadcrumb">
@@ -345,7 +380,11 @@
 		<div class="row">
 			<div class="col-md-12">
 			<?php
-				echo form_open('laporanwp/simpan','id="laporanwp"'); ?>
+				$hidden=array(
+					'ac'=>'level_7',
+					'id'=>$dtedit->id
+				);
+				echo form_open('laporanwp/action','id="laporanwp" method="get"',$hidden); ?>
 					<div class="form-group">
 					<?php echo form_label('Nama Gambar', 'nama_gambar');
 					echo form_input(array(
@@ -357,9 +396,12 @@
 						'value'=>$dtedit->nama_gambar
 					));
 					?></div>
-					
+					<div class="form-group">
+						<?php 
+							echo form_submit('next', '<i class="fa fa-arrow-right"></i> Next','class="form-control btn btn-info pull-right"'); 
+						?>
+					</div>
 					<?php
-					echo anchor('laporanwp/action?ac=level_7&id='.$dtedit->id,'<i class="fa fa-arrow-right"></i> Level 7','class="btn btn-info pull-right"');
 					echo form_close(); 
 					?>
 			</div>
@@ -382,7 +424,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        BMH Marketing
+        Level 7
         <small>it all starts here</small>
       </h1>
       <ol class="breadcrumb">
@@ -408,7 +450,11 @@
 		<div class="row">
 			<div class="col-md-12">
 			<?php
-				echo form_open('laporanwp/simpan','id="laporanwp"'); ?>
+				$hidden=array(
+					'ac'=>'level_8',
+					'id'=>$dtedit->id
+				);
+				echo form_open('laporanwp/action','id="laporanwp" method="get"',$hidden); ?>
 					<div class="form-group">
 					<?php echo form_label('URL Preview ', 'url_preview');
 					echo form_input(array(
@@ -420,9 +466,12 @@
 						'value'=>$dtedit->url_preview
 					));
 					?></div>
-					
+					<div class="form-group">
+						<?php 
+							echo form_submit('next', '<i class="fa fa-arrow-right"></i> Next','class="form-control btn btn-info pull-right"'); 
+						?>
+					</div>
 					<?php
-					echo anchor('laporanwp/action?ac=level_8&id='.$dtedit->id,'<i class="fa fa-arrow-right"></i> Level 8','class="btn btn-info pull-right"');
 					echo form_close(); 
 					?>
 			</div>
@@ -445,7 +494,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        BMH Marketing
+        Level 8
         <small>it all starts here</small>
       </h1>
       <ol class="breadcrumb">
@@ -471,7 +520,11 @@
 		<div class="row">
 			<div class="col-md-12">
 			<?php
-				echo form_open('laporanwp/simpan','id="laporanwp"'); ?>
+				$hidden=array(
+					'ac'=>'level_9',
+					'id'=>$dtedit->id
+				);
+				echo form_open('laporanwp/action','id="laporanwp" method="get"',$hidden); ?>
 					<div class="form-group">
 					<?php echo form_label('Tags ', 'tags');
 					echo form_input(array(
@@ -483,9 +536,12 @@
 						'value'=>$dtedit->tags
 					));
 					?></div>
-					
+					<div class="form-group">
+						<?php 
+							echo form_submit('next', '<i class="fa fa-arrow-right"></i> Next','class="form-control btn btn-info pull-right"'); 
+						?>
+					</div>
 					<?php
-					echo anchor('laporanwp/action?ac=level_9&id='.$dtedit->id,'<i class="fa fa-arrow-right"></i> Level 9','class="btn btn-info pull-right"');
 					echo form_close(); 
 					?>
 			</div>
@@ -508,7 +564,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        BMH Marketing
+        Level 10(END)
         <small>it all starts here</small>
       </h1>
       <ol class="breadcrumb">
