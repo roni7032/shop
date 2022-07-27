@@ -208,13 +208,13 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-<?php elseif($for=='level_4'): ?>
+<?php elseif($for=='level_5'): ?>
 	<!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Level 4
+        Level 5
         <small>it all starts here</small>
       </h1>
       <ol class="breadcrumb">
@@ -241,7 +241,7 @@
 			<div class="col-md-12">
 			<?php
 				$hidden=array(
-					'ac'=>'level_5',
+					'ac'=>'level_6',
 					'id'=>$dtedit->id
 				);
 				echo form_open('laporanwp/action','id="laporanwp" method="get"',$hidden); ?>
@@ -278,13 +278,13 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-<?php elseif($for=='level_5'): ?>
+<?php elseif($for=='level_4'): ?>
 	<!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Level 5
+        Level 4
         <small>it all starts here</small>
       </h1>
       <ol class="breadcrumb">
@@ -311,7 +311,7 @@
 			<div class="col-md-12">
 			<?php
 				$hidden=array(
-					'ac'=>'level_6',
+					'ac'=>'level_5',
 					'id'=>$dtedit->id
 				);
 				echo form_open('laporanwp/action','id="laporanwp" method="get"',$hidden); ?>
@@ -604,6 +604,7 @@
 						'value'=>$dtedit->url,
 						'class'=>'form-control',
 						'id'=>'url',
+						'autofocus'=>'autofocus',
 						'placeholder'=>'URL'
 						)
 					);
