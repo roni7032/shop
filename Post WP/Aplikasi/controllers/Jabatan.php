@@ -24,7 +24,7 @@ class Jabatan extends CI_Controller {
 		$dtmenu['role']=0;
 		$lempar['isi']=view_one('jabatan/all',$dt);
 		$lempar['menu']=view_one('menu/menu',$dtmenu);
-		$this->load->view('template/blog_editor',$lempar);
+		$this->load->view('template/blog_plain',$lempar);
 	}
 	
 	public function action(){
