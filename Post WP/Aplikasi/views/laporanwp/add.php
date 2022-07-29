@@ -110,7 +110,7 @@
 						'placeholder'=>'URL Preview'
 						)
 					);
-					?></div>
+					?><span class="text-red">https://closecrowds.com/themes/?theme=</span></div>
 					<div class="form-group">
 					<?php echo form_label('URL Asli', 'url_asli');
 					echo form_input(array(
@@ -302,13 +302,13 @@
 					echo form_input(array(
 						'type'=>'text',
 						'name'=>'url_preview',
-						'value'=>'',
+						'value'=>'https://closecrowds.com/themes/?theme=',
 						'class'=>'form-control',
 						'id'=>'url_preview',
 						'placeholder'=>'URL Preview'
 						)
 					);
-					?></div>
+					?><span class="text-red">https://closecrowds.com/themes/?theme=</span></div>
 					<div class="form-group">
 					<?php echo form_label('URL Asli', 'url_asli');
 					echo form_input(array(
