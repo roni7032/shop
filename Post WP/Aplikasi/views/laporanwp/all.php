@@ -72,10 +72,11 @@ legend.scheduler-border {
 				$this->table->set_heading('No.','Judul','Laporan','Action');
 					$no=1;
 					foreach ($data as $key => $value) {
+						$link_judul = anchor($value->url,$value->judul,'target="_blank"');
 						$link = anchor('laporanwp/action?ac=edit&id='.$value->id,' <i class="fa fa-pencil"></i> Edit','class="btn btn-block btn-warning"');
 						$link .= anchor('laporanwp/action?ac=level_1&id='.$value->id,'<i class="fa fa-arrow-right"></i> Level 1','class="btn btn-block btn-info"');
 							
-						$this->table->add_row($value->id,$value->judul,$value->laporan,$link);
+						$this->table->add_row($value->id,$link_judul,$value->laporan,$link);
 					}
 				echo $this->table->generate();
 			?>

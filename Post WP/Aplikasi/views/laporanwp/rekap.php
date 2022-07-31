@@ -43,6 +43,7 @@
 						'id'=>'judul',
 						'placeholder'=>'Judul',
 						'autofocus'=>'autofocus',
+						'onFocus'=>'this.select();',
 						'value'=>$dtedit->judul
 					));
 					?></div>
@@ -113,6 +114,7 @@
 						'id'=>'deskripsi',
 						'placeholder'=>'Deskripsi',
 						'autofocus'=>'autofocus',
+						'onFocus'=>'this.select();',
 						'value'=>$dtedit->deskripsi.$desc_1
 					));
 					?></div>
@@ -183,6 +185,7 @@
 						'id'=>'harga',
 						'placeholder'=>'Harga',
 						'autofocus'=>'autofocus',
+						'onFocus'=>'this.select();',
 						'value'=>$dtedit->harga
 					));
 					?></div>
@@ -253,6 +256,7 @@
 						'id'=>'url_download',
 						'placeholder'=>'URL Download',
 						'autofocus'=>'autofocus',
+						'onFocus'=>'this.select();',
 						'value'=>$dtedit->mega_download
 					));
 					?></div>
@@ -323,6 +327,7 @@
 						'id'=>'judul',
 						'placeholder'=>'Judul',
 						'autofocus'=>'autofocus',
+						'onFocus'=>'this.select();',
 						'value'=>$dtedit->judul
 					));
 					?></div>
@@ -393,9 +398,12 @@
 						'id'=>'nama_gambar',
 						'placeholder'=>'Nama Gambar',
 						'autofocus'=>'autofocus',
+						'onFocus'=>'this.select();',
 						'value'=>$dtedit->nama_gambar
 					));
-					?></div>
+					?>
+					<?php if(isset($dtedit->mega_link)): ?><a href="<?php echo $dtedit->mega_link; ?>" target="_blank"><?php echo $dtedit->mega_link; ?></a><?php endif; ?>
+					</div>
 					<div class="form-group">
 						<?php 
 							echo form_submit('next', ' Next','class="btn btn-info pull-right"'); 
@@ -463,6 +471,7 @@
 						'id'=>'url_preview',
 						'placeholder'=>'URL Preview',
 						'autofocus'=>'autofocus',
+						'onFocus'=>'this.select();',
 						'value'=>$dtedit->url_preview
 					));
 					?></div>
@@ -533,6 +542,7 @@
 						'id'=>'tags',
 						'placeholder'=>'Tags',
 						'autofocus'=>'autofocus',
+						'onFocus'=>'this.select();',
 						'value'=>$dtedit->tags
 					));
 					?></div>

@@ -46,7 +46,7 @@ class Laporanwp extends CI_Controller {
 				$dtmenu['role']=0;
 				$lempar['isi']=view_one('laporanwp/add',$dt);
 				$lempar['menu']=view_one('menu/menu',$dtmenu);
-				$this->load->view('template/blog_plain',$lempar);
+				$this->load->view('template/blog_editor',$lempar);
 			break;
 			case 'edit':
 				$dt=array(
@@ -65,7 +65,7 @@ class Laporanwp extends CI_Controller {
 				$dtmenu['role']=0;
 				$lempar['isi']=view_one('laporanwp/add',$dt);
 				$lempar['menu']=view_one('menu/menu',$dtmenu);
-				$this->load->view('template/blog_plain',$lempar);
+				$this->load->view('template/blog_editor',$lempar);
 			break;
 			case 'delete':
 				$this->M_general->deldata('laporan_wp',$id);
@@ -295,10 +295,10 @@ class Laporanwp extends CI_Controller {
 				$ganti_url_asli_preview=array('https://');
 				$url_asli_preview=str_replace($cari_url_asli_preview,$ganti_url_asli_preview,$this->input->post('url_asli_preview'));
 				*/
-				$cari_deskripsi=array('Template Kit');
-				$ganti_deskripsi=array('Theme');
-				$deskripsi_1=str_replace($cari_deskripsi,$ganti_deskripsi,$this->input->post('deskripsi'));
-				$deskripsi=$deskripsi_1.$this->helpDes();
+				$cari_deskripsi=array('Template Kit','template kit');
+				$ganti_deskripsi=array('Theme','Theme');
+				$deskripsi=str_replace($cari_deskripsi,$ganti_deskripsi,$this->input->post('deskripsi'));
+				// $deskripsi=$deskripsi_1.$this->helpDes();
 				
 				$dtsave=array(
 					'judul' => $judul,
@@ -315,6 +315,9 @@ class Laporanwp extends CI_Controller {
 					'mega_download' => $this->input->post('mega_download'),
 					'deskripsi' => $deskripsi,
 				);
+				
+				if($this->input->post('id')!=0) $dtsave['id']=$this->input->post('id');
+				
 				$id=$this->M_general->addData('laporan_wp',$dtsave);
 				redirect('laporanwp/action?ac=edit&id='.$id);
 			break;
@@ -352,6 +355,8 @@ class Laporanwp extends CI_Controller {
 					'deskripsi' => $deskripsi,
 				);
 				$this->M_general->updateData('laporan_wp',$dtsave,$id);
+				
+				redirect($table.'/action?ac=edit&id='.($id-1));
 			break;
 			case 'edit_1':
 				$cari_url_x=array('https://www.closecrowds.com/');
