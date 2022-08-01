@@ -26,6 +26,32 @@
 		</div>
 	</div>
 	<div class="box-body">
+		<?php if(isset($dtedit)): ?>
+		<div class="row">
+			<div class="col-md-12">
+				<a href="<?php echo site_url('laporanwp/action?ac=edit&id='.($dtedit->id)-1); ?>" class="btn btn-info">Previous</a>
+				<div class="btn-group">
+                  <a href="<?php echo site_url('laporanwp/action?ac=level_1&id='.$dtedit->id); ?>" class="btn btn-warning">Level 1</a>
+                  <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="<?php echo site_url('laporanwp/action?ac=level_1&id='.($dtedit->id)-1); ?>">Prev Level 1</a></li>
+                    <li><a href="<?php echo site_url('laporanwp/action?ac=level_1&id='.($dtedit->id)+1); ?>">Next Level 1</a></li>
+                    <li class="divider"></li>
+                    <li><a href="<?php echo site_url('laporanwp'); ?>">ALL</a></li>
+                  </ul>
+                </div>
+				<a href="<?php echo site_url('laporanwp/action?ac=edit&id='.($dtedit->id)+1); ?>" class="btn btn-info">Next</a>
+			</div>
+		</div>
+		<?php endif; ?>
+		<div class="row">
+			<div class="col-md-12">
+				<hr/>
+			</div>
+		</div>
 		<div class="row">
 			<div class="col-md-12">
 				<?php if(isset($id)): ?>
@@ -33,10 +59,21 @@
 				<?php
 				$hidden=array(
 						'table'=>'laporanwp',
-						'ac'=>'edit',
-						'id'=>$dtedit->id
+						'ac'=>'edit'
 					);
 				echo form_open('laporanwp/simpan','id="laporanwp"',$hidden); ?>
+					<div class="form-group">
+					<?php echo form_label('ID', 'id');
+					echo form_input(array(
+						'type'=>'number',
+						'name'=>'id',
+						'value'=>$dtedit->id,
+						'class'=>'form-control',
+						'id'=>'id',
+						'placeholder'=>'ID'
+						)
+					);
+					?></div>
 					<div class="form-group">
 					<?php echo form_label('judul', 'judul');
 					echo form_input(array(
@@ -104,13 +141,13 @@
 					echo form_input(array(
 						'type'=>'text',
 						'name'=>'url_preview',
-						'value'=>$dtedit->url_preview,
+						'value'=>(empty($dtedit->url_preview)) ? 'https://closecrowds.com/themes/?theme=':$dtedit->url_preview,
 						'class'=>'form-control',
 						'id'=>'url_preview',
 						'placeholder'=>'URL Preview'
 						)
 					);
-					?></div>
+					?><span class="text-red">https://closecrowds.com/themes/?theme=</span></div>
 					<div class="form-group">
 					<?php echo form_label('URL Asli', 'url_asli');
 					echo form_input(array(
@@ -237,6 +274,19 @@
 					);
 					echo form_open('laporanwp/simpan','id="laporanwp"',$hidden); ?>
 					<div class="form-group">
+					<?php echo form_label('ID', 'id');
+					echo form_input(array(
+						'type'=>'number',
+						'name'=>'id',
+						'value'=>0,
+						'class'=>'form-control',
+						'id'=>'id',
+						'autofocus'=>'autofocus',
+						'placeholder'=>'ID'
+						)
+					);
+					?></div>
+					<div class="form-group">
 					<?php echo form_label('judul', 'judul');
 					echo form_input(array(
 						'type'=>'text',
@@ -302,13 +352,13 @@
 					echo form_input(array(
 						'type'=>'text',
 						'name'=>'url_preview',
-						'value'=>'',
+						'value'=>'https://closecrowds.com/themes/?theme=',
 						'class'=>'form-control',
 						'id'=>'url_preview',
 						'placeholder'=>'URL Preview'
 						)
 					);
-					?></div>
+					?><span class="text-red">https://closecrowds.com/themes/?theme=</span></div>
 					<div class="form-group">
 					<?php echo form_label('URL Asli', 'url_asli');
 					echo form_input(array(
@@ -352,6 +402,7 @@
 						'name'=>'tags',
 						'value'=>'',
 						'class'=>'form-control',
+						'required'=>'required',
 						'id'=>'tags',
 						'placeholder'=>'Tags'
 						)
