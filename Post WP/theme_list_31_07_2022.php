@@ -57,7 +57,7 @@ array(
     ),
 array(
         "id" 		 => "fidda-portfolio",
-        "url" 		 => "https://template-kits.designtone.xyz/fidda/template-kit/fidda-home/",
+        "url" 		 => "https://template-kits.designtone.xyz/fidda/template-kit/fidda-home/?storefront=envato-elements",
         "purchase" 	 => "/downloads/fidda-portfolio-agency-theme/",
         "responsive" => "yes",
         "type"       => "wordpress",
@@ -72,22 +72,6 @@ array(
         "thumb"      => ""
     ),
 array(
-        "id" 		 => "finterior-interior",
-        "url" 		 => "https://templatekit.tokomoo.com/interiorkit/",
-        "purchase" 	 => "/downloads/finterior-interior-design-architecture-theme/",
-        "responsive" => "yes",
-        "type"       => "wordpress",
-        "thumb"      => ""
-    ),
-array(
-        "id" 		 => "floki-photography",
-        "url" 		 => "http://inspiratype.com/floki/",
-        "purchase" 	 => "/downloads/floki-photography-studio-theme/",
-        "responsive" => "yes",
-        "type"       => "wordpress",
-        "thumb"      => ""
-    ),
-array(
         "id" 		 => "minerva-publicrelation",
         "url" 		 => "https://templatekits.themewarrior.com/minerva/template-kit/home/",
         "purchase" 	 => "/downloads/minerva-public-relation-creative-agency-theme/",
@@ -97,7 +81,7 @@ array(
     ),
 array(
         "id" 		 => "floy-interiordesign",
-        "url" 		 => "http://templatekits.c-kav.com/demo4/floy/",
+        "url" 		 => "http://templatekits.c-kav.com/demo4/floy/?storefront=envato-elements",
         "purchase" 	 => "/downloads/floy-interior-design-architecture-theme/",
         "responsive" => "yes",
         "type"       => "wordpress",
@@ -121,7 +105,7 @@ array(
     ),
 array(
         "id" 		 => "fumia-startup",
-        "url" 		 => "https://meem-codex.site/fumia/template-kit/home/",
+        "url" 		 => "https://meem-codex.site/fumia/template-kit/home/?storefront=envato-elements",
         "purchase" 	 => "/downloads/fumia-startup-agency-theme/",
         "responsive" => "yes",
         "type"       => "wordpress",
@@ -145,24 +129,8 @@ array(
     ),
 array(
         "id" 		 => "genion-creative",
-        "url" 		 => "https://templatekit.selaraswp.com/digitalkit/",
+        "url" 		 => "https://templatekit.selaraswp.com/digitalkit/?storefront=envato-elements",
         "purchase" 	 => "/downloads/genion-creative-digital-agency-theme/",
-        "responsive" => "yes",
-        "type"       => "wordpress",
-        "thumb"      => ""
-    ),
-array(
-        "id" 		 => "give-boostdigital",
-        "url" 		 => "https://bimberonline.com/give-boost/",
-        "purchase" 	 => "/downloads/give-boost-digital-marketing-agency-theme/",
-        "responsive" => "yes",
-        "type"       => "wordpress",
-        "thumb"      => ""
-    ),
-array(
-        "id" 		 => "goodman-creativeportofolio",
-        "url" 		 => "https://paulgoodman.typetemp-studio.com/",
-        "purchase" 	 => "/downloads/goodman-creative-portofolio-theme/",
         "responsive" => "yes",
         "type"       => "wordpress",
         "thumb"      => ""
@@ -185,7 +153,7 @@ array(
     ),
 array(
         "id" 		 => "gulali-creative",
-        "url" 		 => "https://kreativ.space/gulali/template-kit/home/",
+        "url" 		 => "https://kreativ.space/gulali/template-kit/home/?storefront=envato-elements",
         "purchase" 	 => "/downloads/gulali-creative-portfolio-theme/",
         "responsive" => "yes",
         "type"       => "wordpress",
@@ -225,24 +193,8 @@ array(
     ),
 array(
         "id" 		 => "heru-creative",
-        "url" 		 => "https://demo.cocobasic.com/elementor-kit/heru/",
+        "url" 		 => "https://demo.cocobasic.com/elementor-kit/heru/?storefront=envato-elements",
         "purchase" 	 => "/downloads/heru-creative-theme/",
-        "responsive" => "yes",
-        "type"       => "wordpress",
-        "thumb"      => ""
-    ),
-array(
-        "id" 		 => "hillary-creative",
-        "url" 		 => "http://inspiratype.com/hillary/",
-        "purchase" 	 => "/downloads/hillary-creative-portfolio-theme/",
-        "responsive" => "yes",
-        "type"       => "wordpress",
-        "thumb"      => ""
-    ),
-array(
-        "id" 		 => "hoax-creative",
-        "url" 		 => "https://yrkit.rometheme.pro/hoax/",
-        "purchase" 	 => "/downloads/hoax-creative-agency-theme/",
         "responsive" => "yes",
         "type"       => "wordpress",
         "thumb"      => ""
@@ -307,22 +259,6 @@ array(
         "id" 		 => "itsmykit-dark",
         "url" 		 => "https://demo.moxcreative.com/itsmykit/template-kit/itsmykit/",
         "purchase" 	 => "/downloads/itsmykit-dark-creative-portfolio-theme/",
-        "responsive" => "yes",
-        "type"       => "wordpress",
-        "thumb"      => ""
-    ),
-array(
-        "id" 		 => "kreatifa-creative",
-        "url" 		 => "https://demo.moxcreative.com/kreatifa/template-kit/homepage/",
-        "purchase" 	 => "/downloads/kreatifa-creative-digital-agency-theme/",
-        "responsive" => "yes",
-        "type"       => "wordpress",
-        "thumb"      => ""
-    ),
-array(
-        "id" 		 => "leacraft-handmadecrafts",
-        "url" 		 => "http://elementor.doodlias.com/leacraft/",
-        "purchase" 	 => "/downloads/leacraft-handmade-crafts-theme/",
         "responsive" => "yes",
         "type"       => "wordpress",
         "thumb"      => ""
