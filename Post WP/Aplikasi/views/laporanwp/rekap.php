@@ -474,7 +474,7 @@
 						'onFocus'=>'this.select();',
 						'value'=>$dtedit->url_preview
 					));
-					echo isset($dtedit->url) ? anchor($dtedit->url,$dtedit->url,'target="_blank"'):'';
+					echo ($dtedit->url!='') ? anchor($dtedit->url,$dtedit->url,'target="_blank"'):'';
 					?></div>
 					<div class="form-group">
 						<?php 
