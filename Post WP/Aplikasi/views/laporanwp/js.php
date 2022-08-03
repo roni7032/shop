@@ -4,7 +4,14 @@
 	</script>
 <?php elseif($for=='edit'): ?>
 	<script type="text/javascript">
-		CKEDITOR.replace('deskripsi');
+		$('#btn-off').click(function(){
+			let text_url_asli_preview, id_url_asli_preview
+			id_url_asli_preview=$('[name="id"]').val()
+			text_url_asli_preview=$('[name="url_asli_preview"]').val()
+			window.location.href= '<?php echo site_url('laporanwp'); ?>/action?ac=xactive&id='+id_url_asli_preview+'&url_asli_preview='+text_url_asli_preview
+		})
+	
+		// CKEDITOR.replace('deskripsi');
 	</script>
 <?php else: ?>
 	<script type="text/javascript">

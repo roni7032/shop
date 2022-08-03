@@ -161,17 +161,29 @@
 					);
 					?></div>
 					<div class="form-group">
-					<?php echo form_label('URL Asli Preview', 'url_asli_preview');
-					echo form_input(array(
-						'type'=>'text',
-						'name'=>'url_asli_preview',
-						'value'=>$dtedit->url_asli_preview,
-						'class'=>'form-control',
-						'id'=>'url_asli_preview',
-						'placeholder'=>'URL Asli Preview'
-						)
-					);
-					?></div>
+						<div class="row">
+							<div class="col-md-12">
+								<?php echo form_label('URL Asli Preview', 'url_asli_preview'); ?>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-10">
+								<?php echo form_input(array(
+									'type'=>'text',
+									'name'=>'url_asli_preview',
+									'value'=>$dtedit->url_asli_preview,
+									'class'=>'form-control',
+									'id'=>'url_asli_preview',
+									'placeholder'=>'URL Asli Preview'
+									)
+								);
+								?>
+							</div>
+							<div class="col-md-2">
+								<button type="button" id="btn-off" class="btn btn-danger">OFF</button>
+							</div>
+						</div>
+					</div>
 					<div class="form-group">
 					<?php echo form_label('Harga', 'harga');
 					echo form_input(array(

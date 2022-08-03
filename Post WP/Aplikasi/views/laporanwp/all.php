@@ -72,10 +72,18 @@ legend.scheduler-border {
 				$this->table->set_heading('No.','Judul','Laporan','Action');
 					$no=1;
 					foreach ($data as $key => $value) {
-						$link = anchor('laporanwp/action?ac=edit&id='.$value->id,' <i class="fa fa-pencil"></i> Edit','class="btn btn-block btn-warning"');
-						$link .= anchor('laporanwp/action?ac=level_1&id='.$value->id,'<i class="fa fa-arrow-right"></i> Level 1','class="btn btn-block btn-info"');
+					
+						if($value->url_preview=='OFF'){
+							$link = anchor('laporanwp/action?ac=edit&id='.$value->id,' <i class="fa fa-pencil"></i> Edit','class="btn btn-block btn-warning"');
 							
-						$this->table->add_row($value->id,$value->judul,$value->laporan,$link);
+							$judul='<span class="text-red">'.$value->judul.'</span>';
+						}else{
+							$link = anchor('laporanwp/action?ac=edit&id='.$value->id,' <i class="fa fa-pencil"></i> Edit','class="btn btn-block btn-warning"');
+							$link .= anchor('laporanwp/action?ac=level_1&id='.$value->id,'<i class="fa fa-arrow-right"></i> Level 1','class="btn btn-block btn-info"');
+							$judul=$value->judul;
+						}
+						
+						$this->table->add_row($value->id,$judul,$value->laporan,$link);
 					}
 				echo $this->table->generate();
 			?>
