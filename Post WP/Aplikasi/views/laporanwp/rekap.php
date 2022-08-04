@@ -29,7 +29,7 @@
 	<div class="box-body">
 		<div class="row">
 			<div class="col-md-12">
-			<?php
+			<?php if($dtedit->url_preview!=='OFF'):
 				$hidden=array(
 					'ac'=>'level_2',
 					'id'=>$dtedit->id
@@ -54,13 +54,16 @@
 					</div>
 					<?php
 					echo form_close(); 
+					else:
 					?>
+						<a href="<?php echo site_url('laporanwp/action?ac=level_1&id='.($dtedit->id-1)); ?>">Previous</a> | <a href="<?php echo site_url('laporanwp/action?ac=level_1&id='.($dtedit->id+1)); ?>">Next</a>
+					<?php endif; ?>
 			</div>
 		</div>
 	</div>
 	<!-- /.box-body -->
 	<div class="box-footer">
-		Footer
+		<a href="<?php echo site_url('laporanwp/action?ac=edit&id='.$dtedit->id); ?>">Edit</a>
 	</div>
 	<!-- /.box-footer-->
 </div>
@@ -474,7 +477,7 @@
 						'onFocus'=>'this.select();',
 						'value'=>$dtedit->url_preview
 					));
-					echo anchor($dtedit->url,$dtedit->url,'target="_blank"');
+					echo ($dtedit->url!='') ? anchor($dtedit->url,$dtedit->url,'target="_blank"'):'';
 					?></div>
 					<div class="form-group">
 						<?php 
