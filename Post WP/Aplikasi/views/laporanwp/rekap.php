@@ -29,7 +29,7 @@
 	<div class="box-body">
 		<div class="row">
 			<div class="col-md-12">
-			<?php if($dtedit->url_preview!=='OFF'):
+			<?php if($dtedit->url_preview!=='OFF' && $dtedit->url===''):
 				$hidden=array(
 					'ac'=>'level_2',
 					'id'=>$dtedit->id
