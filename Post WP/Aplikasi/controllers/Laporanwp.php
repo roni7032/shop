@@ -99,6 +99,25 @@ class Laporanwp extends CI_Controller {
 				$lempar['menu']=view_one('menu/menu',$dtmenu);
 				$this->load->view('template/blog_plain',$lempar);
 			break;
+			case 'die':
+				$laporan_get=explode(',',$this->input->get('laporan'));
+				
+				$dt=array(
+					'judul'=>'laporanwp',
+					'for'=>'die',
+					'breadcrumb'=>array(
+						array(anchor('','Home'),''),
+						array(anchor('laporanwp',' Semua'),''),
+						array('Rekap','class="active"')
+					),						
+					'data'=>$this->M_general->getDataWhere('laporan_wp',array('id',$laporan_get),'in'),
+				);
+				$dtmenu['menu']=array('laporanwp','laporanwp_1');
+				$dtmenu['role']=0;
+				$lempar['isi']=view_one('laporanwp/rekap',$dt);
+				$lempar['menu']=view_one('menu/menu',$dtmenu);
+				$this->load->view('template/blog_plain',$lempar);
+			break;
 			case 'level_1':
 				$dt=array(
 					'judul'=>'laporanwp',

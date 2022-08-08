@@ -203,6 +203,7 @@
 						'name'=>'tags',
 						'value'=>$dtedit->tags,
 						'class'=>'form-control',
+						'required'=>'required',
 						'id'=>'tags',
 						'placeholder'=>'Tags'
 						)

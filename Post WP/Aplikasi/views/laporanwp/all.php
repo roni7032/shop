@@ -45,11 +45,23 @@ legend.scheduler-border {
 	</div>
 	<div class="box-body">
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-6">
 				<fieldset class="scheduler-border">
 						<legend class="scheduler-border">Filter</legend>
 						<form class="form-inline" action="<?php echo site_url('laporanwp/action'); ?>" method="get">
 							<input type="hidden" name="ac" value="rekap" />
+							<div class="form-group">
+								<input type="text" name="laporan" placeholder="Masukkan" class="form-control"/>
+							</div>
+							<button type="submit" class="btn btn-default">Go!</button>
+						</form>
+				</fieldset>
+			</div>
+			<div class="col-md-6">
+				<fieldset class="scheduler-border">
+						<legend class="scheduler-border">Filter Die</legend>
+						<form class="form-inline" action="<?php echo site_url('laporanwp/action'); ?>" method="get">
+							<input type="hidden" name="ac" value="die" />
 							<div class="form-group">
 								<input type="text" name="laporan" placeholder="Masukkan" class="form-control"/>
 							</div>
