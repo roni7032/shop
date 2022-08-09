@@ -197,19 +197,6 @@
 					);
 					?></div>
 					<div class="form-group">
-					<?php echo form_label('Tags', 'tags');
-					echo form_input(array(
-						'type'=>'text',
-						'name'=>'tags',
-						'value'=>$dtedit->tags,
-						'class'=>'form-control',
-						'required'=>'required',
-						'id'=>'tags',
-						'placeholder'=>'Tags'
-						)
-					);
-					?></div>
-					<div class="form-group">
 					<?php echo form_label('Mega Link', 'mega_link');
 					echo form_input(array(
 						'type'=>'text',
@@ -240,6 +227,19 @@
 						'class'=>'form-control','id'=>'deskripsi',
 						'placeholder'=>'Deskripsi',
 						'value'=>$dtedit->deskripsi	)
+					);
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('Tags', 'tags');
+					echo form_input(array(
+						'type'=>'text',
+						'name'=>'tags',
+						'value'=>$dtedit->tags,
+						'class'=>'form-control',
+						'required'=>'required',
+						'id'=>'tags',
+						'placeholder'=>'Tags'
+						)
 					);
 					?></div>
 					<div class="form-group">
@@ -409,19 +409,6 @@
 					);
 					?></div>
 					<div class="form-group">
-					<?php echo form_label('Tags', 'tags');
-					echo form_input(array(
-						'type'=>'text',
-						'name'=>'tags',
-						'value'=>'',
-						'class'=>'form-control',
-						'required'=>'required',
-						'id'=>'tags',
-						'placeholder'=>'Tags'
-						)
-					);
-					?></div>
-					<div class="form-group">
 					<?php echo form_label('Mega Link', 'mega_link');
 					echo form_input(array(
 						'type'=>'text',
@@ -451,6 +438,19 @@
 						'name'=>'deskripsi',
 						'class'=>'form-control','id'=>'deskripsi',
 						'placeholder'=>'Deskripsi'
+						)
+					);
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('Tags', 'tags');
+					echo form_input(array(
+						'type'=>'text',
+						'name'=>'tags',
+						'value'=>'',
+						'class'=>'form-control',
+						'required'=>'required',
+						'id'=>'tags',
+						'placeholder'=>'Tags'
 						)
 					);
 					?></div>
