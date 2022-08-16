@@ -31,7 +31,7 @@
 			<div class="col-md-12">
 				<a href="<?php echo site_url('laporanwp/action?ac=edit&id='.($dtedit->id)-1); ?>" class="btn btn-info">Previous</a>
 				<div class="btn-group">
-                  <a href="<?php echo site_url('laporanwp/action?ac=level_1&id='.$dtedit->id); ?>" class="btn btn-warning">Level 1</a>
+                  <a href="<?php echo site_url('laporanwp/action?ac=level_1&id='.$dtedit->id); ?>" class="btn btn-warning" accesskey="1">Level 1</a>
                   <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
                     <span class="caret"></span>
                     <span class="sr-only">Toggle Dropdown</span>

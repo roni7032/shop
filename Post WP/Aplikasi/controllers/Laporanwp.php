@@ -311,8 +311,8 @@ class Laporanwp extends CI_Controller {
 				$this->M_general->deldata($table,array('id'=>$id));
 			break;
 			case 'add':
-				$cari_judul=array('Elementor Template Kit','Elementor Pro Template Kit','Template Kit','Elementor Template kit');
-				$ganti_judul=array('Theme','Theme','Theme','Theme');
+				$cari_judul=array('Elementor Template Kit','Elementor Pro Template Kit','Template Kit','Elementor Template kit','Elementor Kit');
+				$ganti_judul=array('Theme','Theme','Theme','Theme','Theme');
 				$judul=str_replace($cari_judul,$ganti_judul,$this->input->post('judul'));
 				
 				$cari_url_x=array('https://www.closecrowds.com/');
@@ -323,8 +323,8 @@ class Laporanwp extends CI_Controller {
 				$ganti_url_asli_preview=array('');
 				$url_asli_preview=str_replace($cari_url_asli_preview,$ganti_url_asli_preview,$this->input->post('url_asli_preview'));
 				
-				$cari_deskripsi=array('Template Kit','template kit');
-				$ganti_deskripsi=array('Theme','Theme');
+				$cari_deskripsi=array('Template Kit','template kit','Template kit');
+				$ganti_deskripsi=array('Theme','Theme','Theme');
 				$deskripsi=str_replace($cari_deskripsi,$ganti_deskripsi,$this->input->post('deskripsi'));
 				// $deskripsi=$deskripsi_1.$this->helpDes();
 				
@@ -350,8 +350,8 @@ class Laporanwp extends CI_Controller {
 				redirect('laporanwp/action?ac=edit&id='.$id);
 			break;
 			case 'edit':
-				$cari_judul=array('Elementor Template Kit','Elementor Pro Template Kit','Template Kit','Elementor Template kit');
-				$ganti_judul=array('Theme','Theme','Theme','Theme');
+				$cari_judul=array('Elementor Template Kit','Elementor Pro Template Kit','Template Kit','Elementor Template kit','Elementor Kit');
+				$ganti_judul=array('Theme','Theme','Theme','Theme','Theme');
 				$judul=str_replace($cari_judul,$ganti_judul,$this->input->post('judul'));
 				
 				$cari_url_x=array('https://www.closecrowds.com/');
@@ -362,8 +362,8 @@ class Laporanwp extends CI_Controller {
 				$ganti_url_asli_preview=array('');
 				$url_asli_preview=str_replace($cari_url_asli_preview,$ganti_url_asli_preview,$this->input->post('url_asli_preview'));
 				
-				$cari_deskripsi=array('Template Kit','template kit');
-				$ganti_deskripsi=array('Theme','Theme');
+				$cari_deskripsi=array('Template Kit','template kit','Template kit','Elementor Kit');
+				$ganti_deskripsi=array('Theme','Theme','Theme','Theme');
 				$deskripsi=str_replace($cari_deskripsi,$ganti_deskripsi,$this->input->post('deskripsi'));
 			
 				$dtsave=array(

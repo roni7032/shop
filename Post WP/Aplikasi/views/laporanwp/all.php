@@ -81,7 +81,7 @@ legend.scheduler-border {
 				);
 
 				$this->table->set_template($tmp_table);
-				$this->table->set_heading('No.','Judul','Laporan','Action');
+				$this->table->set_heading('No.','Judul','Laporan','Tanggal','Action');
 					$no=1;
 					foreach ($data as $key => $value) {
 					
@@ -96,8 +96,8 @@ legend.scheduler-border {
 							$judul=$value->judul;
 							$laporan=$value->laporan;
 						}
-						
-						$this->table->add_row($value->id,$judul,$laporan,$link);
+						$tgl=isset($value->tgl) ? date('d M Y',strtotime($value->tgl)):'';
+						$this->table->add_row($value->id,$judul,$laporan,$tgl,$link);
 					}
 				echo $this->table->generate();
 			?>
