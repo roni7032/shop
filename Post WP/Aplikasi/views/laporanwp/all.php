@@ -96,8 +96,9 @@ legend.scheduler-border {
 							$judul=$value->judul;
 							$laporan=$value->laporan;
 						}
-						$tgl=isset($value->tgl) ? date('d M Y',strtotime($value->tgl)):'';
-						$this->table->add_row($value->id,$judul,$laporan,$tgl,$link);
+						$tgl_1=isset($value->tgl) ? date('d M Y',strtotime($value->tgl)):'-';
+						$tgl=($value->status=='ON') ? anchor('laporanwp/action?ac=on_off&set=off&id='.$value->id,'OFF','class="text-success"'):anchor('laporanwp/action?ac=on_off&set=on&id='.$value->id,'ON','class="text-danger"');
+						$this->table->add_row($value->id,$judul,$laporan,$tgl_1.' - '.$tgl,$link);
 					}
 				echo $this->table->generate();
 			?>

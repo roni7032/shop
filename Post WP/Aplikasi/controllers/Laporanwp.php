@@ -76,6 +76,15 @@ class Laporanwp extends CI_Controller {
 				$this->M_general->updateData('laporan_wp',$dtsave,$id);
 				redirect('laporanwp/action?ac=edit&id='.($id-1));
 			break;
+			case 'on_off':
+				$set=$this->input->get('set');
+				
+				$dtsave=array(
+					'status' => $set,
+				);
+				$this->M_general->updateData('laporan_wp',$dtsave,$id);
+				redirect('laporanwp');
+			break;
 			case 'delete':
 				$this->M_general->deldata('laporan_wp',$id);
 				redirect('laporanwp');

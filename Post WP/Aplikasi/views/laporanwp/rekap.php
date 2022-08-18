@@ -17,7 +17,7 @@
     <!-- Main content -->
     <section class="content">
 		<!-- Default box -->
-<div class="box">
+<div class="box <?php if($dtedit->status!=='ON') echo 'box-danger box-solid'; ?>">
 	<div class="box-header with-border">
 		<h3 class="box-title"><?php echo $judul; ?></h3>
 
