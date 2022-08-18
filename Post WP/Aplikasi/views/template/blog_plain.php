@@ -13,6 +13,8 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/bower_components/Ionicons/css/ionicons.min.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+  <!-- bootstrap datepicker -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
   <!-- Select2 -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/bower_components/select2/dist/css/select2.min.css">
   <!-- Bootstrap time Picker -->
@@ -263,6 +265,8 @@
 <script src="<?php echo base_url(); ?>assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
 <script src="<?php echo base_url(); ?>assets/bower_components/fastclick/lib/fastclick.js"></script>
+<!-- bootstrap datepicker -->
+<script src="<?php echo base_url(); ?>assets/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <!-- Select2 -->
 <script src="<?php echo base_url(); ?>assets/bower_components/select2/dist/js/select2.full.min.js"></script>
 <!-- bootstrap time picker -->
@@ -286,6 +290,11 @@
 		$('.timepicker').timepicker({
 		   showInputs: false,
 		   showMeridian: false
+		})
+		$('.datepicker').datepicker({
+			'format': 'dd M yyyy',
+			'autoclose': true,
+			'todayHighlight': true
 		})
 		$('#example2').DataTable({
 		  'paging'      : true,

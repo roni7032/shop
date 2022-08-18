@@ -81,7 +81,7 @@ legend.scheduler-border {
 				);
 
 				$this->table->set_template($tmp_table);
-				$this->table->set_heading('No.','Judul','Laporan','Tanggal','Action');
+				$this->table->set_heading('No.','Judul','Edisi','Laporan','Tanggal','Action');
 					$no=1;
 					foreach ($data as $key => $value) {
 					
@@ -98,7 +98,7 @@ legend.scheduler-border {
 						}
 						$tgl_1=isset($value->tgl) ? date('d M Y',strtotime($value->tgl)):'-';
 						$tgl=($value->status=='ON') ? anchor('laporanwp/action?ac=on_off&set=off&id='.$value->id,'OFF','class="text-success"'):anchor('laporanwp/action?ac=on_off&set=on&id='.$value->id,'ON','class="text-danger"');
-						$this->table->add_row($value->id,$judul,$laporan,$tgl_1.' - '.$tgl,$link);
+						$this->table->add_row($value->id,$judul,$value->edisi,$laporan,$tgl_1.' - '.$tgl,$link);
 					}
 				echo $this->table->generate();
 			?>

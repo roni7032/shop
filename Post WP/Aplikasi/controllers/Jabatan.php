@@ -46,7 +46,7 @@ class Jabatan extends CI_Controller {
 				$dtmenu['role']=0;
 				$lempar['isi']=view_one('jabatan/add',$dt);
 				$lempar['menu']=view_one('menu/menu',$dtmenu);
-				$this->load->view('template/blog_editor',$lempar);
+				$this->load->view('template/blog_plain',$lempar);
 			break;
 			case 'edit':
 				$dt=array(
@@ -64,7 +64,7 @@ class Jabatan extends CI_Controller {
 				$dtmenu['role']=0;
 				$lempar['isi']=view_one('jabatan/add',$dt);
 				$lempar['menu']=view_one('menu/menu',$dtmenu);
-				$this->load->view('template/blog_editor',$lempar);
+				$this->load->view('template/blog_plain',$lempar);
 			break;
 			case 'delete':
 				$this->M_general->deldata('menu',$id);
@@ -106,18 +106,21 @@ class Jabatan extends CI_Controller {
 			break;
 			case 'add':
 				$dtsave=array(
-					'id' => $this->input->post('id'),
-					'nama' => $this->input->post('nama'),
-					'isi' => $this->input->post('isi'),
+					'jml_aktif' => $this->input->post('jml_aktif'),
+					'jml_off' => $this->input->post('jml_off'),
+					'edisi' => $this->input->post('edisi'),
+					'terima_pembayaran' => $this->input->post('terima_pembayaran'),
+					'terima_pembayaran' => ($this->input->post('tgl_terima_pembayaran')!=='') ? date('Y-m-d',strtotime($this->input->post('tgl_terima_pembayaran'))):null,
 				);
 				$id=$this->M_general->addData($table,$dtsave);
-				redirect($table.'/action?ac=edit&id='.$id);
 			break;
 			case 'edit':
 				$dtsave=array(
-					'id' => $this->input->post('id'),
-					'nama' => $this->input->post('nama'),
-					'isi' => $this->input->post('isi'),
+					'jml_aktif' => $this->input->post('jml_aktif'),
+					'jml_off' => $this->input->post('jml_off'),
+					'edisi' => $this->input->post('edisi'),
+					'terima_pembayaran' => $this->input->post('terima_pembayaran'),
+					'terima_pembayaran' => ($this->input->post('tgl_terima_pembayaran')!=='') ? date('Y-m-d',strtotime($this->input->post('tgl_terima_pembayaran'))):null,
 				);
 				$this->M_general->updateData($table,$dtsave,$id);
 			break;

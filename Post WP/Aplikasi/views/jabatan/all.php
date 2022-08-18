@@ -37,13 +37,11 @@
 			);
 
 			$this->table->set_template($tmp_table);
-			$this->table->set_heading('No.','Nama','link');
+			$this->table->set_heading('No.','JML Aktif','JML OFF','Edisi','Status Pembayaran','Tanggal Pembayaran','Action');
 				$no=1;
 				foreach ($data as $key => $value) {
-					// $link_value = anchor($value->link,'klik','target="_blank" class="btn btn-xs btn-warning"');
-					$link_value = anchor('jabatan/action?ac=set_sudah&id='.$value->id,'<i class="fa fa-eye"> GDrive','class="btn btn-xs btn-info" target="_blank"');
-					$nama=($value->sudah==='yes') ? '<span class="text-red">'.$value->nama.'</span>':'<span class="text-green">'.$value->nama.'</span>';
-					$this->table->add_row($no++,$nama,$link_value);
+					$link = anchor('jabatan/action?ac=edit&id='.$value->id,' <i class="fa fa-pencil"></i> Edit','class="btn btn-block btn-warning"');
+					$this->table->add_row($no++,$value->jml_aktif,$value->jml_off,$value->edisi,$value->terima_pembayaran,$value->tgl_terima_pembayaran,$link);
 				}
 			echo $this->table->generate();
 			?>

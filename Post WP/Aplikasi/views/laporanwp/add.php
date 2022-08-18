@@ -74,7 +74,7 @@
 						)
 					);
 					?></div>
-					<div class="form-group">
+					<div class="form-group <?php if($dtedit->status==='OFF') echo "bg-danger"; ?>">
 					<?php echo form_label('judul', 'judul');
 					echo form_input(array(
 						'type'=>'text',

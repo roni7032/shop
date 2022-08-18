@@ -38,25 +38,56 @@
 					);
 				echo form_open('jabatan/simpan','id="jabatan"',$hidden); ?>
 						<div class="form-group">
-						<?php echo form_label('Nama', 'nama');
+						<?php echo form_label('JML Aktif', 'jml_aktif');
 						echo form_input(array(
-							'type'=>'text',
-							'name'=>'nama',
-							'value'=>$dtedit->nama,
+							'type'=>'numeric',
+							'name'=>'jml_aktif',
+							'value'=>$dtedit->jml_aktif,
 							'class'=>'form-control',
-							'id'=>'nama',
-							'placeholder'=>'Nama'
+							'id'=>'jml_aktif',
+							'placeholder'=>'JML Aktif'
 							)
 						);
 						?></div>
 						<div class="form-group">
-						<?php echo form_label('Isi', 'isi');
-						echo form_textarea(array(
-							'name'=>'isi',
+						<?php echo form_label('JML OFF', 'jml_off');
+						echo form_input(array(
+							'type'=>'numeric',
+							'name'=>'jml_off',
+							'value'=>$dtedit->jml_off,
 							'class'=>'form-control',
-							'id'=>'isi',
-							'placeholder'=>'Isi',
-							'value'=>$dtedit->isi	)
+							'id'=>'jml_off',
+							'placeholder'=>'JML OFF'
+							)
+						);
+						?></div>
+						<div class="form-group">
+						<?php echo form_label('Edisi', 'edisi');
+						echo form_input(array(
+							'type'=>'numeric',
+							'name'=>'edisi',
+							'value'=>$dtedit->edisi,
+							'class'=>'form-control',
+							'id'=>'edisi',
+							'placeholder'=>'Edisi'
+							)
+						);
+						?></div>
+						<div class="form-group">
+						<?php echo form_label('Terima Pembayaran', 'terima_pembayaran');
+						$arr=array('yes'=>'Yes','no'=>'No');
+						echo form_dropdown('terima_pembayaran',$arr,$dtedit->terima_pembayaran,'class="form-control" id="published" ');
+						?></div>
+						<div class="form-group">
+						<?php echo form_label('Tanggal Terima Pembayaran', 'tgl_terima_pembayaran');
+						echo form_input(array(
+							'type'=>'text',
+							'name'=>'tgl_terima_pembayaran',
+							'value'=>date('d M Y',strtotime($dtedit->tgl_terima_pembayaran)),
+							'class'=>'form-control datepicker',
+							'id'=>'tgl_terima_pembayaran',
+							'placeholder'=>'Tanggal Terima Pembayaran'
+							)
 						);
 						?></div>
 						<div class="form-group">
@@ -73,27 +104,58 @@
 					);
 					echo form_open('jabatan/simpan','id="jabatan"',$hidden); ?>
 					<div class="form-group">
-					<?php echo form_label('Nama', 'nama');
-					echo form_input(array(
-						'type'=>'text',
-						'name'=>'nama',
-						'value'=>'',
-						'class'=>'form-control',
-						'id'=>'nama',
-						'placeholder'=>'Nama'
-						)
-					);
-					?></div>
-					<div class="form-group">
-					<?php echo form_label('Isi', 'isi');
-					echo form_textarea(array(
-						'name'=>'isi',
-						'class'=>'form-control',
-						'id'=>'isi',
-						'placeholder'=>'Isi'
-						)
-					);
-					?></div>
+						<?php echo form_label('JML Aktif', 'jml_aktif');
+						echo form_input(array(
+							'type'=>'numeric',
+							'name'=>'jml_aktif',
+							'value'=>'0',
+							'class'=>'form-control',
+							'id'=>'jml_aktif',
+							'placeholder'=>'JML Aktif'
+							)
+						);
+						?></div>
+						<div class="form-group">
+						<?php echo form_label('JML OFF', 'jml_off');
+						echo form_input(array(
+							'type'=>'numeric',
+							'name'=>'jml_off',
+							'value'=>'0',
+							'class'=>'form-control',
+							'id'=>'jml_off',
+							'placeholder'=>'JML OFF'
+							)
+						);
+						?></div>
+						<div class="form-group">
+						<?php echo form_label('Edisi', 'edisi');
+						echo form_input(array(
+							'type'=>'numeric',
+							'name'=>'edisi',
+							'value'=>'0',
+							'class'=>'form-control',
+							'id'=>'edisi',
+							'placeholder'=>'Edisi'
+							)
+						);
+						?></div>
+						<div class="form-group">
+						<?php echo form_label('Terima Pembayaran', 'terima_pembayaran');
+						$arr=array('yes'=>'Yes','no'=>'No');
+						echo form_dropdown('terima_pembayaran',$arr,'no','class="form-control" id="published" ');
+						?></div>
+						<div class="form-group">
+						<?php echo form_label('Tanggal Terima Pembayaran', 'tgl_terima_pembayaran');
+						echo form_input(array(
+							'type'=>'text',
+							'name'=>'tgl_terima_pembayaran',
+							'value'=>'',
+							'class'=>'form-control datepicker',
+							'id'=>'tgl_terima_pembayaran',
+							'placeholder'=>'Tanggal Terima Pembayaran'
+							)
+						);
+						?></div>
 					<div class="form-group">
 					<?php 
 						echo form_submit('save', 'Proses','class="form-control btn btn-info"'); 
