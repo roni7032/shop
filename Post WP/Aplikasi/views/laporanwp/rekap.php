@@ -323,15 +323,15 @@
 				);
 				echo form_open('laporanwp/action','id="laporanwp" method="get"',$hidden); ?>
 					<div class="form-group">
-					<?php echo form_label('Judul', 'judul');
+					<?php echo form_label('Kunci', 'kunci');
 					echo form_input(array(
-						'name'=>'judul',
+						'name'=>'kunci',
 						'class'=>'form-control',
-						'id'=>'judul',
-						'placeholder'=>'Judul',
+						'id'=>'kunci',
+						'placeholder'=>'Kunci',
 						'autofocus'=>'autofocus',
 						'onFocus'=>'this.select();',
-						'value'=>$dtedit->judul
+						'value'=>$dtedit->kunci
 					));
 					?></div>
 					<div class="form-group">
