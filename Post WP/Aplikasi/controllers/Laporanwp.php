@@ -23,6 +23,7 @@ class Laporanwp extends CI_Controller {
 
 		$dtmenu['role']=0;
 		$lempar['isi']=view_one('laporanwp/all',$dt);
+		$lempar['js']=view_one('laporanwp/js',array('for'=>''));
 		$lempar['menu']=view_one('menu/menu',$dtmenu);
 		$this->load->view('template/blog_plain',$lempar);
 	}

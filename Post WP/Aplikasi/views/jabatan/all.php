@@ -37,11 +37,11 @@
 			);
 
 			$this->table->set_template($tmp_table);
-			$this->table->set_heading('No.','JML Aktif','JML OFF','Edisi','Status Pembayaran','Tanggal Pembayaran','Action');
+			$this->table->set_heading('No.','JML Aktif','JML OFF','Edisi','Status Pembayaran','Tanggal Pembayaran','Posisi ID LWP','Action');
 				$no=1;
 				foreach ($data as $key => $value) {
 					$link = anchor('jabatan/action?ac=edit&id='.$value->id,' <i class="fa fa-pencil"></i> Edit','class="btn btn-block btn-warning"');
-					$this->table->add_row($no++,$value->jml_aktif,$value->jml_off,$value->edisi,$value->terima_pembayaran,$value->tgl_terima_pembayaran,$link);
+					$this->table->add_row($no++,$value->jml_aktif,$value->jml_off,$value->edisi,$value->terima_pembayaran,isset($value->tgl_terima_pembayaran) ? date('d M Y',strtotime($value->tgl_terima_pembayaran)):'',$value->posisi_id_lwp,$link);
 				}
 			echo $this->table->generate();
 			?>

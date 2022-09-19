@@ -83,10 +83,22 @@
 						echo form_input(array(
 							'type'=>'text',
 							'name'=>'tgl_terima_pembayaran',
-							'value'=>date('d M Y',strtotime($dtedit->tgl_terima_pembayaran)),
+							'value'=>isset($dtedit->tgl_terima_pembayaran) ? date('d M Y',strtotime($dtedit->tgl_terima_pembayaran)):'',
 							'class'=>'form-control datepicker',
 							'id'=>'tgl_terima_pembayaran',
 							'placeholder'=>'Tanggal Terima Pembayaran'
+							)
+						);
+						?></div>
+						<div class="form-group">
+						<?php echo form_label('Posisi ID LWP', 'posisi_id_lwp');
+						echo form_input(array(
+							'type'=>'numeric',
+							'name'=>'posisi_id_lwp',
+							'value'=>$dtedit->posisi_id_lwp,
+							'class'=>'form-control',
+							'id'=>'posisi_id_lwp',
+							'placeholder'=>'Posisi ID LWP'
 							)
 						);
 						?></div>
@@ -136,23 +148,6 @@
 							'class'=>'form-control',
 							'id'=>'edisi',
 							'placeholder'=>'Edisi'
-							)
-						);
-						?></div>
-						<div class="form-group">
-						<?php echo form_label('Terima Pembayaran', 'terima_pembayaran');
-						$arr=array('yes'=>'Yes','no'=>'No');
-						echo form_dropdown('terima_pembayaran',$arr,'no','class="form-control" id="published" ');
-						?></div>
-						<div class="form-group">
-						<?php echo form_label('Tanggal Terima Pembayaran', 'tgl_terima_pembayaran');
-						echo form_input(array(
-							'type'=>'text',
-							'name'=>'tgl_terima_pembayaran',
-							'value'=>'',
-							'class'=>'form-control datepicker',
-							'id'=>'tgl_terima_pembayaran',
-							'placeholder'=>'Tanggal Terima Pembayaran'
 							)
 						);
 						?></div>

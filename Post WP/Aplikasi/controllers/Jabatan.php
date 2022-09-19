@@ -109,8 +109,6 @@ class Jabatan extends CI_Controller {
 					'jml_aktif' => $this->input->post('jml_aktif'),
 					'jml_off' => $this->input->post('jml_off'),
 					'edisi' => $this->input->post('edisi'),
-					'terima_pembayaran' => $this->input->post('terima_pembayaran'),
-					'terima_pembayaran' => ($this->input->post('tgl_terima_pembayaran')!=='') ? date('Y-m-d',strtotime($this->input->post('tgl_terima_pembayaran'))):null,
 				);
 				$id=$this->M_general->addData($table,$dtsave);
 			break;
@@ -120,7 +118,8 @@ class Jabatan extends CI_Controller {
 					'jml_off' => $this->input->post('jml_off'),
 					'edisi' => $this->input->post('edisi'),
 					'terima_pembayaran' => $this->input->post('terima_pembayaran'),
-					'terima_pembayaran' => ($this->input->post('tgl_terima_pembayaran')!=='') ? date('Y-m-d',strtotime($this->input->post('tgl_terima_pembayaran'))):null,
+					'tgl_terima_pembayaran' => ($this->input->post('tgl_terima_pembayaran')!=='') ? date('Y-m-d',strtotime($this->input->post('tgl_terima_pembayaran'))):null,
+					'posisi_id_lwp' => $this->input->post('posisi_id_lwp'),
 				);
 				$this->M_general->updateData($table,$dtsave,$id);
 			break;

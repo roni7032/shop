@@ -74,7 +74,7 @@ legend.scheduler-border {
 			<div class="col-md-12">
 			<?php
 				$tmp_table=array(
-						'table_open' => '<table width="100%" class="table table-bordered datatable">',
+						'table_open' => '<table id="id_laporan_wp" class="table table-bordered">',
 						'thead_open' => '<thead>',
 						'thead_close' => '</thead>',
 						'table_close' => '</table>'

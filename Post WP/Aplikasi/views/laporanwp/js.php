@@ -15,10 +15,10 @@
 	</script>
 <?php else: ?>
 	<script type="text/javascript">
-		/*$(document).ready(function(){
-			$('#table_dana_investor').DataTable({
+		$(document).ready(function(){
+			$('#id_laporan_wp').DataTable({
 				initComplete: function () {
-					this.api().columns([4]).every( function () {
+					this.api().columns([2]).every( function () {
 						var column = this;
 						var select = $('<select><option value=""></option></select>')
 							.appendTo( $(column.header()).empty() )
@@ -36,11 +36,13 @@
 							select.append( '<option value="'+d+'">'+d+'</option>' )
 						} );
 					} );
-				},"columnDefs": [{
-					"targets": 4,
+				},
+				"aaSorting": [[0,'desc']],
+				"columnDefs": [ {
+					"targets": 2,
 					"orderable": false
-				} ]
+				}]
 			});
-		});*/
+		});
 	</script>
 <?php endif; ?>
