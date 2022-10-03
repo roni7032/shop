@@ -11,7 +11,26 @@
 			window.location.href= '<?php echo site_url('laporanwp'); ?>/action?ac=xactive&id='+id_url_asli_preview+'&url_asli_preview='+text_url_asli_preview
 		})
 	
-		// CKEDITOR.replace('deskripsi');
+		$('input[name="url_asli"]').change(function(e){
+			let url_preview_1=$('input[name="url_preview"]').val()
+			
+			let url_asli_1=$(this).val()
+			url_asli_2=url_asli_1.split('https://elements.envato.com/')
+			url_asli_3=url_asli_2[1].split('-')
+			url_asli=url_asli_3[0]+'-'+url_asli_3[1]+url_asli_3[2]
+			$('input[name="kunci"]').val(url_asli)
+			$('input[name="url_preview"]').val(url_preview_1+url_asli)
+			// $.post("<?php echo site_url('welcome/getKunci'); ?>",{url_asli:url_asli},function(data){
+				
+			// })
+		})
+		
+		$('#tags').change(function(e){
+			let tags_val_1=$(this).val()
+			let tags_val_2=tags_val_1.replace(/\n|\r|,/g,',')
+			
+			$(this).val(tags_val_2)
+		})
 	</script>
 <?php else: ?>
 	<script type="text/javascript">

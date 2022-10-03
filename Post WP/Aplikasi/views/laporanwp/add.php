@@ -161,6 +161,60 @@
 					);
 					?></div>
 					<div class="form-group">
+					<?php echo form_label('Mega Link', 'mega_link');
+					echo form_input(array(
+						'type'=>'text',
+						'name'=>'mega_link',
+						'value'=>$dtedit->mega_link,
+						'class'=>'form-control',
+						'id'=>'mega_link',
+						'placeholder'=>'Mega Link'
+						)
+					);
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('Mega Download', 'mega_download');
+					echo form_input(array(
+						'type'=>'text',
+						'name'=>'mega_download',
+						'value'=>$dtedit->mega_download,
+						'class'=>'form-control',
+						'id'=>'mega_download',
+						'placeholder'=>'Mega Download'
+						)
+					);
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('Deskripsi', 'deskripsi');
+					echo form_textarea(array(
+						'name'=>'deskripsi',
+						'class'=>'form-control','id'=>'deskripsi',
+						'placeholder'=>'Deskripsi',
+						'value'=>$dtedit->deskripsi	)
+					);
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('Tags', 'tags');
+					echo form_textarea(array(
+						'name'=>'tags',
+						'class'=>'form-control',
+						'id'=>'tags',
+						'placeholder'=>'Tags',
+						'value'=>$dtedit->tags
+						)
+					);
+					/*echo form_input(array(
+						'type'=>'text',
+						'name'=>'tags',
+						'value'=>$dtedit->tags,
+						'class'=>'form-control',
+						'required'=>'required',
+						'id'=>'tags',
+						'placeholder'=>'Tags'
+						)
+					);*/
+					?></div>
+					<div class="form-group">
 						<div class="row">
 							<div class="col-md-12">
 								<?php echo form_label('URL Asli Preview', 'url_asli_preview'); ?>
@@ -197,52 +251,6 @@
 					);
 					?></div>
 					<div class="form-group">
-					<?php echo form_label('Mega Link', 'mega_link');
-					echo form_input(array(
-						'type'=>'text',
-						'name'=>'mega_link',
-						'value'=>$dtedit->mega_link,
-						'class'=>'form-control',
-						'id'=>'mega_link',
-						'placeholder'=>'Mega Link'
-						)
-					);
-					?></div>
-					<div class="form-group">
-					<?php echo form_label('Mega Download', 'mega_download');
-					echo form_input(array(
-						'type'=>'text',
-						'name'=>'mega_download',
-						'value'=>$dtedit->mega_download,
-						'class'=>'form-control',
-						'id'=>'mega_download',
-						'placeholder'=>'Mega Download'
-						)
-					);
-					?></div>
-					<div class="form-group">
-					<?php echo form_label('Deskripsi', 'deskripsi');
-					echo form_textarea(array(
-						'name'=>'deskripsi',
-						'class'=>'form-control','id'=>'deskripsi',
-						'placeholder'=>'Deskripsi',
-						'value'=>$dtedit->deskripsi	)
-					);
-					?></div>
-					<div class="form-group">
-					<?php echo form_label('Tags', 'tags');
-					echo form_input(array(
-						'type'=>'text',
-						'name'=>'tags',
-						'value'=>$dtedit->tags,
-						'class'=>'form-control',
-						'required'=>'required',
-						'id'=>'tags',
-						'placeholder'=>'Tags'
-						)
-					);
-					?></div>
-					<div class="form-group">
 					<?php echo form_label('Deskripsi x', 'deskripsix');
 					echo form_textarea(array(
 						'name'=>'deskripsix',
@@ -275,7 +283,7 @@
 					?></div>
 						<div class="form-group">
 						<?php 
-							echo form_submit('save', 'Proses','class="form-control btn btn-info"'); 
+							echo form_submit('save', 'Proses','class="form-control btn btn-info" tabindex="1"'); 
 						?>
 						</div>
 					<?php echo form_close(); ?>
