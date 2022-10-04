@@ -27,10 +27,16 @@
 		
 		$('#tags').change(function(e){
 			let tags_val_1=$(this).val()
-			let tags_val_2=tags_val_1.replace(/\n|\r|,/g,',')
-			
+			let tags_val_3=toTitleCase(tags_val_1)
+			let tags_val_2=tags_val_3.replace(/\n|\r|,/g,',')
 			$(this).val(tags_val_2)
 		})
+		
+		function toTitleCase(str) {
+			return str.replace(/(?:^|\s)\w/g, function(match) {
+				return match.toUpperCase();
+			});
+		}
 	</script>
 <?php else: ?>
 	<script type="text/javascript">
