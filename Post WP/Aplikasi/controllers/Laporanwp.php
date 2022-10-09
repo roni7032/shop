@@ -69,6 +69,26 @@ class Laporanwp extends CI_Controller {
 				$lempar['menu']=view_one('menu/menu',$dtmenu);
 				$this->load->view('template/blog_editor',$lempar);
 			break;
+			case 'edit_2':
+				$dt=array(
+					'judul'=>'laporanwp',
+					'ac'=>$ac,
+					'id'=>$id,
+					'breadcrumb'=>array(
+						array(anchor('','Home'),''),
+						array(anchor('laporanwp',' laporanwp'),''),
+						array('Ubah','class="active"')
+					),						
+					'dtedit'=>$this->M_general->getEdit('laporan_wp',$id),
+					'desc_1'=>$this->helpDes(),
+				);
+				$dtmenu['menu']=array('laporanwp','laporanwp_1');
+				$dtmenu['role']=0;
+				$lempar['isi']=view_one('laporanwp/add',$dt);
+				$lempar['js']=view_one('laporanwp/js',array('for'=>'edit'));
+				$lempar['menu']=view_one('menu/menu',$dtmenu);
+				$this->load->view('template/blog_editor',$lempar);
+			break;
 			case 'xactive':
 				$dtsave=array(
 					'url_preview' => 'OFF',
@@ -394,7 +414,7 @@ class Laporanwp extends CI_Controller {
 				);
 				$this->M_general->updateData('laporan_wp',$dtsave,$id);
 				
-				redirect($table.'/action?ac=edit&id='.($id-1));
+				redirect($table.'/action?ac=level_1&id='.($id-1));
 			break;
 			case 'edit_1':
 				$cari_url_x=array('https://www.closecrowds.com/');
@@ -407,6 +427,43 @@ class Laporanwp extends CI_Controller {
 				);
 				$this->M_general->updateData('laporan_wp',$dtsave,$id);
 				redirect('laporanwp/action?ac=edit&id='.$id);
+			break;
+			case 'edit_2':
+				$cari_judul=array('Elementor Template Kit','Elementor Pro Template Kit','Template Kit','Elementor Template kit','Elementor Kit');
+				$ganti_judul=array('Theme','Theme','Theme','Theme','Theme');
+				$judul=str_replace($cari_judul,$ganti_judul,$this->input->post('judul'));
+				
+				$cari_url_x=array('https://www.closecrowds.com/');
+				$ganti_url_x=array('/');
+				$url_x=str_replace($cari_url_x,$ganti_url_x,$this->input->post('url_x'));
+				
+				$cari_url_asli_preview=array('?storefront=envato-elements');
+				$ganti_url_asli_preview=array('');
+				$url_asli_preview=str_replace($cari_url_asli_preview,$ganti_url_asli_preview,$this->input->post('url_asli_preview'));
+				
+				$cari_deskripsi=array('Template Kit','template kit','Template kit','Elementor Kit');
+				$ganti_deskripsi=array('Theme','Theme','Theme','Theme');
+				$deskripsi=str_replace($cari_deskripsi,$ganti_deskripsi,$this->input->post('deskripsi'));
+			
+				$dtsave=array(
+					'judul' => $judul,
+					'nama_gambar' => $this->input->post('nama_gambar'),
+					'kunci' => strtolower($this->input->post('kunci')),
+					'url' => $this->input->post('url'),
+					'url_x' => $url_x,
+					'url_preview' => $this->input->post('url_preview'),
+					'url_asli' => $this->input->post('url_asli'),
+					'url_asli_preview' => $url_asli_preview,
+					'harga' => $this->input->post('harga'),
+					'tags' => $this->input->post('tags'),
+					'mega_link' => $this->input->post('mega_link'),
+					'mega_download' => $this->input->post('mega_download'),
+					'laporan' => $this->input->post('laporan'),
+					'deskripsi' => $deskripsi,
+				);
+				$this->M_general->updateData('laporan_wp',$dtsave,$id);
+				
+				redirect($table.'/action?ac=edit_2&id='.($id-1));
 			break;
 			default:
 				

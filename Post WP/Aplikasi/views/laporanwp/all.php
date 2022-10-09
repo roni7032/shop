@@ -86,12 +86,12 @@ legend.scheduler-border {
 					foreach ($data as $key => $value) {
 					
 						if($value->url_preview=='OFF'){
-							$link = anchor('laporanwp/action?ac=edit&id='.$value->id,' <i class="fa fa-pencil"></i> Edit','class="btn btn-block btn-warning"');
+							$link = anchor('laporanwp/action?ac=edit_2&id='.$value->id,' <i class="fa fa-pencil"></i> Edit','class="btn btn-block btn-warning"');
 							
 							$judul='<span class="text-red">'.$value->judul.'</span>';
 							$laporan='<span class="text-red">'.$value->url_asli_preview.'</span>';
 						}else{
-							$link = anchor('laporanwp/action?ac=edit&id='.$value->id,' <i class="fa fa-pencil"></i> Edit','class="btn btn-block btn-warning"');
+							$link = anchor('laporanwp/action?ac=edit_2&id='.$value->id,' <i class="fa fa-pencil"></i> Edit','class="btn btn-block btn-warning"');
 							$link .= anchor('laporanwp/action?ac=level_1&id='.$value->id,'<i class="fa fa-arrow-right"></i> Level 1','class="btn btn-block btn-info"');
 							$judul=$value->judul;
 							$laporan=$value->laporan;

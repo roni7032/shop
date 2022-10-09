@@ -63,7 +63,7 @@
 	</div>
 	<!-- /.box-body -->
 	<div class="box-footer">
-		<a href="<?php echo site_url('laporanwp/action?ac=edit&id='.$dtedit->id); ?>">Edit</a>
+		<a href="<?php echo site_url('laporanwp/action?ac=edit&id='.$dtedit->id); ?>" accesskey="1">Edit</a>
 	</div>
 	<!-- /.box-footer-->
 </div>

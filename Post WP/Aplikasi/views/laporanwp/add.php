@@ -59,7 +59,7 @@
 				<?php
 				$hidden=array(
 						'table'=>'laporanwp',
-						'ac'=>'edit'
+						'ac'=>$ac
 					);
 				echo form_open('laporanwp/simpan','id="laporanwp"',$hidden); ?>
 					<div class="form-group">
