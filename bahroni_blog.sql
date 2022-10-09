@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 05, 2022 at 02:14 AM
+-- Generation Time: Oct 09, 2022 at 06:53 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -171,7 +171,8 @@ INSERT INTO `latihan` (`id`, `title`, `description`, `createAt`) VALUES
 (19, 'Proyek obajatour.com', '<p>petunjuk-petunjuk</p>\r\n\r\n<p>[pre]</p>\r\n\r\n<p><a href=\"https://github.com/jwsdigital1/obajatour/compare/dev...roni\">https://github.com/jwsdigital1/obajatour/compare/dev...roni</a></p>\r\n\r\n<p>[/pre]</p>\r\n\r\n<p>[pre]</p>\r\n\r\n<p>[2:12 pm, 14/07/2022] Jo!!Client: frontend: staging.obajatour.com<br />\r\n[2:13 pm, 14/07/2022] Jo!!Client: backoffice:</p>\r\n\r\n<p>staging.obajatour.com/admin_obaja1<br />\r\nu: admin_obaja123<br />\r\np: AdminObaja135!@#</p>\r\n\r\n<p>[/pre]</p>\r\n\r\n<p>[pre]</p>\r\n\r\n<p>ssh centos@18.138.87.44 -i Obaja-VM_Web.pem</p>\r\n\r\n<p>IP PUBLIC : 52.74.202.89<br />\r\nIP PRIVATE : 10.0.0.247<br />\r\nPORT : 50171<br />\r\nUsername : obaja<br />\r\nPassword : aBU5-(=s~QE&quot;<br />\r\nUsername : root<br />\r\nPassword : /Pk&amp;F8z`q*NF<br />\r\nPW MySQL : _WF7b6b6</p>\r\n\r\n<p>[/pre]</p>\r\n', '2022-07-17 11:33:05'),
 (20, 'input CloseCrowds.com', '<p>Petunjuk 2 | CloseCrowds.com<br />\r\n---------------------------------------------------------------------------------<br />\r\nemail : bizacquire@yahoo.com, password : P4l3mb4ng$,?.<br />\r\n---------------------------------------------------------------------------------<br />\r\nok mas,</p>\r\n\r\n<p>website nya <a href=\"https://CloseCrowds.com/wp-admin\" target=\"_blank\">CloseCrowds.com/wp-admin</a><br />\r\nLogin wp-admin nya<br />\r\nUser: admin<br />\r\npass: P3k4nB4ru$,?.</p>\r\n\r\n<p>mega.nz<br />\r\nbizacquire@yahoo.com<br />\r\nP4l3mb4ng$,?.</p>\r\n\r\n<p>ke menu Downloads - All Downloads, mas nya cari posting Diverge AI, lalu klik edit untuk lihat isi nya - atau klik duplicate untuk mulai posting baru tanpa harus mulai dari awal.</p>\r\n\r\n<p>Tolong gunakan wodpress classic editor aja ya mas, jangan pakai elementor untuk edit nya</p>\r\n\r\n<p>Buat Edit:<br />\r\nDescription:<br />\r\nYang di bawah garis lurus &quot;Instruction&quot; nggak boleh di edit-edit lagi - di biarkan begitu saja.<br />\r\nContent yang di copy paste dari Envato hanya &quot;Deskripsi&quot; dan &quot;Feature&quot;</p>\r\n\r\n<p>Mas tolong perhatikan yang Deskripsi, itu terkadang ada teks &quot;Elementor kit&quot; atau Theme. Kata ini kurang di mengerti oleh pengunjung. Jadi mas edit di ganti dengan kata yang lebih familiar seperti Elementor kit di ganti menjadi themes, atau web design atau template.</p>\r\n\r\n<p>Nangkep maksud saya nya ya mas?</p>\r\n\r\n<p>Lalu pilih kategori (disamakan seperti envato)</p>\r\n\r\n<p>Upload Image di &quot;Feature&quot; - sebelah kanan dan Product Gallery (agak di bawah)</p>\r\n\r\n<p>Input tags di sebelah kanan.<br />\r\nTags di sesuaikan dengan website. Contoh - website nya tentang Technologi atau tentang Food, tags nya jadi &quot;Technology Website&quot; &quot;Create tech website&quot;, &quot;wordpress website&quot;&nbsp;&nbsp; dan seterusnya, yang penting senada dengan theme website</p>\r\n\r\n<p>Untuk link download nya di ambil dari mega.nz.<br />\r\nNanti mas nya saya kasih login nya</p>\r\n\r\n<p>Untuk bikin Live Preview nya<br />\r\nFormatnya seperti ini<br />\r\nhttps://closecrowds.com/themes/?theme=AIRobotWebsite<br />\r\nMas nya tinggal ganti kata terakhir. Misal judul website dan posting nya dari ini<br />\r\nhttps://elements.envato.com/ophelia-hotel-resort-elementor-template-kit-2GG3QWU<br />\r\nMas bikin link preview nya:<br />\r\nhttps://closecrowds.com/themes/?theme=Ophelia-resort<br />\r\n(Harus hanya dua kata; nama theme dan jenis bisnis nya dan harus ada tanda penghubung)<br />\r\nMisal nama website &quot;Keren&quot; bisnis nya tentang Pertanian, maka link nya jadi:<br />\r\nhttps://closecrowds.com/themes/?theme=Keren-farm</p>\r\n\r\n<p>Nanti mas nya kasih report nya ke saya atau buat report di google sheet.<br />\r\nisinya:<br />\r\nLink akhir posting: https://www.closecrowds.com/downloads/diverge-ai-robotics-website-themes/<br />\r\nLink halaman produk: https://elements.envato.com/diverge-ai-robotics-elementor-template-kit-3RHE7EE<br />\r\nLink live sumber : https://elementorpress.com/templatekit-pro/layout45/<br />\r\nLink preview https://closecrowds.com/themes/?theme=AIRobotWebsite</p>\r\n\r\n<p>Coba mas nya buat satu posting dulu biar saya bisa review<br />\r\nmakasih ya</p>\r\n', '2022-07-19 15:04:08'),
 (21, 'jasaview.id', '<p><a href=\"https://www.jasaview.id/masuk/\" target=\"_blank\">https://www.jasaview.id/masuk/</a></p>\r\n\r\n<p>Nama : Bahroni</p>\r\n\r\n<p>Email : padukaroni@yahoo.com</p>\r\n\r\n<p>Password : mGzL9nSus9T9wxP</p>\r\n', '2022-09-07 23:26:10'),
-(22, 'Migrasi PostWp dari CI3 ke laravel', '<p>Urutan yang akan dikerjakan</p>\r\n\r\n<ol>\r\n	<li>create project name in localhost</li>\r\n	<li>decide template to use</li>\r\n	<li>create new database for aplicaion</li>\r\n</ol>\r\n', '2022-10-03 23:13:52');
+(22, 'Migrasi PostWp dari CI3 ke laravel', '<p>Urutan yang akan dikerjakan</p>\r\n\r\n<ol>\r\n	<li>create project name in localhost</li>\r\n	<li>decide template to use</li>\r\n	<li>create new database for aplicaion</li>\r\n</ol>\r\n', '2022-10-03 23:13:52'),
+(23, 'Kumpulan Password', '<p>disini tercatat password-password untuk account yang pernah kami daftar</p>\r\n', '2022-10-08 04:45:58');
 
 -- --------------------------------------------------------
 
@@ -214,10 +215,10 @@ INSERT INTO `latihan_category` (`id_latihan`, `id_category`) VALUES
 (17, 13),
 (18, 13),
 (19, 8),
-(20, 23),
-(20, 2),
 (21, 13),
-(22, 17);
+(22, 17),
+(20, 23),
+(23, 2);
 
 -- --------------------------------------------------------
 
@@ -502,7 +503,8 @@ INSERT INTO `riwayat_latihan` (`id`, `id_latihan`, `title`, `description`, `crea
 (69, 19, 'backup backend/v_footer.php', '<hr/>\r\nline 337\r\n[pre]\r\n	$(\'#formTourBooking\').on(\'submit\',function(e){\r\n		e.preventDefault()\r\n		let dob=$(\'input[name=\"dob\"]\').val()\r\n		let first_name=$(\'input[name=\"first_name\"]\').val()\r\n		let last_name=$(\'input[name=\"last_name\"]\').val()\r\n		\r\n		const emailValue=[first_name,last_name,dob]\r\n		\r\n		$.post(\'<?php echo site_url(\"ajax/checkEmailValid\"); ?>\',{email:emailValue},function(data){\r\n			let num = parseInt(data)\r\n		\r\n			if(num > 0){\r\n				$(\'input[name=\"first_name\"]\').parent().addClass(\'has-error\')\r\n				$(\'input[name=\"last_name\"]\').parent().addClass(\'has-error\')\r\n				$(\'input[name=\"dob\"]\').parent().addClass(\'has-error\')\r\n\r\n				if($(\'#first_name_alert\').length > 0){\r\n					$(\'#first_name_alert\').text(\'First Name is already exists\')\r\n				}else{\r\n					$(\'input[name=\"first_name\"]\').parent().append(\'<span id=\"first_name_alert\" class=\"first_name_alert text-red\">First Name is already exists</span>\')\r\n				}\r\n				\r\n				if($(\'#last_name_alert\').length > 0){\r\n					$(\'#last_name_alert\').text(\'Last Name is already exists\')\r\n				}else{\r\n					$(\'input[name=\"last_name\"]\').parent().append(\'<span id=\"last_name_alert\" class=\"last_name_alert text-red\">Last Name is already exists</span>\')\r\n				}\r\n				\r\n				if($(\'#dob_alert\').length > 0){\r\n					$(\'#dob_alert\').text(\'Date Of Birth is already exists\')\r\n				}else{\r\n					$(\'input[name=\"dob\"]\').parent().append(\'<span id=\"dob_alert\" class=\"dob_alert text-red\">Date Of Birth is already exists</span>\')\r\n				}\r\n				\r\n			}else{\r\n				$(\'input[name=\"first_name\"]\').parent().removeClass(\'has-error\')\r\n				$(\'#first_name_alert\').text(\'\')\r\n				$(\'input[name=\"last_name\"]\').parent().removeClass(\'has-error\')\r\n				$(\'#last_name_alert\').text(\'\')\r\n				$(\'input[name=\"dob\"]\').parent().removeClass(\'has-error\')\r\n				$(\'#dob_alert\').text(\'\')\r\n			}\r\n		})\r\n		/*let i_plus=$(\'.has-error\').length\r\n		if(i_plus===0) this.submit()*/\r\n	})\r\n[/pre]', '2022-10-01 22:06:32', '2022-10-02 05:06:32'),
 (70, 19, 'tips dan trik javascript/jQuery', '<p>1. Buat scrool auto top</p>\r\n\r\n<blockquote>\r\n<p>[code]<code>window.scrollTo({top: 0, behavior: &#39;smooth&#39;});</code>[/code]</p>\r\n</blockquote>\r\n', '2022-10-01 23:33:02', '2022-10-02 06:35:36'),
 (71, 19, 'backup backend/v_footer.php', '[pre]\r\nlet dob=$(\'input[name=\"dob\"]\').val()\r\n		let first_name=$(\'input[name=\"first_name\"]\').val()\r\n		let last_name=$(\'input[name=\"last_name\"]\').val()\r\n		\r\n		const emailValue=[first_name,last_name,dob]\r\n		\r\n		$.post(\'<?php echo site_url(\"ajax/checkEmailValid\"); ?>\',{email:emailValue},function(data){\r\n			let num = parseInt(data)\r\n		\r\n			if(num > 0){\r\n				$(\'#main-alert\').html(\'<i class=\"fa fa-ban\"></i> First Name, Last Name and Date Of birth could potentially already exist\')\r\n				\r\n				window.scrollTo({top: 0, behavior: \'smooth\'})\r\n			}else{\r\n				$(\'#main-alert\').html(\'\')\r\n			}\r\n		})\r\n[/pre]', '2022-10-02 18:32:46', '2022-10-03 01:32:46'),
-(72, 20, 'SQ laporan', '<p>[pre]select id,url from laporan_wp where edisi=2 and url&lt;&gt;&#39;&#39; and url_preview&lt;&gt;&#39;OFF&#39;[/pre]</p>\r\n\r\n<p>[pre]select count(id) from laporan_wp where edisi=2 and url_preview=&#39;OFF&#39;[/pre]</p>\r\n', '2022-10-04 23:41:30', '2022-10-05 06:53:12');
+(72, 20, 'SQ laporan', '<p>[pre]select id,url from laporan_wp where edisi=2 and url&lt;&gt;&#39;&#39; and url_preview&lt;&gt;&#39;OFF&#39;[/pre]</p>\r\n\r\n<p>[pre]select count(id) from laporan_wp where edisi=2 and url_preview=&#39;OFF&#39;[/pre]</p>\r\n', '2022-10-04 23:41:30', '2022-10-05 06:53:12'),
+(73, 23, 'https://app.infinityfree.net/', '<p><strong>https://app.infinityfree.net/register </strong>adalah domain gratis dengan subdomain-subdomain yang kita buat sendiri namun main domainnya ditentukan server</p>\r\n\r\n<p>kami terdaftar dengan email : padukaroni@yahoo.com dan password : mQfg33gJJE8T3U8</p>\r\n\r\n<blockquote>\r\n<p>subdomain =&gt; postwp.rf.gd</p>\r\n\r\n<p>username : epiz_32748460 dan password : VGBHmDWH2U8h7DM</p>\r\n</blockquote>\r\n', '2022-10-08 05:09:53', '2022-10-08 03:44:24');
 
 -- --------------------------------------------------------
 
@@ -617,7 +619,7 @@ ALTER TABLE `group_ganti_text`
 -- AUTO_INCREMENT for table `latihan`
 --
 ALTER TABLE `latihan`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `post`
@@ -641,7 +643,7 @@ ALTER TABLE `post_meta`
 -- AUTO_INCREMENT for table `riwayat_latihan`
 --
 ALTER TABLE `riwayat_latihan`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- AUTO_INCREMENT for table `user`
