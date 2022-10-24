@@ -20,11 +20,11 @@
 		<li <?php echo (in_array('jabatan_2',$menu)) ? 'class="active"':''; ?>><a href="<?php echo site_url('jabatan/action?ac=add'); ?>"><i class="fa fa-circle-o"></i> Tambah</a></li>
 	  </ul>
 	</li>
-	<li class="treeview <?php echo (in_array('donatur',$menu)) ? 'active':''; ?>">
-	  <a href="#"><i class="fa fa-dashboard"></i> <span>Donatur</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
+	<li class="treeview <?php echo (in_array('bmh',$menu)) ? 'active':''; ?>">
+	  <a href="#"><i class="fa fa-dashboard"></i> <span>BMH</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
 	  <ul class="treeview-menu">
-		<li <?php echo (in_array('donatur_1',$menu)) ? 'class="active"':''; ?> ><a href="<?php echo site_url('donatur'); ?>"><i class="fa fa-circle-o"></i> Semua data</a></li>
-		<li <?php echo (in_array('donatur_2',$menu)) ? 'class="active"':''; ?> ><a href="<?php echo site_url('donatur/action?ac=add'); ?>"><i class="fa fa-circle-o"></i> Tambah</a></li>
+		<li <?php echo (in_array('bmh_1',$menu)) ? 'class="active"':''; ?> ><a href="<?php echo site_url('ondebmh'); ?>"><i class="fa fa-circle-o"></i> Semua data</a></li>
+		<li <?php echo (in_array('bmh_2',$menu)) ? 'class="active"':''; ?> ><a href="<?php echo site_url('ondebmh/action?ac=add'); ?>"><i class="fa fa-circle-o"></i> Tambah</a></li>
 	  </ul>
 	</li>
 	<li class="header">Pesan</li>
