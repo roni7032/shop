@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 17, 2022 at 07:14 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.0.19
+-- Generation Time: Oct 24, 2022 at 02:19 AM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.0.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -294,7 +294,8 @@ INSERT INTO `post` (`id`, `authorId`, `parentId`, `title`, `metaTitle`, `slug`, 
 (43, 1, NULL, 'Kumpulan pass', NULL, 'Kumpulan-pass', '', 0, '2022-09-19 12:35:31', '2022-10-17 12:07:01', NULL, '<p>trello.com : qRv7EMiBqrWUZ7d</p>\r\n\r\n<blockquote>\r\n<p>biusukki@yahoo.co.id : roni@oistudio.com</p>\r\n\r\n<p>daimaru.gosend@gmail.com : @DaimarU3717.gmail</p>\r\n</blockquote>\r\n\r\n<p>Instagram</p>\r\n\r\n<blockquote>\r\n<p>user : biusukki pass :bmhyarid2021</p>\r\n\r\n<p>user : semangatlagi_ pass : roni@oiStudio.com_1</p>\r\n</blockquote>\r\n'),
 (44, 1, NULL, 'Internet lifehack, untuk download', NULL, 'Internet-lifehack-untuk-download', '', 0, '2022-10-05 01:34:16', '2022-10-05 01:34:39', NULL, '<p>ketik digoogle</p>\r\n\r\n<p>[code]intitle:index.of?[/code] maka akan bisa download file apa saja</p>\r\n\r\n<p>tinggal ditambahi extention belakangnya misal exe atau apk [code]intitle:index.of?exe[/code]</p>\r\n'),
 (45, 1, NULL, 'Rekomendasi Alat Pijat Elektrik', NULL, 'Rekomendasi-Alat-Pijat-Elektrik', '', 0, '2022-10-05 03:01:27', '2022-10-05 03:01:27', NULL, '<p>Rekomendasi alat pijat elektrik</p>\r\n\r\n<ol>\r\n	<li>benbo alat pijat multifungsi</li>\r\n	<li>omron electric nerve stimulator hv-f021</li>\r\n	<li>Jaco king massage jc 533</li>\r\n	<li>dr xie lumbar traction device</li>\r\n	<li>Benbo massage chair</li>\r\n</ol>\r\n'),
-(46, 1, NULL, 'lokasi views pada laravel', NULL, 'lokasi-views-pada-laravel', '', 0, '2022-10-13 06:37:30', '2022-10-13 06:45:09', NULL, '<p>laravel versi terbaru untuk akses halaman welcome pada laravel ada di folder public, sedangkan di laravel yang lama itu langsung pada root aplikasinya.</p>\r\n\r\n<p>meskipun akses halaman welcomenya ada di public tapi tempat file viewnya ada pada folder [code]resources/views/welcome.blade.php[/code] pada laravel lama ada di [code]layout/views/welcome.blade.php[/code]</p>\r\n\r\n<p>untuk script pada views tidak sama seperti frameworks CI3 yang menggunakan HTML murni laravel menggunakan HTML blade</p>\r\n\r\n<p>contoh HTML blade<br />\r\n[pre]<br />\r\n&lt;!DOCTYPE html&gt;<br />\r\n&lt;html lang=&quot;en&quot;&gt;<br />\r\n&nbsp;&nbsp; &nbsp;&lt;head&gt;<br />\r\n&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;meta charset=&quot;UTF-8&quot;&gt;<br />\r\n&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;title&gt;Belajar Laravel 5.3 | @yield(&#39;title&#39;)&lt;/title&gt;<br />\r\n&nbsp;&nbsp; &nbsp;&lt;/head&gt;<br />\r\n&nbsp;&nbsp; &nbsp;&lt;body&gt;<br />\r\n&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;ul&gt;<br />\r\n&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;@section(&#39;sidebar&#39;)<br />\r\n&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &lt;li&gt;HTML&lt;/li&gt;<br />\r\n&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &lt;li&gt;CSS&lt;/li&gt;<br />\r\n&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &lt;li&gt;JS&lt;/li&gt;<br />\r\n&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;@show<br />\r\n&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;/ul&gt;<br />\r\n&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;div class=&quot;container&quot;&gt;<br />\r\n&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;@yield(&#39;content&#39;)<br />\r\n&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;/div&gt;<br />\r\n&nbsp;&nbsp; &nbsp;&lt;/body&gt;<br />\r\n&lt;/html&gt;<br />\r\n[/pre]</p>\r\n\r\n<blockquote>\r\n<p>Penjelasan dari code di atas adalah pada bagian @yield(&#39;title&#39;), jadi sederhananya gini teman-teman kita seperti memberikan ruang pada halaman ini yang datanya akan kita isi dari page yang berbeda sesuai dengan title atau judul halaman. Lalu @yield(&#39;content&#39;) sama persis dengan @yield(&#39;title&#39;), sedangkan @section(&#39;sidebar&#39;)... kita akan meminjam bagian ini untuk kita tampilkan di page yang lain.<br />\r\ndikutip dari onphpid.com</p>\r\n</blockquote>\r\n');
+(46, 1, NULL, 'lokasi views pada laravel', NULL, 'lokasi-views-pada-laravel', '', 0, '2022-10-13 06:37:30', '2022-10-13 06:45:09', NULL, '<p>laravel versi terbaru untuk akses halaman welcome pada laravel ada di folder public, sedangkan di laravel yang lama itu langsung pada root aplikasinya.</p>\r\n\r\n<p>meskipun akses halaman welcomenya ada di public tapi tempat file viewnya ada pada folder [code]resources/views/welcome.blade.php[/code] pada laravel lama ada di [code]layout/views/welcome.blade.php[/code]</p>\r\n\r\n<p>untuk script pada views tidak sama seperti frameworks CI3 yang menggunakan HTML murni laravel menggunakan HTML blade</p>\r\n\r\n<p>contoh HTML blade<br />\r\n[pre]<br />\r\n&lt;!DOCTYPE html&gt;<br />\r\n&lt;html lang=&quot;en&quot;&gt;<br />\r\n&nbsp;&nbsp; &nbsp;&lt;head&gt;<br />\r\n&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;meta charset=&quot;UTF-8&quot;&gt;<br />\r\n&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;title&gt;Belajar Laravel 5.3 | @yield(&#39;title&#39;)&lt;/title&gt;<br />\r\n&nbsp;&nbsp; &nbsp;&lt;/head&gt;<br />\r\n&nbsp;&nbsp; &nbsp;&lt;body&gt;<br />\r\n&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;ul&gt;<br />\r\n&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;@section(&#39;sidebar&#39;)<br />\r\n&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &lt;li&gt;HTML&lt;/li&gt;<br />\r\n&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &lt;li&gt;CSS&lt;/li&gt;<br />\r\n&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &lt;li&gt;JS&lt;/li&gt;<br />\r\n&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;@show<br />\r\n&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;/ul&gt;<br />\r\n&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;div class=&quot;container&quot;&gt;<br />\r\n&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;@yield(&#39;content&#39;)<br />\r\n&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;/div&gt;<br />\r\n&nbsp;&nbsp; &nbsp;&lt;/body&gt;<br />\r\n&lt;/html&gt;<br />\r\n[/pre]</p>\r\n\r\n<blockquote>\r\n<p>Penjelasan dari code di atas adalah pada bagian @yield(&#39;title&#39;), jadi sederhananya gini teman-teman kita seperti memberikan ruang pada halaman ini yang datanya akan kita isi dari page yang berbeda sesuai dengan title atau judul halaman. Lalu @yield(&#39;content&#39;) sama persis dengan @yield(&#39;title&#39;), sedangkan @section(&#39;sidebar&#39;)... kita akan meminjam bagian ini untuk kita tampilkan di page yang lain.<br />\r\ndikutip dari onphpid.com</p>\r\n</blockquote>\r\n'),
+(47, 1, NULL, 'Install laravel step by step', NULL, 'Install-laravel-step-by-step', '', 0, '2022-10-23 11:58:01', '2022-10-23 11:58:01', NULL, '<p>Install Laravel sumber : <a href=\"https://bukuinformatika.com/tutorial-membuat-aplikasi-crud-laravel-adminlte/\" target=\"_blank\">https://bukuinformatika.com/tutorial-membuat-aplikasi-crud-laravel-adminlte/</a></p>\r\n\r\n<p>tahap pertama<br />\r\n[code]composer create-project laravel/laravel crud-laravel-adminlte[/code]</p>\r\n');
 
 -- --------------------------------------------------------
 
@@ -383,7 +384,8 @@ INSERT INTO `post_category` (`postId`, `categoryId`) VALUES
 (44, 1),
 (45, 2),
 (46, 17),
-(43, 2);
+(43, 2),
+(47, 17);
 
 -- --------------------------------------------------------
 
@@ -506,7 +508,8 @@ INSERT INTO `riwayat_latihan` (`id`, `id_latihan`, `title`, `description`, `crea
 (70, 19, 'tips dan trik javascript/jQuery', '<p>1. Buat scrool auto top</p>\r\n\r\n<blockquote>\r\n<p>[code]<code>window.scrollTo({top: 0, behavior: &#39;smooth&#39;});</code>[/code]</p>\r\n</blockquote>\r\n', '2022-10-01 23:33:02', '2022-10-02 06:35:36'),
 (71, 19, 'backup backend/v_footer.php', '[pre]\r\nlet dob=$(\'input[name=\"dob\"]\').val()\r\n		let first_name=$(\'input[name=\"first_name\"]\').val()\r\n		let last_name=$(\'input[name=\"last_name\"]\').val()\r\n		\r\n		const emailValue=[first_name,last_name,dob]\r\n		\r\n		$.post(\'<?php echo site_url(\"ajax/checkEmailValid\"); ?>\',{email:emailValue},function(data){\r\n			let num = parseInt(data)\r\n		\r\n			if(num > 0){\r\n				$(\'#main-alert\').html(\'<i class=\"fa fa-ban\"></i> First Name, Last Name and Date Of birth could potentially already exist\')\r\n				\r\n				window.scrollTo({top: 0, behavior: \'smooth\'})\r\n			}else{\r\n				$(\'#main-alert\').html(\'\')\r\n			}\r\n		})\r\n[/pre]', '2022-10-02 18:32:46', '2022-10-03 01:32:46'),
 (72, 20, 'SQ laporan', '<p>[pre]select id,url from laporan_wp where edisi=2 and url&lt;&gt;&#39;&#39; and url_preview&lt;&gt;&#39;OFF&#39;[/pre]</p>\r\n\r\n<p>[pre]select count(id) from laporan_wp where edisi=2 and url_preview=&#39;OFF&#39;[/pre]</p>\r\n', '2022-10-04 23:41:30', '2022-10-05 06:53:12'),
-(73, 23, 'https://app.infinityfree.net/', '<p><strong>https://app.infinityfree.net/register </strong>adalah domain gratis dengan subdomain-subdomain yang kita buat sendiri namun main domainnya ditentukan server</p>\r\n\r\n<p>kami terdaftar dengan email : padukaroni@yahoo.com dan password : mQfg33gJJE8T3U8</p>\r\n\r\n<blockquote>\r\n<p>subdomain =&gt; postwp.rf.gd</p>\r\n\r\n<p>username : epiz_32748460 dan password : VGBHmDWH2U8h7DM</p>\r\n</blockquote>\r\n', '2022-10-08 05:09:53', '2022-10-08 03:44:24');
+(73, 23, 'https://app.infinityfree.net/', '<p><strong>https://app.infinityfree.net/register </strong>adalah domain gratis dengan subdomain-subdomain yang kita buat sendiri namun main domainnya ditentukan server</p>\r\n\r\n<p>kami terdaftar dengan email : padukaroni@yahoo.com dan password : mQfg33gJJE8T3U8</p>\r\n\r\n<blockquote>\r\n<p>subdomain =&gt; postwp.rf.gd</p>\r\n\r\n<p>username : epiz_32748460 dan password : VGBHmDWH2U8h7DM</p>\r\n</blockquote>\r\n', '2022-10-08 05:09:53', '2022-10-08 03:44:24'),
+(74, 20, '#titip, laporan BMH', '<p>[pre]</p>\r\n\r\n<p>create table main_ondebmh(<br />\r\n&nbsp;&nbsp; &nbsp;id bigint auto_increment,<br />\r\n&nbsp;&nbsp; &nbsp;panggilan varchar(100) not null,<br />\r\n&nbsp;&nbsp; &nbsp;tgl date not null,<br />\r\n&nbsp;&nbsp; &nbsp;update_at timestamp null,<br />\r\n&nbsp;&nbsp; &nbsp;create_at timestamp default current_timestamp,<br />\r\n&nbsp;&nbsp; &nbsp;primary key(id)<br />\r\n)Engine=InnoDB;</p>\r\n\r\n<p>create table pesan_ondebmh(<br />\r\n&nbsp;&nbsp; &nbsp;code char(10) not null,<br />\r\n&nbsp;&nbsp; &nbsp;id_main bigint default 0,<br />\r\n&nbsp;&nbsp; &nbsp;isi_pesan text not null,<br />\r\n&nbsp;&nbsp; &nbsp;status varchar(10) default &#39;terkirim&#39;,<br />\r\n&nbsp;&nbsp; &nbsp;tgl date not null,<br />\r\n&nbsp;&nbsp; &nbsp;update_at timestamp null,<br />\r\n&nbsp;&nbsp; &nbsp;create_at timestamp default current_timestamp,<br />\r\n&nbsp;&nbsp; &nbsp;primary key(code)<br />\r\n)Engine=InnoDB;</p>\r\n\r\n<p><br />\r\n[/pre]</p>\r\n', '2022-10-23 23:15:54', '2022-10-24 06:15:54');
 
 -- --------------------------------------------------------
 
@@ -627,7 +630,7 @@ ALTER TABLE `latihan`
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `post_comment`
@@ -645,7 +648,7 @@ ALTER TABLE `post_meta`
 -- AUTO_INCREMENT for table `riwayat_latihan`
 --
 ALTER TABLE `riwayat_latihan`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT for table `user`
