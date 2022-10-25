@@ -6,6 +6,8 @@ class Ondebmh extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 		date_default_timezone_set('Asia/Jakarta');
+		
+		$this->load->model('M_ondebmh');
 	}
 	
 	public function index(){
@@ -15,7 +17,7 @@ class Ondebmh extends CI_Controller {
 				array(anchor('','Home'),''),
 				array('BMH','class="active"')
 			),
-			'data'=>$this->M_general->getData('main_ondebmh')
+			'data'=>$this->M_ondebmh->getAll('w_pesan_ondebmh')
 		);
 
 		$dtmenu['menu']=array(
@@ -72,10 +74,24 @@ class Ondebmh extends CI_Controller {
 				$this->M_general->deldata('menu',$id);
 				redirect('welcome/menu');
 			break;
-			case 'set_sudah':
-				$dtedit=$this->M_general->getEdit('Ondebmh',$id);
-				$this->M_general->updateData('Ondebmh',array('sudah'=>'yes'),$id);
-				redirect($dtedit->link);
+			case 'pesan':
+				$dt=array(
+					'judul'=>'Ondebmh',
+					'ac'=>$ac,
+					'id'=>$id,
+					'breadcrumb'=>array(
+						array(anchor('','Home'),''),
+						array(anchor('Ondebmh',' Ondebmh'),''),
+						array('Pesan','class="active"')
+					),
+					'data'=>$this->M_general->getDataWhere('pesan_ondebmh',array('id_main'=>$id),'',array('create_at','DESC'))
+				);
+				$dtmenu['menu']=array('Ondebmh','Ondebmh_1');
+				$dtmenu['role']=0;
+				$lempar['isi']=view_one('Ondebmh/pesan',$dt);
+				$lempar['js']=view_one('Ondebmh/js',array('for'=>'add'));
+				$lempar['menu']=view_one('menu/menu',$dtmenu);
+				$this->load->view('template/blog_editor',$lempar);
 			break;
 			default:
 				$dt=array(
@@ -124,6 +140,19 @@ class Ondebmh extends CI_Controller {
 					'posisi_id_lwp' => $this->input->post('posisi_id_lwp'),
 				);
 				$this->M_general->updateData($table,$dtsave,$id);
+			break;
+			case 'pesan':
+				$dtsave=array(
+					'code' => $this->M_general->makeCode('pesan_ondebmh',10,'code'),
+					'id_main' => $this->input->post('id_main'),
+					'isi_pesan' => $this->input->post('isi_pesan'),
+					'status' => $this->input->post('status'),
+					'tgl' => ($this->input->post('tgl')!=='') ? date('Y-m-d',strtotime($this->input->post('tgl'))):null,
+					'update_at' => date('Y-m-d h:i:s'),
+				);
+				$id=$this->M_general->addData($table,$dtsave);
+				
+				redirect('ondebmh/action?ac=pesan&id='.$dtsave['id_main']);
 			break;
 			default:
 				

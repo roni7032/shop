@@ -37,11 +37,12 @@
 			);
 
 			$this->table->set_template($tmp_table);
-			$this->table->set_heading('No.','Panggilan','No. HP','Tanggal','Action');
+			$this->table->set_heading('No.','Tgl Collect','Panggilan','No. HP','Tgl Kirim','Status','Action');
 				$no=1;
 				foreach ($data as $key => $value) {
-					$link = anchor('ondebmh/action?ac=edit&id='.$value->id,' <i class="fa fa-pencil"></i> Edit','class="btn btn-block btn-warning"');
-					$this->table->add_row($no++,$value->panggilan,$value->hp,date('d M Y',strtotime($value->tgl)),$link);
+					// $link = anchor('ondebmh/action?ac=edit&id='.$value->id,' <i class="fa fa-pencil"></i> Edit','class="btn btn-block btn-warning"');
+					$link = anchor('ondebmh/action?ac=pesan&id='.$value->id,' <i class="fa fa-send"></i> ','class="btn btn-info"');
+					$this->table->add_row($no++,date('d M Y',strtotime($value->tgl)), $value->panggilan,$value->hp,isset($value->p_tgl) ? date('d M Y',strtotime($value->p_tgl)):'',$value->status,$link);
 				}
 			echo $this->table->generate();
 			?>

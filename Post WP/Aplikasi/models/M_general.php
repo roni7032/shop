@@ -64,13 +64,17 @@ class M_general extends CI_Model{
 		}
 		return $this->db->get($table)->result();
 	}
+	
+	function getCountW($table,$where){
+		return $this->db->get_where($table,$where)->num_rows();
+	}
 	/*--------Custom---------------*/
 	
 	public function makeCode($table,$prefix,$key){
 		do{
-		$length = 5;
+		$length = $prefix;
 		$randomletter = substr(str_shuffle("abcdefghijklmnopqrstuvwxyz1234567890"), 0, $length);
-		$username=$prefix.$randomletter.mt_rand(10,100);
+		$username=$randomletter.mt_rand(10,100);
 		$a=$this->getCountW($table,array($key => $username));
 		}while($a > 0);
 		
