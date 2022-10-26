@@ -27,6 +27,7 @@ class Ondebmh extends CI_Controller {
 
 		$dtmenu['role']=0;
 		$lempar['isi']=view_one('Ondebmh/all',$dt);
+		$lempar['js']=view_one('Ondebmh/js',array('for'=>'all'));
 		$lempar['menu']=view_one('menu/menu',$dtmenu);
 		$this->load->view('template/blog_plain',$lempar);
 	}
@@ -153,6 +154,19 @@ class Ondebmh extends CI_Controller {
 				$id=$this->M_general->addData($table,$dtsave);
 				
 				redirect('ondebmh/action?ac=pesan&id='.$dtsave['id_main']);
+			break;
+			case 'pesan_1':
+				$dtsave=array(
+					'code' => $this->M_general->makeCode('pesan_ondebmh',10,'code'),
+					'id_main' => $this->input->post('id_main'),
+					'isi_pesan' => $this->input->post('isi_pesan'),
+					'status' => $this->input->post('status'),
+					'tgl' => date('Y-m-d'),
+					'update_at' => date('Y-m-d h:i:s'),
+				);
+				$id=$this->M_general->addData($table,$dtsave);
+				
+				redirect('ondebmh');
 			break;
 			default:
 				

@@ -37,12 +37,30 @@
 			);
 
 			$this->table->set_template($tmp_table);
-			$this->table->set_heading('No.','Tgl Collect','Panggilan','No. HP','Tgl Kirim','Status','Action');
+			$this->table->set_heading('No.','Tgl Collect','Panggilan','No. HP','Status','Action');
 				$no=1;
 				foreach ($data as $key => $value) {
 					// $link = anchor('ondebmh/action?ac=edit&id='.$value->id,' <i class="fa fa-pencil"></i> Edit','class="btn btn-block btn-warning"');
-					$link = anchor('ondebmh/action?ac=pesan&id='.$value->id,' <i class="fa fa-send"></i> ','class="btn btn-info"');
-					$this->table->add_row($no++,date('d M Y',strtotime($value->tgl)), $value->panggilan,$value->hp,isset($value->p_tgl) ? date('d M Y',strtotime($value->p_tgl)):'',$value->status,$link);
+					$status = isset($value->status) ? anchor('ondebmh/action?ac=pesan&id='.$value->id,$value->status):'';
+					$hidden=array(
+						'table'=>'pesan_ondebmh',
+						'ac'=>'pesan_1',
+						'id_main'=>$value->id
+					);
+					$link = form_open('ondebmh/simpan','id="ondebmh_"'.$value->id,$hidden);
+					$link .= '<input type="text" name="isi_pesan" id="id_isi_pesan_'.$value->id.'"/>';
+					$arr=array(
+						'terkirim'=>'Terkirim',
+						'dibaca'=>'Dibaca',
+						'pending'=>'Pending',
+						'tidakdibaca'=>'Tidak Dibaca',
+						'block'=>'Block',
+					);
+					$link .= form_dropdown('status',$arr,'','id="status_'.$value->id.'"');
+					$link .= form_submit('save', 'Go','class=""'); 
+					$link .= form_close(); 
+					// $link .= '<button type"button" onClick="addpesan('.$value->id.')">Go</button>';
+					$this->table->add_row($no++,date('d M Y',strtotime($value->tgl)), $value->panggilan,$value->hp,$status,$link);
 				}
 			echo $this->table->generate();
 			?>

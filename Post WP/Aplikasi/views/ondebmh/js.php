@@ -12,8 +12,10 @@
 			$('.select2').select2()
 		})
 	</script>
-<?php elseif($for=='edit'): ?>
+<?php elseif($for=='all'): ?>
 	<script type="text/javascript">
-		
+		function addpesan(id){
+			
+		}
 	</script>
 <?php endif; ?>
