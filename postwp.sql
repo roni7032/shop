@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 02, 2022 at 07:28 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.0.19
+-- Generation Time: Nov 08, 2022 at 01:02 AM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.0.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -1292,6 +1292,194 @@ INSERT INTO `pesan_ondebmh` (`code`, `id_main`, `isi_pesan`, `status`, `tgl`, `u
 ('yqpg7sw69u', 20, 'perenalan dan penawaran sarung', 'dibaca', '2022-11-02', '2022-11-02 04:54:14', '2022-11-02 04:54:14'),
 ('zs8f1ixow0', 16, 'perenalan dan penawaran sarung', 'dibaca', '2022-11-02', '2022-11-02 04:54:58', '2022-11-02 04:54:58');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `suarrid`
+--
+
+CREATE TABLE `suarrid` (
+  `id` bigint(20) NOT NULL,
+  `link` varchar(200) NOT NULL,
+  `judul` varchar(200) DEFAULT NULL,
+  `img` varchar(200) DEFAULT NULL,
+  `isi` longtext DEFAULT NULL,
+  `tags` varchar(100) DEFAULT NULL,
+  `status` enum('ON','OFF') NOT NULL DEFAULT 'OFF'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `suarrid`
+--
+
+INSERT INTO `suarrid` (`id`, `link`, `judul`, `img`, `isi`, `tags`, `status`) VALUES
+(1, 'http://suarr.id/mengenal-ulama-beirut-2-syeikh-abdul-basith-al-fakhuriy-mufti-beirut-di-masa-daulah-utsmaniyyah/', NULL, NULL, NULL, NULL, 'OFF'),
+(2, 'http://suarr.id/mengenal-sabatu-rijal-2-tujuh-waliyullah-kota-marakesh-maroko/', NULL, NULL, NULL, NULL, 'OFF'),
+(3, 'http://suarr.id/george-orwell-animal-farm/', NULL, NULL, NULL, NULL, 'OFF'),
+(4, 'http://suarr.id/inilah-sosok-wisudawan-unnes-penggagas-setiya-aji-flower-farm-bandungan/', NULL, NULL, NULL, NULL, 'OFF'),
+(5, 'http://suarr.id/mohamed-salah-oase-di-tengah-islamophobia/', NULL, NULL, NULL, NULL, 'OFF'),
+(6, 'http://suarr.id/gus-dur-dan-tiga-pendekar-chicago/', NULL, NULL, NULL, NULL, 'OFF'),
+(7, 'http://suarr.id/diumumkan-hari-ini-inilah-mawapres-fip-dan-fmipa-unnes-tahun-2018-4/', NULL, NULL, NULL, NULL, 'OFF'),
+(8, 'http://suarr.id/dul-matin-menggugat-tuhan/', NULL, NULL, NULL, NULL, 'OFF'),
+(9, 'http://suarr.id/alumni-pkpt-ipnu-ippnu-unnes-bangkitkan-nahdlatut-tujjar/', NULL, NULL, NULL, NULL, 'OFF'),
+(10, 'http://suarr.id/ada-anak-bertanya-pada-bapaknya/', NULL, NULL, NULL, NULL, 'OFF'),
+(11, 'http://suarr.id/tawassuth-kiai-sahal-mahfudz/', NULL, NULL, NULL, NULL, 'OFF'),
+(12, 'http://suarr.id/mempersiapkan-diri-menyambut-bulan-suci/', NULL, NULL, NULL, NULL, 'OFF'),
+(13, 'http://suarr.id/sejarah-penamaan-puasa-hari-putih/', NULL, NULL, NULL, NULL, 'OFF'),
+(14, 'http://suarr.id/nostalgia-bersama-komik-legendaris-karya-tatang-s/', NULL, NULL, NULL, NULL, 'OFF'),
+(15, 'http://suarr.id/ketika-al-jahizh-diledek-karena-cinta-kepada-buku/', NULL, NULL, NULL, NULL, 'OFF'),
+(16, 'http://suarr.id/peran-kiai-tak-terganti-di-era-disrupsi/', NULL, NULL, NULL, NULL, 'OFF'),
+(17, 'http://suarr.id/mahasiswa-kkn-unnes-adakan-panggung-apresiasi-bagi-anak/', NULL, NULL, NULL, NULL, 'OFF'),
+(18, 'http://suarr.id/pesan-habib-lutfi-untuk-mahasiswa-unnes/', NULL, NULL, NULL, NULL, 'OFF'),
+(19, 'http://suarr.id/ibnu-saqa-kawan-syaikh-abdul-qadir-yang-malang/', NULL, NULL, NULL, NULL, 'OFF'),
+(20, 'http://suarr.id/peduli-lingkungan-kophi-jateng-lakukan-aksi-cabut-paku/', NULL, NULL, NULL, NULL, 'OFF'),
+(21, 'http://suarr.id/agama-adalah-kebutuhan-ruhani/', NULL, NULL, NULL, NULL, 'OFF'),
+(22, 'http://suarr.id/edward-said-orientalisme-dan-sebelumnya/', NULL, NULL, NULL, NULL, 'OFF'),
+(23, 'http://suarr.id/sastra-subjek-pengendali-kritik-agresif/', NULL, NULL, NULL, NULL, 'OFF'),
+(24, 'http://suarr.id/maling-langgar/', NULL, NULL, NULL, NULL, 'OFF'),
+(25, 'http://suarr.id/selawatan-dan-ngaji-budaya-digelar-di-kampus-ungu/', NULL, NULL, NULL, NULL, 'OFF'),
+(26, 'http://suarr.id/dukung-asean-games-2018-papermob-ppak-unnes-2018-dapat-apresiasi-dari-kemenpora/', NULL, NULL, NULL, NULL, 'OFF'),
+(27, 'http://suarr.id/organisasi-daerah-peran-strategis-yang-dilupakan/', NULL, NULL, NULL, NULL, 'OFF'),
+(28, 'http://suarr.id/aksi-jaga-keberagaman-dalam-perspektif-nasionalisme/', NULL, NULL, NULL, NULL, 'OFF'),
+(29, 'http://suarr.id/mengulik-peristiwa-isra-miraj/', NULL, NULL, NULL, NULL, 'OFF'),
+(30, 'http://suarr.id/thomas/', NULL, NULL, NULL, NULL, 'OFF'),
+(31, 'http://suarr.id/nawal-el-saadawi-diskriminasi-gender-dan-pertentanganya-dengan-tuhan/', NULL, NULL, NULL, NULL, 'OFF'),
+(32, 'http://suarr.id/new-normal-pemerintah-kabupaten-pati-sinergikan-gugus-tugas-covid19-pondok-pesantren/', NULL, NULL, NULL, NULL, 'OFF'),
+(33, 'http://suarr.id/pcinu-maroko-kibarkan-karya-ulama-nusantara-di-kancah-dunia/', NULL, NULL, NULL, NULL, 'OFF'),
+(34, 'http://suarr.id/darwish-yang-menangisi-janggut-indahnya/', NULL, NULL, NULL, NULL, 'OFF'),
+(35, 'http://suarr.id/seorang/', NULL, NULL, NULL, NULL, 'OFF'),
+(36, 'http://suarr.id/absurditas-dan-nihilisme-di-era-pasca-agama-refleksi-atas-kebahagiaan/', NULL, NULL, NULL, NULL, 'OFF'),
+(37, 'http://suarr.id/pondok-pesantren-dekat-unissula/', NULL, NULL, NULL, NULL, 'OFF'),
+(38, 'http://suarr.id/nuansa-nasionalisme-dalam-unnes-bersholawat/', NULL, NULL, NULL, NULL, 'OFF'),
+(39, 'http://suarr.id/kophi-jateng-edukasi-siswa-sdn-1-ngijo-tentang-lingkungan/', NULL, NULL, NULL, NULL, 'OFF'),
+(40, 'http://suarr.id/iklan/', NULL, NULL, NULL, NULL, 'OFF'),
+(41, 'http://suarr.id/meneladani-cara-mencari-ilmu-ala-syaikh-abu-madyan/', NULL, NULL, NULL, NULL, 'OFF'),
+(42, 'http://suarr.id/gema-al-ghazali-dalam-karya-karya-barhebraeus/', NULL, NULL, NULL, NULL, 'OFF'),
+(43, 'http://suarr.id/anjing-dan-abu-yazid-al-busthomi-antara-najis-zahir-dan-najis-batin/', NULL, NULL, NULL, NULL, 'OFF'),
+(44, 'http://suarr.id/sidi-abu-madyan-dan-ramalan-syekh-abu-yaza/', NULL, NULL, NULL, NULL, 'OFF'),
+(45, 'http://suarr.id/high-noon-jakarta-2001-catatan-berharga-dari-panggung-belakang-presiden/', NULL, NULL, NULL, NULL, 'OFF'),
+(46, 'http://suarr.id/sambut-tokoh-nasional-bem-unnes-lakukan-aksi/', NULL, NULL, NULL, NULL, 'OFF'),
+(47, 'http://suarr.id/gosip/', NULL, NULL, NULL, NULL, 'OFF'),
+(48, 'http://suarr.id/pesan-syaikh-abul-hasan-asy-syadzili-tentang-ketaatan/', NULL, NULL, NULL, NULL, 'OFF'),
+(49, 'http://suarr.id/imam-al-qusyairi-sufi-yang-pakar-nahwu/', NULL, NULL, NULL, NULL, 'OFF'),
+(50, 'http://suarr.id/kkn-tim-ii-undip-pelopori-pengelolaan-sampah-skala-rumah-tangga-desa-petanjungan/', NULL, NULL, NULL, NULL, 'OFF'),
+(51, 'http://suarr.id/menggugat-komersialisasi-pendidikan-indonesia-pendidikan-murah-kenapa-tidak/', NULL, NULL, NULL, NULL, 'OFF'),
+(52, 'http://suarr.id/penyakit-batin-yang-banyak-orang-lupa/', NULL, NULL, NULL, NULL, 'OFF'),
+(53, 'http://suarr.id/cara-islam-menyikapi-wabah/', NULL, NULL, NULL, NULL, 'OFF'),
+(54, 'http://suarr.id/kisah-kiai-lunuwih-dan-seorang-santri/', NULL, NULL, NULL, NULL, 'OFF'),
+(55, 'http://suarr.id/menimbang-ulang-wacana-kampus-asing-di-indonesia/', NULL, NULL, NULL, NULL, 'OFF'),
+(56, 'http://suarr.id/imam-sibawaih-dari-kekalahan-debat-sampai-kitab-nahwunya-yang-tak-sempat-dirampungkan/', NULL, NULL, NULL, NULL, 'OFF'),
+(57, 'http://suarr.id/unen-unen-jowo-dan-hubungannya-dengan-kaidah-balaghoh/', NULL, NULL, NULL, NULL, 'OFF'),
+(58, 'http://suarr.id/ekologi-dalam-klenik-rasionalitas-dan-agama/', NULL, NULL, NULL, NULL, 'OFF'),
+(59, 'http://suarr.id/narasi-narasi-kemanusiaan-yang-terpinggirkan/', NULL, NULL, NULL, NULL, 'OFF'),
+(60, 'http://suarr.id/children-heaven-perjuangan-demi-sepatu-butut/', NULL, NULL, NULL, NULL, 'OFF'),
+(61, 'http://suarr.id/daftar-pondok-pesantren-dekat-unwahas/', NULL, NULL, NULL, NULL, 'OFF'),
+(62, 'http://suarr.id/fazlur-rahman-pembaharu-islam-yang-melampaui-zaman/', NULL, NULL, NULL, NULL, 'OFF'),
+(63, 'http://suarr.id/nahwul-qulub-imam-al-qusyairi-melihat-nahwu-dari-kacamata-tasawuf/', NULL, NULL, NULL, NULL, 'OFF'),
+(64, 'http://suarr.id/biografi-ibn-al-jauzi-pakar-fikih-madzhab-hambali-dan-penggede-ulama-abad-enam-hijriyah/', NULL, NULL, NULL, NULL, 'OFF'),
+(65, 'http://suarr.id/permulaan-munculnya-ilmu-shorof/', NULL, NULL, NULL, NULL, 'OFF'),
+(66, 'http://suarr.id/tentang-kitab-al-fihrist-karya-nadim/', NULL, NULL, NULL, NULL, 'OFF'),
+(67, 'http://suarr.id/guslat-mipa-gelar-kartinis-return-untuk-menyambut-hari-kartini/', NULL, NULL, NULL, NULL, 'OFF'),
+(68, 'http://suarr.id/ibnu-jinni-sang-linguis-arab/', NULL, NULL, NULL, NULL, 'OFF'),
+(69, 'http://suarr.id/ppg-jembatan-pahlawan-tanpa-tanda-jasa-menjadi-para-penjual-jasa/', NULL, NULL, NULL, NULL, 'OFF'),
+(70, 'http://suarr.id/bagaimana-membedakan-buku-yang-palsu-dari-yang-otentik-dalam-korpus-al-ghazali-2/', NULL, NULL, NULL, NULL, 'OFF'),
+(71, 'http://suarr.id/imam-ibn-ajrum-ulama-maroko-dibalik-kitab-jurumiyah/', NULL, NULL, NULL, NULL, 'OFF'),
+(72, 'http://suarr.id/istikamah-kiai-sahal-mahfudz/', NULL, NULL, NULL, NULL, 'OFF'),
+(73, 'http://suarr.id/ribuan-peserta-ikuti-toefl-akbar-unnes-2018/', NULL, NULL, NULL, NULL, 'OFF'),
+(74, 'http://suarr.id/10-kalam-hikmah-anjuran-untuk-belajar-nahwu/', NULL, NULL, NULL, NULL, 'OFF'),
+(75, 'http://suarr.id/pak-kiai-misbahul-munir-dewan-guru-pesantren-raudlatul-ulum-tutup-usia/', NULL, NULL, NULL, NULL, 'OFF'),
+(76, 'http://suarr.id/karamah-khalifah-umar-bin-abdul-aziz-yang-jarang-orang-ketahui/', NULL, NULL, NULL, NULL, 'OFF'),
+(77, 'http://suarr.id/gus-sholah-kiai-pembela-hak-hak-minoritas/', NULL, NULL, NULL, NULL, 'OFF'),
+(78, 'http://suarr.id/dapatkah-sains-dan-agama-bersatu/', NULL, NULL, NULL, NULL, 'OFF'),
+(79, 'http://suarr.id/penyebab-pikiran-kacau/', NULL, NULL, NULL, NULL, 'OFF'),
+(80, 'http://suarr.id/puisi-puisi-muhammad-lutfi-tragedi-bambu-berdarah/', NULL, NULL, NULL, NULL, 'OFF'),
+(81, 'http://suarr.id/coco-2017-islam-nusantara-dalam-dia-de-los-muertos/', NULL, NULL, NULL, NULL, 'OFF'),
+(82, 'http://suarr.id/hakikat-syukur-tertinggi/', NULL, NULL, NULL, NULL, 'OFF'),
+(83, 'http://suarr.id/perempuan-terorisme-dan-manipulasi-tafsir-tentang-ayat-jihad/', NULL, NULL, NULL, NULL, 'OFF'),
+(84, 'http://suarr.id/kisah-ibrahim-alegori-pencarian-tuhan-dengan-logika-dan-cinta/', NULL, NULL, NULL, NULL, 'OFF'),
+(85, 'http://suarr.id/mahasiswa-baru-unnes-jalur-snmptn-wajib-perhatikan-beberapa-kegiatan-ini/', NULL, NULL, NULL, NULL, 'OFF'),
+(86, 'http://suarr.id/komunikasi-ilmu-pengetahuan/', NULL, NULL, NULL, NULL, 'OFF'),
+(87, 'http://suarr.id/bonek-melawan-terorisme/', NULL, NULL, NULL, NULL, 'OFF'),
+(88, 'http://suarr.id/pendidikan-profesi-guru-pentingkah-bagi-fkip/', NULL, NULL, NULL, NULL, 'OFF'),
+(89, 'http://suarr.id/syaikh-abdul-fattah-al-yafii-ulama-yaman-yangtaubat-dari-salafi-wahabi/', NULL, NULL, NULL, NULL, 'OFF'),
+(90, 'http://suarr.id/pameran-ilustrasi-roman-arok-dedes-pikat-pengunjung/', NULL, NULL, NULL, NULL, 'OFF'),
+(91, 'http://suarr.id/kuliah-tetap-ngaji-berikut-daftar-pondok-di-sekitar-kampus-uinsa/', NULL, NULL, NULL, NULL, 'OFF'),
+(92, 'http://suarr.id/tentang-dua-unta-dalam-al-qur%CA%BEan/', NULL, NULL, NULL, NULL, 'OFF'),
+(93, 'http://suarr.id/hijrah/', NULL, NULL, NULL, NULL, 'OFF'),
+(94, 'http://suarr.id/memandang-wajah-islam-di-pekalongan-selatan/', NULL, NULL, NULL, NULL, 'OFF'),
+(95, 'http://suarr.id/menyoal-istilah-islam-nusantara/', NULL, NULL, NULL, NULL, 'OFF'),
+(96, 'http://suarr.id/mengenal-sabatu-rijal-1-tujuh-waliyullah-kota-marakesh-maroko/', NULL, NULL, NULL, NULL, 'OFF'),
+(97, 'http://suarr.id/secercah-keindahan-al-quran/', NULL, NULL, NULL, NULL, 'OFF'),
+(98, 'http://suarr.id/pengumuman-umptkin-sudah-bisa-dilihat-disini/', NULL, NULL, NULL, NULL, 'OFF'),
+(99, 'http://suarr.id/paradigma-islam-meneladan-dan-menyimak-pemikiran-kuntowijoyo/', NULL, NULL, NULL, NULL, 'OFF'),
+(100, 'http://suarr.id/generasi-milenial-optimisme-menyongsong-bonus-demografi-indonesia/', NULL, NULL, NULL, NULL, 'OFF'),
+(101, 'http://suarr.id/keagungan-dan-fadhilah-bulan-rojab/', NULL, NULL, NULL, NULL, 'OFF'),
+(102, 'http://suarr.id/manjaga-diri-dari-penyakit-habib-umar-bin-hafiz-sarankan-melakukan-4-hal-ini/', NULL, NULL, NULL, NULL, 'OFF'),
+(103, 'http://suarr.id/romantika-kehidupan-sayyidah-aisyah/', NULL, NULL, NULL, NULL, 'OFF'),
+(104, 'http://suarr.id/abu-yusuf-al-almai-ulama-yang-lebih-memilih-mengaji-walau-anaknya-meninggal-dunia/', NULL, NULL, NULL, NULL, 'OFF'),
+(105, 'http://suarr.id/buya-hamka-ulama-modernis-dan-politikus-inklusif/', NULL, NULL, NULL, NULL, 'OFF'),
+(106, 'http://suarr.id/maroko-bermadzab-maliki-kenapa/', NULL, NULL, NULL, NULL, 'OFF'),
+(107, 'http://suarr.id/daftar-pondok-di-sekitar-iain-surakrta/', NULL, NULL, NULL, NULL, 'OFF'),
+(108, 'http://suarr.id/rahasia-di-balik-kematian/', NULL, NULL, NULL, NULL, 'OFF'),
+(109, 'http://suarr.id/kifayatul-atqiya-1-perintah-menyebut-namaku/', NULL, NULL, NULL, NULL, 'OFF'),
+(110, 'http://suarr.id/valentino-simanjuntak-nafas-baru-komentator-bola-di-indonesia/', NULL, NULL, NULL, NULL, 'OFF'),
+(111, 'http://suarr.id/apa-itu-murab/', NULL, NULL, NULL, NULL, 'OFF'),
+(112, 'http://suarr.id/masuk-surga-karena-nahwu/', NULL, NULL, NULL, NULL, 'OFF'),
+(113, 'http://suarr.id/menyelami-kebijaksanaan-pak-ndul/', NULL, NULL, NULL, NULL, 'OFF'),
+(114, 'http://suarr.id/nabi-ibrahim-abu-bakr-syibli-dan-berhala-psikologis/', NULL, NULL, NULL, NULL, 'OFF'),
+(115, 'http://suarr.id/abu-nawas-harun-al-rasyid-dan-seorang-gadis-pelayan/', NULL, NULL, NULL, NULL, 'OFF'),
+(116, 'http://suarr.id/tgkh-muhammad-zainuddin-abdul-madjid-tonggak-nasionalisme-religius-di-nusa-tenggara-barat/', NULL, NULL, NULL, NULL, 'OFF'),
+(117, 'http://suarr.id/merancang-sekolah-masa-depan-kita-tantangan-para-guru-abad-21/', NULL, NULL, NULL, NULL, 'OFF'),
+(118, 'http://suarr.id/mengenal-ar-baswedan-seorang-nasionalis-keturunan-arab/', NULL, NULL, NULL, NULL, 'OFF'),
+(119, 'http://suarr.id/pendengki-dan-akibatnya-pada-keturunan/', NULL, NULL, NULL, NULL, 'OFF'),
+(120, 'http://suarr.id/ketika-bismillah-menjadi-obat-bagi-pecinta-yang-gila/', NULL, NULL, NULL, NULL, 'OFF'),
+(121, 'http://suarr.id/bagaimana-membedakan-buku-yang-palsu-dari-yang-otentik-dalam-korpus-al-ghazali-1/', NULL, NULL, NULL, NULL, 'OFF'),
+(122, 'http://suarr.id/dilema-pasca-kampus-menjadi-idealis-atau-realistis/', NULL, NULL, NULL, NULL, 'OFF'),
+(123, 'http://suarr.id/cafe-mesir-antara-suasana-dan-sejarah/', NULL, NULL, NULL, NULL, 'OFF'),
+(124, 'http://suarr.id/barkh-al-abid-al-aswad-hamba-yang-membuat-tuhan-tertawa/', NULL, NULL, NULL, NULL, 'OFF'),
+(125, 'http://suarr.id/jangan-ngaku-sarkub-semarang-jika-belum-pernah-ke-5-makam-ini/', NULL, NULL, NULL, NULL, 'OFF'),
+(126, 'http://suarr.id/mata-air-itu-bernama-gus-mus/', NULL, NULL, NULL, NULL, 'OFF'),
+(127, 'http://suarr.id/ijtihad-umar-di-tengah-wabah/', NULL, NULL, NULL, NULL, 'OFF'),
+(128, 'http://suarr.id/bucaillisme-sains-islam-atau-pseudosains/', NULL, NULL, NULL, NULL, 'OFF'),
+(129, 'http://suarr.id/5-filsuf-islam-yang-harus-dibaca-setiap-muslim/', NULL, NULL, NULL, NULL, 'OFF'),
+(130, 'http://suarr.id/pondok-sekitar-undip/', NULL, NULL, NULL, NULL, 'OFF'),
+(131, 'http://suarr.id/perempuan-dalam-islam-tubuh-pikiran-dan-jiwa/', NULL, NULL, NULL, NULL, 'OFF'),
+(132, 'http://suarr.id/beatles-spiritualitas-dan-india/', NULL, NULL, NULL, NULL, 'OFF'),
+(133, 'http://suarr.id/mempertanyakan-keadilan/', NULL, NULL, NULL, NULL, 'OFF'),
+(134, 'http://suarr.id/mujadalah-dalam-demokrasi-demokrasi-dalam-mujadalah/', NULL, NULL, NULL, NULL, 'OFF'),
+(135, 'http://suarr.id/menegaskan-unnes-sebagai-kampus-rakyat/', NULL, NULL, NULL, NULL, 'OFF'),
+(136, 'http://suarr.id/puisi-puisi-zulfia-haryanti-sebab-kau-pernah-menjadi-kopi-yang-hangat/', NULL, NULL, NULL, NULL, 'OFF'),
+(137, 'http://suarr.id/ziarah-ke-makam-imam-abdurrahman-al-auzai-di-beirut-lebanon/', NULL, NULL, NULL, NULL, 'OFF'),
+(138, 'http://suarr.id/imam-al-ghazali-kitab-ayyuhal-walad-dan-nasihat-untuk-para-santri/', NULL, NULL, NULL, NULL, 'OFF'),
+(139, 'http://suarr.id/belajar-dari-gus-dur-yang-tidak-pernah-punya-pacar-dan-lebih-banyak-membaca-buku/', NULL, NULL, NULL, NULL, 'OFF'),
+(140, 'http://suarr.id/sistem-zonasi-ketika-jarak-sebagai-penentu-kelulusan/', NULL, NULL, NULL, NULL, 'OFF'),
+(141, 'http://suarr.id/tanda-tanda-kalimat-isim/', NULL, NULL, NULL, NULL, 'OFF'),
+(142, 'http://suarr.id/sktm-surat-sakti-masuk-sekolah/', NULL, NULL, NULL, NULL, 'OFF'),
+(143, 'http://suarr.id/pondok-pesantren-dekat-unsoed/', NULL, NULL, NULL, NULL, 'OFF'),
+(144, 'http://suarr.id/kerajaan-dan-kekuatan-rakyat-jelata/', NULL, NULL, NULL, NULL, 'OFF'),
+(145, 'http://suarr.id/interpretasi-sesuai-musimnya/', NULL, NULL, NULL, NULL, 'OFF'),
+(146, 'http://suarr.id/malam-tirakatan-17-agustus-perkawinan-ajaran-islam-dan-nasionalisme/', NULL, NULL, NULL, NULL, 'OFF'),
+(147, 'http://suarr.id/belajar-positif-dari-nabi-yunus/', NULL, NULL, NULL, NULL, 'OFF'),
+(148, 'http://suarr.id/puisi-puisi-mahfudz-zain-kala-berduka-cinta/', NULL, NULL, NULL, NULL, 'OFF'),
+(149, 'http://suarr.id/5-kiat-dani-puspitasari-menjadi-wisudawan-terbaik-unnes/', NULL, NULL, NULL, NULL, 'OFF'),
+(150, 'http://suarr.id/ketika-seorang-marxis-menulis-buku-keislaman/', NULL, NULL, NULL, NULL, 'OFF'),
+(151, 'http://suarr.id/isim-fiil-dan-macam-macamnya/', NULL, NULL, NULL, NULL, 'OFF'),
+(152, 'http://suarr.id/pesantren-dekat-uin-walisongo/', NULL, NULL, NULL, NULL, 'OFF'),
+(153, 'http://suarr.id/tiga-pengelana-dan-sebuah-petualangan/', NULL, NULL, NULL, NULL, 'OFF'),
+(154, 'http://suarr.id/adonis-aku-dilahirkan-untuk-puisi/', NULL, NULL, NULL, NULL, 'OFF'),
+(155, 'http://suarr.id/hidup-adalah-perjalanan/', NULL, NULL, NULL, NULL, 'OFF'),
+(156, 'http://suarr.id/tanda-tanda-kalimat-fiil/', NULL, NULL, NULL, NULL, 'OFF'),
+(157, 'http://suarr.id/khamar-harun-ar-rasyid-dan-jawaban-cerdas-bahlul/', NULL, NULL, NULL, NULL, 'OFF'),
+(158, 'http://suarr.id/jadi-mahasiswa-sekaligus-santri-berikut-daftar-pondok-di-sekitar-iain-salatiga/', NULL, NULL, NULL, NULL, 'OFF'),
+(159, 'http://suarr.id/tentang-pentingnya-belajar-ilmu-nahwu/', NULL, NULL, NULL, NULL, 'OFF'),
+(160, 'http://suarr.id/pesan-tersirat-dari-dhamir-dalam-kitab-al-amtsilah-tashrifiyyah/', NULL, NULL, NULL, NULL, 'OFF'),
+(161, 'http://suarr.id/jannah-wa-nar-surga-dan-neraka/', NULL, NULL, NULL, NULL, 'OFF'),
+(162, 'http://suarr.id/terusan-suez-dari-ambisi-hingga-perang/', NULL, NULL, NULL, NULL, 'OFF'),
+(163, 'http://suarr.id/makna-dibalik-sholawat/', NULL, NULL, NULL, NULL, 'OFF'),
+(164, 'http://suarr.id/macam-macam-tanwin-definisi-dan-contohnya/', NULL, NULL, NULL, NULL, 'OFF'),
+(165, 'http://suarr.id/syair-syair-arab-pintu-mini-memasuki-peradaban-arab-masa-jahiliyah/', NULL, NULL, NULL, NULL, 'OFF'),
+(166, 'http://suarr.id/memaknai-cinta-ala-de-beauvoir/', NULL, NULL, NULL, NULL, 'OFF');
+
 --
 -- Indexes for dumped tables
 --
@@ -1321,6 +1509,12 @@ ALTER TABLE `pesan_ondebmh`
   ADD PRIMARY KEY (`code`);
 
 --
+-- Indexes for table `suarrid`
+--
+ALTER TABLE `suarrid`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -1341,6 +1535,12 @@ ALTER TABLE `laporan_wp`
 --
 ALTER TABLE `main_ondebmh`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=299;
+
+--
+-- AUTO_INCREMENT for table `suarrid`
+--
+ALTER TABLE `suarrid`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=167;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
