@@ -29,12 +29,17 @@
 	<div class="box-body">
 		<div class="row">
 			<div class="col-md-12">
-			<?php if($dtedit->url_preview!=='OFF' && $dtedit->url===''):
+				<h3><?php echo $dtedit->kat; ?></h3>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<?php if($dtedit->judul!=='OFF' || $dtedit->done===0):
 				$hidden=array(
 					'ac'=>'level_2',
 					'id'=>$dtedit->id
 				);
-				echo form_open('laporanwp/action','id="laporanwp" method="get"',$hidden); ?>
+				echo form_open('suarrid/action','id="suarrid" method="get"',$hidden); ?>
 					<div class="form-group">
 					<?php echo form_label('Judul', 'judul');
 					echo form_input(array(
@@ -46,24 +51,25 @@
 						'onFocus'=>'this.select();',
 						'value'=>$dtedit->judul
 					));
-					?></div>
+					?>
+					</div>
 					<div class="form-group">
 						<?php 
 							echo form_submit('next', ' Next','class="btn btn-info pull-right"'); 
 						?>
 					</div>
 					<?php
-					echo form_close(); 
+					echo form_close();			
 					else:
 					?>
-						<a href="<?php echo site_url('laporanwp/action?ac=level_1&id='.($dtedit->id-1)); ?>">Previous</a> | <a href="<?php echo site_url('laporanwp/action?ac=level_1&id='.($dtedit->id+1)); ?>">Next</a>
+						<a href="<?php echo site_url('suarrid/action?ac=level_1&id='.($dtedit->id-1)); ?>">Previous</a> | <a href="<?php echo site_url('suarrid/action?ac=level_1&id='.($dtedit->id+1)); ?>">Next</a>
 					<?php endif; ?>
 			</div>
 		</div>
 	</div>
 	<!-- /.box-body -->
 	<div class="box-footer">
-		<a href="<?php echo site_url('laporanwp/action?ac=edit&id='.$dtedit->id); ?>" accesskey="1">Edit</a>
+		<a href="<?php echo site_url('suarrid/action?ac=edit&id='.$dtedit->id); ?>" accesskey="1">Edit</a>
 	</div>
 	<!-- /.box-footer-->
 </div>
@@ -103,22 +109,27 @@
 	<div class="box-body">
 		<div class="row">
 			<div class="col-md-12">
+				<h3><?php echo $dtedit->kat; ?></h3>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
 			<?php
 				$hidden=array(
 					'ac'=>'level_3',
 					'id'=>$dtedit->id
 				);
-				echo form_open('laporanwp/action','id="laporanwp" method="get"',$hidden);?>
+				echo form_open('suarrid/action','id="suarrid" method="get"',$hidden);?>
 					<div class="form-group">
-					<?php echo form_label('Deskripsi', 'deskripsi');
+					<?php echo form_label('Isi', 'isi');
 					echo form_textarea(array(
-						'name'=>'deskripsi',
+						// 'name'=>'isi',
 						'class'=>'form-control',
-						'id'=>'deskripsi',
-						'placeholder'=>'Deskripsi',
+						'id'=>'isi',
+						'placeholder'=>'isi',
 						'autofocus'=>'autofocus',
 						'onFocus'=>'this.select();',
-						'value'=>$dtedit->deskripsi.$desc_1
+						'value'=>$dtedit->isi
 					));
 					?></div>
 					<div class="form-group">
@@ -179,88 +190,17 @@
 					'ac'=>'level_4',
 					'id'=>$dtedit->id
 				);
-				echo form_open('laporanwp/action','id="laporanwp" method="get"',$hidden);?>
+				echo form_open('suarrid/action','id="suarrid" method="get"',$hidden);?>
 					<div class="form-group">
-					<?php echo form_label('Harga', 'harga');
+					<?php echo form_label('Tags', 'tags');
 					echo form_input(array(
-						'name'=>'harga',
+						'name'=>'tags',
 						'class'=>'form-control',
-						'id'=>'harga',
-						'placeholder'=>'Harga',
+						'id'=>'tags',
+						'placeholder'=>'tags',
 						'autofocus'=>'autofocus',
 						'onFocus'=>'this.select();',
-						'value'=>$dtedit->harga
-					));
-					?></div>
-					<div class="form-group">
-						<?php 
-							echo form_submit('next', ' Next','class="btn btn-info pull-right"'); 
-						?>
-					</div>
-					<?php
-					echo form_close(); 
-					?>
-			</div>
-		</div>
-	</div>
-	<!-- /.box-body -->
-	<div class="box-footer">
-		Footer
-	</div>
-	<!-- /.box-footer-->
-</div>
-<!-- /.box -->
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-<?php elseif($for=='level_5'): ?>
-	<!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Level 5
-        <small>it all starts here</small>
-      </h1>
-      <ol class="breadcrumb">
-		<?php foreach($breadcrumb as $key => $value): ?>
-			<li <?php echo ($value[1]=="") ? "":$value[1]; ?>><?php echo $value[0]; ?></li>
-		<?php endforeach; ?>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-		<!-- Default box -->
-<div class="box">
-	<div class="box-header with-border">
-		<h3 class="box-title"><?php echo $judul; ?></h3>
-
-		<div class="box-tools pull-right">
-			<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
-			<button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
-		</div>
-	</div>
-	<div class="box-body">
-		<div class="row">
-			<div class="col-md-12">
-			<?php
-				$hidden=array(
-					'ac'=>'level_6',
-					'id'=>$dtedit->id
-				);
-				echo form_open('laporanwp/action','id="laporanwp" method="get"',$hidden); ?>
-					<div class="form-group">
-					<?php echo form_label('URL Download', 'url_download');
-					echo form_input(array(
-						'name'=>'url_download',
-						'class'=>'form-control',
-						'id'=>'url_download',
-						'placeholder'=>'URL Download',
-						'autofocus'=>'autofocus',
-						'onFocus'=>'this.select();',
-						'value'=>$dtedit->mega_download
+						'value'=>$dtedit->tags
 					));
 					?></div>
 					<div class="form-group">
@@ -318,20 +258,20 @@
 			<div class="col-md-12">
 			<?php
 				$hidden=array(
-					'ac'=>'level_5',
-					'id'=>$dtedit->id
+					'ac'=>'edit_3',
+					'id'=> $dtedit->id
 				);
-				echo form_open('laporanwp/action','id="laporanwp" method="get"',$hidden); ?>
+				echo form_open('suarrid/simpan','id="suarrid"',$hidden); ?>
 					<div class="form-group">
-					<?php echo form_label('Kunci', 'kunci');
+					<?php echo form_label('Img', 'img');
 					echo form_input(array(
-						'name'=>'kunci',
+						'name'=>'img',
 						'class'=>'form-control',
-						'id'=>'kunci',
-						'placeholder'=>'Kunci',
+						'id'=>'img',
+						'placeholder'=>'img',
 						'autofocus'=>'autofocus',
 						'onFocus'=>'this.select();',
-						'value'=>$dtedit->kunci
+						'value'=>$dtedit->img
 					));
 					?></div>
 					<div class="form-group">
@@ -392,7 +332,7 @@
 					'ac'=>'level_7',
 					'id'=>$dtedit->id
 				);
-				echo form_open('laporanwp/action','id="laporanwp" method="get"',$hidden); ?>
+				echo form_open('suarrid/action','id="suarrid" method="get"',$hidden); ?>
 					<div class="form-group">
 					<?php echo form_label('Nama Gambar', 'nama_gambar');
 					echo form_input(array(
@@ -465,7 +405,7 @@
 					'ac'=>'level_8',
 					'id'=>$dtedit->id
 				);
-				echo form_open('laporanwp/action','id="laporanwp" method="get"',$hidden); ?>
+				echo form_open('suarrid/action','id="suarrid" method="get"',$hidden); ?>
 					<div class="form-group">
 					<?php echo form_label('URL Preview ', 'url_preview');
 					echo form_input(array(
@@ -537,7 +477,7 @@
 					'ac'=>'level_9',
 					'id'=>$dtedit->id
 				);
-				echo form_open('laporanwp/action','id="laporanwp" method="get"',$hidden); ?>
+				echo form_open('suarrid/action','id="suarrid" method="get"',$hidden); ?>
 					<div class="form-group">
 					<?php echo form_label('Tags ', 'tags');
 					echo form_input(array(
@@ -605,11 +545,11 @@
 			<div class="col-md-12">
 			<?php
 				$hidden=array(
-						'table'=>'laporanwp',
+						'table'=>'suarrid',
 						'ac'=>'edit_1',
 						'id'=>$dtedit->id
 					);
-				echo form_open('laporanwp/simpan','id="laporanwp"',$hidden); ?>
+				echo form_open('suarrid/simpan','id="suarrid"',$hidden); ?>
 					<div class="form-group">
 					<?php echo form_label('URL', 'url');
 					echo form_input(array(
@@ -687,7 +627,7 @@
 		<div class="row">
 			<div class="col-md-12">
 			<?php
-				echo form_open('laporanwp/simpan','id="laporanwp"'); ?>
+				echo form_open('suarrid/simpan','id="suarrid"'); ?>
 					<div class="form-group">
 					<?php echo form_label('Laporan', 'laporan');
 					$arr='';
@@ -752,7 +692,7 @@
 		<div class="row">
 			<div class="col-md-12">
 			<?php
-				echo form_open('laporanwp/simpan','id="laporanwp"'); ?>
+				echo form_open('suarrid/simpan','id="suarrid"'); ?>
 					<div class="form-group">
 					<?php echo form_label('Laporan', 'laporan');
 					$arr='';

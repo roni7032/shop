@@ -27,6 +27,14 @@
 		<li <?php echo (in_array('bmh_2',$menu)) ? 'class="active"':''; ?> ><a href="<?php echo site_url('ondebmh/action?ac=add'); ?>"><i class="fa fa-circle-o"></i> Tambah</a></li>
 	  </ul>
 	</li>
+	<li class="treeview <?php echo (in_array('suarrid',$menu)) ? 'active':''; ?>">
+	  <a href="#"><i class="fa fa-dashboard"></i> <span>suarrid</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
+	  <ul class="treeview-menu">
+		<li <?php echo (in_array('suarrid_1',$menu)) ? 'class="active"':''; ?> ><a href="<?php echo site_url('suarrid'); ?>"><i class="fa fa-circle-o"></i> Belum</a></li>
+		<li <?php echo (in_array('suarrid_2',$menu)) ? 'class="active"':''; ?> ><a href="<?php echo site_url('suarrid/isdone'); ?>"><i class="fa fa-circle-o"></i> Semua Data</a></li>
+		<li <?php echo (in_array('suarrid_3',$menu)) ? 'class="active"':''; ?> ><a href="<?php echo site_url('suarrid/action?ac=add'); ?>"><i class="fa fa-circle-o"></i> Tambah</a></li>
+	  </ul>
+	</li>
 	<li class="header">Pesan</li>
 	<!--<li class="treeview <?php echo (in_array('categori_tema_pesan',$menu)) ? 'active':''; ?>">
 	  <a href="#"><i class="fa fa-dashboard"></i> <span>Kategori Group Pesan</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>

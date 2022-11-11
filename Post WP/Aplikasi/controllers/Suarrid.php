@@ -15,11 +15,31 @@ class Suarrid extends CI_Controller {
 				array(anchor('','Home'),''),
 				array('suarrid','class="active"')
 			),
-			'data'=>$this->M_general->getData('suarrid')
+			'data'=>$this->M_general->getDataWhere('suarrid',array('done'=>0),'',array('id','DESC'))
 		);
 
 		$dtmenu['menu'][0]='suarrid';
 		$dtmenu['menu'][1]='suarrid_1';
+
+		$dtmenu['role']=0;
+		$lempar['isi']=view_one('suarrid/all',$dt);
+		$lempar['js']=view_one('suarrid/js',array('for'=>''));
+		$lempar['menu']=view_one('menu/menu',$dtmenu);
+		$this->load->view('template/blog_plain',$lempar);
+	}
+	
+	public function isdone(){
+		$dt=array(
+			'judul'=>'Suarr.id',
+			'breadcrumb'=>array(
+				array(anchor('','Home'),''),
+				array('suarrid','class="active"')
+			),
+			'data'=>$this->M_general->getData('suarrid')
+		);
+
+		$dtmenu['menu'][0]='suarrid';
+		$dtmenu['menu'][1]='suarrid_2';
 
 		$dtmenu['role']=0;
 		$lempar['isi']=view_one('suarrid/all',$dt);
@@ -43,7 +63,7 @@ class Suarrid extends CI_Controller {
 						array('Tambah','class="active"')
 					),
 				);
-				$dtmenu['menu']=array('suarrid','suarrid_2');
+				$dtmenu['menu']=array('suarrid','suarrid_3');
 				$dtmenu['role']=0;
 				$lempar['isi']=view_one('suarrid/add',$dt);
 				$lempar['menu']=view_one('menu/menu',$dtmenu);
@@ -59,10 +79,10 @@ class Suarrid extends CI_Controller {
 						array(anchor('suarrid',' suarrid'),''),
 						array('Ubah','class="active"')
 					),						
-					'dtedit'=>$this->M_general->getEdit('laporan_wp',$id),
+					'dtedit'=>$this->M_general->getEdit('suarrid',$id),
 					'desc_1'=>$this->helpDes(),
 				);
-				$dtmenu['menu']=array('suarrid','suarrid_1');
+				$dtmenu['menu']=array('suarrid','suarrid_3');
 				$dtmenu['role']=0;
 				$lempar['isi']=view_one('suarrid/add',$dt);
 				$lempar['js']=view_one('suarrid/js',array('for'=>'edit'));
@@ -79,13 +99,12 @@ class Suarrid extends CI_Controller {
 						array(anchor('suarrid',' suarrid'),''),
 						array('Ubah','class="active"')
 					),						
-					'dtedit'=>$this->M_general->getEdit('laporan_wp',$id),
-					'desc_1'=>$this->helpDes(),
+					'dtedit'=>$this->M_general->getEdit('suarrid',$id)
 				);
-				$dtmenu['menu']=array('suarrid','suarrid_1');
+				$dtmenu['menu']=array('suarrid','suarrid_3');
 				$dtmenu['role']=0;
 				$lempar['isi']=view_one('suarrid/add',$dt);
-				$lempar['js']=view_one('suarrid/js',array('for'=>'edit'));
+				$lempar['js']=view_one('suarrid/js',array('for'=>'add'));
 				$lempar['menu']=view_one('menu/menu',$dtmenu);
 				$this->load->view('template/blog_editor',$lempar);
 			break;
@@ -94,7 +113,7 @@ class Suarrid extends CI_Controller {
 					'url_preview' => 'OFF',
 					'url_asli_preview' => $this->input->get('url_asli_preview')
 				);
-				$this->M_general->updateData('laporan_wp',$dtsave,$id);
+				$this->M_general->updateData('suarrid',$dtsave,$id);
 				redirect('suarrid/action?ac=edit&id='.($id-1));
 			break;
 			case 'on_off':
@@ -103,11 +122,11 @@ class Suarrid extends CI_Controller {
 				$dtsave=array(
 					'status' => $set,
 				);
-				$this->M_general->updateData('laporan_wp',$dtsave,$id);
+				$this->M_general->updateData('suarrid',$dtsave,$id);
 				redirect('suarrid');
 			break;
 			case 'delete':
-				$this->M_general->deldata('laporan_wp',$id);
+				$this->M_general->deldata('suarrid',$id);
 				redirect('suarrid');
 			break;
 			case 'rekap':
@@ -121,9 +140,9 @@ class Suarrid extends CI_Controller {
 						array(anchor('suarrid',' Semua'),''),
 						array('Rekap','class="active"')
 					),						
-					'data'=>$this->M_general->getDataWhere('laporan_wp',array('id',$laporan_get),'in'),
+					'data'=>$this->M_general->getDataWhere('suarrid',array('id',$laporan_get),'in'),
 				);
-				$dtmenu['menu']=array('suarrid','suarrid_1');
+				$dtmenu['menu']=array('suarrid','suarrid_3');
 				$dtmenu['role']=0;
 				$lempar['isi']=view_one('suarrid/rekap',$dt);
 				$lempar['menu']=view_one('menu/menu',$dtmenu);
@@ -140,9 +159,9 @@ class Suarrid extends CI_Controller {
 						array(anchor('suarrid',' Semua'),''),
 						array('Rekap','class="active"')
 					),						
-					'data'=>$this->M_general->getDataWhere('laporan_wp',array('id',$laporan_get),'in'),
+					'data'=>$this->M_general->getDataWhere('suarrid',array('id',$laporan_get),'in'),
 				);
-				$dtmenu['menu']=array('suarrid','suarrid_1');
+				$dtmenu['menu']=array('suarrid','suarrid_3');
 				$dtmenu['role']=0;
 				$lempar['isi']=view_one('suarrid/rekap',$dt);
 				$lempar['menu']=view_one('menu/menu',$dtmenu);
@@ -158,9 +177,9 @@ class Suarrid extends CI_Controller {
 						array(anchor('suarrid',' suarrid'),''),
 						array('Ubah','class="active"')
 					),						
-					'dtedit'=>$this->M_general->getEdit('laporan_wp',$id),
+					'dtedit'=>$this->M_general->getEdit('suarrid',$id),
 				);
-				$dtmenu['menu']=array('suarrid','suarrid_1');
+				$dtmenu['menu']=array('suarrid','suarrid_3');
 				$dtmenu['role']=0;
 				$lempar['isi']=view_one('suarrid/rekap',$dt);
 				$lempar['menu']=view_one('menu/menu',$dtmenu);
@@ -176,10 +195,10 @@ class Suarrid extends CI_Controller {
 						array(anchor('suarrid',' suarrid'),''),
 						array('Ubah','class="active"')
 					),						
-					'dtedit'=>$this->M_general->getEdit('laporan_wp',$id),
+					'dtedit'=>$this->M_general->getEdit('suarrid',$id),
 					'desc_1'=>$this->helpDes(),
 				);
-				$dtmenu['menu']=array('suarrid','suarrid_1');
+				$dtmenu['menu']=array('suarrid','suarrid_3');
 				$dtmenu['role']=0;
 				$lempar['isi']=view_one('suarrid/rekap',$dt);
 				$lempar['menu']=view_one('menu/menu',$dtmenu);
@@ -195,9 +214,9 @@ class Suarrid extends CI_Controller {
 						array(anchor('suarrid',' suarrid'),''),
 						array('Ubah','class="active"')
 					),						
-					'dtedit'=>$this->M_general->getEdit('laporan_wp',$id),
+					'dtedit'=>$this->M_general->getEdit('suarrid',$id),
 				);
-				$dtmenu['menu']=array('suarrid','suarrid_1');
+				$dtmenu['menu']=array('suarrid','suarrid_3');
 				$dtmenu['role']=0;
 				$lempar['isi']=view_one('suarrid/rekap',$dt);
 				$lempar['menu']=view_one('menu/menu',$dtmenu);
@@ -213,9 +232,9 @@ class Suarrid extends CI_Controller {
 						array(anchor('suarrid',' suarrid'),''),
 						array('Ubah','class="active"')
 					),						
-					'dtedit'=>$this->M_general->getEdit('laporan_wp',$id),
+					'dtedit'=>$this->M_general->getEdit('suarrid',$id),
 				);
-				$dtmenu['menu']=array('suarrid','suarrid_1');
+				$dtmenu['menu']=array('suarrid','suarrid_3');
 				$dtmenu['role']=0;
 				$lempar['isi']=view_one('suarrid/rekap',$dt);
 				$lempar['menu']=view_one('menu/menu',$dtmenu);
@@ -231,9 +250,9 @@ class Suarrid extends CI_Controller {
 						array(anchor('suarrid',' suarrid'),''),
 						array('Ubah','class="active"')
 					),						
-					'dtedit'=>$this->M_general->getEdit('laporan_wp',$id),
+					'dtedit'=>$this->M_general->getEdit('suarrid',$id),
 				);
-				$dtmenu['menu']=array('suarrid','suarrid_1');
+				$dtmenu['menu']=array('suarrid','suarrid_3');
 				$dtmenu['role']=0;
 				$lempar['isi']=view_one('suarrid/rekap',$dt);
 				$lempar['menu']=view_one('menu/menu',$dtmenu);
@@ -249,9 +268,9 @@ class Suarrid extends CI_Controller {
 						array(anchor('suarrid',' suarrid'),''),
 						array('Ubah','class="active"')
 					),						
-					'dtedit'=>$this->M_general->getEdit('laporan_wp',$id),
+					'dtedit'=>$this->M_general->getEdit('suarrid',$id),
 				);
-				$dtmenu['menu']=array('suarrid','suarrid_1');
+				$dtmenu['menu']=array('suarrid','suarrid_3');
 				$dtmenu['role']=0;
 				$lempar['isi']=view_one('suarrid/rekap',$dt);
 				$lempar['menu']=view_one('menu/menu',$dtmenu);
@@ -267,9 +286,9 @@ class Suarrid extends CI_Controller {
 						array(anchor('suarrid',' suarrid'),''),
 						array('Ubah','class="active"')
 					),						
-					'dtedit'=>$this->M_general->getEdit('laporan_wp',$id),
+					'dtedit'=>$this->M_general->getEdit('suarrid',$id),
 				);
-				$dtmenu['menu']=array('suarrid','suarrid_1');
+				$dtmenu['menu']=array('suarrid','suarrid_3');
 				$dtmenu['role']=0;
 				$lempar['isi']=view_one('suarrid/rekap',$dt);
 				$lempar['menu']=view_one('menu/menu',$dtmenu);
@@ -285,9 +304,9 @@ class Suarrid extends CI_Controller {
 						array(anchor('suarrid',' suarrid'),''),
 						array('Ubah','class="active"')
 					),						
-					'dtedit'=>$this->M_general->getEdit('laporan_wp',$id),
+					'dtedit'=>$this->M_general->getEdit('suarrid',$id),
 				);
-				$dtmenu['menu']=array('suarrid','suarrid_1');
+				$dtmenu['menu']=array('suarrid','suarrid_3');
 				$dtmenu['role']=0;
 				$lempar['isi']=view_one('suarrid/rekap',$dt);
 				$lempar['menu']=view_one('menu/menu',$dtmenu);
@@ -303,9 +322,9 @@ class Suarrid extends CI_Controller {
 						array(anchor('suarrid',' suarrid'),''),
 						array('Ubah','class="active"')
 					),						
-					'dtedit'=>$this->M_general->getEdit('laporan_wp',$id),
+					'dtedit'=>$this->M_general->getEdit('suarrid',$id),
 				);
-				$dtmenu['menu']=array('suarrid','suarrid_1');
+				$dtmenu['menu']=array('suarrid','suarrid_3');
 				$dtmenu['role']=0;
 				$lempar['isi']=view_one('suarrid/rekap',$dt);
 				$lempar['menu']=view_one('menu/menu',$dtmenu);
@@ -341,78 +360,28 @@ class Suarrid extends CI_Controller {
 				$this->M_general->deldata($table,array('id'=>$id));
 			break;
 			case 'add':
-				$cari_judul=array('Elementor Template Kit','Elementor Pro Template Kit','Template Kit','Elementor Template kit','Elementor Kit');
-				$ganti_judul=array('Theme','Theme','Theme','Theme','Theme');
-				$judul=str_replace($cari_judul,$ganti_judul,$this->input->post('judul'));
-				
-				$cari_url_x=array('https://www.closecrowds.com/');
-				$ganti_url_x=array('/');
-				$url_x=str_replace($cari_url_x,$ganti_url_x,$this->input->post('url_x'));
-				
-				$cari_url_asli_preview=array('?storefront=envato-elements');
-				$ganti_url_asli_preview=array('');
-				$url_asli_preview=str_replace($cari_url_asli_preview,$ganti_url_asli_preview,$this->input->post('url_asli_preview'));
-				
-				$cari_deskripsi=array('Template Kit','template kit','Template kit');
-				$ganti_deskripsi=array('Theme','Theme','Theme');
-				$deskripsi=str_replace($cari_deskripsi,$ganti_deskripsi,$this->input->post('deskripsi'));
-				// $deskripsi=$deskripsi_1.$this->helpDes();
-				
+							
 				$dtsave=array(
 					'judul' => $judul,
-					'nama_gambar' => $this->input->post('nama_gambar'),
-					'kunci' => strtolower($this->input->post('kunci')),
-					'url' => $this->input->post('url'),
-					'url_x' => $url_x,
-					'url_preview' => $this->input->post('url_preview'),
-					'url_asli' => $this->input->post('url_asli'),
-					'url_asli_preview' => $url_asli_preview,
-					'harga' => $this->input->post('harga'),
-					'tags' => $this->input->post('tags'),
-					'mega_link' => $this->input->post('mega_link'),
-					'mega_download' => $this->input->post('mega_download'),
-					'deskripsi' => $deskripsi,
+					'isi' => $this->input->post('nama_gambar'),
+					'link' => strtolower($this->input->post('link')),
+					'tags' => $this->input->post('tags')
 				);
 				
 				if($this->input->post('id')!=0) $dtsave['id']=$this->input->post('id');
 				
-				$id=$this->M_general->addData('laporan_wp',$dtsave);
+				$id=$this->M_general->addData('suarrid',$dtsave);
 				redirect('suarrid/action?ac=edit&id='.$id);
 			break;
 			case 'edit':
-				$cari_judul=array('Elementor Template Kit','Elementor Pro Template Kit','Template Kit','Elementor Template kit','Elementor Kit');
-				$ganti_judul=array('Theme','Theme','Theme','Theme','Theme');
-				$judul=str_replace($cari_judul,$ganti_judul,$this->input->post('judul'));
-				
-				$cari_url_x=array('https://www.closecrowds.com/');
-				$ganti_url_x=array('/');
-				$url_x=str_replace($cari_url_x,$ganti_url_x,$this->input->post('url_x'));
-				
-				$cari_url_asli_preview=array('?storefront=envato-elements');
-				$ganti_url_asli_preview=array('');
-				$url_asli_preview=str_replace($cari_url_asli_preview,$ganti_url_asli_preview,$this->input->post('url_asli_preview'));
-				
-				$cari_deskripsi=array('Template Kit','template kit','Template kit','Elementor Kit');
-				$ganti_deskripsi=array('Theme','Theme','Theme','Theme');
-				$deskripsi=str_replace($cari_deskripsi,$ganti_deskripsi,$this->input->post('deskripsi'));
-			
 				$dtsave=array(
-					'judul' => $judul,
-					'nama_gambar' => $this->input->post('nama_gambar'),
-					'kunci' => strtolower($this->input->post('kunci')),
-					'url' => $this->input->post('url'),
-					'url_x' => $url_x,
-					'url_preview' => $this->input->post('url_preview'),
-					'url_asli' => $this->input->post('url_asli'),
-					'url_asli_preview' => $url_asli_preview,
-					'harga' => $this->input->post('harga'),
-					'tags' => $this->input->post('tags'),
-					'mega_link' => $this->input->post('mega_link'),
-					'mega_download' => $this->input->post('mega_download'),
-					'laporan' => $this->input->post('laporan'),
-					'deskripsi' => $deskripsi,
+					'kat' => $this->input->post('kat'),
+					'judul' => $this->input->post('judul'),
+					'isi' => $this->input->post('isi'),
+					'img' => strtolower($this->input->post('img')),
+					'tags' => $this->input->post('tags')
 				);
-				$this->M_general->updateData('laporan_wp',$dtsave,$id);
+				$this->M_general->updateData('suarrid',$dtsave,$id);
 				
 				redirect($table.'/action?ac=level_1&id='.($id-1));
 			break;
@@ -425,45 +394,31 @@ class Suarrid extends CI_Controller {
 					'url' => $this->input->post('url'),
 					'url_x' => $url_x
 				);
-				$this->M_general->updateData('laporan_wp',$dtsave,$id);
+				$this->M_general->updateData('suarrid',$dtsave,$id);
 				redirect('suarrid/action?ac=edit&id='.$id);
 			break;
 			case 'edit_2':
-				$cari_judul=array('Elementor Template Kit','Elementor Pro Template Kit','Template Kit','Elementor Template kit','Elementor Kit');
-				$ganti_judul=array('Theme','Theme','Theme','Theme','Theme');
-				$judul=str_replace($cari_judul,$ganti_judul,$this->input->post('judul'));
-				
-				$cari_url_x=array('https://www.closecrowds.com/');
-				$ganti_url_x=array('/');
-				$url_x=str_replace($cari_url_x,$ganti_url_x,$this->input->post('url_x'));
-				
-				$cari_url_asli_preview=array('?storefront=envato-elements');
-				$ganti_url_asli_preview=array('');
-				$url_asli_preview=str_replace($cari_url_asli_preview,$ganti_url_asli_preview,$this->input->post('url_asli_preview'));
-				
-				$cari_deskripsi=array('Template Kit','template kit','Template kit','Elementor Kit');
-				$ganti_deskripsi=array('Theme','Theme','Theme','Theme');
-				$deskripsi=str_replace($cari_deskripsi,$ganti_deskripsi,$this->input->post('deskripsi'));
-			
+							
 				$dtsave=array(
-					'judul' => $judul,
-					'nama_gambar' => $this->input->post('nama_gambar'),
-					'kunci' => strtolower($this->input->post('kunci')),
-					'url' => $this->input->post('url'),
-					'url_x' => $url_x,
-					'url_preview' => $this->input->post('url_preview'),
-					'url_asli' => $this->input->post('url_asli'),
-					'url_asli_preview' => $url_asli_preview,
-					'harga' => $this->input->post('harga'),
-					'tags' => $this->input->post('tags'),
-					'mega_link' => $this->input->post('mega_link'),
-					'mega_download' => $this->input->post('mega_download'),
-					'laporan' => $this->input->post('laporan'),
-					'deskripsi' => $deskripsi,
+					'kat' => $this->input->post('kat'),
+					'judul' => $this->input->post('judul'),
+					'isi' => $this->input->post('isi'),
+					'img' => $this->input->post('img'),
+					'tags' => $this->input->post('tags')
 				);
-				$this->M_general->updateData('laporan_wp',$dtsave,$id);
+				if($this->input->post('judul')==='OFF') $dtsave['done']=1;
+				$this->M_general->updateData('suarrid',$dtsave,$id);
 				
 				redirect($table.'/action?ac=edit_2&id='.($id-1));
+			break;
+			case 'edit_3':
+							
+				$dtsave=array(
+					'done' => 1
+				);
+				$this->M_general->updateData('suarrid',$dtsave,$id);
+				
+				redirect('suarrid/action?ac=level_1&id='.($id-1));
 			break;
 			default:
 				

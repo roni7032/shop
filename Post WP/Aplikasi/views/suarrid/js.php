@@ -1,6 +1,6 @@
 <?php if($for=='add'): ?>
 	<script type="text/javascript">
-		CKEDITOR.replace('deskripsi');
+		CKEDITOR.replace('isi');
 	</script>
 <?php elseif($for=='edit'): ?>
 	<script type="text/javascript">

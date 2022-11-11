@@ -84,12 +84,13 @@ legend.scheduler-border {
 				$this->table->set_heading('No.','Link','Judul','Status','Action');
 					$no=1;
 					foreach ($data as $key => $value) {
-						$link = anchor('suarrid/action?ac=edit_2&id='.$value->id,' <i class="fa fa-pencil"></i> Edit','class="btn btn-block btn-warning"');
+						$link = anchor('suarrid/action?ac=edit_2&id='.$value->id,' <i class="fa fa-pencil"></i>','class="btn btn-warning"');
+						$link .= anchor('suarrid/action?ac=level_1&id='.$value->id,' <i class="fa fa-hand-o-right"></i>','class="btn btn-success"');
 							
 						$link_1='<span class="text-red">'.$value->link.'</span>';
 						
 						$status=($value->status=='ON') ? anchor('suarrid/action?ac=on_off&set=off&id='.$value->id,'OFF','class="text-success"'):anchor('suarrid/action?ac=on_off&set=on&id='.$value->id,'ON','class="text-danger"');
-						$this->table->add_row($value->id,$link_1,$value->judul,$status,$link);
+						$this->table->add_row($value->id,$link_1,$value->judul,$status,'<div class="btn-group">'.$link.'</div>');
 					}
 				echo $this->table->generate();
 			?>

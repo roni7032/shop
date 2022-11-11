@@ -29,21 +29,21 @@
 		<?php if(isset($dtedit)): ?>
 		<div class="row">
 			<div class="col-md-12">
-				<a href="<?php echo site_url('laporanwp/action?ac=edit&id='.($dtedit->id)-1); ?>" class="btn btn-info">Previous</a>
+				<a href="<?php echo site_url('suarrid/action?ac=edit&id='.($dtedit->id)-1); ?>" class="btn btn-info">Previous</a>
 				<div class="btn-group">
-                  <a href="<?php echo site_url('laporanwp/action?ac=level_1&id='.$dtedit->id); ?>" class="btn btn-warning" accesskey="1">Level 1</a>
+                  <a href="<?php echo site_url('suarrid/action?ac=level_1&id='.$dtedit->id); ?>" class="btn btn-warning" accesskey="1">Level 1</a>
                   <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
                     <span class="caret"></span>
                     <span class="sr-only">Toggle Dropdown</span>
                   </button>
                   <ul class="dropdown-menu" role="menu">
-                    <li><a href="<?php echo site_url('laporanwp/action?ac=level_1&id='.($dtedit->id)-1); ?>">Prev Level 1</a></li>
-                    <li><a href="<?php echo site_url('laporanwp/action?ac=level_1&id='.($dtedit->id)+1); ?>">Next Level 1</a></li>
+                    <li><a href="<?php echo site_url('suarrid/action?ac=level_1&id='.($dtedit->id)-1); ?>">Prev Level 1</a></li>
+                    <li><a href="<?php echo site_url('suarrid/action?ac=level_1&id='.($dtedit->id)+1); ?>">Next Level 1</a></li>
                     <li class="divider"></li>
-                    <li><a href="<?php echo site_url('laporanwp'); ?>">ALL</a></li>
+                    <li><a href="<?php echo site_url('suarrid'); ?>">ALL</a></li>
                   </ul>
                 </div>
-				<a href="<?php echo site_url('laporanwp/action?ac=edit&id='.($dtedit->id)+1); ?>" class="btn btn-info">Next</a>
+				<a href="<?php echo site_url('suarrid/action?ac=edit&id='.($dtedit->id)+1); ?>" class="btn btn-info">Next</a>
 			</div>
 		</div>
 		<?php endif; ?>
@@ -58,10 +58,10 @@
 				
 				<?php
 				$hidden=array(
-						'table'=>'laporanwp',
+						'table'=>'suarrid',
 						'ac'=>$ac
 					);
-				echo form_open('laporanwp/simpan','id="laporanwp"',$hidden); ?>
+				echo form_open('suarrid/simpan','id="suarrid"',$hidden); ?>
 					<div class="form-group">
 					<?php echo form_label('ID', 'id');
 					echo form_input(array(
@@ -74,6 +74,49 @@
 						)
 					);
 					?></div>
+					<div class="form-group">
+					<?php echo form_label('Link', 'link');
+					echo form_input(array(
+						'type'=>'text',
+						'name'=>'link',
+						'value'=>$dtedit->link,
+						'class'=>'form-control',
+						'id'=>'link',
+						'placeholder'=>'Link'
+						)
+					);
+					?>
+					<a href="https://web.archive.org/web/20200722161424/<?php echo $dtedit->link; ?>" target="_blank"><?php echo $dtedit->link; ?></a>
+					</div>
+					<div class="form-group">
+					<?php echo form_label('Img', 'img');
+					$img_1=explode('http://suarr.id/',$dtedit->link);				
+					$img=str_replace('/','',$img_1[1]);				
+					echo form_input(array(
+						'type'=>'text',
+						'name'=>'img',
+						'value'=>$img,
+						'class'=>'form-control',
+						'id'=>'img',
+						'autofocus'=>'autofocus',
+						'onFocus'=>'this.select();',
+						'placeholder'=>'img'
+						)
+					);
+					?>
+					</div>
+					<div class="form-group">
+					<?php echo form_label('Kategori', 'kat');
+					echo form_input(array(
+						'type'=>'text',
+						'name'=>'kat',
+						'value'=>$dtedit->kat,
+						'class'=>'form-control',
+						'id'=>'kat',
+						'placeholder'=>'Kategori'
+						)
+					);
+					?></div>
 					<div class="form-group <?php if($dtedit->status==='OFF') echo "bg-danger"; ?>">
 					<?php echo form_label('judul', 'judul');
 					echo form_input(array(
@@ -82,204 +125,31 @@
 						'value'=>$dtedit->judul,
 						'class'=>'form-control',
 						'id'=>'judul',
-						'autofocus'=>'autofocus',
 						'placeholder'=>'judul'
 						)
 					);
 					?></div>
 					<div class="form-group">
-					<?php echo form_label('Nama Gambar', 'nama_gambar');
-					echo form_input(array(
-						'type'=>'text',
-						'name'=>'nama_gambar',
-						'value'=>$dtedit->nama_gambar,
-						'class'=>'form-control',
-						'id'=>'nama_gambar',
-						'placeholder'=>'Nama Gambar'
-						)
-					);
-					?></div>
-					<div class="form-group">
-					<?php echo form_label('Id', 'kunci');
-					echo form_input(array(
-						'type'=>'text',
-						'name'=>'kunci',
-						'value'=>$dtedit->kunci,
-						'class'=>'form-control',
-						'required'=>'required',
-						'id'=>'kunci',
-						'placeholder'=>'Id'
-						)
-					);
-					?></div>
-					<div class="form-group">
-					<?php echo form_label('URL', 'url');
-					echo form_input(array(
-						'type'=>'text',
-						'name'=>'url',
-						'value'=>$dtedit->url,
-						'class'=>'form-control',
-						'id'=>'url',
-						'placeholder'=>'URL'
-						)
-					);
-					?></div>
-					<div class="form-group">
-					<?php echo form_label('URL X', 'url_x');
-					echo form_input(array(
-						'type'=>'text',
-						'name'=>'url_x',
-						'value'=>$dtedit->url_x,
-						'class'=>'form-control',
-						'id'=>'url_x',
-						'placeholder'=>'URL X'
-						)
-					);
-					?></div>
-					<div class="form-group">
-					<?php echo form_label('URL Preview', 'url_preview');
-					echo form_input(array(
-						'type'=>'text',
-						'name'=>'url_preview',
-						'value'=>(empty($dtedit->url_preview)) ? 'https://closecrowds.com/themes/?theme=':$dtedit->url_preview,
-						'class'=>'form-control',
-						'id'=>'url_preview',
-						'placeholder'=>'URL Preview'
-						)
-					);
-					?><span class="text-red">https://closecrowds.com/themes/?theme=</span></div>
-					<div class="form-group">
-					<?php echo form_label('URL Asli', 'url_asli');
-					echo form_input(array(
-						'type'=>'text',
-						'name'=>'url_asli',
-						'value'=>$dtedit->url_asli,
-						'class'=>'form-control',
-						'id'=>'url_asli',
-						'placeholder'=>'URL Asli'
-						)
-					);
-					?></div>
-					<div class="form-group">
-					<?php echo form_label('Mega Link', 'mega_link');
-					echo form_input(array(
-						'type'=>'text',
-						'name'=>'mega_link',
-						'value'=>$dtedit->mega_link,
-						'class'=>'form-control',
-						'id'=>'mega_link',
-						'placeholder'=>'Mega Link'
-						)
-					);
-					?></div>
-					<div class="form-group">
-					<?php echo form_label('Mega Download', 'mega_download');
-					echo form_input(array(
-						'type'=>'text',
-						'name'=>'mega_download',
-						'value'=>$dtedit->mega_download,
-						'class'=>'form-control',
-						'id'=>'mega_download',
-						'placeholder'=>'Mega Download'
-						)
-					);
-					?></div>
-					<div class="form-group">
-					<?php echo form_label('Deskripsi', 'deskripsi');
+					<?php echo form_label('Isi', 'isi');
 					echo form_textarea(array(
-						'name'=>'deskripsi',
-						'class'=>'form-control','id'=>'deskripsi',
-						'placeholder'=>'Deskripsi',
-						'value'=>$dtedit->deskripsi	)
+						'name'=>'isi',
+						'class'=>'form-control',
+						'id'=>'isi',
+						'placeholder'=>'Isi',
+						'value'=>$dtedit->isi	)
 					);
 					?></div>
 					<div class="form-group">
 					<?php echo form_label('Tags', 'tags');
-					echo form_textarea(array(
-						'name'=>'tags',
-						'class'=>'form-control',
-						'id'=>'tags',
-						'placeholder'=>'Tags',
-						'value'=>$dtedit->tags
-						)
-					);
-					/*echo form_input(array(
+					echo form_input(array(
 						'type'=>'text',
 						'name'=>'tags',
 						'value'=>$dtedit->tags,
 						'class'=>'form-control',
-						'required'=>'required',
 						'id'=>'tags',
-						'placeholder'=>'Tags'
-						)
-					);*/
-					?></div>
-					<div class="form-group">
-						<div class="row">
-							<div class="col-md-12">
-								<?php echo form_label('URL Asli Preview', 'url_asli_preview'); ?>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-10">
-								<?php echo form_input(array(
-									'type'=>'text',
-									'name'=>'url_asli_preview',
-									'value'=>$dtedit->url_asli_preview,
-									'class'=>'form-control',
-									'id'=>'url_asli_preview',
-									'placeholder'=>'URL Asli Preview'
-									)
-								);
-								?>
-							</div>
-							<div class="col-md-2">
-								<button type="button" id="btn-off" class="btn btn-danger">OFF</button>
-							</div>
-						</div>
-					</div>
-					<div class="form-group">
-					<?php echo form_label('Harga', 'harga');
-					echo form_input(array(
-						'type'=>'text',
-						'name'=>'harga',
-						'value'=>$dtedit->harga,
-						'class'=>'form-control',
-						'id'=>'harga',
-						'placeholder'=>'Harga'
+						'placeholder'=>'tags'
 						)
 					);
-					?></div>
-					<div class="form-group">
-					<?php echo form_label('Deskripsi x', 'deskripsix');
-					echo form_textarea(array(
-						'name'=>'deskripsix',
-						'class'=>'form-control',
-						'id'=>'deskripsix',
-						'placeholder'=>'Deskripsi',
-						'readonly'=>'readonly',
-						'value'=>$dtedit->deskripsi.$desc_1
-						)
-					);
-					?></div>
-					<div class="form-group">
-					<?php echo form_label('Laporan', 'laporan');
-					$arr='array(
-        "id" 		 => "'.$dtedit->kunci.'",
-        "url" 		 => "'.$dtedit->url_asli_preview.'",
-        "purchase" 	 => "'.$dtedit->url_x.'",
-        "responsive" => "yes",
-        "type"       => "wordpress",
-        "thumb"      => ""
-    ),';
-					
-					echo form_textarea(array(
-						'name'=>'laporan',
-						'class'=>'form-control',
-						'id'=>'laporan',
-						'placeholder'=>'Laporan',
-						'value'=>$arr
-					));
 					?></div>
 						<div class="form-group">
 						<?php 
@@ -290,10 +160,10 @@
 				<?php else: ?>
 					<?php 
 					$hidden=array(
-						'table'=>'laporanwp',
+						'table'=>'suarrid',
 						'ac'=>'add',
 					);
-					echo form_open('laporanwp/simpan','id="laporanwp"',$hidden); ?>
+					echo form_open('suarrid/simpan','id="suarrid"',$hidden); ?>
 					<div class="form-group">
 					<?php echo form_label('ID', 'id');
 					echo form_input(array(
