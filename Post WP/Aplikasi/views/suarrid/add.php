@@ -75,20 +75,6 @@
 					);
 					?></div>
 					<div class="form-group">
-					<?php echo form_label('Link', 'link');
-					echo form_input(array(
-						'type'=>'text',
-						'name'=>'link',
-						'value'=>$dtedit->link,
-						'class'=>'form-control',
-						'id'=>'link',
-						'placeholder'=>'Link'
-						)
-					);
-					?>
-					<a href="https://web.archive.org/web/20200722161424/<?php echo $dtedit->link; ?>" target="_blank"><?php echo $dtedit->link; ?></a>
-					</div>
-					<div class="form-group">
 					<?php echo form_label('Img', 'img');
 					$img_1=explode('http://suarr.id/',$dtedit->link);				
 					$img=str_replace('/','',$img_1[1]);				
@@ -101,6 +87,20 @@
 						'autofocus'=>'autofocus',
 						'onFocus'=>'this.select();',
 						'placeholder'=>'img'
+						)
+					);
+					?>
+					</div>
+					<div class="form-group">
+					<a href="https://web.archive.org/web/20200722161424/<?php echo $dtedit->link; ?>" target="_blank"><?php echo $dtedit->link; ?></a><br/>
+					<?php echo form_label('Link', 'link');
+					echo form_input(array(
+						'type'=>'text',
+						'name'=>'link',
+						'value'=>$dtedit->link,
+						'class'=>'form-control',
+						'id'=>'link',
+						'placeholder'=>'Link'
 						)
 					);
 					?>

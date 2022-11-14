@@ -29,12 +29,12 @@
 	<div class="box-body">
 		<div class="row">
 			<div class="col-md-12">
-				<h3><?php echo $dtedit->kat; ?></h3>
+				<h3><?php echo '('.$dtedit->done.') '.$dtedit->kat; ?></h3>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				<?php if($dtedit->judul!=='OFF' || $dtedit->done===0):
+				<?php if($dtedit->judul!=='OFF'):
 				$hidden=array(
 					'ac'=>'level_2',
 					'id'=>$dtedit->id
@@ -183,6 +183,11 @@
 		</div>
 	</div>
 	<div class="box-body">
+		<div class="row">
+			<div class="col-md-12">
+				<h3><?php echo '('.$dtedit->done.') '.$dtedit->kat; ?></h3>
+			</div>
+		</div>
 		<div class="row">
 			<div class="col-md-12">
 			<?php
