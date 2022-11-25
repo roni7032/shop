@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 14, 2022 at 01:00 AM
+-- Generation Time: Nov 25, 2022 at 01:11 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -1295,6 +1295,33 @@ INSERT INTO `pesan_ondebmh` (`code`, `id_main`, `isi_pesan`, `status`, `tgl`, `u
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `portalcibinong`
+--
+
+CREATE TABLE `portalcibinong` (
+  `id` bigint(20) NOT NULL,
+  `listing_type` bigint(20) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `tagline` varchar(50) DEFAULT NULL,
+  `logo_img` varchar(100) DEFAULT NULL,
+  `cover_img` varchar(100) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `phone` varchar(50) DEFAULT NULL,
+  `website` varchar(50) DEFAULT NULL,
+  `facebook` varchar(50) DEFAULT NULL,
+  `twitter` varchar(50) DEFAULT NULL,
+  `instagram` varchar(50) DEFAULT NULL,
+  `youtube` varchar(50) DEFAULT NULL,
+  `work_hours` text DEFAULT NULL,
+  `location_maps` text DEFAULT NULL,
+  `region` varchar(50) DEFAULT NULL,
+  `category` varchar(50) DEFAULT NULL,
+  `tags` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `suarrid`
 --
 
@@ -1531,6 +1558,12 @@ ALTER TABLE `pesan_ondebmh`
   ADD PRIMARY KEY (`code`);
 
 --
+-- Indexes for table `portalcibinong`
+--
+ALTER TABLE `portalcibinong`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `suarrid`
 --
 ALTER TABLE `suarrid`
@@ -1557,6 +1590,12 @@ ALTER TABLE `laporan_wp`
 --
 ALTER TABLE `main_ondebmh`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=299;
+
+--
+-- AUTO_INCREMENT for table `portalcibinong`
+--
+ALTER TABLE `portalcibinong`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `suarrid`
