@@ -1,0 +1,2087 @@
+<style type="text/css">
+    .example-modal .modal {
+      position: relative;
+      top: auto;
+      bottom: auto;
+      right: auto;
+      left: auto;
+      display: block;
+      z-index: 1;
+    }
+
+    .example-modal .modal {
+      background: transparent !important;
+    }
+	
+	fieldset.scheduler-border {
+	  border: 1px groove #ddd !important;
+	  padding: 0 1.4em 1.4em 1.4em !important;
+	  margin: 0 0 1.5em 0 !important;
+	  -webkit-box-shadow: 0px 0px 0px 0px #000;
+	  box-shadow: 0px 0px 0px 0px #000;
+	}
+
+	legend.scheduler-border {
+	  font-size: 1.2em !important;
+	  font-weight: bold !important;
+	  text-align: left !important;
+	  width: auto;
+	  padding: 0 10px;
+	  border-bottom: none;
+	}
+	.form-group-num-of-members{
+		display:none;
+	}
+</style>
+<?php
+$sprice=0;
+?>
+<section class="content">
+
+	<!-- Default box -->
+	<div class="box">
+		<div class="box-header with-border">
+		<h3 class="box-title"><?php echo $title; ?></h3>
+
+			<div class="box-tools pull-right">
+				<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+						title="Collapse">
+				<i class="fa fa-minus"></i></button>
+				<button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+				  <i class="fa fa-times"></i></button>
+			</div>
+		</div>
+		<div class="box-body">
+			<div class="col-lg-12">
+			<?php if($act=="add"): ?>
+				<?php 
+					$getJenisVisa=$this->M_general->getData('jenis_visa','*',array('id','ASC'));
+					echo form_open_multipart('admin/tour_booking?act=addData','id="formTourBooking"'); ?>
+					<input type="hidden" name="tour_id" value="" id="tour_id-id" />
+					<input type="hidden" name="tour_desc" value="" id="tour_id-desc" />
+					<input type="hidden" name="iarrival_date" value="" id="iarrival_date" />
+					
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
+									Select Tour
+								</button>
+								<div class="row">
+									<div id="tmp" class="col-md-4"></div>
+									<div id="tmp_1" class="col-md-4"></div>
+								</div>
+								<div class="modal fade" id="modal-default">
+								  <div class="modal-dialog" style="width:90%;">
+									<div class="modal-content">
+									  <div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										  <span aria-hidden="true">&times;</span></button>
+										<h4 class="modal-title">Tours</h4>
+									  </div>
+									  <div class="modal-body">
+										<div class="row">
+											<div class="col-sm-12">
+													<div class="form-group">
+														<div class="col-sm-4">
+															<input type="text" id="search-dp-id" class="datepicker form-control" placeholder="Tanggal Berangkat" />
+														</div>
+														<div class="col-sm-6">
+															<input type="text" id="search-tour-id" class="form-control" placeholder="Cari Tour" />
+															<!-- <select class="form-control" id="idsatu">
+																<option value="1">satu</option>
+																<option value="2">dua</option>
+															</select> -->
+														</div>														
+														<div class="col-sm-2">
+															<!-- <button id="search-btn-id" class="btn btn-success">Cari</button>-->
+														</div>
+													</div>
+											</div>
+										</div>
+										<hr/>
+									<div id="modal-tours-id">
+										<?php for($i=0;$i<count($dttour);$i+=4): ?>
+										<?php
+											if($i==0){
+												$a=(count($dttour) < 4) ? count($dttour):4;
+											}else{
+												// $a=count($dttour)%$i;
+												$a=4;
+											}
+										?>
+										
+										<div class="row">
+											<?php for($j=$i;$j < ($i+$a); $j++): 
+												if($j<count($dttour)):
+											?>
+
+											<?php $id=$dttour[$j]->i_id; ?>
+											<div class="col-sm-3">
+												<a href="#" data-dismiss="modal" onclick="setTourId('<?php echo $id; ?>')" id="tour_<?php echo $id; ?>"><img src="<?php echo img_load($dttour[$j]->img); ?>" style="width:100%;" />
+												<input type="hidden" id="seo_<?php echo $id; ?>" value="<?php echo $dttour[$j]->seo; ?>" />
+												<input type="hidden" id="duration_<?php echo $id; ?>" value="<?php echo $dttour[$j]->iduration; ?>" />
+												<span class="tour_title"><?php echo $dttour[$j]->title; ?></span></a>
+												<br/>
+												<label class="label-control" id="seats_<?php echo $id; ?>">Available Seats : <?php echo ($dttour[$j]->seat)-($dttour[$j]->jmlcode_booking); ?></label>
+												<br/>
+												<label class="label-control" id="departure_<?php echo $id; ?>">Departure Date : <?php echo date('j M Y',strtotime($dttour[$j]->ideparture_date)); ?></label>
+												<br/>
+												<label class="label-control" id="arrival_<?php echo $id; ?>">Arrival Date : <?php echo date('j M Y',strtotime($dttour[$j]->iarrival_date)); ?></label>
+												<br/>
+												<label class="label-control" id="price_<?php echo $id; ?>">Price : <?php echo 'Rp. '.number_format($dttour[$j]->harga,0,',','.'); ?></label>
+											</div>
+											<?php endif;
+											endfor; ?>
+										</div>
+										<?php endfor; ?>
+									  </div>
+									</div>
+									  <div class="modal-footer">
+										<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+										<!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+									  </div>
+									</div>
+									<!-- /.modal-content -->
+								  </div>
+								  <!-- /.modal-dialog -->
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<fieldset class="scheduler-border">
+								<legend class="scheduler-border">Filter</legend>
+								<label class="text-yellow"><i class="fa fa-warning"></i> - Please mark the checkbox if you want to search by Date of Birth</label>
+								<div class="input-group">
+									<span class="input-group-addon">
+									  <input type="checkbox" id="id_find_check" />
+									  <input type="hidden" id="id_userid_val" name="name_userid" value="0"/>
+									</span>
+									<input type="text" class="form-control" id="id_find_text"/>
+									<span class="input-group-btn">
+										<button type="button" class="btn btn-info btn-flat" id="id_find_button"><i class="fa fa-search"></i></button>
+									</span>
+								</div>
+								<!-- /input-group -->
+							</fieldset>
+						</div>
+						<div class="modal fade" id="id-modal-user">
+							<div class="modal-dialog modal-lg">
+							  <div class="modal-content">
+								<div class="modal-header">
+								  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span></button>
+								  <h4 class="modal-title">Users</h4>
+								</div>
+								<div class="modal-body">
+									<div class="row">
+										<div class="col-md-12" id="id-modal-user-body" style="overflow:scroll;max-height:400px;"></div>
+									</div>
+									<!-- <div class="row">
+										<div class="col-md-12" id="id-modal-user-body-child"></div>
+									</div> -->
+								</div>
+							  </div>
+							  <!-- /.modal-content -->
+							</div>
+							<!-- /.modal-dialog -->
+						</div>
+						<!-- /.modal -->
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="label-control" for="first_name">First Name<sup class="text-red">*</sup></label>
+								<input type="text" name="first_name" class="form-control booker booker-control" readonly required placeholder="First Name"/>
+							</div>
+							<div class="form-group">
+								<label class="label-control" for="last_name">Last Name<sup class="text-red">*</sup></label>
+								<input type="text" name="last_name" class="form-control booker booker-control" readonly required placeholder="Last Name"/>
+							</div>
+							<div class="form-group">
+								<label class="label-control" for="email">Email<sup class="text-red">*</sup></label>
+								<input type="email" name="email" onchange="checkEmailValid(0)" class="form-control email booker booker-control" readonly required placeholder="Email" />
+							</div>
+							<div class="form-group">
+								<label class="label-control" for="country">Country</label>
+								<select name="country" class="form-control" id="country_id" required disabled>
+									<option value="">Country</option>
+									<?php foreach($dtcountries as $key => $value): ?>
+										
+										<option value="<?php echo $value->id; ?>"><?php echo $value->name; ?></option>
+										
+									<?php endforeach; ?>
+								</select>
+							</div>
+							<div class="form-group">
+								<label class="label-control" for="city">City</label>
+								<select name="city" class="form-control" id="city_id" required disabled>
+									<option value="">City</option>
+									<?php foreach($dtcities as $key => $value): ?>
+										
+										<option value="<?php echo $value->id; ?>"><?php echo $value->name; ?></option>
+										
+									<?php endforeach; ?>
+								</select>
+							</div>
+							<div class="form-group">
+								<label class="label-control" for="address">Address</label>
+								<input name="address" class="form-control booker-control" readonly type="text" placeholder="Address"/>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="label-control" for="phone">Phone<sup class="text-red">*</sup></label>
+								<input type="text" name="phone" class="form-control booker booker-control" readonly required placeholder="Phone" />
+							</div>
+							<div class="form-group">
+								<label class="label-control" for="date_of_birth">Date Of Birth<sup class="text-red">*</sup></label>
+								<input class="form-control booker booker-control" readonly required name="dob" id="id_dob" placeholder="Date Of Birth" type="text" />
+							</div>
+							<div class="form-group form-group-num-of-members">
+								<label class="label-control" for="num_of_members">Number Of Members<sup class="text-red">*</sup></label>
+								<select name="num_of_members" class="form-control" id="num_of_members_id">
+									<option value="0">Num Of Members</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label class="label-control" for="remarks">Remarks</label>
+								<input name="remarks" class="form-control" type="text" placeholder="Remarks" />
+							</div>
+							<div class="form-group">
+								<label class="label-control" for="status_deposit">Status Deposit</label>
+								<input name="status_deposit" class="form-control" type="text" placeholder="Status Deposit" />
+							</div>
+							<div class="form-group">
+								<label class="label-control" for="status_payment">Status Payment</label>
+								<select name="status_payment" class="form-control select2" id="status_payment_id">
+									<option value="status_payment" disabled>Status Payment</option>
+									<option value="booking">Booking</option>
+									<option value="deposit">Deposit</option>
+									<option value="full_payment">Full Payment</option>
+									<option value="cancel">Cancel</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="row form-group-num-of-members">
+						<div class="col-md-12">
+							<label class="label-control">Set Booker as Guest 1?</label>
+							<br/>
+							<button type="button" id="set_booker_add_guest_id" class="btn btn-default btn-lg text-red" elstat="off"><i class="fa fa-toggle-off"></i></button>
+							<br/>
+							<br/>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="box box-warning box-solid">
+								<div class="box-header with-border">
+									<h3 class="box-title">Members</h3>
+
+									  <div class="box-tools pull-right">
+										<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+										</button>
+									  </div>
+								  <!-- /.box-tools -->
+								</div>
+								<!-- /.box-header -->
+								<div class="box-body" style="" id="members_panel_id">
+									<div class="row">
+										<div class="col-md-6">
+											<!-- <span style="color:blue;font-size:12px">Guest 1</span> -->
+											<div style="background-color:orange;width:100%;height:30px;text-align:center;">
+												<span style="color:#ffffff;font-size:20px">Guest 1</span>
+												<input type="hidden" id="default_form" value="not_build_from_js">
+											</div>
+											<hr/>
+											<div class="form-group">
+												
+												<label class="label-control" for="mr_mrs">Mr/Mrs<sup class="text-red">*</sup></label>
+												<select group_input='input_1' id="mr_mrs_1" name="mr_mrs[]" class="form-control mr_mrs" required >
+													<option value="">-</option>
+													<option value="mr">Mr</option>
+													<option value="ms">Ms</option>
+													<option value="mrs">Mrs</option>
+													<option value="miss">Miss</option>
+													<option value="mstr">Mstr</option>
+													<option value="inf">Inf</option>
+												</select>
+											</div>
+											<div class="form-group">
+												<label class="label-control">First Name<sup class="text-red">*</sup></label>
+												<input id="mfirst_name_1" group_input='input_1' class="form-control m_booker member_booker_0" name="mfirst_name[]" required placeholder="First Name" type="text" />
+												<input id="urutan_member_0" class="form-control" name="urutan_member[]" placeholder="Urutan Member" type="hidden" value="0"/>
+												<input name="muserid[]" class="muserid" type="hidden" value="0"/>
+											</div>
+											<div class="form-group">	
+												<label class="label-control">Last Name<sup class="text-red">*</sup></label>
+												<input id="mlast_name_1" group_input='input_1' class="form-control m_booker member_booker_0" required name="mlast_name[]" required placeholder="Last Name" type="text"/>
+											</div>
+											<div class="form-group">	
+												<label class="label-control">Gender</label><br/>
+												<input type="radio" group_input='input_1' id="g_laki_laki_1" name="gender[0]" value="l" /> <label for="g_laki_laki_1">Laki-Laki</label>
+												<input type="radio" group_input='input_1' id="g_perempuan_1" name="gender[0]" value="p" /> <label for="g_perempuan_1">Perempuan</label><br/>
+											</div>
+											<div class="form-group">	
+												<label class="label-control">Place Of Birth</label>
+												<input class="form-control" group_input='input_1' name="mpob[]" id="mpob_1" placeholder="Place Of Birth" type="text"/>
+											</div>
+											<div class="form-group">	
+												<label class="label-control">Date Of Birth<sup class="text-red">*</sup></label>
+												<input class="form-control mdob member_booker_0" group_input='input_1' name="mdob[]" id="mdob_1" name="mdob_1" placeholder="Date Of Birth" type="text" required />
+											</div>
+											<div class="form-group">	
+												<label class="label-control">Phone Number<sup class="text-red">*</sup></label>
+												<input type="text" id="phone_1" group_input='input_1' class="form-control member_booker_0" name="mphone[]" placeholder="Phone Number" required  />
+											</div>
+											<div class="form-group">	
+												<label class="label-control">Email<sup class="text-red">*</sup></label>
+												<input type="text" id="email_1" group_input='input_1' onchange="checkEmailValid(1)" class="form-control email member_booker_0" name="memail[]" placeholder="Email" required />
+											</div>
+											<div class="form-group">	
+												<label class="label-control">Hobbies</label><br/>
+												<input type="checkbox" id="hobies_1"  name="hobies_0[]" value="Reading" />
+												<label for="hobies_1">Reading</label>
+												<input type="checkbox" id="hobies_2"  name="hobies_0[]" value="Writing" />
+												<label for="hobies_2">Writing</label>
+												<input type="checkbox" id="hobies_3"  name="hobies_0[]" value="Cooking" />
+												<label for="hobies_3">Cooking</label>
+												<input type="checkbox" id="hobies_4"  name="hobies_0[]" value="Photography" />
+												<label for="hobies_4">Photography</label><br/>
+												<input type="checkbox" id="hobies_5"  name="hobies_0[]" value="Sightseeing" />
+												<label for="hobies_5">Sightseeing</label>
+												<input type="checkbox" id="hobies_6"  name="hobies_0[]" value="Sport Activity" />
+												<label for="hobies_6">Sport Activity</label>
+												<input type="checkbox" id="hobies_7"  name="hobies_0[]" value="Social Activity" />
+												<label for="hobies_7">Social Activity</label><br/>
+												<input type="text" class="form-control" name="hobies_text[]" placeholder="Others (isi sendiri)" />
+											</div>
+											<div class="form-group">	
+												<label class="label-control" for="mtype_of_meal">Type Of Meal</label>
+												<select group_input='input_1'  id="type_of_meal_1" name="mtype_of_meal[]" class="form-control select2">
+													<option value="0" disabled>Type Of Meal</option>
+													<option value="2">Standard</option>
+													<option value="1">Vegetarian</option>
+													<option value="3">No Pork</option>
+												</select>
+											</div>
+											<div class="form-group">	
+												<label class="label-control">Passport Number</label>
+												<input type="text" class="form-control" group_input='input_1' name="mpass_num[]" id="mpass_num_1" placeholder="Passport Number"/>
+											</div>
+											<div class="form-group">	
+												<label class="label-control">Expired Passport</label>
+												<input type="text" group_input='input_1' class="form-control exp_pass" name="mpass_exp[]" placeholder="Expired Passport" id="exp_pass_1" onchange="cekpassport_exp(1)"/>
+												<span id="warning_exp_pass_1" class="label label-warning"></span><br/>
+											</div>
+											<div class="form-group">
+												<label class="label-control">Place Of Issue Passport</label>
+												<input type="text" group_input='input_1' class="form-control" name="mpass_issue[]" id="mpass_issue_1" placeholder="Place Of Issue Passport" />
+											</div>
+											<div class="form-group">	
+												<label class="label-control">Passport Picture</label>
+												<input type="file" name="pasport_img[]" accept="image/png, image/gif, image/jpeg"/>
+											</div>
+												<div class="callout callout-info" id="mvisa_id_1">
+													<div class="row">
+														<div class="col-xs-6">
+															<h4>Visa</h4>
+														</div>
+														<div class="col-xs-6">
+															<button type="button" class="btn btn-link pull-right text-red add_new_visa" onclick="setNewVisa(0)">add new</button>
+														</div>
+													</div>
+													<div class="row visa_row_0">
+														<div class="col-xs-6">
+															<select class="form-control jenis_visa" id="jenis_visa_0_0" name="jenis_visa[0][]" row-id="0">
+																<option value="0">Pilih...</option>
+																<?php
+																	foreach($getJenisVisa as $keyJenisVisa => $valueJenisVisa): ?>
+																	<option value="<?php echo $valueJenisVisa->id; ?>"><?php echo $valueJenisVisa->jenis_visa; ?></option>
+																	
+																<?php endforeach; ?>
+															</select>
+															<br/>
+															<label class="label-control">Visa Picture</label>
+														</div>
+														<div class="col-xs-6">
+															<!--<select class="form-control" id="harga_visa_0_0" name="harga_visa[0][]" row-id="0">
+																<option value="0">Pilih...</option>
+															</select>-->
+															<input class="form-control datepicker" group_input="input_1" name="tanggal_exp[0][]" id="mtanggal_exp" placeholder="Expired Date" type="text" />
+															<br/>
+															<input name="visa_img[0][]" type="file" accept="image/png, image/gif, image/jpeg"/>
+														</div>
+													</div>
+												</div>
+												
+												<br/>
+												<!-- <label class="label-control">Accommodation</label> -->
+												<?php
+													foreach($dtaccommodation as $key => $value){
+														$dtacc[$value->itinerary_id]=array('id'=>$value->id,'name'=>$value->name);
+														
+														$arrac[]=array('itinerary_id'=>$value->itinerary_id,'id'=>$value->id,'name'=>$value->name);
+													}
+													$arrac[]=array('itinerary_id'=>0,'id'=>0,'name'=>'Pilih...');
+												?>
+												<input type="hidden" name="maccommodation" value="null">
+												<!-- <select name="maccommodation[]" class="c_accom form-control select2">
+													<option value="" disabled selected>Accommodation</option>
+													<?php //foreach($dtacc[$dtedit->tour_id] as $key => $value): ?>
+														<option value="<?php// echo $value->id; ?>"><?php// echo $value->name; ?></option>
+													<?php// endforeach; ?>
+												</select> -->
+										</div>
+									</div>
+								</div>
+							</div>
+								<!-- /.box-body -->
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group btn-save">
+								<input type="hidden" value='<?php echo ($arrac) ? json_encode($arrac):""; ?>' id="jaccom_id"/>
+								<input type="hidden" value='<?php echo json_encode((array)$getJenisVisa); ?>' id="jvisa_id"/>
+								<input class="btn btn-warning" type="reset" value="Reset"/>
+								<input type="submit" class="btn btn-primary pull-right" value="Submit"/>
+							</div>
+						</div>
+					</div>
+					
+				<?php echo form_close(); ?>
+			<?php elseif($act=="bookingnext"): ?>
+				
+			<?php elseif($act=="edit"): ?>
+				<?php echo form_open_multipart('admin/tour_booking?act=updateData','',array('id'=>$id,'code_booking'=>$dtedit->code_booking,'username'=>$dtedit->username,'reservations'=>$dtedit->reservations)); ?>
+				
+					<input type="hidden" name="tour_id" value="<?php echo $dtedit->tour_id; ?>" id="tour_id-id"  />
+					<input type="hidden" name="tour_desc" value="" id="tour_id-desc" />
+					<input type="hidden" name="iarrival_date" value="<?php echo date('j M Y',strtotime($dtedit->arrival_date)); ?>" id="iarrival_date" />
+					<input type="hidden" name="InventoryId" value="<?=$dtedit->InventoryId;?>" />
+				<!-- <input type="hidden" name="OptyId" value="<?=$dtedit->OptyId;?>" />
+					<input type="hidden" name="RevnId" value="<?=$dtedit->RevnId;?>" />
+					<input type="hidden" name="InventoryOrgId" value="<?=$dtedittour->InvOrgId;?>" />
+					<input type="hidden" name="PrimaryRevenueId" value="<?=$dtedit->PrimaryRevenueId;?>" />
+					<input type="hidden" name="OptyNumber" value="<?=$dtedit->OptyNumber;?>" /> -->				
+					<input type="hidden" name="price" value="<?=$dtedit->price;?>" />
+					
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
+									Select Tour
+								</button>
+								<div class="row">
+									<div id="tmp" class="col-md-4">
+										<img src="<?php echo img_load($dtedittour->img); ?>" style="width:100%;">
+										<br/>
+										<?php echo $dtedittour->title; ?>
+									</div>
+								</div>
+								<div class="modal fade" id="modal-default">
+								  <div class="modal-dialog" style="width:90%;">
+									<div class="modal-content">
+									  <div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										  <span aria-hidden="true">&times;</span></button>
+										<h4 class="modal-title">Tours</h4>
+									  </div>
+									  <div class="modal-body">
+										<div class="row">
+											<div class="col-sm-12">
+													<div class="form-group">
+														<div class="col-sm-4">
+															<input type="text" id="search-dp-id" class="datepicker form-control" placeholder="Tanggal Berangkat" />
+														</div>
+														<div class="col-sm-6">
+															<input type="text" id="search-tour-id" class="form-control" placeholder="Cari Tour" />
+															<!-- <select class="form-control" id="idsatu">
+																<option value="1">satu</option>
+																<option value="2">dua</option>
+															</select> -->
+														</div>														
+														<div class="col-sm-2">
+															<!-- <button id="search-btn-id" class="btn btn-success">Cari</button>-->
+														</div>
+													</div>
+											</div>
+										</div>
+										<hr/>
+										<div id="modal-tours-id">
+										<?php for($i=0;$i<count($dttour);$i+=4): ?>
+										<?php
+											if($i==0){
+												$a=(count($dttour) < 4) ? count($dttour):4;
+											}else{
+												// $a=count($dttour)%$i;
+												$a=4;
+											}
+										?>
+										
+										<div class="row">
+											<?php for($j=$i;$j < ($i+$a); $j++): 
+												if($j<count($dttour)):
+											?>
+											<?php 
+												$id=$dttour[$j]->i_id; 
+												$tot_seat=($dttour[$j]->seat)-($dttour[$j]->jmlcode_booking);
+												$less[$id]=$tot_seat;
+											?>
+											<div class="col-sm-3">
+												<a href="#" data-dismiss="modal" onclick="setTourId('<?php echo $id; ?>')" id="tour_<?php echo $id; ?>"><img src="<?php echo img_load($dttour[$j]->img); ?>" style="width:100%;" />
+												<span class="tour_title"><?php echo $dttour[$j]->title; ?></span></a>
+												<br/>
+												<label class="label-control" id="seats_<?php echo $id; ?>">Available Seats : <?php echo $tot_seat; ?></label>
+												<br/>
+												<label class="label-control" id="departure_<?php echo $id; ?>">Departure Date : <?php echo date('j M Y',strtotime($dttour[$j]->ideparture_date)); ?></label>
+												<br/>
+												<label class="label-control" id="arrival_<?php echo $id; ?>">Arrival Date : <?php echo date('j M Y',strtotime($dttour[$j]->iarrival_date)); ?></label>
+												<br/>
+												<label class="label-control" id="price_<?php echo $id; ?>">Price : <?php echo 'Rp. '.number_format($dttour[$j]->harga,0,',','.'); ?></label>
+											</div>
+											<?php endif; endfor; ?>
+										</div>
+										<?php endfor; ?>
+										</div>
+									  </div>
+									  <div class="modal-footer">
+										<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+										<!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+									  </div>
+									</div>
+									<!-- /.modal-content -->
+								  </div>
+								  <!-- /.modal-dialog -->
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<?php $nama=explode(" ",$dtedit->full_name); ?>
+							<div class="form-group">
+								<label class="label-control" for="first_name">First Name<sup class="text-red">*</sup></label>
+								<input type="hidden" id="id_userid_val" name="name_userid" value="<?php echo $dtedit->userid; ?>"/>
+								<input type="text" name="first_name" class="form-control booker"  placeholder="First Name" <?php echo isset($nama[0]) ? 'value="'.$nama[0].'" readonly':''; ?>  />
+							</div>
+							<div class="form-group">
+								<label class="label-control" for="last_name">Last Name<sup class="text-red">*</sup></label>
+								<input type="text" name="last_name" class="form-control booker"  placeholder="Last Name" <?php echo isset($nama[1]) ? 'value="'.$nama[1].'" readonly':''; ?>  />
+							</div>
+							<div class="form-group">
+								<label class="label-control" for="email">Email<sup class="text-red">*</sup></label>
+								<input type="text" name="email" class="form-control email booker"  placeholder="Email" <?php echo isset($dtedit->email) ? 'value="'.$dtedit->email.'" readonly':''; ?>  />
+							</div>
+							<div class="form-group">
+								<label class="label-control" for="country">Country<sup class="text-red">*</sup></label>
+								<select name="country" class="form-control" id="country_id"  <?php if(isset($dtedit->country)) echo "disabled"; ?>>
+									<option value="0" disabled>Country</option>
+									<?php foreach($dtcountries as $key => $value): ?>
+										<option value="<?php echo $value->id; ?>" <?php if($value->id==$dtedit->country) echo "selected"; ?>><?php echo $value->name; ?></option>
+									<?php endforeach; ?>
+								</select>
+							</div>
+							<div class="form-group">
+								<label class="label-control" for="city">City<sup class="text-red">*</sup></label>
+								<select name="city" class="form-control"  <?php if(isset($dtedit->city)) echo "disabled"; ?> id="city_id">
+									<?php if(isset($dtcities[0]->id)): ?>
+									<option value="<?php echo $dtcities[0]->id; ?>" selected><?php echo $dtcities[0]->name; ?></option>
+									<?php endif; ?>
+								</select>
+							</div>
+							<div class="form-group">
+								<label class="label-control" for="address">Address</label>
+								<input name="address" class="form-control" type="text" placeholder="Address" <?php echo isset($dtedit->address) ? 'value="'.$dtedit->address.'" readonly':''; ?> />
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="label-control" for="phone">Phone<sup class="text-red">*</sup></label>
+								<input type="text" name="phone" class="form-control booker"  placeholder="Phone" <?php echo isset($dtedit->phone) ? 'value="'.$dtedit->phone.'" readonly':''; ?>  />
+							</div>
+							<div class="form-group">
+								<label class="label-control" for="date_of_birth">Date Of Birth<sup class="text-red">*</sup></label>
+								<input class="form-control datepicker booker" name="dob" id="id_dob"  placeholder="Date Of Birth" type="text" <?php echo isset($dtedit->dob) ? 'value="'.date('d M Y',strtotime($dtedit->dob)).'" disabled':''; ?>  />
+							</div>
+							<div class="form-group">
+								<label class="label-control" for="num_of_members">Number Of Members<sup class="text-red">*</sup></label>
+								<input type="hidden" id="num_of_members_id_edit" value="<?php echo $dtedit->num_of_members; ?>" />
+								<?php
+								$tot_seat_1=$dtedit->seat-$dtedit->jml_booking;
+								?>
+								<select name="num_of_members" class="form-control" id="num_of_members_id" >
+									<option value="0" disabled>Num Of Members</option>
+									<?php for($i=0;$i<$tot_seat_1;$i++): ?>
+										<option value="<?php echo $i+1; ?>" <?php if($dtedit->num_of_members==($i+1)) echo "selected"; ?>><?php echo $i+1; ?></option>
+									<?php endfor; ?>
+								</select>
+							</div>
+							<div class="form-group">
+								<label class="label-control" for="remarks">Remarks</label>
+								<input name="remarks" class="form-control" type="text" placeholder="Remarks" value="<?php echo isset($dtedit->remarks) ? $dtedit->remarks:""; ?>" />
+							</div>
+							<div class="form-group">
+								<label class="label-control" for="status_deposit">Status Deposit</label>
+								<input name="status_deposit" class="form-control" type="text" placeholder="Status Deposit" value="<?php echo isset($dtedit->status_deposit) ? $dtedit->status_deposit:""; ?>" />
+							</div>
+							<div class="form-group">
+								<label class="label-control" for="status_payment">Status Payment</label>
+								<select name="status_payment" class="form-control select2" id="status_payment_id">
+									<option value="status_payment" disabled>Status Payment</option>
+									<option value="booking" <?php if($dtedit->pay_status=="booking") echo "selected"; ?>>Booking</option>
+									<option value="deposit" <?php if($dtedit->pay_status=="deposit") echo "selected"; ?>>Deposit</option>
+									<option value="full_payment" <?php if($dtedit->pay_status=="full_payment") echo "selected"; ?>>Full Payment</option>
+									<option value="cancel" <?php if($dtedit->pay_status=="cancel") echo "selected"; ?>>Cancel</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<label class="label-control">Set Booker as Guest 1?</label>
+							<br/>
+							<button type="button" id="set_booker_as_guest_id" class="btn btn-default btn-lg text-red" elstat="on"><i class="fa fa-toggle-on"></i></button>
+							<br/>
+							<br/>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="box box-warning box-solid">
+								<div class="box-header with-border">
+									<h3 class="box-title">Members</h3>
+
+									  <div class="box-tools pull-right">
+										<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+										</button>
+									  </div>
+								  <!-- /.box-tools -->
+								</div>
+								<!-- /.box-header -->
+								<div class="box-body" style="" id="members_panel_id">
+									<?php 
+										$arrvisa=array();
+										foreach($dtvisa as $kv_1 => $vv_1){
+											$arrvisa[]=array(
+												'id'=>$vv_1->id,
+												'nama_pemilik'=>$vv_1->nama_pemilik,
+												'jenis_visa'=>$vv_1->jenis_visa,
+												'price'=>$vv_1->price
+											);
+										}
+									?>
+									<?php for($i=0;$i<$dtedit->num_of_members;$i++): ?>
+										<?php if(($i%2)==0) echo '<div class="row">';?>
+											<div class="edit_box col-md-6">
+												<div style="background-color:orange;width:100%;height:30px;text-align:center;">
+													<span style="color:#ffffff;font-size:20px">Guest <?php echo ($i+1); ?>(<?php echo (isset($dteditmembers[$i]->first_name)) ? $dteditmembers[$i]->first_name:""; ?> <?php echo (isset($dteditmembers[$i]->last_name)) ? $dteditmembers[$i]->last_name:""; ?>)</span>
+													<i class='fa fa-close fa-2x pull-right' style='color:#b71c1c;' onclick='deleteMember("<?php echo (isset($dteditmembers[$i]->reservation_id)) ? $dteditmembers[$i]->reservation_id:""; ?>", "<?php echo (isset($dteditmembers[$i]->id_member)) ? $dteditmembers[$i]->id_member:""; ?>", "<?php echo (isset($dteditmembers[$i]->userid)) ? $dteditmembers[$i]->userid:""; ?>")'></i>
+												</div>
+												<hr/>
+												<div class="form-group">
+													<label class="label-control" for="mr_mrs">Mr/Mrs<sup class="text-red">*</sup></label>
+													<select id="mr_mrs_<?php echo ($i); ?>" name="mr_mrs[]"  <?php if(isset($dteditmembers[$i]->mr_mrs)) echo 'disabled'; ?> class="form-control">
+														<option value="">-</option>
+														<option value="mr" <?php if(isset($dteditmembers[$i]) && count($dteditmembers) > 0 && $dteditmembers[$i]->mr_mrs=="mr") echo "selected"; ?>>Mr</option>
+														<option value="ms" <?php if(isset($dteditmembers[$i]) &&count($dteditmembers) > 0 && $dteditmembers[$i]->mr_mrs=="ms") echo "selected"; ?>>Ms</option>
+														<option value="mrs" <?php if(isset($dteditmembers[$i]) &&count($dteditmembers) > 0 && $dteditmembers[$i]->mr_mrs=="mrs") echo "selected"; ?>>Mrs</option>
+														<option value="miss" <?php if(isset($dteditmembers[$i]) &&count($dteditmembers) > 0 && $dteditmembers[$i]->mr_mrs=="miss") echo "selected"; ?>>Miss</option>
+														<option value="mstr" <?php if(isset($dteditmembers[$i]) &&count($dteditmembers) > 0 && $dteditmembers[$i]->mr_mrs=="mstr") echo "selected"; ?>>Mstr</option>
+														<option value="inf" <?php if(isset($dteditmembers[$i]) &&count($dteditmembers) > 0 && $dteditmembers[$i]->mr_mrs=="inf") echo "selected"; ?>>Inf</option>
+													</select>
+												</div>
+												<div class="form-group">
+													<label class="label-control">First Name<sup class="text-red">*</sup></label>
+													<input id="mfirst_name_1" class="form-control m_booker member_booker_<?php echo ($i); ?>"  name="mfirst_name[]"  placeholder="First Name"  type="text" <?php echo isset($dteditmembers[$i]->first_name) ? 'value="'.$dteditmembers[$i]->first_name.'" readonly':''; ?>/>
+													<input id="urutan_member_<?=$i;?>" class="form-control" name="urutan_member[]" placeholder="Urutan Member" type="hidden" value="<?php echo (isset($dteditmembers[$i]->reservation_sequence) && $dteditmembers[$i]->reservation_sequence>0) ? $dteditmembers[$i]->reservation_sequence:$i; ?>"/>
+													<input name="muserid[]" class="muserid" type="hidden" value="<?php echo isset($dteditmembers[$i]->userid) ? $dteditmembers[$i]->userid:"0"; ?>"/>
+												</div>
+												<div class="form-group">	
+													<label class="label-control">Last Name<sup class="text-red">*</sup></label>
+													<input id="mlast_name_1" class="form-control m_booker member_booker_<?php echo ($i); ?>"  name="mlast_name[]"  placeholder="Last Name"  type="text" <?php echo isset($dteditmembers[$i]->last_name) ? 'value="'.$dteditmembers[$i]->last_name.'" readonly':''; ?>/>
+												</div>
+												<div class="form-group">	
+													<label class="label-control">Gender<sup class="text-red">*</sup></label><br/>
+													<?php $gender_disabled=isset($dteditmembers[$i]->gender) ? 'disabled':''; ?>
+													<?php if(isset($dteditmembers[$i])): ?>
+														<input type="radio" id="g_laki_laki_<?php echo $i; ?>" name="gender[<?php echo $i; ?>]" value="l" <?php if($dteditmembers[$i]->gender==='l') echo "checked "; echo $gender_disabled; ?> />
+														<label for="g_laki_laki_<?php echo $i; ?>">Laki-Laki</label>
+														<input type="radio" id="g_perempuan_<?php echo $i; ?>" name="gender[<?php echo $i; ?>]" value="p" <?php if($dteditmembers[$i]->gender==='p') echo "checked "; echo $gender_disabled; ?> />
+														<label for="g_perempuan_<?php echo $i; ?>">Perempuan</label><br/>
+													<?php else: ?>
+														<input type="radio" id="g_laki_laki_<?php echo $i; ?>" name="gender[<?php echo $i; ?>]" value="l" />
+														<label for="g_laki_laki_<?php echo $i; ?>">Laki-Laki</label>
+														<input type="radio" id="g_perempuan_<?php echo $i; ?>" name="gender[<?php echo $i; ?>]" value="p" />
+														<label for="g_perempuan_<?php echo $i; ?>">Perempuan</label><br/>
+													<?php endif; ?>
+												</div>
+												<div class="form-group">
+													<label class="label-control">Place Of Birth</label>
+													<input type="text" class="form-control" name="mpob[]"  placeholder="Place Of Birth" <?php echo isset($dteditmembers[$i]->pob) ? 'value="'.$dteditmembers[$i]->pob.'" readonly':''; ?> />
+												</div>
+												<div class="form-group">
+													<label class="label-control">Date Of Birth<sup class="text-red">*</sup></label>
+													<input class="form-control mdob member_booker_<?php echo ($i); ?>"  name="mdob[]"  placeholder="Date Of Birth" type="text" <?php echo isset($dteditmembers[$i]->dob) ? 'value="'.date('j M Y',strtotime($dteditmembers[$i]->dob)).'" readonly':''; ?>  />
+												</div>
+												<div class="form-group">	
+													<label class="label-control">Phone Number<sup class="text-red">*</sup></label>
+													<input type="text" class="form-control member_booker_<?php echo ($i); ?>"  name="mphone[]" placeholder="Phone Number" <?php echo (isset($dteditmembers[$i]->phone)) ? 'value="'.$dteditmembers[$i]->phone.'" readonly':''; ?> />
+												</div>
+												<div class="form-group">
+													<label class="label-control">Email<sup class="text-red">*</sup></label>
+													<input type="text" class="form-control email member_booker_<?php echo ($i); ?>"  name="memail[]" placeholder="Email" <?php echo (isset($dteditmembers[$i]->email)) ? 'value="'.$dteditmembers[$i]->email.'" readonly':''; ?> />
+												</div>
+												<div class="form-group">
+													<?php 
+														$arr_hobies=array();
+														$hobies_text=null;
+														$hobies_disabled=null;
+														if(isset($dteditmembers[$i]->hobies)) {
+															$panjang_kalimat=strlen($dteditmembers[$i]->hobies);
+															if($panjang_kalimat > 1) {
+																$arr_hobies_1=explode('|',$dteditmembers[$i]->hobies);
+																if(isset($arr_hobies_1[0])) $arr_hobies=explode(',',$arr_hobies_1[0]);
+																$hobies_text=isset($arr_hobies_1[1]) ? 'value="'.$arr_hobies_1[1].'" disabled':null;
+																$hobies_disabled='disabled';
+															}
+														}
+													?>
+													<label class="label-control">Hobbies</label><br/>
+													<input type="checkbox" id="<?php echo $i; ?>_hobies_1" <?php if(in_array('Reading',$arr_hobies)) echo "checked "; echo $hobies_disabled; ?>  name="hobies_<?php echo $i; ?>[]" value="Reading" />
+													<label for="<?php echo $i; ?>_hobies_1">Reading</label>
+													<input type="checkbox" id="<?php echo $i; ?>_hobies_2" <?php if(in_array('Writing',$arr_hobies)) echo "checked "; echo $hobies_disabled; ?> name="hobies_<?php echo $i; ?>[]" value="Writing" />
+													<label for="<?php echo $i; ?>_hobies_2">Writing</label>
+													<input type="checkbox" id="<?php echo $i; ?>_hobies_3" <?php if(in_array('Cooking',$arr_hobies)) echo "checked "; echo $hobies_disabled; ?> name="hobies_<?php echo $i; ?>[]" value="Cooking" />
+													<label for="<?php echo $i; ?>_hobies_3">Cooking</label>
+													<input type="checkbox" id="<?php echo $i; ?>_hobies_4" <?php if(in_array('Photography',$arr_hobies)) echo "checked "; echo $hobies_disabled; ?> name="hobies_<?php echo $i; ?>[]" value="Photography" />
+													<label for="<?php echo $i; ?>_hobies_4">Photography</label><br/>
+													<input type="checkbox" id="<?php echo $i; ?>_hobies_5" <?php if(in_array('Sightseeing',$arr_hobies)) echo "checked "; echo $hobies_disabled; ?> name="hobies_<?php echo $i; ?>[]" value="Sightseeing" />
+													<label for="<?php echo $i; ?>_hobies_5">Sightseeing</label>
+													<input type="checkbox" id="<?php echo $i; ?>_hobies_6" <?php if(in_array('Sport Activity',$arr_hobies)) echo "checked "; echo $hobies_disabled; ?> name="hobies_<?php echo $i; ?>[]" value="Sport Activity" />
+													<label for="<?php echo $i; ?>_hobies_6">Sport Activity</label>
+													<input type="checkbox" id="<?php echo $i; ?>_hobies_7" <?php if(in_array('Social Activity',$arr_hobies)) echo "checked "; echo $hobies_disabled; ?> name="hobies_<?php echo $i; ?>[]" value="Social Activity" />
+													<label for="<?php echo $i; ?>_hobies_7">Social Activity</label><br/>
+													<input type="text" class="form-control" name="hobies_text[]" <?php echo $hobies_text; ?> placeholder="Others (isi sendiri)" />
+												</div>
+												<div class="form-group">
+													<label class="label-control" for="mtype_of_meal">Type Of Meal</label>
+													
+													<select name="mtype_of_meal[]" class="form-control">
+														<option value="0" disabled>Type Of Meal</option>
+														<option value="2" <?php if(isset($dteditmembers[$i]->type_of_meal) && $dteditmembers[$i]->type_of_meal==2) echo "selected"; ?>>Standard</option>
+														<option value="1" <?php if(isset($dteditmembers[$i]->type_of_meal) && $dteditmembers[$i]->type_of_meal==1) echo "selected"; ?>>Vegetarian</option>
+														<option value="3" <?php if(isset($dteditmembers[$i]->type_of_meal) && $dteditmembers[$i]->type_of_meal==3) echo "selected"; ?>>No Pork</option>
+													</select>
+												</div>
+												<div class="form-group">
+													<label class="label-control">Passport Number</label>
+													<input type="text" class="form-control" name="mpass_num[]" placeholder="Passport Number" <?php echo isset($dteditmembers[$i]->pass_num) ? 'value="'.$dteditmembers[$i]->pass_num.'" readonly':''; ?>/>
+												</div>
+												<div class="form-group">	
+													<label class="label-control">Expired Passport</label>
+													<input type="text" class="form-control exp_pass" name="mpass_exp[]" placeholder="Expired Passport" id="exp_pass_<?php echo ($i+1); ?>" onchange="cekpassport_exp(<?php echo ($i+1); ?>)" <?php echo (isset($dteditmembers[$i]->pass_exp)) ? 'value="'.date('j M Y',strtotime($dteditmembers[$i]->pass_exp)).'" readonly':''; ?>  />
+													<span id="warning_exp_pass_<?php echo ($i+1); ?>" class="label label-warning"></span><br/>
+												</div>
+												<div class="form-group">
+													<label class="label-control">Place Of Issue Passport</label>
+													<input type="text" class="form-control" name="mpass_issue[]" placeholder="Place Of Issue Passport" <?php echo isset($dteditmembers[$i]->pass_issue) ? 'value="'.$dteditmembers[$i]->pass_issue.'" readonly':''; ?>/>
+												</div>
+												<div class="form-group">	
+													<label class="label-control">Passport Picture</label>
+													<input type="file" name="pasport_img[]" accept="image/png, image/gif, image/jpeg"/><br/>
+													<?php if(isset($dteditmembers[$i]->pass_img)): ?>
+														<img class="img-responsive" src="<?php echo base_url($dteditmembers[$i]->pass_img); ?>" />
+													<?php endif; ?>
+												</div>
+												<div class="form-group">
+													<div class="callout callout-info" id="mvisa_id_<?php echo ($i+1); ?>">
+														<div class="row">
+															<div class="col-xs-6">
+																<h4>Visa</h4>
+															</div>
+															<div class="col-xs-6">
+																<button type="button" class="btn btn-link pull-right text-red add_new_visa" onclick="setNewVisa(<?php echo ($i); ?>)">add new</button>
+															</div>
+														</div>
+														<?php
+														$bnt_member_visa=false;
+														if(isset($dteditmembers[$i]->userid)) $bnt_member_visa=true;
+														
+														if($bnt_member_visa==true){
+															if(empty($dtreservation_tour_members_visa[$dteditmembers[$i]->userid])) $bnt_member_visa=false;
+														}
+														if($bnt_member_visa==true): ?>
+														
+															<?php foreach($dtreservation_tour_members_visa[$dteditmembers[$i]->userid] as $key => $value): 
+																$visa_row=($key===0) ? 'visa_row_'.$i:'visa_row_'.$i.'_'.$key;
+															?>
+															<div class="row <?php echo $visa_row; ?>">
+																<div class="col-xs-6">
+																	<select class="form-control jenis_visa" id="jenis_visa_<?php echo ($i); ?>_<?php echo ($i); ?>" name="jenis_visa[<?php echo ($i); ?>][]" row-id="<?=$i+1;?>" <?php echo isset($value->id_jenis_visa) ? 'disabled':''; ?>>
+																		<option value="0">Pilih...</option>
+																		<?php foreach($getJenisVisa as $keyJenisVisa => $valueJenisVisa): ?>
+																			<?php 
+																				if($valueJenisVisa->id==$value->id_jenis_visa){
+																					$sel="selected";
+																				}else{
+																					$sel="";
+																				}
+																			?>
+																			<option value="<?php echo $valueJenisVisa->id; ?>" <?php echo $sel; ?>><?php echo $valueJenisVisa->jenis_visa; ?></option>
+																			
+																		<?php
+																		endforeach; ?>
+																	</select>
+																	<br/>
+																	<label class="label-control">Visa Picture</label>
+																</div>
+																<div class="col-xs-6">
+																	<?php if(isset($value->tanggal_exp)): ?>
+																		<input class="form-control datepicker" group_input="input_1" name="tanggal_exp[<?php echo ($i); ?>][]" id="mtanggal_exp" placeholder="Expired Date" type="text" value="<?php echo isset($value->tanggal_exp) ? date('d M Y',strtotime($value->tanggal_exp)):''; ?>" disabled />
+																		<br/>
+																	<?php else: ?>
+																		<input class="form-control datepicker" group_input="input_1" name="tanggal_exp[<?php echo ($i); ?>][]" id="mtanggal_exp" placeholder="Expired Date" type="text" value="<?php echo isset($value->tanggal_exp) ? date('d M Y',strtotime($value->tanggal_exp)):''; ?>" />
+																		<br/>
+																	<?php endif; ?>
+																	<?php if(isset($value->visa_img)): ?>
+																		<img class="img-responsive" src="<?php echo base_url($value->visa_img); ?>" />
+																	<?php else: ?>
+																		<input name="visa_img[<?php echo ($i); ?>][]" type="file" accept="image/png, image/gif, image/jpeg"/>
+																		<br/>
+																	<?php endif; ?>
+																	
+																</div>
+															</div>
+															<hr/>
+															<?php endforeach; ?>
+														<?php else: ?>
+															<div class="row visa_row_<?php echo ($i); ?>">
+																<div class="col-xs-6">
+																	<select class="form-control jenis_visa" id="jenis_visa_<?php echo ($i); ?>_<?php echo ($i); ?>" name="jenis_visa[<?php echo ($i); ?>][]" row-id="<?php echo ($i); ?>">
+																		<option value="0">Pilih...</option>
+																		<?php
+																			foreach($getJenisVisa as $keyJenisVisa => $valueJenisVisa): ?>
+																			<option value="<?php echo $valueJenisVisa->id; ?>"><?php echo $valueJenisVisa->jenis_visa; ?></option>
+																			
+																		<?php endforeach; ?>
+																	</select>
+																</div>
+																<div class="col-xs-6">
+																	<input class="form-control datepicker" group_input="input_1" name="tanggal_exp[<?php echo ($i); ?>][]" id="mtanggal_exp" placeholder="Expired Date" type="text" />
+																	<br/>
+																	<input name="visa_img[<?php echo ($i); ?>][]" type="file" accept="image/png, image/gif, image/jpeg"/>
+																</div>
+															</div>
+														<?php endif; ?>
+														<br/>
+														<!-- <label class="label-control">Accommodation</label> -->
+														<?php
+															$dtacc=array();
+															
+															foreach($dtaccommodation as $key3 => $value3){
+																$dtacc[$value3->itinerary_id][]=(object)array('id'=>$value3->id, 'name'=>$value3->name);
+																
+																$arrac[]=array('itinerary_id'=>$dtedit->tour_id,'id'=>$value3->id,'name'=>$value3->name);
+															}
+														?>
+														<input type="hidden" name="maccommodation" value="null">
+													</div>
+												</div>
+											</div>
+										<?php if(($i%2)!=0) echo '</div>';?>
+									<?php endfor; ?>
+								</div>
+								<!-- /.box-body -->
+							</div>
+						</div>
+					</div>			
+					<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<?php 
+										$arrac[]=array('itinerary_id'=>0,'id'=>0,'name'=>0); 
+										$arrvisa[]=array('id'=>0,'nama_pemilik'=>0,'jenis_visa'=>0,'price'=>0);
+									?>
+									<input type="hidden" value='<?php echo json_encode($arrac); ?>' id="jaccom_id"/>
+									<input type="hidden" value='<?php echo json_encode($arrvisa); ?>' id="jvisa_id"/>
+									<input type="submit" class="btn btn-primary pull-right" value="Update"/>
+								</div>
+							</div>
+					</div>
+				<?php echo form_close(); ?>
+			<?php elseif($act=="read"): ?>
+			
+				<div class="col-md-4">
+					<strong><i class="fa fa-hand-o-right margin-r-5"></i>Reservations</strong>
+
+					<p class="text-muted"><?php echo $dtread->reservations; ?></p>
+
+					<hr>
+
+					<strong><i class="fa fa-hand-o-right margin-r-5"></i>Full Name</strong>
+
+					<p class="text-muted"><?php echo $dtread->full_name; ?></p>
+
+					<hr>
+
+					<strong><i class="fa fa-hand-o-right margin-r-5"></i>Email</strong>
+
+					<p class="text-muted"><?php echo $dtread->email; ?></p>
+
+					<hr>
+
+					<strong><i class="fa fa-hand-o-right margin-r-5"></i>Phone</strong>
+
+					<p class="text-muted"><?php echo $dtread->phone; ?></p>
+
+					<hr>
+
+					<strong><i class="fa fa-hand-o-right margin-r-5"></i>Address</strong>
+
+					<p class="text-muted"><?php echo $dtread->address; ?></p>
+
+					<hr>
+
+					<strong><i class="fa fa-hand-o-right margin-r-5"></i>Country</strong>
+
+					<p class="text-muted"><?php echo $dtcountries->name; ?></p>
+
+					<hr>
+
+					<strong><i class="fa fa-hand-o-right margin-r-5"></i>City</strong>
+
+					<p class="text-muted"><?php echo isset($dtcities->name) ? $dtcities->name:'Not Set'; ?></p>
+
+					<hr>
+
+					<strong><i class="fa fa-hand-o-right margin-r-5"></i>Type Of Meal</strong>
+					<?php
+						$dttypeofmeal=array(1=>'Vegetarian',2=>'Standard',3=>'No Pork');
+					?>
+
+					<p class="text-muted"><?php echo (isset($dttypeofmeal[$dtread->type_of_meal])) ? $dttypeofmeal[$dtread->type_of_meal]:"Not Set"; ?></p>
+
+					<hr>
+
+					<strong><i class="fa fa-hand-o-right margin-r-5"></i>Num Of Members</strong>
+
+					<p class="text-muted"><?php echo $dtread->num_of_members." Members"; ?></p>
+
+					<hr>
+
+					<strong><i class="fa fa-hand-o-right margin-r-5"></i>Code Booking</strong>
+
+					<p class="text-muted"><?php echo $dtread->code_booking; ?></p>
+
+					<hr>
+					
+					<strong><i class="fa fa-hand-o-right margin-r-5"></i>Pay_status </strong>
+
+					<p class="text-muted"><?php echo $dtread->pay_status ; ?></p>
+
+					<hr>
+					
+					<strong><i class="fa fa-hand-o-right margin-r-5"></i>Status Deposit</strong>
+
+					<p class="text-muted"><?php echo $dtread->status_deposit; ?></p>
+
+					<hr>
+					
+					<strong><i class="fa fa-hand-o-right margin-r-5"></i>Remarks </strong>
+
+					<p class="text-muted"><?php echo $dtread->remarks ; ?></p>
+
+					<hr>
+				</div>
+				<div class="col-md-8">
+					<div class="box box-default">
+						<div class="box-header with-border">
+							<h3 class="box-title">Members</h3>
+
+							<div class="box-tools pull-right">
+								<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+								</button>
+							</div>
+						  <!-- /.box-tools -->
+						</div>
+						<!-- /.box-header -->
+						<div class="box-body">
+							<div class="nav-tabs-custom">
+								<ul class="nav nav-tabs">
+									<li class="active"><a href="#nota_1" data-toggle="tab" aria-expanded="false">Detail & Price</a></li>
+									<?php for($i=0;$i<count($dtmembers);$i++): ?>
+									<li><a href="#guest_<?php echo $i+1; ?>" data-toggle="tab" aria-expanded="false">Guest <?php echo $i+1; ?></a></li>
+									<?php endfor; ?>
+								</ul>
+								<div class="tab-content">
+									<div class="tab-pane active" id="nota_1">
+										<div class="row">
+											<div class="col-md-12">
+												<img src="<?php echo img_load($dttour->img); ?>" class="img-thumbnail" />
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12">
+												<label class="label-control">Title : <?php echo $dttour->title; ?></label>
+											</div>
+										</div>
+										<?php if($this->input->get('type') == 'domestik'):?>
+											<div class="row">
+												<div class="col-md-12">
+													<label class="label-control">
+														Periode : 
+														<?php if(date('F Y',strtotime($dttour->departure_date)) != date('F Y',strtotime($dttour->arrival_date))):?>
+																<?php echo date('F Y',strtotime($dttour->departure_date)); ?> <?php echo $dttour->arrival_date != null ? ' - ' . date('F Y',strtotime($dttour->arrival_date)) : ''; ?>
+														<?php else:?>
+															<?php echo date('F Y',strtotime($dttour->departure_date)); ?></h3>
+														<?php endif; ?>
+													</label>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<label class="label-control">Tgl. Keberangkatan : <?php echo date('j F Y',strtotime($dttour->selected_departure)); ?></label>
+												</div>
+											</div>
+										<?php else:?>
+											<div class="row">
+												<div class="col-md-12">
+													<label class="label-control">Departure : <?php echo date('j M Y',strtotime($dttour->departure_date)); ?></label>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<label class="label-control">Arrival : <?php echo date('j M Y',strtotime($dttour->arrival_date)); ?></label>
+												</div>
+											</div>
+										<?php endif;?>
+										<div class="row">
+											<div class="col-md-12">
+												<label class="label-control">Price : Rp. <?php echo number_format($dttour->price_ti,0,',','.'); $sprice +=$dttour->price_ti; ?></label>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12">
+												<fieldset>
+													<legend>Other Cost</legend>
+													<?php if($this->input->get('type') == 'domestik'):?>
+														<div class="row">
+															<div class="col-md-12">
+																<?php if(count($dtadditionals) > 0):?>
+																	<span>Additionals</span>
+																	<ol>
+																	<?php foreach($dtadditionals as $additional):?>
+																		<li><?=$additional->title;?> x <?=count($dtmembers);?> member : Rp. <?=number_format($additional->price * count($dtmembers),0,',','.');?></li>
+																	<?php endforeach;?>
+																	</ol>
+																<?php endif;?>
+															</div>
+														</div>
+													<?php else:?>
+													<div class="row">
+														<div class="col-sm-6">
+															<strong>Facilities Cost</strong>
+															<ul>
+															<?php
+																$tmp_price=0;
+																foreach($dttpf as $key => $value):?>
+																
+																<li><?php echo $value->name; ?> : 
+																<?php
+																	if(is_numeric($value->price)){
+																		echo "Rp. ".number_format($value->price,0,',','.');
+																		// $tmp_price +=$value->price;
+																	}else{
+																		echo $value->price;
+																	}
+																?></li>
+																
+															<?php endforeach;
+																// $sprice +=$tmp_price;
+															?>
+															</ul>
+														</div>
+														<div class="col-sm-6">
+															<strong>Costs</strong>
+															<ul>
+															<?php
+																$tmp_price=0;
+																$tmp_acc=0;
+																foreach($dtmembers as $key => $value): ?>
+																<li>Guest_<?php echo ($key+1); ?>
+																	<ul>
+																	
+																	<?php if($value->nama_paket_visa): ?>
+																		<li> Visa :
+																		<?php
+																		$vp=$dtvisas[$value->nama_paket_visa]->price_tp;
+																		$tmp_price +=$vp;
+																		echo "Rp. ".number_format($vp,0,',','.'); ?>
+																		</li>
+																	<?php endif; ?>
+																		<li>Accomodation : 
+																		<?php
+																			if(isset($value->accommodation)){
+																				
+																				$acc=isset($dtaccommodations[$value->accommodation]->price) ? $dtaccommodations[$value->accommodation]->price:0;
+																				
+																				$a=(is_numeric($acc)) ? $acc:0;
+																				$tmp_acc +=$a;
+																				echo "Rp. ".number_format($a,0,',','.');
+																			}
+																		?>
+																		</li>
+																	</ul>
+																</li>
+															<?php endforeach; 
+															$sprice += $tmp_acc; 
+															$ppn =$sprice+($sprice*(1/100)); 
+															?>
+															</ul>
+														</div>
+													</div>
+													<?php endif;?>
+													<h3>Total Price : Rp. <?php echo number_format($total_cost,0,',','.'); ?></h3>
+													<table class="table">
+														<tr>
+															<th>No</th><th>Nama Staff</th><th>Tanggal Modifikasi/Edit</th><th>Aktifitas</th>
+														</tr>
+														<?php
+														$no=1;
+														foreach($dttour_reservation_edit_history as $key => $value): ?>
+														<tr>
+															<td><?php echo $no++; ?></td>
+															<td><?php echo $value->UserName; ?></td>
+															<td><?php echo date('j M Y H:i:s',strtotime($value->tanggal)); ?></td>
+															<td><?php echo $value->remarks; ?></td>
+														</tr>
+														<?php  endforeach; ?>
+													</table>
+												</fieldset>
+											</div>
+										</div>
+									</div>
+									<?php foreach($dtmembers as $key => $value): ?>
+									<div class="tab-pane " id="guest_<?php echo $key+1; ?>">
+										<div class="row">
+											<div class="col-md-6">
+												<strong><i class="fa fa-hand-o-right margin-r-5"></i>Title</strong>
+
+												<p class="text-muted"><?php echo $value->mr_mrs; ?></p>
+
+												<hr>
+												
+												<strong><i class="fa fa-hand-o-right margin-r-5"></i>First Name</strong>
+
+												<p class="text-muted"><?php echo $value->first_name; ?></p>
+
+												<hr>
+
+												<strong><i class="fa fa-hand-o-right margin-r-5"></i>Last Name</strong>
+
+												<p class="text-muted"><?php echo $value->last_name; ?></p>
+
+												<hr>
+
+												<strong><i class="fa fa-hand-o-right margin-r-5"></i>Place Of Birth</strong>
+
+												<p class="text-muted"><?php echo $value->pob; ?></p>
+
+												<hr>
+												
+												<strong><i class="fa fa-hand-o-right margin-r-5"></i>Date Of Birth</strong>
+
+												<p class="text-muted"><?php echo date('j M Y',strtotime($value->dob)); ?></p>
+
+												<hr>
+
+											</div>
+											<?php if($this->input->get('type') != 'domestik'):?>
+											<div class="col-md-6">
+												<strong><i class="fa fa-hand-o-right margin-r-5"></i>Pasport Expired</strong>
+
+												<p class="text-muted"><?php echo (isset($value->pass_exp)) ? date('j M Y',strtotime($value->pass_exp)):""; ?></p>
+
+												<hr>
+
+												<strong><i class="fa fa-hand-o-right margin-r-5"></i>Pasport Issue</strong>
+
+												<p class="text-muted"><?php echo $value->pass_issue; ?></p>
+
+												<hr>
+
+												<strong><i class="fa fa-hand-o-right margin-r-5"></i>Pasport Number</strong>
+
+												<p class="text-muted"><?php echo $value->pass_num; ?></p>
+
+												<hr>
+												
+												<strong><i class="fa fa-hand-o-right margin-r-5"></i>Hobies</strong>
+
+												<p class="text-muted"><?php echo $value->hobies; ?></p>
+
+												<hr>
+												
+											</div>
+											<?php endif;?>
+										</div>
+										<div class="row">
+											<div class="col-md-12">
+												<strong><i class="fa fa-hand-o-right margin-r-5"></i>Accommodation</strong>
+
+												<p class="text-muted">
+												Name :
+												<?php echo (isset($dtaccommodations[$value->accommodation]->name)) ? $dtaccommodations[$value->accommodation]->name:"Not Set"; ?>
+												<br/>
+												Price : <?php 
+												$a=(isset($dtaccommodations[$value->accommodation]->price)) ? $dtaccommodations[$value->accommodation]->price:0;
+												
+												echo (is_numeric($a)) ? "Rp. ".number_format($a,0,',','.'):$a; ?>
+												</p>
+
+												<hr>
+											</div>
+										</div>
+										<?php 
+											$dtstatus=array(
+												1=>"Pending",
+												2=>"Cancel",
+												3=>"Finish",
+											);
+										if($value->nama_paket_visa): ?>
+										<div class="row">
+											<div class="col-md-12">
+										<strong><i class="fa fa-hand-o-right margin-r-5"></i>Visa</strong>
+										<p class="text-muted"><?php echo $value->visa; ?></p>
+										<table class="table table-hover">
+											<tr>
+												<th>Owner Name</th>
+												<th>Kind</th>
+												<th>Visa Number</th>
+												<th>Expired</th>
+												<th>Issue</th>
+												<th>Status</th>
+												<th>Price</th>
+												<th>Kind of Price</th>
+											</tr>
+											<tr>
+												<td><?php echo $dtvisas[$value->nama_paket_visa]->nama_pemilik; ?></td>
+												<td><?php echo $dtvisas[$value->nama_paket_visa]->jenis_visa; ?></td>
+												<td><?php echo $dtvisas[$value->nama_paket_visa]->nomor_visa; ?></td>
+												<td><?php echo date('j M Y',strtotime($dtvisas[$value->nama_paket_visa]->exp_visa)); ?></td>
+												<td><?php echo $dtvisas[$value->nama_paket_visa]->issue; ?></td>
+												<td><?php echo $dtstatus[$dtvisas[$value->nama_paket_visa]->status_visa]; ?></td>
+												<td><?php echo $dtvisas[$value->nama_paket_visa]->price_tp; ?></td>
+												<td><?php echo $dtvisas[$value->nama_paket_visa]->name_tk; ?></td>
+											</tr>
+										</table>
+										
+										<hr>
+											</div>
+										</div>
+										<?php endif; ?>
+											
+									</div>
+								  <?php endforeach; ?>
+								</div>
+								<!-- /.tab-content -->
+							</div>
+							<!--<?php foreach($dtmembers as $key => $value): ?>
+							  <table class="table table-hover">
+								<tr>
+									<th>First Name</th><td><?php echo $value->first_name; ?></td>
+								</tr>
+								<tr>
+									<th>Last Name</th><td><?php echo $value->last_name; ?></td>
+								</tr>
+								<tr>
+									<th>Date Of Birth</th><td><?php echo date('d F Y',strtotime($value->dob)); ?></td>
+								</tr>
+							  </table>
+							  <br/>
+							<?php endforeach; ?> -->
+						</div>
+						<!-- /.box-body -->
+					</div>
+					<!-- <div class="row">
+						<div class="col-md-12">
+								<div class="box box-warning box-solid">
+									<div class="box-header with-border">
+										<h3 class="box-title">Additonals</h3>
+
+											<div class="box-tools pull-right">
+											<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+											</button>
+											</div>
+										
+									</div>
+									
+									<div class="box-body">
+										
+									</div>
+								</div>
+						</div>
+					</div> -->
+				</div>
+			
+			<?php elseif($act=="list_booking"): ?>
+				<div class="row">
+					<div class="col-md-12">
+				<table class="table table-bordered datatable">
+					<thead>
+					<tr>
+						<th>#</th>
+						<th>Tour</th>
+						<th>Summary</th>
+						<th>Action</th>
+					</tr>
+					</thead>
+					<tbody>
+					<?php
+						$booked=array(); $deposit=array(); $full_pay=array(); $cancel=array(); $dtpay=array();
+						// $i_id=0;
+						foreach($dttour as $key => $value){
+							// if($i_id!=$value->id_ti) $booked=0; $deposit=0; $full_pay=0; $cancel=0;
+							// $i_id=$value->id_ti;
+							$booked[$value->id_ti][] = 0;
+							$deposit[$value->id_ti][] = 0;
+							$full_pay[$value->id_ti][] = 0;
+							$cancel[$value->id_ti][] = 0;
+							switch($value->pay_status){
+								case "booking":
+									$booked[$value->id_ti][] = $value->num;
+									break;
+								case "deposit":
+									$deposit[$value->id_ti][] = $value->num;
+									break;
+								case "full_payment":
+									$full_pay[$value->id_ti][] = $value->num;
+									break;
+								case "cancel":
+									$cancel[$value->id_ti][] = $value->num;
+									break;
+								default:
+									
+									break;
+							}
+							
+							$dtpay[$value->id_ti]=(object) array(
+								'img'=>$value->img,
+								'title'=>$value->title,
+								'capacity_ti'=>$value->capacity_ti,
+								'departure_date'=>$value->dd_ti,
+								'duration'=>$value->d_ti,
+								'arrival_date'=>$value->a_ti,
+							);
+						}
+					?>
+					<?php $no=1; foreach($dtpay as $k_pay => $v_pay): ?>
+						<?php
+							$n_booked=array_sum($booked[$k_pay]);
+							$n_deposit=array_sum($deposit[$k_pay]);
+							$n_full_pay=array_sum($full_pay[$k_pay]);
+							$n_cancel=array_sum($cancel[$k_pay]);
+						?>
+						<tr>
+							<td><?php echo $no++; ?></td>
+							<td>
+								<img src="<?php echo img_load($v_pay->img); ?>" width="100" height="50" />
+								<br/>
+								<span><?php echo $v_pay->title; ?></span>
+								<br/>
+								<span><?php echo date('j M Y',strtotime($v_pay->departure_date)); ?>-<?php echo date('j M Y',strtotime($v_pay->arrival_date)); ?> - <?php echo $v_pay->duration; ?> Days</span>
+							</td>
+							<td>Capacity : <?php echo $v_pay->capacity_ti; ?> Seats | Rest: <?php echo ($v_pay->capacity_ti-($n_full_pay+$n_deposit)); ?> Seats
+							<br/>Booked : <?php echo $n_booked; ?> Seats | Deposit : <?php echo $n_deposit; ?> Seats | Full Payment : <?php echo $n_full_pay; ?> Seats | Cancel : <?php echo $n_cancel; ?> Seats</td>
+							<td>
+								<!-- <button type="button" onclick="detailBook('<?php echo $k_pay; ?>')" class="btn btn-success" data-toggle="modal" data-target="#modal-members"><i class="fa fa-list"></i> Members</button> -->
+								<a href="<?php echo site_url('admin/tour_booking?act=detail_members&id='.$k_pay); ?>" class="btn btn-block btn-success"><i class="fa fa-list"></i> Members</a>
+								<a href="<?php echo site_url('admin/tour_booking?act=rooming&id='.$k_pay); ?>" class="btn btn-block btn-default"><i class="fa fa-bed"></i> Rooming</a>
+							</td>
+						</tr>
+					<?php endforeach; ?>
+					</tbody>
+					<tfoot>
+						<tr>
+						<th>#</th>
+						<th>Tour</th>
+						<th>Summary</th>
+						<th>Action</th>
+						</tr>
+					</tfoot>
+				</table>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="nav-tabs-custom">
+							<ul class="nav nav-tabs pull-right">
+								<li class="active"><a href="#booking_list_tour" data-toggle="tab">Booking List @Tour</a></li>
+								<li><a href="#booking_list" data-toggle="tab">Booking List</a></li>
+								<!-- <li><a href="#rooming_list" data-toggle="tab">Rooming List</a></li> -->
+								<li><a href="#passport" data-toggle="tab">Passport</a></li>
+								<li class="pull-left header"><i class="fa fa-th"></i> Export</li>
+							</ul>
+							<div class="tab-content">
+								<div class="tab-pane active" id="booking_list_tour">
+									<div class="box box-warning">
+										<div class="box-header with-border">
+											<i class="glyphicon glyphicon-equalizer"></i>
+
+											<h3 class="box-title">Export Data</h3>
+										</div>
+						
+										<div class="box-body">
+											<?php echo form_open('admin/tour_booking?act=export','',array('status'=>'booking_list_tour')); ?>
+												<div class="form-group">
+												<?php 
+												foreach($dtpay as $p_k => $p_val){
+													$pil_tour[$p_val->title]=$p_k;
+												} 
+												// var_dump($pil_tour);
+												?>
+													<label class="label-control" for="pilih_tour">Choose...</label>
+													<select name="i_id" class="form-control select2" id="pilih_tour_id">
+														<option value="pilih..." disabled>Pilih...</option>
+														<?php foreach($pil_tour as $t_key => $t_val): ?>
+															<option value="<?php echo $t_val; ?>"><?php echo $t_key; ?></option>
+														<?php endforeach; ?>
+													</select>
+												</div>
+												<div class="form-group">
+													<input type="text" class="form-control reservation" placeholder="Date" name="end_date" id="end_date_id"/>
+												</div>
+												<?php
+												$a=$this->session->USER_SESSION->FirstName." ".$this->session->USER_SESSION->LastName;
+												?>
+												<div class="form-group">
+													<input type="text" class="form-control" placeholder="Admin Name" name="admin_name" id="admin_name_id" value="<?php echo $a; ?>" readonly/>
+												</div>
+												<div class="form-group">
+													<input type="submit" class="btn btn-primary pull-right" value="Export"/>
+												</div>
+											<?php echo form_close(); ?>
+										</div>						
+									</div>
+								</div>
+						  <!-- /.tab-pane -->
+								<div class="tab-pane" id="booking_list">
+									<div class="box box-warning">
+										<div class="box-header with-border">
+											<i class="glyphicon glyphicon-equalizer"></i>
+
+											<h3 class="box-title">Export Data</h3>
+										</div>
+						
+										<div class="box-body">
+											<?php echo form_open('admin/tour_booking?act=export','',array('status'=>'booking_list')); ?>
+												<div class="form-group">
+													<input type="text" class="form-control reservation" placeholder="Date" name="end_date" id="end_date_id"/>
+												</div>
+												<?php
+												$a=$this->session->USER_SESSION->FirstName." ".$this->session->USER_SESSION->LastName;
+												?>
+												<div class="form-group">
+													<input type="text" class="form-control" placeholder="Admin Name" name="admin_name" id="admin_name_id" value="<?php echo $a; ?>" readonly/>
+												</div>
+												<div class="form-group">
+													<input type="submit" class="btn btn-primary pull-right" value="Export"/>
+												</div>
+											<?php echo form_close(); ?>
+										</div>						
+									</div>
+								</div>
+						  <!-- /.tab-pane -->
+								<div class="tab-pane" id="rooming_list">
+									<div class="box box-warning">
+										<div class="box-header with-border">
+											<i class="glyphicon glyphicon-equalizer"></i>
+
+											<h3 class="box-title">Export Data</h3>
+										</div>
+						
+										<div class="box-body">
+											<?php echo form_open('admin/tour_booking?act=export','',array('status'=>'rooming_list')); ?>
+												<div class="form-group">
+													<input type="text" class="form-control reservation" placeholder="Date" name="end_date" id="end_date_id"/>
+												</div>
+												<?php
+												$a=$this->session->USER_SESSION->FirstName." ".$this->session->USER_SESSION->LastName;
+												?>
+												<div class="form-group">
+													<input type="text" class="form-control" placeholder="Admin Name" name="admin_name" id="admin_name_id" value="<?php echo $a; ?>" readonly/>
+												</div>
+												<div class="form-group">
+													<input type="submit" class="btn btn-primary pull-right" value="Export"/>
+												</div>
+											<?php echo form_close(); ?>
+										</div>						
+									</div>
+								</div>
+						  <!-- /.tab-pane -->
+								<div class="tab-pane" id="passport">
+									<div class="box box-warning">
+										<div class="box-header with-border">
+											<i class="glyphicon glyphicon-equalizer"></i>
+
+											<h3 class="box-title">Export Data</h3>
+										</div>
+						
+										<div class="box-body">
+											<?php echo form_open('admin/tour_booking?act=export','',array('status'=>'passport')); ?>
+												<div class="form-group">
+													<input type="text" class="form-control reservation" placeholder="Date" name="end_date" id="end_date_id"/>
+												</div>
+												<?php
+												$a=$this->session->USER_SESSION->FirstName." ".$this->session->USER_SESSION->LastName;
+												?>
+												<div class="form-group">
+													<input type="text" class="form-control" placeholder="Admin Name" name="admin_name" id="admin_name_id" value="<?php echo $a; ?>" readonly/>
+												</div>
+												<div class="form-group">
+													<input type="submit" class="btn btn-primary pull-right" value="Export"/>
+												</div>
+											<?php echo form_close(); ?>
+										</div>						
+									</div>
+								</div>
+							</div>
+						<!-- /.tab-content -->
+						</div>
+						<!--<div class="box box-warning">
+						<div class="box-header with-border">
+							<i class="glyphicon glyphicon-equalizer"></i>
+
+							<h3 class="box-title">Export Data</h3>
+						</div>
+						
+						<div class="box-body">
+							<?php echo form_open('admin/tour_booking?act=export'); ?>
+								<div class="form-group">
+									<input type="text" class="form-control reservation" placeholder="Date" name="end_date" id="end_date_id"/>
+								</div>
+								<?php
+								$a=$this->session->USER_SESSION->FirstName." ".$this->session->USER_SESSION->LastName;
+								?>
+								<div class="form-group">
+									<input type="text" class="form-control" placeholder="Admin Name" name="admin_name" id="admin_name_id" value="<?php echo $a; ?>" readonly/>
+								</div>
+								<div class="form-group">
+									<label class="label-control" for="status_payment">Choose...</label>
+									<select name="status" class="form-control select2" id="status_id">
+										<option value="pilih..." disabled>Pilih...</option>
+										<option value="booking_list">Booking List(CSV)</option>
+										<option value="booking_list_tour">Booking List @Tour(CSV)</option>
+										<option value="rooming_list">Rooming List(CSV)</option>
+										<option value="passport">Passport(CSV)</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<input type="submit" class="btn btn-primary pull-right" value="Export"/>
+								</div>
+							<?php echo form_close(); ?>
+						</div>
+						
+						</div>-->
+					</div>
+				</div>
+				<?php elseif($act=="list_booking_pax"): ?>
+						<div class="modal fade" id="modal-members">
+						  <div class="modal-dialog">
+							<div class="modal-content">
+							  <div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								  <span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title">Members</h4>
+							  </div>
+							  <div class="modal-body">
+								<div id="isi_members-id"></div>
+							  </div>
+							  <div class="modal-footer">
+								<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+								<!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+							  </div>
+							</div>
+							<!-- /.modal-content -->
+						  </div>
+						  <!-- /.modal-dialog -->
+						</div>
+				<div class="row">
+					<div class="col-md-12">
+				<table class="table table-bordered datatable">
+					<thead>
+					<tr>
+						<th>#</th>
+						<th>Tour</th>
+						<th>Summary</th>
+						<th>Action</th>
+					</tr>
+					</thead>
+					<tbody>
+					<?php
+						$booked=array(); $deposit=array(); $full_pay=array(); $cancel=array(); $dtpay=array();
+						// $i_id=0;
+						foreach($dttour as $key => $value){
+							// if($i_id!=$value->id_ti) $booked=0; $deposit=0; $full_pay=0; $cancel=0;
+							// $i_id=$value->id_ti;
+							$booked[$value->id_ti][] = 0;
+							$deposit[$value->id_ti][] = 0;
+							$full_pay[$value->id_ti][] = 0;
+							$cancel[$value->id_ti][] = 0;
+							switch($value->pay_status){
+								case "booking":
+									$booked[$value->id_ti][] = $value->num;
+									break;
+								case "deposit":
+									$deposit[$value->id_ti][] = $value->num;
+									break;
+								case "full_payment":
+									$full_pay[$value->id_ti][] = $value->num;
+									break;
+								case "cancel":
+									$cancel[$value->id_ti][] = $value->num;
+									break;
+								default:
+									
+									break;
+							}
+							
+							$dtpay[$value->id_ti]=(object) array(
+								'img'=>$value->img,
+								'title'=>$value->title,
+								'capacity_ti'=>$value->capacity_ti,
+								'departure_date'=>$value->dd_ti,
+								'duration'=>$value->d_ti,
+								'arrival_date'=>$value->a_ti,
+							);
+						}
+					?>
+					<?php $no=1; foreach($dtpay as $k_pay => $v_pay): ?>
+						<?php
+							$n_booked=array_sum($booked[$k_pay]);
+							$n_deposit=array_sum($deposit[$k_pay]);
+							$n_full_pay=array_sum($full_pay[$k_pay]);
+							$n_cancel=array_sum($cancel[$k_pay]);
+						?>
+						<tr>
+							<td><?php echo $no++; ?></td>
+							<td>
+								<img src="<?php echo img_load($v_pay->img); ?>" width="100" height="50" />
+								<br/>
+								<span><?php echo $v_pay->title; ?></span>
+								<br/>
+								<span><?php echo date('j M Y',strtotime($v_pay->departure_date)); ?>-<?php echo date('j M Y',strtotime($v_pay->arrival_date)); ?> - <?php echo $v_pay->duration; ?> Days</span>
+							</td>
+							<td>Capacity : <?php echo $v_pay->capacity_ti; ?> Seats | Rest: <?php echo ($v_pay->capacity_ti-($n_full_pay+$n_deposit)); ?> Seats
+							<br/>Booked : <?php echo $n_booked; ?> Seats | Deposit : <?php echo $n_deposit; ?> Seats | Full Payment : <?php echo $n_full_pay; ?> Seats | Cancel : <?php echo $n_cancel; ?> Seats</td>
+							<td>
+								<!-- <button type="button" onclick="detailBook('<?php echo $k_pay; ?>')" class="btn btn-success" data-toggle="modal" data-target="#modal-members"><i class="fa fa-list"></i> Members</button> -->
+								<a href="<?php echo site_url('admin/tour_booking?act=detail_members&id='.$k_pay); ?>" class="btn btn-success"><i class="fa fa-list"></i> Members</a>
+							</td>
+						</tr>
+					<?php endforeach; ?>
+					</tbody>
+					<tfoot>
+						<tr>
+						<th>#</th>
+						<th>Tour</th>
+						<th>Summary</th>
+						<th>Action</th>
+						</tr>
+					</tfoot>
+				</table>
+					</div>
+				</div>
+			<?php elseif($act=="detail_members"): ?>
+				<table class="table">
+					<tr>
+						<th>No.</th>
+						<th>Title</th>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Status Booking</th>
+						<th>Total Members</th>
+						<th>Booking Date</th>
+						<th>Action</th>
+					</tr>
+					<?php
+					$no=1;
+					foreach($dtmembers as $key => $value): ?>
+						<tr>
+							<td><?php echo $no++; ?></td>
+							<td><?php echo $mr_mrs[$value->reservations]; ?></td>
+							<td><?php echo $value->full_name; ?></td>
+							<td><?php echo $value->email; ?></td>
+							<td><?php echo $value->pay_status; ?></td>
+							<td><?php echo $value->num_of_members; ?></td>
+							<td><?php echo date('j M Y H:i:s',strtotime($value->time_update)); ?></td>
+							<td><a href="<?php echo site_url('admin/tour_booking?act=edit&id='.$value->id); ?>">Edit</a> | <a href="#" onclick="getTourMembers(<?php echo $value->id; ?>)">-/+</a></td>
+						</tr>
+						<tr>
+							<td colspan="7" id="reservation_<?php echo $value->id; ?>"></td>
+						</tr>
+					<?php endforeach; ?>
+				</table>
+				<?php elseif($act=="rooming"): ?>
+					<div class="row">
+								<div class="col-md-12">
+									<img src="<?php echo img_load($dttour->img); ?>" class="img-thumbnail" />
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<a href="#" class="btn btn-success pull-right" data-toggle="modal" data-target="#modal-rooming">Insert Members</a>
+								</div>
+							</div>
+					<div class="modal fade" id="modal-rooming">
+						  <div class="modal-dialog">
+							<div class="modal-content">
+							  <div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								  <span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title">Room Form</h4>
+							  </div>
+							  <div class="modal-body">
+								<?php 
+								$hidden=array(
+									'tour_id'=>$id
+								);
+								echo form_open('admin/tour_booking?act=addData_rooming','id="tour_booking_room_id"',$hidden); ?>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<?php echo form_label('Room Number', 'room_num');
+											echo form_input(array(
+												'type'=>'number',
+												'name'=>'room_number',
+												'class'=>'form-control',
+												'id'=>'room_num',
+												'value'=>0,
+												'placeholder'=>'Room Number'
+												)
+											);
+											?>
+										</div>
+									</div>
+								</div>
+								<div class="row">	
+									<div class="col-md-6">
+										<div class="form-group">
+											<?php echo form_label('Room Type', 'room_type');
+											// $arr_room_type=array('Single','Twin','Double');
+											// $arr_room_type[0]="Pilih...";
+											foreach($dtroomtype as $key => $value){
+												$arr_room_type[$value->id]=$value->name;
+											}
+											echo form_dropdown('id_room_type', $arr_room_type,'', 'class="form-control" id="room_type"');
+											?>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<?php echo form_label('Extra Bed', 'extra_bed');
+											$arr_extra_bed=array('yes'=>'Yes','no'=>'No');
+											echo form_dropdown('extra_bed', $arr_extra_bed,array('no'), 'class="form-control" id="extra_bed"');
+											?>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<?php echo form_label('Contact', 'contact');
+											echo form_input(array(
+												'type'=>'text',
+												'name'=>'contact',
+												'class'=>'form-control',
+												'id'=>'contact',
+												'placeholder'=>'Contact'
+												)
+											);
+											?>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<?php echo form_label('Remarks', 'remarks');
+											echo form_input(array(
+												'type'=>'text',
+												'name'=>'remarks',
+												'class'=>'form-control',
+												'id'=>'remarks',
+												'placeholder'=>'Remarks'
+												)
+											);
+											?>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<?php echo form_label('Members', 'members');
+											$arr_room_members=array();
+											foreach($dtmembers as $key => $value){
+												$arr_room_members[$value->id_member]=$value->first_name.' '.$value->last_name;
+											}
+											echo form_dropdown('room_members[]', $arr_room_members,'', 'class="form-control select2" multiple="multiple" id="room_type1" style="width: 100%;"');
+											?>
+										</div>
+									</div>
+								</div>
+								<?php echo form_close(); ?>
+							  </div>
+							  <div class="modal-footer">
+								<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+								<button type="submit" form="tour_booking_room_id" class="btn btn-primary">Save</button>
+							  </div>
+							</div>
+							<!-- /.modal-content -->
+						  </div>
+						  <!-- /.modal-dialog -->
+						</div>
+				<?php elseif($act == "edit_rooming"): ?>
+					<?php 
+								$hidden=array(
+									'tour_id'=>$id,
+									'id'=>$dtroom->id,
+								);
+								echo form_open('admin/tour_booking?act=editData_rooming','id="tour_booking_room_id"',$hidden); ?>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<?php echo form_label('Room Number', 'room_num');
+											echo form_input(array(
+												'type'=>'number',
+												'name'=>'room_number',
+												'class'=>'form-control',
+												'id'=>'room_num',
+												'value'=>$dtroom->room_number,
+												'placeholder'=>'Room Number'
+												)
+											);
+											?>
+										</div>
+									</div>
+								</div>
+								<div class="row">	
+									<div class="col-md-6">
+										<div class="form-group">
+											<?php echo form_label('Room Type', 'room_type');
+											// $arr_room_type=array('Single','Twin','Double');
+											// $arr_room_type[0]="Pilih...";
+											foreach($dtroomtype as $key => $value){
+												$arr_room_type[$value->id]=$value->name;
+											}
+											echo form_dropdown('id_room_type', $arr_room_type,array($dtroom->id_room_type), 'class="form-control" id="room_type"');
+											?>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<?php echo form_label('Extra Bed', 'extra_bed');
+											$arr_extra_bed=array('yes'=>'Yes','no'=>'No');
+											echo form_dropdown('extra_bed', $arr_extra_bed,array($dtroom->extra_bed), 'class="form-control" id="extra_bed"');
+											?>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<?php echo form_label('Contact', 'contact');
+											echo form_input(array(
+												'type'=>'text',
+												'name'=>'contact',
+												'class'=>'form-control',
+												'id'=>'contact',
+												'value'=>$dtroom->contact,
+												'placeholder'=>'Contact'
+												)
+											);
+											?>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<?php echo form_label('Remarks', 'remarks');
+											echo form_input(array(
+												'type'=>'text',
+												'name'=>'remarks',
+												'class'=>'form-control',
+												'id'=>'remarks',
+												'value'=>$dtroom->remarks,
+												'placeholder'=>'Remarks'
+												)
+											);
+											?>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<?php echo form_label('Members', 'members');
+											// $arr_room_type=array('Single','Twin','Double');
+											foreach($dtmembers as $key => $value){
+												$arr_room_members[$value->id_member]=$value->first_name.' '.$value->last_name;
+											}
+											echo form_dropdown('room_members[]', $arr_room_members,$dtroommembers, 'class="form-control select2" multiple="multiple" id="room_type1" style="width: 100%;"');
+											?>
+										</div>
+									</div>
+								</div>
+								<?php echo form_close(); ?>
+				</div>
+				<!-- /.box-body penting biar bisa pakai footer box-->
+				<div class="box-footer">
+					<a class="btn btn-default pull-left" href="<?php echo site_url('admin/tour_booking?act=rooming&id='.$id); ?>">Back</a>
+					<button type="submit" form="tour_booking_room_id" class="btn btn-primary pull-right">Save</button>
+				</div>
+				<!-- /.box-footer-->
+				<?php elseif($act == "domestik"): ?>
+				<?php
+				$sess=$this->session->USER_SESSION;
+				$tmp_table=array(
+                        'table_open' => '<table width="100%" class="table table-bordered datatable">',
+                        'thead_open' => '<thead>',
+                        'thead_close' => '</thead>',
+                        'table_close' => '</table>'
+                );
+				$action="";
+				$no=1;
+				$p="";
+				$username="";
+				$this->table->set_template($tmp_table);$this->table->set_heading('#','Tour','Full Name','Email','Phone','Num Of Members','Staff','Status Payment','Date Booking',$action);
+					foreach ($data as $key => $value) {
+						$dtmembers1 = $this->M_general->getDataWhere('reservation_tour_members',array('code_booking'=>$value->code_booking),'',array('code_booking','DESC'));
+						$link = anchor('admin/tour_booking?type=domestik&act=read&id='.$value->id,'<i class="fa fa-eye"></i>','class="btn btn-primary"');
+                        $link .= anchor('admin/tour_booking?type=domestik&act=edit&id='.$value->id,' <i class="fa fa-pencil"></i> ','class="btn btn-warning"');
+						if($sess->UserGroupName=="Administrator"){
+                        $link .= anchor('admin/tour_booking?act=del&id='.$value->id,'<i class="fa fa-trash">','class="btn btn-danger" onclick="return confirm(\'Anda yakin..?\')"');
+						}
+						if($value->pay_status=="booking"){
+							$p="<span class='label label-info'>Booking</span>";
+						}else if($value->pay_status=="deposit"){
+							$p="<span class='label label-warning'>Deposit</span>";
+						}else if($value->pay_status=="full_payment"){
+							$p="<span class='label label-success'>Full Payment</span>";
+						}else if($value->pay_status=="cancel"){
+							$p="<span class='label label-danger'>Cancel</span>";
+						}else{
+							$p="<span class='label label-default'>Pending</span>";
+						}
+						
+						$tmp_username_1=explode("#",$value->username);
+						$tmp_username_2=end($tmp_username_1);
+						$tmp_username=explode("|",$tmp_username_2);
+						if($tmp_username[0]=='admin'){
+							$username=(isset($tmp_username[1])) ? $tmp_username[1]:$tmp_username[0];
+							$lastedited=$username." ".date('j M Y h:i:s',strtotime($value->time_update));
+						}else{
+							$username="";
+						}
+						$hover_tour_title = '<a href="#" title="'.$value->tour_title.' , '.$value->departure.'">'.mywordwrap($value->tour_title).'</a>';
+						$this->table->add_row($no++,$hover_tour_title,$value->full_name,$value->email,$value->phone,(count($dtmembers1)< 1) ? 0:count($dtmembers1),$username,$p,date('j M Y h:i A',strtotime($value->time_update)),'<div class="btn-group">'.$link.'</div>');
+					}
+				echo $this->table->generate();
+				?>
+				
+			<?php else: ?>
+				<?php
+				$sess=$this->session->USER_SESSION;
+				$tmp_table=array(
+                        'table_open' => '<table width="100%" class="table table-bordered datatable">',
+                        'thead_open' => '<thead>',
+                        'thead_close' => '</thead>',
+                        'table_close' => '</table>'
+                );
+				$action="<a href='".site_url('admin/tour_booking?act=add')."' class='btn btn-info'><i class='fa fa-plus'></i> Add Data</a>";
+				$no=1;
+				$p="";
+				$username="";
+				$this->table->set_template($tmp_table);$this->table->set_heading('#','Tour','Full Name','Email','Phone','Num Of Members','Staff','Status Payment','Date Booking',$action);
+					foreach ($data as $key => $value) {
+						// $dtmembers1 = $this->M_general->getDataWhere('reservation_tour_members',array('code_booking'=>$value->code_booking),'',array('code_booking','DESC'));
+						$link = anchor('admin/tour_booking?act=read&id='.$value->id,'<i class="fa fa-eye"></i>','class="btn btn-primary"');
+                        $link .= anchor('admin/tour_booking?act=edit&id='.$value->id,' <i class="fa fa-pencil"></i> ','class="btn btn-warning"');
+						if($sess->UserGroupName=="Administrator"){
+                        $link .= anchor('admin/tour_booking?act=del&id='.$value->id,'<i class="fa fa-trash">','class="btn btn-danger" onclick="return confirm(\'Anda yakin..?\')"');
+						}
+						if($value->pay_status=="booking"){
+							$p="<span class='label label-info'>Booking</span>";
+						}else if($value->pay_status=="deposit"){
+							$p="<span class='label label-warning'>Deposit</span>";
+						}else if($value->pay_status=="full_payment"){
+							$p="<span class='label label-success'>Full Payment</span>";
+						}else if($value->pay_status=="cancel"){
+							$p="<span class='label label-danger'>Cancel</span>";
+						}else{
+							$p="<span class='label label-default'>Pending</span>";
+						}
+						
+						$tmp_username_1=explode("#",$value->username);
+						$tmp_username_2=end($tmp_username_1);
+						$tmp_username=explode("|",$tmp_username_2);
+						if($tmp_username[0]=='admin'){
+							$username=(isset($tmp_username[1])) ? $tmp_username[1]:$tmp_username[0];
+							$lastedited=$username." ".date('j M Y h:i:s',strtotime($value->time_update));
+						}else{
+							$username="";
+						}
+						$hover_tour_title = '<a href="#" title="'.$value->tour_title.' , '.$value->departure.'">'.mywordwrap($value->tour_title).'</a>';
+						// $this->table->add_row($no++,$hover_tour_title,$value->full_name,$value->email,$value->phone,(count($dtmembers1)< 1) ? 0:count($dtmembers1),$username,$p,date('j M Y h:i A',strtotime($value->time_update)),'<div class="btn-group">'.$link.'</div>');
+						$this->table->add_row($no++,$hover_tour_title,$value->full_name,$value->email,$value->phone,$value->num_of_members,$username,$p,date('j M Y h:i A',strtotime($value->time_update)),'<div class="btn-group">'.$link.'</div>');
+					}
+				echo $this->table->generate();
+				?>
+				
+			<?php endif; ?>
+			</div>
+		</div>
+        <!-- /.box-body -->
+		<!-- <div class="box-footer">
+		Footer
+		</div> -->
+        <!-- /.box-footer-->
+	</div>
+      <!-- /.box -->
+	<?php if($act=="rooming"): ?>
+		<?php foreach($dtroommembers['utama'] as $key => $value): ?>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="info-box bg-aqua">
+					<!-- <span class="info-box-icon"><i class="fa fa-bookmark-o"></i></span> -->
+					<span class="info-box-icon"><?php echo $value->room_number; ?></span>
+
+					<div class="info-box-content">
+					  <span class="info-box-text">Room Type : <strong><?php echo $value->name; ?></strong></span>
+					  <span class="info-box-text">Extra Bed : <strong><?php echo $value->extra_bed; ?></strong></span>
+					  <span class="info-box-text">Contact : <strong><?php echo $value->contact; ?></strong></span>
+					  <span class="info-box-text">Remarks : <strong><?php echo $value->remarks; ?></strong></span>
+					  
+					  <div class="progress">
+						<div class="progress-bar" style="width: 100%"></div>
+					  </div>
+						  <span class="progress-description">
+							<a href="<?php echo site_url('admin/tour_booking?act=edit_rooming&id_room='.$value->id.'&id='.$id); ?>" class="btn btn-warning btn-xs">Edit</a> <a href="<?php echo site_url('admin/tour_booking?act=del_rooming&id_room='.$value->id.'&id='.$id); ?>" class="btn btn-danger btn-xs">Delete</a> | <?php $tem_1=array();
+							foreach($dtroommembers['member'][$value->id] as $key_1 => $value_1): ?>
+								<?php $tem_1[]=$value_1->first_name.' '.$value_1->last_name; ?>
+							<?php endforeach; ?>
+							<?php echo implode(', ',$tem_1); ?>
+						  </span>
+					</div>
+					<!-- /.info-box-content -->
+				</div>
+				<!-- /.info-box -->
+			</div>
+		</div>
+		<?php endforeach; ?>
+	<?php endif; ?>
+</section>
