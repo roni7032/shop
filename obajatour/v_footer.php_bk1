@@ -1,0 +1,2336 @@
+<script src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js'></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+	//--- redeem point
+
+	function addCommas(nStr){
+	    nStr += '';
+	    x = nStr.split('.');
+	    x1 = x[0];
+	    x2 = x.length > 1 ? '.' + x[1] : '';
+	    var rgx = /(\d+)(\d{3})/;
+	    while (rgx.test(x1)) {
+	        x1 = x1.replace(rgx, '$1' + '.' + '$2');
+	    }
+	    return x1 + x2;
+	}
+
+	$(".redeem").on("change", function(e) {
+		var thisval = $(".redeem").val();
+		var emailPre = thisval.split("$").pop();
+		var email = emailPre.substr(0, emailPre.indexOf('&'));
+		var name = thisval.substr(0, thisval.indexOf('#'));
+		var idUser = thisval.split("&").pop();
+		$(".r-name").html(name);
+		$(".r-email").html(email);
+		$(".r-user").val(idUser);
+	});
+
+  	$(".freetext").keyup(function(){
+    	$(".freetextres").html($(".freetext").val());
+	});
+
+  	$(".points").keyup(function(){
+		var point = $(".points").val();
+		var redeem = $(".masterredeem").val();
+		var convert = 0;
+		if (point > 0) {
+			convert = addCommas(point * redeem);
+		}
+		$(".r-convert").html('Rp '+convert);
+		$(".r-point").html(point+' Points');
+	});
+
+	var element = $("#html-content-holder");
+	var getCanvas;
+
+	$("#btn-Preview-Image").on('click', function () {
+	  	html2canvas(element, {
+	  		onrendered: function (canvas) {
+	  			$("#previewImage").html(canvas);
+	  			getCanvas = canvas;
+	  		}
+	  	});
+	  	$("#btn-Convert-Html2Image").removeAttr('download');
+	  	$("#btn-Convert-Html2Image").attr("href", "#");
+	});
+
+	$("#btn-Convert-Html2Image").on('click', function () {
+	    if (confirm('Sistem akan melakukan pemotongan poin, apakah Anda yakin?')) {
+	    	var users = $('.r-user').val();
+	    	var title = $('.freetext').val();
+	    	var point = $(".points").val();
+	    	if (users != 0) {
+				var imgageData = getCanvas.toDataURL("image/png");
+		        $.post("<?= site_url('admin/redeemajax'); ?>", {
+		          user: users,
+		          redeem: title,
+		          point: point,
+		          img: imgageData
+		        },
+		        function(data, status){
+		        	if (data == 'true') {
+		        		location.reload();
+		        	} else {
+		        		alert('Redeem gagal, pilih user dengan point mencukupi.');
+	    				$('#modal-reedem').modal('toggle');
+		        	}
+		        });
+		    	//---
+	    	} else {
+	    		alert('Mohon pilih user terlebih dahulu.');
+	    		$('#modal-reedem').modal('toggle');
+	    	}
+	    } else {
+	      $('#modal-reedem').modal('toggle');
+	    }
+	});
+
+	//--- end redeem point
+
+	var table = $(".datatable").DataTable();
+   $('.handleCheckbox').on('submit', function(e){
+      var form = this;
+      table.$('input[type="checkbox"]').each(function(){
+         if(!$.contains(document, this)){
+            if(this.checked){
+              $(form).append($('<input>').attr('type', 'hidden').attr('name', this.name).val(this.value));
+            }
+         } 
+      });
+   });
+
+   $('.handleCheckbox2').on('submit', function(e){
+      var form = this;
+      table.$('input[type="checkbox"]').each(function(){
+         if(!$.contains(document, this)){
+            if(this.checked){
+              $(form).append($('<input>').attr('type', 'hidden').attr('name', this.name).val(this.value));
+            }
+         } 
+      });
+   });
+
+    $(".checkemail").on("keyup change", function(e) {
+        var testEmail = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
+		if (testEmail.test($(this).val())) {
+        $.post("<?= site_url('admin/checkemail'); ?>", {
+          email: $(this).val()
+        },
+        function(data, status){
+          if (data == 'exist') {
+            $('.warning-email').html('<span style="color:orangered; padding-left:10px;">This email has been registered, please use another email</span>');
+          } else {
+            $('.warning-email').html('<span style="color:green; padding-left:10px;">available</span>');
+          }
+    	});
+    	}
+    });
+
+	// bookerNotBlank()
+	$(".select2").select2({
+		placeholder: 'Pilih Data ..'
+	});
+	
+	$("#fileuploader").uploadFile({
+		url: "<?php echo site_url('images'); ?>",
+		multiple:false,
+		dragDrop:true,
+		fileName:"myfile",
+		acceptFiles:"image/*",
+		showPreview:true,
+		maxFileSize:3000,
+		previewHeight: "100px",
+		previewWidth: "100px",
+		onSuccess:function(){
+			location.reload();
+		}
+	});
+	$("#filebanner").uploadFile({
+		url: "<?php echo site_url('images/banner'); ?>",
+		multiple:false,
+		dragDrop:true,
+		fileName:"myfile",
+		acceptFiles:"image/*",
+		showPreview:true,
+		maxFileSize:3000000,
+		previewHeight: "100px",
+		previewWidth: "100px",
+		onSuccess:function(){
+			location.reload();
+		}
+	});
+	var count=0;
+	$("#listimageid").uploadFile({
+		url: "<?php echo site_url('images/listimg'); ?>",
+		multiple:false,
+		dragDrop:true,
+		fileName:"myfile",
+		acceptFiles:"image/*",
+		showPreview:true,
+		maxFileSize:1000000,
+		// showDone: true,
+		customProgressBar: function(obj,s){
+			this.statusbar = $("<div class='ajax-file-upload-statusbar'></div>");
+			this.preview = $("<img class='ajax-file-upload-preview'/>").width(s.previewWidth).height(s.previewHeight).appendTo(this.statusbar).hide();
+			this.filename = $("<div class='ajax-file-upload-filename'></div>").appendTo(this.statusbar).hide();
+			this.progressDiv = $("<div class='ajax-file-upload-progress' style='width:100%;'>").appendTo(this.statusbar).hide();
+			this.progressbar = $("<div class='ajax-file-upload-bar'></div>").appendTo(this.progressDiv);
+			this.abort = $("<div>" + s.abortStr + "</div>").appendTo(this.statusbar).hide();
+			this.cancel = $("<div>" + s.cancelStr + "</div>").appendTo(this.statusbar).hide();
+			this.done = $("<div>" + s.doneStr + "</div>").appendTo(this.statusbar).hide();
+			this.download = $("<div>" + s.downloadStr + "</div>").appendTo(this.statusbar).hide();
+			this.del = $("<div>" + s.deleteStr + "</div>").appendTo(this.statusbar).hide();
+			this.abort.addClass("ajax-file-upload-red");
+			this.done.addClass("ajax-file-upload-green");
+			this.download.addClass("ajax-file-upload-green");            
+			this.cancel.addClass("ajax-file-upload-red");
+			this.del.addClass("ajax-file-upload-red");
+			if(count++ %2 ==0)
+				this.statusbar.addClass("even");
+			else
+				this.statusbar.addClass("odd"); 
+			return this;
+		},
+		// showDelete:true,
+		// showProgress: true,
+		returnType:"json",
+		/*previewHeight: "100px",
+		previewWidth: "100px",*/
+		onSuccess:function(files,data,xhr){
+			console.log(data);
+			if(data != null)
+				$('#list_img').val(data.id);
+			return this;
+		}
+	});
+
+	$('.datepicker').click(function(){
+		$(this).datepicker('setDate', $(this).attr("data-date"));
+	});
+	
+	$('input[name="dob"]').datepicker({
+		'format': 'dd M yyyy',
+		'autoclose': true,
+		'todayHighlight': true,
+		'endDate': new Date
+	});
+	
+	$('.mdob').datepicker({
+		'format': 'dd M yyyy',
+		'autoclose': true,
+		'todayHighlight': true,
+		'endDate': new Date
+	});
+	
+	let exp_pass_end=new Date()
+	exp_pass_end.setMonth(exp_pass_end.getMonth()+7)
+	$('.exp_pass').datepicker({
+		'format': 'dd M yyyy',
+		'autoclose': true,
+		'startDate': exp_pass_end
+	});
+	
+	$('.datepicker').datepicker({
+		'format': 'dd M yyyy',
+		'autoclose': true,
+		'todayHighlight': true
+	});
+
+	$('.datepicker-month').datepicker({
+		'format': 'M yyyy',
+		"viewMode": "months", 
+		"minViewMode": "months",
+		'autoclose': true,
+		'todayHighlight': true
+	});
+	$('.reservation').daterangepicker({
+		locale:{
+			format: "D MMM YYYY"
+		}
+	});
+	
+	$('.textarea').wysihtml5();
+	if ($('#itinerary').length > 0) {
+		CKEDITOR.replace('itinerary');
+	}
+	
+	$(".member_booker_0").keyup(function(e){
+		let status=$('#set_booker_add_guest_id').attr('elstat')
+		if(status==='on'){
+			let booker=$(".booker");
+			let member_booker=$(".member_booker_0")
+			for(let i=0;i<4;i++){
+				booker.eq(i).val(member_booker.eq(i).val())
+			}
+			booker.eq(4).datepicker('setDate', member_booker.eq(2).val())
+			booker.eq(2).val(member_booker.eq(4).val())
+		}
+	})
+	
+	$(".booker").keyup(function(e){
+		let status=$('#set_booker_add_guest_id').attr('elstat')
+		if(status==='on'){
+			let booker=$(".booker");
+			let member_booker=$(".member_booker_0")
+			for(let i=0;i<4;i++){
+				member_booker.eq(i).val(booker.eq(i).val())
+			}
+			member_booker.eq(2).datepicker('setDate', booker.eq(4).val())
+			member_booker.eq(4).val(booker.eq(2).val())
+		}
+	})
+	
+	$('#set_booker_add_guest_id').click(function(){
+		let status=$(this).attr('elstat')
+		let booker=$(".booker");
+		let member_booker=$(".member_booker_0")
+		if(status==='off'){
+			$(this).html('<i class="fa fa-toggle-on"></i>');
+			$(this).attr('elstat','on')
+			
+			for(let i=0;i<4;i++){
+				member_booker.eq(i).val(booker.eq(i).val())
+			}
+			member_booker.eq(2).datepicker('setDate', booker.eq(4).val())
+			member_booker.eq(4).val(booker.eq(2).val())
+			return false
+		}else{
+			$(this).html('<i class="fa fa-toggle-off"></i>');
+			$(this).attr('elstat','off')
+			
+			for(let i=0;i<member_booker.length;i++){
+				member_booker[i].value=""
+			}
+		}
+	})
+	
+	$('#set_booker_as_guest_id').click(function(){
+		let id_userid_value=$('#id_userid_val').val()
+		if(id_userid_value === '0' || id_userid_value === ''){
+			let booker=$(".booker");
+			let member_booker=$(".member_booker_0");
+			if(member_booker[0].value===""){
+				$(this).html('<i class="fa fa-toggle-on"></i>');
+				
+				// member_booker.eq(4).val('Bahroni hebat');
+				for(let i=0;i<4;i++){
+					member_booker.eq(i).val(booker.eq(i).val())
+				}
+				member_booker.eq(2).datepicker('setDate', booker.eq(4).val())
+				member_booker.eq(4).val(booker.eq(2).val())
+			}else{
+				$(this).html('<i class="fa fa-toggle-off"></i>');
+				for(let i=0;i<member_booker.length;i++){
+					member_booker[i].value=""
+				}
+			}
+			return false
+		}
+		
+		let member_1=$('.muserid')
+		let status=$(this).attr('elstat')
+		/*let num_of_members_id_edit=0
+		if($('#num_of_members_id_edit').length > 0){
+			num_of_members_id_edit=$('#num_of_members_id_edit').val()
+		}*/
+		
+		// let val_num_of_members=val_num_of_members_1-num_of_members_id_edit
+		// let userid=$("#id_userid_val").val()
+		let userid=$("input[name=id]").val()
+		let member = $.map(member_1, function(option){
+			return option.value
+		})
+		// let val_num_of_members=val_num_of_members_1-member.length
+		let val_num_of_members=member.length
+		if(status==='on'){
+			member[0]='1'
+			$("#members_panel_id").html('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>')
+			$(this).attr('elstat','off')
+			$(this).html('<i class="fa fa-toggle-off"></i>')
+			$.post("<?php echo site_url('ajax/setMembersForm'); ?>",{id:member,jml:val_num_of_members,userid:userid},function(data){
+				$("#members_panel_id").html(data);
+				$('.datepicker').datepicker({
+					'format': 'dd M yyyy',
+					'autoclose': true,
+					'todayHighlight': true
+				});
+
+				$(".mr_mrs").change(function(){
+					var elem=$(this);
+					var val_1=elem.val();
+					var tmp_id=elem.attr('id');
+					var arr_id=tmp_id.split("_");
+					var id=arr_id[2];
+					// alert(tmp_id);
+					if(val_1=='mrs'||val_1=='ms'||val_1=='miss'){
+						$("#g_perempuan_"+(id)).prop('checked',true);
+					}else{
+						$("#g_laki_laki_"+(id)).prop('checked',true);
+					}
+				});
+				
+				$('input[name="dob"]').datepicker({
+					'format': 'dd M yyyy',
+					'autoclose': true,
+					'todayHighlight': true,
+					'endDate': new Date
+				});
+				
+				$('.mdob').datepicker({
+					'format': 'dd M yyyy',
+					'autoclose': true,
+					'todayHighlight': true,
+					'endDate': new Date
+				});
+				
+				let exp_pass_end=new Date()
+				exp_pass_end.setMonth(exp_pass_end.getMonth()+7)
+				$('.exp_pass').datepicker({
+					'format': 'dd M yyyy',
+					'autoclose': true,
+					'startDate': exp_pass_end
+				});
+			})
+		}else{
+			// userid=$("input[name=id]").val()
+			$("#members_panel_id").html('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>')
+			$(this).attr('elstat','on')
+			$(this).html('<i class="fa fa-toggle-on"></i>')
+			$.post("<?php echo site_url('ajax/setMembersForm'); ?>",{id:member,jml:val_num_of_members,userid:userid},function(data){
+				$("#members_panel_id").html(data);
+				$('.datepicker').datepicker({
+					'format': 'dd M yyyy',
+					'autoclose': true,
+					'todayHighlight': true
+				});
+
+				$(".mr_mrs").change(function(){
+					var elem=$(this);
+					var val_1=elem.val();
+					var tmp_id=elem.attr('id');
+					var arr_id=tmp_id.split("_");
+					var id=arr_id[2];
+					// alert(tmp_id);
+					if(val_1=='mrs'||val_1=='ms'||val_1=='miss'){
+						$("#g_perempuan_"+(id)).prop('checked',true);
+					}else{
+						$("#g_laki_laki_"+(id)).prop('checked',true);
+					}
+				});
+				
+				$('input[name="dob"]').datepicker({
+					'format': 'dd M yyyy',
+					'autoclose': true,
+					'todayHighlight': true,
+					'endDate': new Date
+				});
+				
+				$('.mdob').datepicker({
+					'format': 'dd M yyyy',
+					'autoclose': true,
+					'todayHighlight': true,
+					'endDate': new Date
+				});
+				
+				let exp_pass_end=new Date()
+				exp_pass_end.setMonth(exp_pass_end.getMonth()+7)
+				$('.exp_pass').datepicker({
+					'format': 'dd M yyyy',
+					'autoclose': true,
+					'startDate': exp_pass_end
+				});
+			})
+		}
+		return false
+	})
+	
+	$('#id_find_button').click(function(){
+		getBookerAdd()
+		return false
+	})
+	
+	$("#id_find_check").change(function() {
+		$('#id_find_text').val('')
+		getCheckFilterAdd()
+	})
+	
+	$('#formTourBooking').on('submit',function(e){
+		// tourFormSubmit(this, e, )
+		var id_userid_val=$('#id_userid_val').val()
+		var first_name=$('#id_first_name').val()
+		var last_name=$('#id_last_name').val()
+		var email=$('#id_email').val()
+		var country=$('#country_id').val()
+		var city=$('#city_id').val()
+		var phone=$('#id_phone').val()
+		var dob=$('#id_dob').val()
+		var jml_member=$('.mdob').length
+		
+		const emailValue=[0,first_name,last_name,dob]
+		
+		checkEmailValid(this, e, emailValue)
+		checkEmailValid(this, e, 0)
+		checkEmailValid(this, e, [0,phone])
+		
+		for(let i=0;i<jml_member;i++){
+			var mmr_mrs=$('#mr_mrs_'+i).val()
+			var mfirst_name=$('#mfirst_name_'+i).val()
+			var mlast_name=$('#mlast_name_'+i).val()
+			var memail=$('#email_'+i).val()
+			var mphone=$('#phone_'+i).val()
+			var mdob=$('#mdob_'+i).val()
+			var muserid=$('.muserid').eq(i).val()
+			
+			const memailValue=[i+1,mfirst_name,mlast_name,mdob]
+			
+			checkEmailValid(this, e, memailValue)
+			checkEmailValid(this, e, i+1)
+			checkEmailValid(this, e, [i+1,mphone])
+		}
+		// checkEmailValid(this, e, onde)
+	})
+	
+	$('.m_booker').keyup(function(){
+		var elem=$(this);
+		var val_1=elem.val();
+		var tmp_id=elem.attr('id');
+		var arr_id=tmp_id.split("_");
+		var name=arr_id[0];
+		var id;
+				
+		var r = $('#'+tmp_id).get(0).getBoundingClientRect()
+		let r_top=parseInt(r.top)+30
+		// let r_left=parseInt(r.left)
+		let r_left=290
+		
+		if($('#bntAutocomplate').length > 0){
+			$('#bntAutocomplate').remove()
+		}
+		
+		if(arr_id[2]==='undefined'){
+			id=arr_id[1]
+		}else{
+			id=arr_id[2]
+		}
+		
+		$.post('<?php echo site_url("ajax/getMembers"); ?>',{val_find_text:val_1,name:name},function(data){
+			// console.log(data)
+			let au_cont=''
+			obj=JSON.parse(data)
+			
+			var table ="<table class='table table-hover'><tr><th>First Name</th><th>Last Name</th><th>Date Of Birth</th><th>Email</th><th>Phone</th><th>Action</th></tr>"
+			for(let i=0;i<obj.length;i++){
+				table += "<tr><td>"+obj[i].FirstName+"</td><td>"+obj[i].LastName+"</td><td>"+obj[i].dob+"</td><td>"+obj[i].Email+"</td><td>"+obj[i].MObileNo+"</td><td><button type='button' class='btn btn-success' onclick='setMBooker("+obj[i].UserId+","+id+")'>Set</button></td></tr>"
+			}
+			table +="</table>"
+			
+			if(obj.length > 0){
+				au_cont='<div id="bntAutocomplate" class="box box-success" style="position:fixed;top:'+r_top+'px;left:'+r_left+'px;z-index:10;background-color:#ffffff;overflow-y:scroll;max-height:300px;width:70%;">'
+					au_cont +='<div class="box-header with-border">'
+					  au_cont +='<h3 class="box-title">please select if the user already exists</h3>'
+
+					  au_cont +='<div class="box-tools pull-right">'
+						au_cont +='<button type="button" class="btn btn-box-tool close-bntAutocomplate"><i class="fa fa-times"></i></button>'
+					  au_cont +='</div>'
+					au_cont +='</div>'
+					au_cont +='<div class="box-body">'+table+'</div></div>'
+				
+				$('#'+tmp_id).parent().append(au_cont)
+				$('.close-bntAutocomplate').click(function(e){
+					$('#bntAutocomplate').remove()
+				})
+			}else{
+				if($('#bntAutocomplate').length > 0) $('#bntAutocomplate').remove()
+			}
+		})		
+	});
+});
+
+function setMBooker(userid,id){
+	if($('#bntAutocomplate').length > 0) $('#bntAutocomplate').remove()
+		
+	/*$.post('<?php echo site_url("ajax/setMBooker"); ?>',{userid:userid},function(data){
+		obj=JSON.parse(data)
+	})*/
+	// let val_class_new_guest_check=$('.class_new_guest_check')
+	let val_num_of_members=0
+	// if($('#num_of_members_id').length > 0){
+		// let val_num_of_members=parseInt($('.muserid').length)
+	// }
+	let member=[]
+	for(let i=0;i<$('.muserid').length;i++){
+		member[i]=$('.muserid').eq(i).val()
+	}
+	
+	if(member.length > 0){
+		member[parseInt(member.length)+1]=userid
+	}else{
+		member[0]=userid
+	}
+	val_num_of_members=parseInt($('.muserid').length)
+	$.post("<?php echo site_url('ajax/setMembersForm'); ?>",{id:member,jml:val_num_of_members,userid:userid},function(data){
+		// console.log(data)
+		// return false
+		$("#members_panel_id").html(data);
+		$('.datepicker').datepicker({
+			'format': 'dd M yyyy',
+			'autoclose': true,
+			'todayHighlight': true
+		});
+		
+		$(".mr_mrs").change(function(){
+			var elem=$(this);
+			var val_1=elem.val();
+			var tmp_id=elem.attr('id');
+			var arr_id=tmp_id.split("_");
+			var id=arr_id[2];
+			// alert(tmp_id);
+			if(val_1=='mrs'||val_1=='ms'||val_1=='miss'){
+				$("#g_perempuan_"+(id)).prop('checked',true);
+			}else{
+				$("#g_laki_laki_"+(id)).prop('checked',true);
+			}
+		});
+		
+		$('input[name="dob"]').datepicker({
+			'format': 'dd M yyyy',
+			'autoclose': true,
+			'todayHighlight': true,
+			'endDate': new Date
+		});
+		
+		$('.mdob').datepicker({
+			'format': 'dd M yyyy',
+			'autoclose': true,
+			'todayHighlight': true,
+			'endDate': new Date
+		});
+		
+		let exp_pass_end=new Date()
+		exp_pass_end.setMonth(exp_pass_end.getMonth()+7)
+		$('.exp_pass').datepicker({
+			'format': 'dd M yyyy',
+			'autoclose': true,
+			'startDate': exp_pass_end
+		});
+		
+		$('#set_booker_as_guest_id').click(function(){
+			let booker=$(".booker");
+			let member_booker=$(".member_booker_0");
+			if(member_booker[0].value===""){
+				$(this).html('<i class="fa fa-toggle-on"></i>');
+
+				for(let i=0;i<booker.length;i++){
+				member_booker[i].value=booker[i].value
+				}
+				member_booker[2].value=booker[4].value
+				member_booker[4].value=booker[2].value
+			}else{
+				$(this).html('<i class="fa fa-toggle-off"></i>');
+				for(let i=0;i<member_booker.length;i++){
+					member_booker[i].value=""
+				}
+			}
+			return false
+		})
+		
+		$('.m_booker').keyup(function(){
+			var elem=$(this);
+			var val_1=elem.val();
+			var tmp_id=elem.attr('id');
+			var arr_id=tmp_id.split("_");
+			var name=arr_id[0];
+			var id;
+					
+			var r = $('#'+tmp_id).get(0).getBoundingClientRect()
+			let r_top=parseInt(r.top)+30
+			let r_left=290
+			
+			if($('#bntAutocomplate').length > 0){
+				$('#bntAutocomplate').remove()
+			}
+			
+			if(arr_id[2]==='undefined'){
+				id=arr_id[1]
+			}else{
+				id=arr_id[2]
+			}
+			
+			$.post('<?php echo site_url("ajax/getMembers"); ?>',{val_find_text:val_1,name:name},function(data){
+				// console.log(data)
+				let au_cont=''
+				obj=JSON.parse(data)
+				
+				var table ="<table class='table table-hover'><tr><th>First Name</th><th>Last Name</th><th>Date Of Birth</th><th>Email</th><th>Phone</th><th>Action</th></tr>"
+				for(let i=0;i<obj.length;i++){
+					table += "<tr><td>"+obj[i].FirstName+"</td><td>"+obj[i].LastName+"</td><td>"+obj[i].dob+"</td><td>"+obj[i].Email+"</td><td>"+obj[i].MObileNo+"</td><td><button type='button' class='btn btn-success' onclick='setMBooker("+obj[i].UserId+","+id+")'>Set</button></td></tr>"
+				}
+				table +="</table>"
+				
+				if(obj.length > 0){
+					au_cont='<div id="bntAutocomplate" class="box box-success" style="position:fixed;top:'+r_top+'px;left:'+r_left+'px;z-index:10;background-color:#ffffff;overflow-y:scroll;max-height:300px;width:70%;">'
+						au_cont +='<div class="box-header with-border">'
+						  au_cont +='<h3 class="box-title">please select if the user already exists</h3>'
+
+						  au_cont +='<div class="box-tools pull-right">'
+							au_cont +='<button type="button" class="btn btn-box-tool close-bntAutocomplate"><i class="fa fa-times"></i></button>'
+						  au_cont +='</div>'
+						au_cont +='</div>'
+						au_cont +='<div class="box-body">'+table+'</div></div>'
+					
+					$('#'+tmp_id).parent().append(au_cont)
+					$('.close-bntAutocomplate').click(function(e){
+						$('#bntAutocomplate').remove()
+					})
+				}else{
+					if($('#bntAutocomplate').length > 0) $('#bntAutocomplate').remove()
+				}
+			})		
+		});
+
+	});
+}
+
+function checkEmailValid(tourform, e, index){
+	e.preventDefault()
+	
+	var jml_member=$('.mdob').length
+	var index_2=index
+	var num
+	let status=Array.isArray(index)
+	if(status===false){	
+		let emailValue=$('.email').eq(index).val()
+		$.post('<?php echo site_url("ajax/checkEmailValid"); ?>',{email:emailValue},function(data){
+			num = parseInt(data)
+			
+			tourFormSubmitCek()
+			if(num > 0){
+				$('.email').eq(index).parent().addClass('has-error')
+				if($('#email_alertx_'+index).length > 0){
+					$('#email_alertx_'+index).text(' Email is already exists')
+				}else{
+					$('.email').eq(index).parent().append('<span id="email_alertx_'+index+'" class="error_alert email_alert text-red"> Email is already exists</span>')
+				}
+				
+			}else{
+				$('.email').eq(index).parent().removeClass('has-error')
+				$('#email_alertx_'+index).remove()
+			}
+		})
+	}else{
+		var index=index_2[0]
+		if(index_2.length===2){
+			let emailValue=index_2[1]
+			$.post('<?php echo site_url("ajax/checkEmailValid"); ?>',{email:emailValue},function(data){
+				num = parseInt(data)
+				
+				tourFormSubmitCek()
+				if(num > 0){
+					if(index===0){
+						$('#id_phone').parent().addClass('has-error')
+						if($('#phone_alertx').length > 0){
+							$('#phone_alertx').text(' Phone is already exists')
+						}else{
+							$('#id_phone').parent().append('<span id="phone_alertx" class="error_alert phone_alert text-red"> Phone is already exists</span>')
+						}
+					}else{
+						index=index-1
+						$('#phone_'+index).parent().addClass('has-error')
+						if($('#phone_alertx_'+index).length > 0){
+							$('#phone_alertx_'+index).text(' Phone is already exists')
+						}else{
+							$('#phone_'+index).parent().append('<span id="phone_alertx_'+index+'" class="error_alert phone_alert text-red"> Phone is already exists</span>')
+						}
+					}
+				}else{
+					if(index===0){
+						$('#id_phone').parent().removeClass('has-error')
+						$('#phone_alertx').remove()
+					}else{
+						index=index-1
+						$('#phone_'+index).parent().removeClass('has-error')
+						$('#phone_alertx_'+index).remove()
+					}
+				}
+				if(index >= jml_member){
+					if($('.error_alert').length <= 0){
+							this.submit()
+					}
+				}
+			})
+		}else{
+			let emailValue=[index_2[1],index_2[2],index_2[3]]
+			$.post('<?php echo site_url("ajax/checkEmailValid"); ?>',{email:emailValue},function(data){
+				var num = parseInt(data)
+				
+				tourFormSubmitCek()
+				if(num > 0){
+					if(index===0){
+						$('#id_first_name').parent().addClass('has-error')
+						$('#id_last_name').parent().addClass('has-error')
+						$('#id_dob').parent().addClass('has-error')
+						if($('#first_name_alertx').length > 0){
+							$('#first_name_alertx').text(' First Name is already exists')
+							$('#last_name_alertx').text(' Last Name is already exists')
+							$('#dob_alertx').text(' Date of birth is already exists')
+						}else{
+							$('#id_first_name').parent().append('<span id="first_name_alertx" class="error_alert email_alert text-red"> First Name is already exists</span>')
+							$('#id_last_name').parent().append('<span id="last_name_alertx" class="error_alert email_alert text-red"> First Name is already exists</span>')
+							$('#id_dob').parent().append('<span id="dob_alertx" class="error_alert email_alert text-red"> Date of birth is already exists</span>')
+						}
+					}else{
+						index=index-1
+						$('#mfirst_name_'+index).parent().addClass('has-error')
+						$('#mlast_name_'+index).parent().addClass('has-error')
+						$('#mdob_'+index).parent().addClass('has-error')
+						if($('#mfirst_name_alertx_'+index).length > 0){
+							$('#mfirst_name_alertx_'+index).text(' First Name is already exists')
+							$('#mlast_name_alertx_'+index).text(' Last Name is already exists')
+							$('#mdob_alertx_'+index).text(' Date of birth is already exists')
+						}else{
+							$('#mfirst_name_'+index).parent().append('<span id="mfirst_name_alertx_'+index+'" class="error_alert email_alert text-red"> First Name is already exists</span>')
+							$('#mlast_name_'+index).parent().append('<span id="mlast_name_alertx_'+index+'" class="error_alert email_alert text-red"> First Name is already exists</span>')
+							$('#mdob_'+index).parent().append('<span id="mdob_alertx_'+index+'" class="error_alert email_alert text-red"> Date of birth is already exists</span>')
+						}
+					}
+				}else{
+					if(index===0){
+						$('#id_first_name').parent().removeClass('has-error')
+						$('#id_last_name').parent().removeClass('has-error')
+						$('#id_dob').parent().removeClass('has-error')
+						$('#first_name_alertx').remove()
+						$('#last_name_alertx').remove()
+						$('#dob_alertx').remove()
+					}else{
+						index=index-1
+						$('#mfirst_name_'+index).parent().removeClass('has-error')
+						$('#mlast_name_'+index).parent().removeClass('has-error')
+						$('#mdob_'+index).parent().removeClass('has-error')
+						$('#mfirst_name_alertx_'+index).remove()
+						$('#mlast_name_alertx_'+index).remove()
+						$('#mdob_alertx_'+index).remove()
+					}
+				}
+				if(index_2[0] >= jml_member){
+					if($('.error_alert').length <= 0){
+						tourform.submit()
+					}
+				}
+				// console.log(index_2[0]+" "+jml_member)
+			})
+		}
+	}
+	// cekErrorAlert($('.error_alert').length)
+	// console.log(num)
+}
+
+function getCheckFilterAdd(){
+	if($('#id_find_check').is(':checked')){
+		$('#id_find_text').datepicker({
+			'format': 'dd M yyyy',
+			'autoclose': true,
+			'todayHighlight': true
+		});
+	}else{
+		$('#id_find_text').datepicker("destroy")
+	}
+}
+
+function getBookerAdd(){
+	let tour_id_id=$('#tour_id-id').val()
+	let val_find_text=$('#id_find_text').val()
+	let obj
+	let table
+	let bnt_table=0
+	
+	if(tour_id_id==""){
+		alert('Please select your tour first')
+		return false
+	}
+	
+	if($('#id_find_check').is(':checked')){
+		val_find_text = 'dob|'+val_find_text
+	}
+	
+	if(val_find_text!==''){
+		$.post('<?php echo site_url("ajax/getBookerAdd"); ?>',{val_find_text:val_find_text},function(data){
+			obj=JSON.parse(data)
+			// console.log(data)
+			// return false;
+			if(obj.length > 0){	
+				
+				table="<h3>Step 1/2</h3><hr/>"
+				table +="<button type='button' class='btn btn-primary' id='id_create_new'>Create New</button>"
+				table +="<table class='table table-bordered'><tr><th>First Name</th><th>Last Name</th><th>Date Of Birth</th><th>Email</th><th>Phone</th><th>Action</th></tr>"
+				for(let i=0;i<obj.length;i++){
+					$('#id_userid_val').val(obj[i].UserID)
+					table += "<tr><td>"+obj[i].FirstName+"</td><td>"+obj[i].LastName+"</td><td>"+obj[i].dob+"</td><td>"+obj[i].Email+"</td><td>"+obj[i].MObileNo+"</td><td><button type='button' class='btn btn-success' onclick='getBookerAdd2("+obj[i].UserId+")'>Set</button></td></tr>"
+					if(obj[i].FirstName===''&&obj[i].Email===''){
+						bnt_table +=1
+					}
+				}
+				table +="</table>"
+				if(bnt_table > 0){
+					let booker=$(".booker-control");
+					for(let i=0;i<booker.length;i++){
+						booker[i].value=""
+						booker[i].removeAttribute('readonly')
+					}
+					
+					$('#country_id').prop("disabled", false)
+					$('#city_id').prop("disabled", false)
+					
+					$('.form-group-num-of-members').show()
+					// $('#num_of_members_id').trigger('change')
+				}else{
+					$('#id-modal-user-body').html(table)
+					$('#id-modal-user').modal('show')
+				}
+			}else{
+				let booker=$(".booker-control");
+				for(let i=0;i<booker.length;i++){
+					booker[i].value=""
+					booker[i].removeAttribute('readonly')
+				}
+				
+				$('#country_id').prop("disabled", false)
+				$('#city_id').prop("disabled", false)
+				
+				$('.form-group-num-of-members').show()
+				// $('#num_of_members_id').trigger('change')
+			}
+			
+			$('#id_create_new').click(function(){
+				let booker=$(".booker-control");
+				for(let i=0;i<booker.length;i++){
+					booker[i].value=""
+					booker[i].removeAttribute('readonly')
+				}
+
+				$('#country_id').prop("disabled", false)
+				$('#city_id').prop("disabled", false)
+
+				$('.form-group-num-of-members').show()
+				
+				$('#id-modal-user').modal('hide')
+			})
+		});
+	}
+}
+function getBookerAdd2(userid){
+	let obj
+	let table
+	let val_country_id=$('#country_id option')
+	let new_num_of_members_1=$("#num_of_members_id option");
+	let new_num_of_members=$.map(new_num_of_members_1, function(option){
+		return '<option value="'+option.value+'">'+option.text+'</option>';
+	})
+	
+	var id_country_1=0
+	
+	$.get('<?php echo site_url("ajax/getBookerAdd2"); ?>',{userid:userid},function(data){
+		
+		/*------- booker area  -----------*/
+		obj=JSON.parse(data)
+		obj1=JSON.parse(obj['booker'])
+		obj2=JSON.parse(obj['mbooker'])
+		// console.log(obj['mbooker'])
+		$("input[name=name_userid]").val(userid)
+		$("input[name=first_name]").val(obj1.FirstName)
+		$("input[name=last_name]").val(obj1.LastName)
+		$("input[name=email]").val(obj1.Email)
+		$("input[name=phone]").val(obj1.MobileNo)
+		$("input[name=dob]").datepicker('setDate', obj1.dob)
+		$("input[name=address]").val(obj1.Address)
+		
+		if(obj1.FirstName==='') $("input[name=first_name]").removeAttr('readonly')
+		if(obj1.LastName==='') $("input[name=first_name]").removeAttr('readonly')
+		if(obj1.dob==='') $("input[name=dob]").removeAttr('readonly')
+		if(obj1.Email==='') $("input[name=email]").removeAttr('readonly')
+		if(obj1.MobileNo==='') $("input[name=phone]").removeAttr('readonly')
+		if(obj1.Address==='') $("input[name=address]").removeAttr('readonly')
+		
+		let op_country = $.map(val_country_id, function(option){
+			if(option.value==obj1.id_country){
+				return '<option value="'+option.value+'" selected>'+option.text+'</option>';
+			}else{
+				return '<option value="'+option.value+'">'+option.text+'</option>';
+			}
+		})
+		$('#country_id').html(op_country)
+		// $('#country_id').trigger("change")
+		if(obj1.id_country===''){
+			// obj1.id_country=0
+			$('#country_id').removeAttr('disabled')
+			$("#city_id").removeAttr('disabled')
+		}else{
+			id_country_1=obj1.id_country+'|'+obj1.id_city
+		}
+		
+		$.post("<?php echo site_url('ajax/getCity'); ?>",{code:id_country_1},function(data){
+			if(data){
+				$("#city_id").html(data)
+			}else{
+				$("#city_id").html('<option value="0">City</option>')
+			}
+		});
+		
+		$("input[name=dob]").datepicker('destroy')
+		$("input[name=dob]").removeClass('datepicker')
+		
+		table="<h3>Step 2/2</h3><hr/>"
+		table +="<table class='table table-bordered'><tr><th>Full Name</th><th>Email</th><th>Phone</th><th>Action</th></tr>"
+		for(let i=0;i<obj2.length;i++){
+			table += "<tr><td>"+obj2[i].FirstName+" "+obj2[i].LastName+"</td><td>"+obj2[i].Email+"</td><td>"+obj2[i].MobileNo+"</td><td><input type='checkbox' class='class_new_guest_check' value='"+obj2[i].UserID+"' /></td></tr>"
+		}
+		table +="</table>"
+		table +="<br/>Add Guest : <select id='setNumGuest' class='form-control'>"+new_num_of_members+"</select><buttton type='button' class='btn btn-block btn-success' id='idSetNewGuest'>Go!</button>" 
+		
+		$('#id-modal-user-body').html(table)
+		/*------- guest area  -----------*/
+		$('#idSetNewGuest').click(function(){
+			let val_class_new_guest_check=$('.class_new_guest_check')
+			let val_num_of_members=$('#setNumGuest').val()
+			
+			// for(let i;i<=val_class_new_guest_check.length;i++){
+				// let member=val_class_new_guest_check[i].value
+			// }
+			let member = $.map(val_class_new_guest_check, function(option){
+				if(option.checked){
+					return option.value
+				}
+			})
+			
+			val_num_of_members=parseInt(member.length)+parseInt(val_num_of_members)
+			$.post("<?php echo site_url('ajax/setMembersForm'); ?>",{id:member,jml:val_num_of_members,userid:userid},function(data){
+				// console.log(data)
+				$("#members_panel_id").html(data);
+				$('.datepicker').datepicker({
+					'format': 'dd M yyyy',
+					'autoclose': true,
+					'todayHighlight': true
+				});
+				
+				$(".mr_mrs").change(function(){
+					var elem=$(this);
+					var val_1=elem.val();
+					var tmp_id=elem.attr('id');
+					var arr_id=tmp_id.split("_");
+					var id=arr_id[2];
+					// alert(tmp_id);
+					if(val_1=='mrs'||val_1=='ms'||val_1=='miss'){
+						$("#g_perempuan_"+(id)).prop('checked',true);
+					}else{
+						$("#g_laki_laki_"+(id)).prop('checked',true);
+					}
+				});
+				
+				$('input[name="dob"]').datepicker({
+					'format': 'dd M yyyy',
+					'autoclose': true,
+					'todayHighlight': true,
+					'endDate': new Date
+				});
+				
+				$('.mdob').datepicker({
+					'format': 'dd M yyyy',
+					'autoclose': true,
+					'todayHighlight': true,
+					'endDate': new Date
+				});
+				
+				let exp_pass_end=new Date()
+				exp_pass_end.setMonth(exp_pass_end.getMonth()+7)
+				$('.exp_pass').datepicker({
+					'format': 'dd M yyyy',
+					'autoclose': true,
+					'startDate': exp_pass_end
+				});
+				
+				$('#set_booker_as_guest_id').click(function(){
+					let booker=$(".booker");
+					let member_booker=$(".member_booker_0");
+					if(member_booker[0].value===""){
+						$(this).html('<i class="fa fa-toggle-on"></i>');
+
+						for(let i=0;i<booker.length;i++){
+						member_booker[i].value=booker[i].value
+						}
+						member_booker[2].value=booker[4].value
+						member_booker[4].value=booker[2].value
+					}else{
+						$(this).html('<i class="fa fa-toggle-off"></i>');
+						for(let i=0;i<member_booker.length;i++){
+							member_booker[i].value=""
+						}
+					}
+					return false
+				})
+				$('#id-modal-user').modal('hide')
+				
+				$('.m_booker').keyup(function(){
+					var elem=$(this);
+					var val_1=elem.val();
+					var tmp_id=elem.attr('id');
+					var arr_id=tmp_id.split("_");
+					var name=arr_id[0];
+					var id;
+							
+					var r = $('#'+tmp_id).get(0).getBoundingClientRect()
+					let r_top=parseInt(r.top)+30
+					let r_left=290
+					
+					if($('#bntAutocomplate').length > 0){
+						$('#bntAutocomplate').remove()
+					}
+					
+					if(arr_id[2]==='undefined'){
+						id=arr_id[1]
+					}else{
+						id=arr_id[2]
+					}
+					
+					$.post('<?php echo site_url("ajax/getMembers"); ?>',{val_find_text:val_1,name:name},function(data){
+						// console.log(data)
+						let au_cont=''
+						obj=JSON.parse(data)
+						
+						var table ="<table class='table table-hover'><tr><th>First Name</th><th>Last Name</th><th>Date Of Birth</th><th>Email</th><th>Phone</th><th>Action</th></tr>"
+						for(let i=0;i<obj.length;i++){
+							table += "<tr><td>"+obj[i].FirstName+"</td><td>"+obj[i].LastName+"</td><td>"+obj[i].dob+"</td><td>"+obj[i].Email+"</td><td>"+obj[i].MObileNo+"</td><td><button type='button' class='btn btn-success' onclick='setMBooker("+obj[i].UserId+","+id+")'>Set</button></td></tr>"
+						}
+						table +="</table>"
+						
+						if(obj.length > 0){
+							au_cont='<div id="bntAutocomplate" class="box box-success" style="position:fixed;top:'+r_top+'px;left:'+r_left+'px;z-index:10;background-color:#ffffff;overflow-y:scroll;max-height:300px;width:70%;">'
+								au_cont +='<div class="box-header with-border">'
+								  au_cont +='<h3 class="box-title">please select if the user already exists</h3>'
+
+								  au_cont +='<div class="box-tools pull-right">'
+									au_cont +='<button type="button" class="btn btn-box-tool close-bntAutocomplate"><i class="fa fa-times"></i></button>'
+								  au_cont +='</div>'
+								au_cont +='</div>'
+								au_cont +='<div class="box-body">'+table+'</div></div>'
+							
+							$('#'+tmp_id).parent().append(au_cont)
+							$('.close-bntAutocomplate').click(function(e){
+								$('#bntAutocomplate').remove()
+							})
+						}else{
+							if($('#bntAutocomplate').length > 0) $('#bntAutocomplate').remove()
+						}
+					})		
+				});
+				
+				$('#formTourBooking').on('submit',function(e){
+					$('#formTourBooking').on('submit',function(e){
+						// tourFormSubmit(this, e, )
+						var id_userid_val=$('#id_userid_val').val()
+						var first_name=$('#id_first_name').val()
+						var last_name=$('#id_last_name').val()
+						var email=$('#id_email').val()
+						var country=$('#country_id').val()
+						var city=$('#city_id').val()
+						var phone=$('#id_phone').val()
+						var dob=$('#id_dob').val()
+						var jml_member=$('.mdob').length
+						
+						const emailValue=[0,first_name,last_name,dob]
+						
+						checkEmailValid(this, e, emailValue)
+						checkEmailValid(this, e, 0)
+						checkEmailValid(this, e, [0,phone])
+						
+						for(let i=0;i<jml_member;i++){
+							var mmr_mrs=$('#mr_mrs_'+i).val()
+							var mfirst_name=$('#mfirst_name_'+i).val()
+							var mlast_name=$('#mlast_name_'+i).val()
+							var memail=$('#email_'+i).val()
+							var mphone=$('#phone_'+i).val()
+							var mdob=$('#mdob_'+i).val()
+							var muserid=$('.muserid').eq(i).val()
+							
+							const memailValue=[i+1,mfirst_name,mlast_name,mdob]
+							
+							checkEmailValid(this, e, memailValue)
+							checkEmailValid(this, e, i+1)
+							checkEmailValid(this, e, [i+1,mphone])
+						}
+						// checkEmailValid(this, e, onde)
+					})
+				});
+			});
+		})		
+	})
+}
+
+function bookerNotBlank(){
+	// var elements = $(".booker_important");
+	/*var email = $(".email");
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].oninvalid = function(e) {
+            e.target.setCustomValidity("");
+            if (!e.target.validity.valid) {
+                e.target.setCustomValidity("This field cannot be left blank");
+            }
+        };
+        elements[i].oninput = function(e) {
+            e.target.setCustomValidity("");
+        };
+    }
+	if(email.length > 0){
+		for(i=0;i<email.length;i++){
+			email[i].oninvalid = function(e) {
+				e.target.setCustomValidity("");
+				if (!e.target.validity.valid) {
+					e.target.setCustomValidity("This field cannot be left blank and please use email format");
+				}
+			};
+			email[i].oninput = function(e) {
+				e.target.setCustomValidity("");
+			};
+		}
+	}*/
+}
+
+function setFakeNumOfMembers(id, tour_id){
+	let new_id=id
+	let new_tour_id=tour_id
+	let nom = $('#id_fake_num_of_members').val()
+	$.post('<?php echo site_url("ajax/setFakeNumOfMembers"); ?>',{id:new_id,tour_id:new_tour_id,nom:nom},function(data){
+		// console.log(data);
+		alert("change have saved");
+		// location.reload();
+	}); 
+	return false;
+}
+function tour_clone(id){
+	// alert(id);
+	$.post('<?php echo site_url("ajax/tour_clone"); ?>',{id:id},function(data){
+		// console.log(data);
+		// alert(data);
+		location.reload();
+	}); 
+	return false;
+}
+
+function itinerary_clone(id){
+	// alert(id);
+	$.post('<?php echo site_url("ajax/itinerary_clone"); ?>',{id:id},function(data){
+		// console.log(data);
+		// alert(data);
+		location.reload();
+	}); 
+	return false;
+}
+
+function setImage(id){
+	var src=$("#img_"+id).attr('src');
+	$("#cont_img").html('<img class="img-responsive img-thumbnail" src="'+src+'" />');
+	$("#img").val(id);
+	$(".btn_img").html('<i class="fa fa-square-o"></i> Pilih');
+	$("#bimg_"+id).html('<i class="fa fa-check-square-o"></i> Pilih');
+}
+
+function addimg(lim){
+	$.post('<?php echo site_url("ajax/tour_tblimg"); ?>',{limit:lim},function(data){
+		$("#tr-more").remove();
+		$("#tblimg > tbody:last-child").append(data);
+		console.log(data);
+	});
+}
+
+/* for booking form */
+function setTourId(id){
+	$("#tour_id-id").val(id);
+	old_numberOfmembers=$("#num_of_members_id").val();
+	
+	var i_id=id;
+	
+	var url='<?php echo site_url("ajax/setTourId"); ?>';
+	
+	var data={id:id};
+	$.post(url,data,function(e){
+		$('#tmp_1').html(e);
+	});
+	
+	var accom_id=$("#jaccom_id").val();
+	var objaccom=JSON.parse(accom_id);
+	var accom_sel="";
+	for(var j in objaccom){
+		if(objaccom[j].itinerary_id==i_id) accom_sel += "<option value='"+objaccom[j].id+"'>"+objaccom[j].name+"</option>";
+	}
+	
+	var src=$("#tour_"+id).children('img').attr('src');
+	var title=$("#tour_"+id).children('span').text();
+	var seo=$("#seo_"+id).val();
+	var duration=$("#duration_"+id).val();
+	var seats=$("#seats_"+id).text().split(":");
+	var arrival=$("#arrival_"+id).text().split(":");
+	var departure=$("#departure_"+id).text().split(":");
+	
+	$("#tour_id-desc").val(title);
+	
+	seats=parseInt(seats[1]);
+	arrival=arrival[1].trim();
+	departure=departure[1].trim();
+	
+	var op="<option value='0' disabled>0</option>";
+	for(var i=1; i <= seats; i++){
+		op +="<option value='"+i+"'>"+i+"</option>";
+	}
+	
+	var img="<img src='"+src+"' style='width:100%;' />";
+
+	$(".c_accom").html(accom_sel);
+	// $("#tmp").html(img+"<br/><a href='<?php echo site_url('tour_detail'); ?>/"+id+"/"+seo+"'>"+title+"</a><br/>("+departure+" - "+arrival+") "+duration+" Days");
+	$("#tmp").html(img+"<br/><a href='<?php echo site_url('tour_detail'); ?>/"+id+"/"+seo+"'>"+title+"</a><br/>("+departure+" - "+arrival+") ");
+	$("#num_of_members_id").html(op);
+	$('#num_of_members_id option[value=1]').attr('selected','selected');
+	$("#iarrival_date").val(arrival);
+	// $("#num_of_members_id").val(old_numberOfmembers);
+	
+	if(seats < 1){
+		$('.btn-save').hide();
+		$('input[type="submit"]').attr('disabled','disabled');
+	}
+}
+
+function detailBook(id){
+	var url='<?php echo site_url("ajax/getMembersBooking"); ?>';
+	var data={id:id};
+	$.post(url,data,function(e){
+		$('#isi_members-id').html(e);
+	});
+}
+
+function getTourMembers(id){
+	var url='<?php echo site_url("ajax/getTourMembers"); ?>';
+	var data={id:id};
+	$.post(url,data,function(e){
+		$('#reservation_'+id).html(e);
+	});
+}
+
+function tour_booking_rooming_setRoom(id){
+	var url='<?php echo site_url("ajax/tour_booking_rooming_setRoom"); ?>';
+	var data={id:id};
+	$.post(url,data,function(e){
+		$('#isi_rooming').html(e);
+	});
+}
+
+function getFlightRsvDetails(id){
+	var url='<?php echo site_url("ajax/getFlightRsvDetails"); ?>';
+	var data={id:id};
+	$.post(url,data,function(e){
+		$('#flight_rsv_details').html(e);
+	});
+}
+
+function getFlightPaymentDetails(id){
+	var url='<?php echo site_url("ajax/getFlightPaymentDetails"); ?>';
+	var data={id:id};
+	$.post(url,data,function(e){
+		$('#flight_payment_details').html(e);
+	});
+}
+
+function getFlightETicket(id){
+	var url='<?php echo site_url("ajax/getFlightETicket"); ?>';
+	console.log(url);
+	var data={id:id};
+	$.post(url,data,function(e){
+		$('#flight_eticket').html(e);
+	});
+}
+
+$(".mr_mrs").change(function(){
+	var elem=$(this);
+	var val_1=elem.val();
+	var tmp_id=elem.attr('id');
+	var arr_id=tmp_id.split("_");
+	var id=arr_id[2];
+	if(val_1=='mrs'||val_1=='ms'||val_1=='miss'){
+		$("#g_perempuan_"+id).prop('checked',true);
+	}else{
+		$("#g_laki_laki_"+id).prop('checked',true);
+	}
+});
+
+function setNewVisa(a_row_id){
+	let options = $('#jenis_visa_0_0 option');
+		
+	let arr_jenis_visa = [];
+	let new_row_jenis_visa="";
+	let b_row_id=0;
+
+	let values = $.map(options ,function(option) {
+		return '<option value="'+option.value+'">'+option.label+'</option>'
+	});
+	$('.jenis_visa').each(function(){
+	  arr_jenis_visa.push($(this).attr('row-id'))
+	})
+	b_row_id=arr_jenis_visa.length;
+	
+	new_row_jenis_visa="<div class='row visa_row_0_"+a_row_id+"'><div class='col-xs-6'><select class='form-control jenis_visa' id='jenis_visa_0_"+(parseInt(b_row_id)+1)+"' name='jenis_visa["+a_row_id+"][]' row-id='"+(parseInt(b_row_id)+1)+"'>"+values+"</select><br/><label class='label-control'>Visa Picture</label></div><div class='col-xs-6'><input class='form-control datepicker' group_input='input_1' name='tanggal_exp["+a_row_id+"][]' id='mtanggal_exp' placeholder='Expired Date' type='text' row-id='"+(parseInt(b_row_id)+1)+"' /><br/><input name='visa_img["+a_row_id+"][]' type='file' accept='image/png, image/gif, image/jpeg' /></div></div><hr>";
+	
+	$('.visa_row_'+a_row_id).before(new_row_jenis_visa)
+	$('.datepicker').datepicker({
+		'format': 'dd M yyyy',
+		'autoclose': true,
+		'todayHighlight': true
+	});
+}
+
+/*$('.add_new_visa').click(function(){
+		alert('dor');
+		return false;
+		let options = $('#jenis_visa_0_0 option');
+		
+		let arr_jenis_visa = [];
+		let new_row_jenis_visa="";
+		let a_row_id=0;
+
+		let values = $.map(options ,function(option) {
+			return '<option value="'+option.value+'">'+option.label+'</option>'
+		});
+		$('.jenis_visa').each(function(){
+		  arr_jenis_visa.push($(this).attr('row-id'))
+		})
+		a_row_id=arr_jenis_visa.length;
+		
+		new_row_jenis_visa="<div class='row visa_row_"+a_row_id+"'><div class='col-xs-6'><select class='form-control jenis_visa' id='jenis_visa_"+a_row_id+"_"+a_row_id+"' name='jenis_visa[]' row-id='"+a_row_id+"'>"+values+"</select></div><div class='col-xs-6'><select class='form-control' id='harga_visa_"+a_row_id+"_"+a_row_id+"' name='harga_visa[]' row-id='"+(parseInt(a_row_id)+1)+"'><option value='0'>Pilih...</option></select></div></div>";
+		
+		$('.visa_row_'+(parseInt(a_row_id)-1)).before(new_row_jenis_visa)
+		
+		console.log((parseInt(a_row_id)-1));
+		return false;
+})*/
+
+$("#num_of_members_id").change(function(){	
+	// versi 1
+	var num = this.value
+	bnt_num_of_member(num)
+});
+
+function bnt_num_of_member(num){
+	$('#set_booker_as_guest_id').attr('elstat','on')
+	$('#set_booker_as_guest_id').html('<i class="fa fa-toggle-on"></i>')
+	var i_id=$("#tour_id-id").val();
+	var accom_id=$("#jaccom_id").val();
+	var objaccom=JSON.parse(accom_id);
+	var accom_sel="";
+	for(var j in objaccom){
+		if(objaccom[j].itinerary_id==i_id) accom_sel += "<option value='"+objaccom[j].id+"'>"+objaccom[j].name+"</option>";
+	}
+	
+	var tmp_visa=$("#jvisa_id").val();
+	var jvisa=JSON.parse(tmp_visa);
+	visa_sel="";
+	j=0;
+	for(j in jvisa){
+		if(jvisa[j].id!=0) visa_sel += "<option value='"+jvisa[j].id+"'>"+jvisa[j].jenis_visa+"</option>";
+	}
+	// var num = this.value;
+	var frmmembers="";
+	var frm_t="";
+	var edit_num_id=$("#num_of_members_id_edit").val();
+	seat_filled={};
+	if(edit_num_id==null){
+		for(var i=0; i < num;i++){
+				seat_filled[i+1]=check_form_seat(i+1)
+				if(((i+1)%2)==0) frmmembers +="<div class='row'>";
+					frmmembers +="<div class='col-md-6' id='member_"+(i+1)+"'>";
+					frmmembers +="<div style='background-color:orange;width:100%;height:30px;text-align:center;'><span style='color:#ffffff;font-size:20px'>Guest "+(i+1)+"</span></div><hr/>";
+					frmmembers +="<div class='form-group'>";
+					frmmembers +="<label class='label-control' for='mr_mrs'>Mr/Mrs<sup class='text-red'>*</sup></label><select group_input='input_"+(i+1)+"' id='mr_mrs_"+(i)+"' name='mr_mrs[]' class='form-control mr_mrs'>";
+					frmmembers +="<option value=''>-</option>";
+					frmmembers +="<option value='mr'>Mr</option>";
+					frmmembers +="<option value='ms'>Ms</option>";
+					frmmembers +="<option value='mrs'>Mrs</option>";
+					frmmembers +="<option value='miss'>Miss</option>";
+					frmmembers +="<option value='mstr'>Mstr</option>";
+					frmmembers +="<option value='inf'>Inf</option>";
+					frmmembers +="</select>";
+					frmmembers +="</div>";
+					frmmembers +="<div class='form-group'>";
+					frmmembers +="<input id='urutan_member_"+(i)+"' type='hidden' class='form-control' group_input='input_"+(i)+"' name='urutan_member[]' placeholder='Urutan Member' value='"+i+"'/>";
+					frmmembers +="<input name='muserid[]' class='muserid' value='0' type='hidden'/>";
+					frmmembers +="</div>";
+					frmmembers +="<div class='form-group'>";
+					frmmembers +="<label class='label-control'>First Name<sup class='text-red'>*</sup></label><input id='mfirst_name_"+(i)+"' type='text' class='form-control m_booker member_booker_"+(i)+"' group_input='input_"+(i)+"' name='mfirst_name[]' placeholder='First Name'/>";
+					frmmembers +="</div>";
+					
+					frmmembers +="<div class='form-group'>";
+					frmmembers +="<label class='label-control'>Last Name<sup class='text-red'>*</sup></label><input id='mlast_name_"+(i)+"' type='text' class='form-control m_booker member_booker_"+(i)+"' group_input='input_"+(i)+"' name='mlast_name[]' placeholder='Last Name'/>";
+					frmmembers +="</div>";
+					
+					frmmembers +="<div class='form-group'>";
+					frmmembers +="<label class='label-control'>Gender<sup class='text-red'>*</sup></label><br/><input type='radio' id='g_laki_laki_"+(i)+"' name='gender["+(i)+"]' group_input='input_"+(i)+"' value='L' /> <label for='g_laki_laki_"+(i)+"'>Laki-Laki</label> <input type='radio' id='g_perempuan_"+(i)+"' name='gender["+(i)+"]' value='Pak'  group_input='input_"+(i)+"' /> <label for='g_perempuan_"+(i)+"'>Perempuan</label>";
+					frmmembers +="</div>";
+					frmmembers +="<div class='form-group'>";
+					frmmembers +='<label class="label-control">Place Of Birth</label><input class="form-control" group_input="input_'+(i)+'" name="mpob[]" id="mpob_'+(i)+'" placeholder="Place Of Birth" type="text" />';
+					frmmembers +="</div>";
+					frmmembers +="<div class='form-group'>";
+					frmmembers +="<label class='label-control'>Date Of Birth<sup class='text-red'>*</sup></label><input group_input='input_"+(i)+"' type='text' class='form-control mdob member_booker_"+(i)+"' name='mdob[]' id='mdob_"+(i)+"' placeholder='Date Of Birth' />";
+					frmmembers +="</div>";
+					frmmembers +="<div class='form-group'>";
+					frmmembers +="<label class='label-control'>Phone Number</label><input group_input='input_"+(i)+"' type='text' class='form-control member_booker_"+(i)+"' name='mphone[]' id='phone_"+(i)+"' placeholder='Phone Number'/>";
+					frmmembers +="</div>";
+					frmmembers +="<div class='form-group'>";
+					frmmembers +="<label class='label-control'>Email</label><input group_input='input_"+(i)+"' type='email' class='form-control email member_booker_"+(i)+"' name='memail[]' id='email_"+(i)+"' placeholder='Email'/>";
+					frmmembers +="</div>";
+					frmmembers +="<div class='form-group'>";
+					frmmembers +="<label class='label-control'>Hobbies</label><br/><input type='checkbox' id='"+(i)+"_hobies_1' name='hobies_"+(i)+"[]' value='Reading' /> <label for='"+(i)+"_hobies_1'>Reading</label> <input type='checkbox' id='"+(i)+"_hobies_2' name='hobies_"+(i)+"[]' value='Writing' /> <label for='"+(i)+"_hobies_2'>Writing</label> <input type='checkbox' id='"+(i)+"_hobies_3' name='hobies_"+(i)+"[]' value='Cooking' /> <label for='"+(i)+"_hobies_3'>Cooking</label> <input type='checkbox' id='"+(i)+"_hobies_4' name='hobies_"+(i)+"[]' value='Photography' /> <label for='"+(i)+"_hobies_4'>Photography</label><br/><input type='checkbox' id='"+(i)+"_hobies_5' name='hobies_"+(i)+"[]' value='Sightseeing' /> <label for='"+(i)+"_hobies_5'>Sightseeing</label> <input type='checkbox' id='"+(i)+"_hobies_6' name='hobies_"+(i)+"[]' value='Sport Activity' /> <label for='"+(i)+"_hobies_6'>Sport Activity</label> <input type='checkbox' id='"+(i)+"_hobies_7' name='hobies_"+(i)+"[]' value='Social Activity' /> <label for='"+(i)+"_hobies_7'>Social Activity</label><br/><input type='text' class='form-control' name='hobies_text[]' placeholder='Others (isi sendiri)' />";
+					frmmembers +="</div>";
+					frmmembers +="<div class='form-group'>";
+					frmmembers +="<label class='label-control' for='mtype_of_meal'>Type Of Meal</label><select name='mtype_of_meal[]' id='mtype_of_meal_"+(i)+"'' class='form-control select2' group_input='input_"+(i)+"'><option value='2'>Standard</option><option value='1'>Vegetarian</option><option value='3'>No Pork</option></select>";
+					frmmembers +="</div>";
+					frmmembers +="<div class='form-group'>";
+					frmmembers +="<label class='label-control'>Passport Number</label><input group_input='input_"+(i)+"' type='text' class='form-control' name='mpass_num[]' id='mpass_num_"+(i)+"' placeholder='Passport Number'>";
+					frmmembers +="</div>";
+					frmmembers +="<div class='form-group'>";
+					frmmembers +="<label class='label-control'>Expired Passport</label><input group_input='input_"+(i)+"' type='text' placeholder='Expired Passport' class='form-control exp_pass' onchange='cekpassport_exp("+(i)+")' name='mpass_exp[]' id='exp_pass_"+(i)+"'/><span id='warning_exp_pass_"+(i)+"'></span>";
+					frmmembers +="</div>";
+					frmmembers +="<div class='form-group'>";
+					frmmembers +="<label class='label-control'>Place Of Issue Passport</label><input group_input='input_"+(i)+"' type='text' class='form-control' name='mpass_issue[]' id='mpass_issue_"+(i)+"'>";
+					frmmembers +="</div>";
+					frmmembers +="<div class='form-group'>";
+					frmmembers +="<label class='label-control'>Passport Picture</label><input type='file' name='pasport_img[]' accept='image/png, image/gif, image/jpeg' /><span id='warning_exp_pass_"+(i+1)+"'></span>";
+					frmmembers +="</div>";
+					
+					frmmembers +="<div class='callout callout-info' id='mvisa_id_"+(i+1)+"'>";
+								  
+					frmmembers +="<div class='row'>";
+					frmmembers +="<div class='col-xs-6'>";
+					frmmembers +="<h4>Visa</h4>";
+					frmmembers +="</div>";
+					frmmembers +="<div class='col-xs-6'>";
+					frmmembers +="<button type='button' class='btn btn-link pull-right text-red add_new_visa' onclick='setNewVisa("+i+")'>add new</button>";
+					frmmembers +="</div>";
+					frmmembers +="</div>";
+					frmmembers +="<div class='row visa_row_"+(i)+"'>";
+					frmmembers +="<div class='col-xs-6'>";
+					//frmmembers +="<select group_input='input_"+(i+1)+"' class='form-control' id='nama_paket_visa_id_"+(i+1)+"' name='nama_paket_visa["+(i+1)+"]' onchange='setvisano("+(i+1)+")'>";
+					frmmembers +='<select class="form-control" id="jenis_visa_'+(i)+'_'+(i)+'" name="jenis_visa['+(i)+'][]" row-id="'+(i)+'">';
+					frmmembers +="<option value=''>Pilih...</option>"+visa_sel;
+					frmmembers +="</select>";
+					frmmembers +="<br/><label class='label-control'>Visa Picture</label>";
+					frmmembers +="</div>";
+					frmmembers +="<div class='col-xs-6'>";
+					frmmembers +="<input class='form-control datepicker' group_input='input_1' name='tanggal_exp["+(i)+"][]' placeholder='Expired Date' type='text' />";
+					frmmembers +="<br/><input name='visa_img["+(i)+"][]' type='file' accept='image/png, image/gif, image/jpeg' />";
+													   
+							  
+					frmmembers +="</div>";
+					/*frmmembers +="<div class='col-xs-4'>";
+					frmmembers +="<input type='text' readonly name='harga_visa["+(i+1)+"]' group_input='input_"+(i+1)+"' class='form-control' id='harga_visa_id_"+(i+1)+"' />";
+					frmmembers +="</div>";*/
+					frmmembers +="</div>";
+					frmmembers +="</div>";
+
+					//frmmembers +="<br/><label class='label-control'>Accommodation</label><select name='maccommodation[]' class='c_accom form-control select2'><option value='' disabled selected>Accommodation</option>"+accom_sel+"</select>";
+					
+					frmmembers +="</div>";
+					frmmembers +="</div>";
+				if(((i+1)%2)!=0) 
+					frmmembers +="</div><!-- end row -->";
+
+			//$("#members_panel_id").append(frmmembers);
+		}
+		
+		$("#members_panel_id").html(frmmembers);
+		for(var i=0; i < num;i++){
+			restore_value(seat_filled[i+1],'input_'+(i+1));
+		}
+		$(".select2").select2({
+			placeholder: 'Pilih...'
+		});
+		$('.datepicker').datepicker({
+			'format': 'dd M yyyy',
+			'autoclose': true,
+			'todayHighlight': true
+		});
+		
+		$(".mvisa").change(function() {
+			var elem=$(this);
+			var tmp_id=elem.attr('id');
+			var arr_id=tmp_id.split("_");
+			var id=arr_id[2];
+			if (this.value == "No") {
+				//$('#mvisa_id_'+id).show();
+			}else{
+				$('#mvisa_id_'+id).hide();
+			}
+		});
+		
+		$(".mr_mrs").change(function(){
+			var elem=$(this);
+			var val_1=elem.val();
+			var tmp_id=elem.attr('id');
+			var arr_id=tmp_id.split("_");
+			var id=arr_id[2];
+			
+			if(val_1=='mrs'||val_1=='ms'||val_1=='miss'){
+				$("#g_perempuan_"+(id-1)).prop('checked',true);
+			}else{
+				$("#g_laki_laki_"+(id-1)).prop('checked',true);
+			}
+		});
+		
+		$(".member_booker_0").keyup(function(e){
+			let status=$('#set_booker_add_guest_id').attr('elstat')
+			if(status==='on'){
+				let booker=$(".booker");
+				let member_booker=$(".member_booker_0")
+				for(let i=0;i<4;i++){
+					booker.eq(i).val(member_booker.eq(i).val())
+				}
+				booker.eq(4).datepicker('setDate', member_booker.eq(2).val())
+				booker.eq(2).val(member_booker.eq(4).val())
+			}
+		})
+		
+		$(".booker").keyup(function(e){
+			let status=$('#set_booker_add_guest_id').attr('elstat')
+			if(status==='on'){
+				let booker=$(".booker");
+				let member_booker=$(".member_booker_0")
+				for(let i=0;i<4;i++){
+					member_booker.eq(i).val(booker.eq(i).val())
+				}
+				member_booker.eq(2).datepicker('setDate', booker.eq(4).val())
+				member_booker.eq(4).val(booker.eq(2).val())
+			}
+		})
+		
+		$('input[name="dob"]').datepicker({
+			'format': 'dd M yyyy',
+			'autoclose': true,
+			'todayHighlight': true,
+			'endDate': new Date
+		});
+		
+		$('.mdob').datepicker({
+			'format': 'dd M yyyy',
+			'autoclose': true,
+			'todayHighlight': true,
+			'endDate': new Date
+		});
+		
+		let exp_pass_end=new Date()
+		exp_pass_end.setMonth(exp_pass_end.getMonth()+7)
+		$('.exp_pass').datepicker({
+			'format': 'dd M yyyy',
+			'autoclose': true,
+			'startDate': exp_pass_end
+		});
+		
+		$('.m_booker').keyup(function(){
+			var elem=$(this);
+			var val_1=elem.val();
+			var tmp_id=elem.attr('id');
+			var arr_id=tmp_id.split("_");
+			var name=arr_id[0];
+			var id;
+					
+			var r = $('#'+tmp_id).get(0).getBoundingClientRect()
+			let r_top=parseInt(r.top)+30
+			let r_left=290
+			
+			if($('#bntAutocomplate').length > 0){
+				$('#bntAutocomplate').remove()
+			}
+			
+			if(arr_id[2]==='undefined'){
+				id=arr_id[1]
+			}else{
+				id=arr_id[2]
+			}
+			
+			$.post('<?php echo site_url("ajax/getMembers"); ?>',{val_find_text:val_1,name:name},function(data){
+				// console.log(data)
+				let au_cont=''
+				obj=JSON.parse(data)
+				
+				var table ="<table class='table table-hover'><tr><th>First Name</th><th>Last Name</th><th>Date Of Birth</th><th>Email</th><th>Phone</th><th>Action</th></tr>"
+				for(let i=0;i<obj.length;i++){
+					table += "<tr><td>"+obj[i].FirstName+"</td><td>"+obj[i].LastName+"</td><td>"+obj[i].dob+"</td><td>"+obj[i].Email+"</td><td>"+obj[i].MObileNo+"</td><td><button type='button' class='btn btn-success' onclick='setMBooker("+obj[i].UserId+","+id+")'>Set</button></td></tr>"
+				}
+				table +="</table>"
+				
+				if(obj.length > 0){
+					au_cont='<div id="bntAutocomplate" class="box box-success" style="position:fixed;top:'+r_top+'px;left:'+r_left+'px;z-index:10;background-color:#ffffff;overflow-y:scroll;max-height:300px;width:70%;">'
+						au_cont +='<div class="box-header with-border">'
+						  au_cont +='<h3 class="box-title">please select if the user already exists</h3>'
+
+						  au_cont +='<div class="box-tools pull-right">'
+							au_cont +='<button type="button" class="btn btn-box-tool close-bntAutocomplate"><i class="fa fa-times"></i></button>'
+						  au_cont +='</div>'
+						au_cont +='</div>'
+						au_cont +='<div class="box-body">'+table+'</div></div>'
+					
+					$('#'+tmp_id).parent().append(au_cont)
+					$('.close-bntAutocomplate').click(function(e){
+						$('#bntAutocomplate').remove()
+					})
+				}else{
+					if($('#bntAutocomplate').length > 0) $('#bntAutocomplate').remove()
+				}
+			})		
+		});
+	}else{
+		let member_1=$('.muserid')
+		let status=$(this).attr('elstat')
+		let num_of_members_id_edit=0
+		let val_num_of_members=parseInt(num)
+		let userid=$("input[name=id]").val()
+		let member = $.map(member_1, function(option){
+			return option.value
+		})
+		if($('#num_of_members_id_edit').length > 0){
+			num_of_members_id_edit=parseInt($('#num_of_members_id_edit').val())
+		}
+		// alert(num_of_members_id_edit)
+		if(val_num_of_members <= num_of_members_id_edit){
+			val_num_of_members=num_of_members_id_edit
+		}
+		
+		$("#members_panel_id").html('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>')
+		$.post("<?php echo site_url('ajax/setMembersForm'); ?>",{id:member,jml:val_num_of_members,userid:userid},function(data){
+			$("#members_panel_id").html(data);
+			$('.datepicker').datepicker({
+				'format': 'dd M yyyy',
+				'autoclose': true,
+				'todayHighlight': true
+			});
+			
+			$(".mr_mrs").change(function(){
+				var elem=$(this);
+				var val_1=elem.val();
+				var tmp_id=elem.attr('id');
+				var arr_id=tmp_id.split("_");
+				var id=arr_id[2];
+				// alert(tmp_id);
+				if(val_1=='mrs'||val_1=='ms'||val_1=='miss'){
+					$("#g_perempuan_"+(id)).prop('checked',true);
+				}else{
+					$("#g_laki_laki_"+(id)).prop('checked',true);
+				}
+			});
+			
+			$('input[name="dob"]').datepicker({
+				'format': 'dd M yyyy',
+				'autoclose': true,
+				'todayHighlight': true,
+				'endDate': new Date
+			});
+			
+			$('.mdob').datepicker({
+				'format': 'dd M yyyy',
+				'autoclose': true,
+				'todayHighlight': true,
+				'endDate': new Date
+			});
+			
+			let exp_pass_end=new Date()
+			exp_pass_end.setMonth(exp_pass_end.getMonth()+7)
+			$('.exp_pass').datepicker({
+				'format': 'dd M yyyy',
+				'autoclose': true,
+				'startDate': exp_pass_end
+			});
+			
+			$('#num_of_members_id option[value="'+val_num_of_members+'"]').attr('selected','selected')
+			/*$('#set_booker_as_guest_id').click(function(){
+				let booker=$(".booker");
+				let member_booker=$(".member_booker_0");
+				if(member_booker[0].value===""){
+					$(this).html('<i class="fa fa-toggle-on"></i>');
+						
+					for(let i=0;i<booker.length;i++){
+						member_booker[i].value=booker[i].value
+					}
+					member_booker[2].value=booker[4].value
+					member_booker[4].value=booker[2].value
+				}else{
+					$(this).html('<i class="fa fa-toggle-off"></i>');
+					for(let i=0;i<member_booker.length;i++){
+						member_booker[i].value=""
+					}
+				}
+				return false
+			})*/
+				$('.m_booker').keyup(function(){
+				var elem=$(this);
+				var val_1=elem.val();
+				var tmp_id=elem.attr('id');
+				var arr_id=tmp_id.split("_");
+				var name=arr_id[0];
+				var id;
+						
+				var r = $('#'+tmp_id).get(0).getBoundingClientRect()
+				let r_top=parseInt(r.top)+30
+				// let r_left=parseInt(r.left)
+				let r_left=290
+				
+				if($('#bntAutocomplate').length > 0){
+					$('#bntAutocomplate').remove()
+				}
+				
+				if(arr_id[2]==='undefined'){
+					id=arr_id[1]
+				}else{
+					id=arr_id[2]
+				}
+				
+				$.post('<?php echo site_url("ajax/getMembers"); ?>',{val_find_text:val_1,name:name},function(data){
+					// console.log(data)
+					let au_cont=''
+					obj=JSON.parse(data)
+					
+					var table ="<table class='table table-hover'><tr><th>First Name</th><th>Last Name</th><th>Date Of Birth</th><th>Email</th><th>Phone</th><th>Action</th></tr>"
+					for(let i=0;i<obj.length;i++){
+						table += "<tr><td>"+obj[i].FirstName+"</td><td>"+obj[i].LastName+"</td><td>"+obj[i].dob+"</td><td>"+obj[i].Email+"</td><td>"+obj[i].MObileNo+"</td><td><button type='button' class='btn btn-success' onclick='setMBooker("+obj[i].UserId+","+id+")'>Set</button></td></tr>"
+					}
+					table +="</table>"
+					
+					if(obj.length > 0){
+						au_cont='<div id="bntAutocomplate" class="box box-success" style="position:fixed;top:'+r_top+'px;left:'+r_left+'px;z-index:10;background-color:#ffffff;overflow-y:scroll;max-height:300px;width:70%;">'
+							au_cont +='<div class="box-header with-border">'
+							  au_cont +='<h3 class="box-title">please select if the user already exists</h3>'
+
+							  au_cont +='<div class="box-tools pull-right">'
+								au_cont +='<button type="button" class="btn btn-box-tool close-bntAutocomplate"><i class="fa fa-times"></i></button>'
+							  au_cont +='</div>'
+							au_cont +='</div>'
+							au_cont +='<div class="box-body">'+table+'</div></div>'
+						
+						$('#'+tmp_id).parent().append(au_cont)
+						$('.close-bntAutocomplate').click(function(e){
+							$('#bntAutocomplate').remove()
+						})
+					}else{
+						if($('#bntAutocomplate').length > 0) $('#bntAutocomplate').remove()
+					}
+				})		
+			});
+		});
+		/*var elem=[];
+		for(var i=0;i<num;i++){
+			var a=$(".edit_box").eq(i).html();
+			if(a){
+				elem[i]=a;
+			}else{
+				frm_t="";
+				
+				frm_t +="<span style='color:blue;font-size:12px'>Guest "+(i+1)+"</span>";
+				frm_t +="<div class='form-group'>";
+				frm_t +="<label class='label-control'>First Name</label><input type='text' class='form-control' name='mfirst_name[]' placeholder='First Name' required  />";
+				frm_t +="<label class='label-control'>Last Name</label><input type='text' class='form-control' name='mlast_name[]' placeholder='Last Name'/>";
+				frm_t +="<label class='label-control'>Date Of Birth</label><input type='text' class='form-control mdob' name='mdob[]' placeholder='Date Of Birth'/>";
+				
+				frm_t +="<label class='label-control'>Passport Number</label><input type='text' class='form-control' name='mpass_num[]' placeholder='Passport Number'>";
+				frm_t +="<label class='label-control'>Expired Passport</label><input type='text' placeholder='Expired Passport' class='form-control datepicker' onchange='cekpassport_exp("+(i+1)+")' name='mpass_exp[]'><span id='warning_exp_pass_"+(i+1)+"'></span><br/>";
+				frm_t +="<label class='label-control'>Place Of Issue Passport</label><input type='text' class='form-control' name='mpass_issue[]'>";
+
+				frm_t +="<label class='label-control'>Do Guests already have a Visa?</label><br/><input type='radio' id='yes_id_"+(i+1)+"' name='mvisa["+(i+1)+"]' class='mvisa' value='Yes' checked /><label for='yes_id_"+(i+1)+"'>Yes</label> <input type='radio' id='no_id_"+(i+1)+"' class='mvisa' name='mvisa["+(i+1)+"]' value='No' /> <label for='no_id_"+(i+1)+"'>No</label>";
+				
+				frm_t +="<div class='callout callout-info' id='mvisa_id_"+(i+1)+"' style='display:none;'>";
+				frm_t +="<h4>Visa</h4>";
+				frm_t +="<div class='row'>";
+				frm_t +="<div class='col-xs-4'>";
+				frm_t +="<select class='form-control' id='nama_paket_visa_id_"+(i+1)+"' name='nama_paket_visa["+(i+1)+"]' onchange='setvisano("+(i+1)+")'>";
+				frm_t +="<option value=''>Pilih...</option>"+visa_sel;
+				frm_t +="</select>";
+				frm_t +="</div>";
+				frm_t +="<div class='col-xs-4'>";
+				frm_t +="<input type='text' readonly name='jenis_visa["+(i+1)+"]' class='form-control' id='jenis_visa_id_"+(i+1)+"' />";
+				frm_t +="</div>";
+				frm_t +="<div class='col-xs-4'>";
+				frm_t +="<input type='text' readonly name='harga_visa["+(i+1)+"]' class='form-control' id='harga_visa_id_"+(i+1)+"' />";
+				frm_t +="</div>";
+				frm_t +="</div>";
+				frm_t +="</div>";
+
+				frm_t +="<br/><label class='label-control'>Accommodation</label><select name='maccommodation[]' class='c_accom form-control'><option value='' disabled selected>Accommodation</option>"+accom_sel+"</select>";
+				
+				frm_t +="</div>";
+				
+				elem[i]=frm_t;
+			}
+		}
+		for(var i=0;i<num;i++){
+			if(i%2==0) frmmembers +="<div class='row'>";
+			frmmembers +="<div class='edit_box col-md-6'>";
+			frmmembers +=elem[i];
+			frmmembers +="</div>";
+			if(i%2!=0) frmmembers +="</div>";
+		}*/
+	}
+}
+
+function restore_value(data=null, group_input=null){
+	//alert(data);
+	dom_value=$("[group_input="+group_input+"]").map(function(){return $(this).attr('id');}).get();
+	$.each(data, function(i, data1){
+	//	alert(data1);
+	//	alert(dom_value[i]);
+		$('[id='+dom_value[i]+']').val(data1);
+	})
+}
+
+function check_form_seat(iteration=null){
+	if(iteration != null){
+		var values = $("[group_input=input_"+iteration+"]").map(function(){return $(this).val();}).get();
+			
+	}
+	else{
+		var values=null;
+	}
+  	return values;
+}
+
+function deleteMember(reservation_id, id_member, userid){
+	var r = confirm("Are you sure to delete data?");
+	if (r == false) {
+	  return false;
+	} 
+	dataMap={};
+	dataMap['reservation_id']=reservation_id;
+	dataMap['id_member']=id_member;
+	dataMap['userid']=userid;
+	dataMap['numOfmembers']=parseInt($("#num_of_members_id").val());
+	$.post('<?=base_url();?>/ajax/deleteMember', dataMap, function(data){
+		json=$.parseJSON(data);
+		if(json.status){
+			// $("#num_of_members_id").val(numOfmembers-1);
+			// $("#num_of_members_id").change();
+			// location.reload()
+			return false;
+		}
+	})
+}
+
+function setvisano(id){
+	var val_id=$("#nama_paket_visa_id_"+id).val();
+	var tmp_visa=$("#jvisa_id").val();
+	var jvisa=JSON.parse(tmp_visa);
+	var visa=[];
+	
+	for(var i in jvisa){
+		visa[jvisa[i].id]={nama_pemilik:jvisa[i].nama_pemilik,jenis_visa:jvisa[i].jenis_visa,price:jvisa[i].price};
+	}
+	
+	$("#jenis_visa_id_"+id).val(visa[val_id].jenis_visa);
+	$("#harga_visa_id_"+id).val(visa[val_id].price);
+}
+
+function setAccomPrice(i_id,id,val){
+	var i_id=i_id;
+	var id=id;
+	var val=val;
+	
+	$.post("<?php echo site_url('ajax/setAccomPrice'); ?>",{i_id:i_id,id:id,val:val},function(data){
+		location.reload();
+	});
+}
+
+$(".mvisa").change(function() {
+
+		var elem=$(this);
+
+		var tmp_id=elem.attr('id');
+
+
+		var arr_id=tmp_id.split("_");
+
+			
+
+		var id=arr_id[2];
+
+		
+
+		if (this.value == "No") {
+
+			//$('#mvisa_id_'+id).show();
+
+		}else{
+
+			$('#mvisa_id_'+id).hide();
+
+		}
+
+	});
+	function f_visa(e){
+		var arr_id=e.split("_");
+		var id=arr_id[2];
+		
+		if ($('#'+e).val() == "No") {
+
+			//$('#mvisa_id_'+id).show();
+
+		}else{
+
+			$('#mvisa_id_'+id).hide();
+
+		}
+
+	}
+/* expire passport */
+function cekpassport_exp(id){
+	var val=$('#exp_pass_'+id).val();
+	var iarrival_date=$('#iarrival_date').val();
+	$.post("<?php echo site_url('ajax/cekpassport_exp'); ?>",{id:id,val:val,arrival_date:iarrival_date},function(e){
+		$('#warning_exp_pass_'+id).html(e);
+		// console.log(e);
+		/*if(e < 7){ 
+			$('#warning_exp_pass_'+id).text('Masa berlaku pasport anda sudah mendekati expired saat arrival');
+		}else{
+			$('#warning_exp_pass_'+id).text('');
+		}*/
+	});
+}
+/* country, province and city */
+$("#country_id").change(function(){
+	var id=this.value;
+	$.post("<?php echo site_url('ajax/getCity'); ?>",{code:id+'|JKT'},function(data){
+		$("#city_id").html(data);
+		$("#city_id").trigger("change");
+	});
+});
+
+$("#provincies_id").change(function(){
+	var nilai=$("#city_id").val();
+	var idp=$("#provincies_id").val();
+	
+	// if(nilai.length <= 0) return false;
+	var id=JSON.stringify(nilai);
+	
+	$.post("<?php echo site_url('ajax/getCity'); ?>",{code:id,idp:idp},function(data){
+		$("#city_id").html(data);
+		$("#city_id").trigger("change");
+	});
+});
+
+$("#search-tour-id").keyup(function(){
+	var title=$(this).val();
+	var dp=$("#search-dp-id").val();
+	// var idp=$("#provincies_id").val();
+	
+	// if(nilai.length <= 0) return false;
+	// var id=JSON.stringify(nilai);
+	// if(title=="" && dp=="") return false;
+	$.post("<?php echo site_url('ajax/getTours'); ?>",{title:title,dp:dp},function(data){
+		$("#modal-tours-id").html(data);
+	});
+});
+
+$("#search-dp-id").change(function(){
+	var dp=$(this).val();
+	var title=$("#search-tour-id").val();
+	// var idp=$("#provincies_id").val();
+	
+	// if(nilai.length <= 0) return false;
+	// var id=JSON.stringify(nilai);
+	// if(title=="" && dp=="") return false;
+	$.post("<?php echo site_url('ajax/getTours'); ?>",{title:title,dp:dp},function(data){
+		$("#modal-tours-id").html(data);
+	});
+});
+
+$("#search-btn-id").click(function(){
+	var title=$("#search-tour-id").val();
+	var dp=$("#search-dp-id").val();
+	if(title!="" && dp!=""){
+		
+	}
+	
+	if(title!=""){
+		
+	}
+	
+	if(dp!=""){
+		
+	}
+});
+
+$("input[name=phone]").change(function(){
+	var a=$(this).val();
+	$("#phone").val(a);
+});
+$("input[name=email]").change(function(){
+	var a=$(this).val();
+	$("#email").val(a);
+});
+$("#type_of_meal_id").change(function(){
+	var a=$(this).val();
+	$('#type_of_meal option[value='+a+']').attr('selected', true);
+
+});
+
+$(document).on('change', '[id^=jenis_visa_]', function(){
+	let id_jenis_visa=$(this).attr('id');
+	id_jenis_visa_1=id_jenis_visa.split('_');
+	id_jenis_visa_2='#harga_visa_'+id_jenis_visa_1[2]+'_';
+	dataMap={}
+	dataMap['jenis_visa_id']=$(this).val();
+	row_id=$(this).attr('row-id')
+	$.post('<?=base_url();?>ajax/getHargaVisa', dataMap, function(data){
+		$(id_jenis_visa_2+row_id).html(data)
+		$('#price_'+row_id).val('')
+	})
+	console.log(id_jenis_visa_2)						 
+})
+
+$(document).on('change', "[class=mr_mrs]", function(){
+	var elem=$(this);
+	var val_1=elem.val();
+	var tmp_id=elem.attr('id');
+	var arr_id=tmp_id.split("_");
+	var id=arr_id[2];
+	// alert(tmp_id);
+	if(val_1=='mrs'||val_1=='ms'||val_1=='miss'){
+		$("#g_perempuan_"+id).prop('checked',true);
+	}else{
+		$("#g_laki_laki_"+id).prop('checked',true);
+	}
+});
+
+function tourFormSubmit(tourform, e){
+	e.preventDefault()
+	
+	var id_userid_val=$('#id_userid_val').val()
+	var first_name=$('#id_first_name').val()
+	var last_name=$('#id_last_name').val()
+	var email=$('#id_email').val()
+	var country=$('#country_id').val()
+	var city=$('#city_id').val()
+	var phone=$('#id_phone').val()
+	var dob=$('#id_dob').val()
+	var jml_member=$('.mdob').length
+	
+	const emailValue=[0,first_name,last_name,dob]
+	
+	checkEmailValid(emailValue)
+	checkEmailValid(0)
+	checkEmailValid([0,phone])
+	
+	for(let i=0;i<jml_member;i++){
+		var mmr_mrs=$('#mr_mrs_'+i).val()
+		var mfirst_name=$('#mfirst_name_'+i).val()
+		var mlast_name=$('#mlast_name_'+i).val()
+		var memail=$('#email_'+i).val()
+		var mphone=$('#phone_'+i).val()
+		var mdob=$('#mdob_'+i).val()
+		var muserid=$('.muserid').eq(i).val()
+		
+		const memailValue=[i+1,mfirst_name,mlast_name,mdob]
+		
+		checkEmailValid(memailValue)
+		checkEmailValid(i+1)
+		checkEmailValid([i+1,mphone])
+	}
+	
+	// tourFormSubmitCek()
+	// let jml_error_alert=$('.error_alert').length
+	/*let jml_error_alert_1=$('.error_alert_1').length
+	var jml_error_alert_1_text=0
+	for(let i=0;i<jml_error_alert_1;i++){
+		let error_alert_1_text = $('.error_alert_1').eq(i).text()
+		if(error_alert_1_text.length > 0){
+			jml_error_alert_1_text++
+		}
+	}*/
+	// console.log(jml_error_alert)
+}
+function tourFormSubmitCek(){
+	var id_userid_val=$('#id_userid_val').val()
+	var first_name=$('#id_first_name').val()
+	var last_name=$('#id_last_name').val()
+	var email=$('#id_email').val()
+	var country=$('#country_id').val()
+	var city=$('#city_id').val()
+	var phone=$('#id_phone').val()
+	var dob=$('#id_dob').val()
+	var jml_member=$('.mdob').length
+	
+	const emailValue=[0,first_name,last_name,dob]
+	
+	/*if(id_userid_val==="0" || id_userid_val===""){
+		checkEmailValid(emailValue)
+		checkEmailValid(0)
+		checkEmailValid([0,phone])
+	}*/
+
+	if(first_name === ""){
+		if($('#first_name_alert').length > 0){
+			$('#first_name_alert').text('First Name can\'t be empty')
+		}else{
+			$('#id_first_name').parent().append('<span id="first_name_alert" class="error_alert" style="color:red;">First Name can\'t be empty</span>')
+		}
+	}else{
+		$('#first_name_alert').remove()
+	}
+
+	if(last_name === ""){
+		if($('#last_name_alert').length > 0){
+			$('#last_name_alert').text('last Name can\'t be empty')
+		}else{
+			$('#id_last_name').parent().append('<span id="last_name_alert" class="error_alert" style="color:red;">Last Name can\'t be empty</span>')
+		}
+	}else{
+		$('#last_name_alert').remove()
+	}
+
+	if(email === ""){
+		if($('#email_alert').length > 0){
+			$('#email_alert').text('Email can\'t be empty')
+		}else{
+			$('#id_email').parent().append('<span id="email_alert" class="error_alert" style="color:red;">Email can\'t be empty</span>')
+		}
+	}else{
+		$('#email_alert').remove()
+	}
+
+	if(country === ""){
+		if($('#country_alert').length > 0){
+			$('#country_alert').text('Country can\'t be empty')
+		}else{
+			$('#country_id').parent().append('<span id="country_alert" class="error_alert" style="color:red;">Country can\'t be empty</span>')
+		}
+	}else{
+		$('#country_alert').remove()
+	}
+
+	if(city === ""){
+		if($('#city_alert').length > 0){
+			$('#city_alert').text('City can\'t be empty')
+		}else{
+			$('#city_id').parent().append('<span id="city_alert" class="error_alert" style="color:red;">City can\'t be empty</span>')
+		}
+	}else{
+		$('#city_alert').remove()
+	}
+
+	if(city === ""){
+		if($('#city_alert').length > 0){
+			$('#city_alert').text('City can\'t be empty')
+		}else{
+			$('#city_id').parent().append('<span id="city_alert" class="error_alert" style="color:red;">City can\'t be empty</span>')
+		}
+	}else{
+		$('#city_alert').remove()
+	}
+
+	if(phone === ""){
+		if($('#phone_alert').length > 0){
+			$('#phone_alert').text('Phone can\'t be empty')
+		}else{
+			$('#id_phone').parent().append('<span id="phone_alert" class="error_alert" style="color:red;">Phone can\'t be empty</span>')
+		}
+	}else{
+		$('#phone_alert').remove()
+	}
+
+	if(dob === ""){
+		if($('#dob_alert').length > 0){
+			$('#dob_alert').text('Date Of Birth can\'t be empty')
+		}else{
+			$('#id_dob').parent().append('<span id="dob_alert" class="error_alert" style="color:red;">Date Of Birth can\'t be empty</span>')
+		}
+	}else{
+		$('#dob_alert').remove()
+	}
+	
+	for(let i=0;i<jml_member;i++){
+		var mmr_mrs=$('#mr_mrs_'+i).val()
+		var mfirst_name=$('#mfirst_name_'+i).val()
+		var mlast_name=$('#mlast_name_'+i).val()
+		var memail=$('#email_'+i).val()
+		var mphone=$('#phone_'+i).val()
+		var mdob=$('#mdob_'+i).val()
+		var muserid=$('.muserid').eq(i).val()
+		
+		const memailValue=[i+1,mfirst_name,mlast_name,mdob]
+		
+		/*if(muserid === "0"){
+			checkEmailValid(memailValue)
+			checkEmailValid(i+1)
+			checkEmailValid([i+1,mphone])
+		}*/
+		
+		if(mmr_mrs === ""){
+			if($('#mmr_mrs_alert_'+i).length > 0){
+				$('#mmr_mrs_alert_'+i).text('Mr/Mrs can\'t be empty')
+			}else{
+				$('#mr_mrs_'+i).parent().append('<span id="mmr_mrs_alert_'+i+'" class="error_alert" style="color:red;">Mr/Mrs can\'t be empty</span>')
+			}
+		}else{
+			$('#mmr_mrs_alert_'+i).remove()
+		}
+		
+		if(mfirst_name === ""){
+			if($('#mfirst_name_alert_'+i).length > 0){
+				$('#mfirst_name_alert_'+i).text('First Name can\'t be empty')
+			}else{
+				$('#mfirst_name_'+i).parent().append('<span id="mfirst_name_alert_'+i+'" class="error_alert" style="color:red;">First Name can\'t be empty</span>')
+			}
+		}else{
+			$('#mfirst_name_alert_'+i).remove()
+		}
+		
+		if(mlast_name === ""){
+			if($('#mlast_name_alert_'+i).length > 0){
+				$('#mlast_name_alert_'+i).text('Last Name can\'t be empty')
+			}else{
+				$('#mlast_name_'+i).parent().append('<span id="mlast_name_alert_'+i+'" class="error_alert" style="color:red;">Last Name can\'t be empty</span>')
+			}
+		}else{
+			$('#mlast_name_alert_'+i).remove()
+		}
+		
+		if(memail === ""){
+			if($('#memail_alert_'+i).length > 0){
+				$('#memail_alert_'+i).text('Email can\'t be empty')
+			}else{
+				$('#email_'+i).parent().append('<span id="memail_alert_'+i+'" class="error_alert" style="color:red;">Email can\'t be empty</span>')
+			}
+		}else{
+			$('#memail_alert_'+i).remove()
+		}
+		
+		if(mphone === ""){
+			if($('#mphone_alert_'+i).length > 0){
+				$('#mphone_alert_'+i).text('Phone can\'t be empty')
+			}else{
+				$('#phone_'+i).parent().append('<span id="mphone_alert_'+i+'" class="error_alert" style="color:red;">Phone can\'t be empty</span>')
+			}
+		}else{
+			$('#mphone_alert_'+i).remove()
+		}
+		
+		if(mdob === ""){
+			if($('#mdob_alert_'+i).length > 0){
+				$('#mdob_alert_'+i).text('Date of birth can\'t be empty')
+			}else{
+				$('#mdob_'+i).parent().append('<span id="mdob_alert_'+i+'" class="error_alert" style="color:red;">Date of birth can\'t be empty</span>')
+			}
+		}else{
+			$('#mdob_alert_'+i).remove()
+		}
+	}
+}
+
+function cekErrorAlert(jml){
+	if(jml === 0){
+		// $('#formTourBooking').submit()
+		console.log(jml)
+	}
+	return false
+}
+</script>

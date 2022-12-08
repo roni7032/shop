@@ -1,1 +1,0 @@
-ALTER TABLE `reservation_tour_members` ADD `hobies` TEXT NULL DEFAULT NULL AFTER `email`; 
