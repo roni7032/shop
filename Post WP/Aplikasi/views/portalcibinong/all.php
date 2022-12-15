@@ -44,53 +44,24 @@ legend.scheduler-border {
 		</div>
 	</div>
 	<div class="box-body">
-		<!-- <div class="row">
-			<div class="col-md-6">
-				<fieldset class="scheduler-border">
-						<legend class="scheduler-border">Filter</legend>
-						<form class="form-inline" action="<?php echo site_url('suarrid/action'); ?>" method="get">
-							<input type="hidden" name="ac" value="rekap" />
-							<div class="form-group">
-								<input type="text" name="laporan" placeholder="Masukkan" class="form-control"/>
-							</div>
-							<button type="submit" class="btn btn-default">Go!</button>
-						</form>
-				</fieldset>
-			</div>
-			<div class="col-md-6">
-				<fieldset class="scheduler-border">
-						<legend class="scheduler-border">Filter Die</legend>
-						<form class="form-inline" action="<?php echo site_url('suarrid/action'); ?>" method="get">
-							<input type="hidden" name="ac" value="die" />
-							<div class="form-group">
-								<input type="text" name="laporan" placeholder="Masukkan" class="form-control"/>
-							</div>
-							<button type="submit" class="btn btn-default">Go!</button>
-						</form>
-				</fieldset>
-			</div>
-		</div> -->
 		<div class="row">
 			<div class="col-md-12">
 			<?php
 				$tmp_table=array(
-						'table_open' => '<table id="id_suarrid" class="table table-bordered datatable">',
+						'table_open' => '<table width="100%" class="table table-bordered datatable">',
 						'thead_open' => '<thead>',
 						'thead_close' => '</thead>',
 						'table_close' => '</table>'
 				);
 
 				$this->table->set_template($tmp_table);
-				$this->table->set_heading('No.','Link','Judul','Status','Action');
+				$this->table->set_heading('No.','Title','Tagline','email','done','Action');
 					$no=1;
 					foreach ($data as $key => $value) {
-						$link = anchor('suarrid/action?ac=edit_2&id='.$value->id,' <i class="fa fa-pencil"></i>','class="btn btn-warning"');
-						$link .= anchor('suarrid/action?ac=level_1&id='.$value->id,' <i class="fa fa-hand-o-right"></i>','class="btn btn-success"');
-							
-						$link_1='<span class="text-red">'.$value->link.'</span>';
+						$link = anchor('portalcibinong/action?ac=edit&id='.$value->id,' <i class="fa fa-pencil"></i> Edit','class="btn btn-warning"');
+						$link .= anchor('portalcibinong/action?ac=level_1&id='.$value->id,' <i class="fa fa-minus"></i>','class="btn btn-success"');
 						
-						$status=($value->status=='ON') ? anchor('suarrid/action?ac=on_off&set=off&id='.$value->id,'OFF','class="text-success"'):anchor('suarrid/action?ac=on_off&set=on&id='.$value->id,'ON','class="text-danger"');
-						$this->table->add_row($value->id,$link_1,$value->judul,$status,'<div class="btn-group">'.$link.'</div>');
+						$this->table->add_row($no++,$value->title,$value->tagline,$value->email,$value->done,'<div class="btn-group">'.$link.'</div>');
 					}
 				echo $this->table->generate();
 			?>

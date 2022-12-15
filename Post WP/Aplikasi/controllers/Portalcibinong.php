@@ -13,17 +13,17 @@ class Portalcibinong extends CI_Controller {
 			'judul'=>'Suarr.id',
 			'breadcrumb'=>array(
 				array(anchor('','Home'),''),
-				array('Portalcibinong','class="active"')
+				array('portalcibinong','class="active"')
 			),
-			'data'=>$this->M_general->getDataWhere('Portalcibinong',array('done'=>0),'',array('id','DESC'))
+			'data'=>$this->M_general->getDataWhere('portalcibinong',array('done'=>0),'',array('id','DESC'))
 		);
 
-		$dtmenu['menu'][0]='Portalcibinong';
-		$dtmenu['menu'][1]='Portalcibinong_1';
+		$dtmenu['menu'][0]='portalcibinong';
+		$dtmenu['menu'][1]='portalcibinong_1';
 
 		$dtmenu['role']=0;
-		$lempar['isi']=view_one('Portalcibinong/all',$dt);
-		$lempar['js']=view_one('Portalcibinong/js',array('for'=>''));
+		$lempar['isi']=view_one('portalcibinong/all',$dt);
+		$lempar['js']=view_one('portalcibinong/js',array('for'=>''));
 		$lempar['menu']=view_one('menu/menu',$dtmenu);
 		$this->load->view('template/blog_plain',$lempar);
 	}
@@ -33,17 +33,17 @@ class Portalcibinong extends CI_Controller {
 			'judul'=>'Suarr.id',
 			'breadcrumb'=>array(
 				array(anchor('','Home'),''),
-				array('Portalcibinong','class="active"')
+				array('portalcibinong','class="active"')
 			),
-			'data'=>$this->M_general->getData('Portalcibinong')
+			'data'=>$this->M_general->getData('portalcibinong')
 		);
 
-		$dtmenu['menu'][0]='Portalcibinong';
-		$dtmenu['menu'][1]='Portalcibinong_2';
+		$dtmenu['menu'][0]='portalcibinong';
+		$dtmenu['menu'][1]='portalcibinong_2';
 
 		$dtmenu['role']=0;
-		$lempar['isi']=view_one('Portalcibinong/all',$dt);
-		$lempar['js']=view_one('Portalcibinong/js',array('for'=>''));
+		$lempar['isi']=view_one('portalcibinong/all',$dt);
+		$lempar['js']=view_one('portalcibinong/js',array('for'=>''));
 		$lempar['menu']=view_one('menu/menu',$dtmenu);
 		$this->load->view('template/blog_plain',$lempar);
 	}
@@ -59,13 +59,15 @@ class Portalcibinong extends CI_Controller {
 					'ac'=>$ac,
 					'breadcrumb'=>array(
 						array(anchor('','Home'),''),
-						array(anchor('Portalcibinong',' Portalcibinong'),''),
+						array(anchor('portalcibinong',' Portalcibinong'),''),
 						array('Tambah','class="active"')
 					),
+					'dtCategory'=>array((object)array('id'=>'place','nama'=>'Place')),
+					'dtJml'=>$this->M_general->getCountW('portalcibinong',null)
 				);
-				$dtmenu['menu']=array('Portalcibinong','Portalcibinong_3');
+				$dtmenu['menu']=array('portalcibinong','portalcibinong_3');
 				$dtmenu['role']=0;
-				$lempar['isi']=view_one('Portalcibinong/add',$dt);
+				$lempar['isi']=view_one('portalcibinong/add',$dt);
 				$lempar['menu']=view_one('menu/menu',$dtmenu);
 				$this->load->view('template/blog_editor',$lempar);
 			break;
@@ -76,16 +78,16 @@ class Portalcibinong extends CI_Controller {
 					'id'=>$id,
 					'breadcrumb'=>array(
 						array(anchor('','Home'),''),
-						array(anchor('Portalcibinong',' Portalcibinong'),''),
+						array(anchor('portalcibinong',' Portalcibinong'),''),
 						array('Ubah','class="active"')
 					),						
-					'dtedit'=>$this->M_general->getEdit('Portalcibinong',$id),
-					'desc_1'=>$this->helpDes(),
+					'dtedit'=>$this->M_general->getEdit('portalcibinong',$id),
+					'dtCategory'=>array((object)array('id'=>'place','nama'=>'Place'))
 				);
-				$dtmenu['menu']=array('Portalcibinong','Portalcibinong_3');
+				$dtmenu['menu']=array('portalcibinong','portalcibinong_3');
 				$dtmenu['role']=0;
-				$lempar['isi']=view_one('Portalcibinong/add',$dt);
-				$lempar['js']=view_one('Portalcibinong/js',array('for'=>'edit'));
+				$lempar['isi']=view_one('portalcibinong/add',$dt);
+				$lempar['js']=view_one('portalcibinong/js',array('for'=>'edit'));
 				$lempar['menu']=view_one('menu/menu',$dtmenu);
 				$this->load->view('template/blog_editor',$lempar);
 			break;
@@ -96,15 +98,15 @@ class Portalcibinong extends CI_Controller {
 					'id'=>$id,
 					'breadcrumb'=>array(
 						array(anchor('','Home'),''),
-						array(anchor('Portalcibinong',' Portalcibinong'),''),
+						array(anchor('portalcibinong',' Portalcibinong'),''),
 						array('Ubah','class="active"')
 					),						
-					'dtedit'=>$this->M_general->getEdit('Portalcibinong',$id)
+					'dtedit'=>$this->M_general->getEdit('portalcibinong',$id)
 				);
-				$dtmenu['menu']=array('Portalcibinong','Portalcibinong_3');
+				$dtmenu['menu']=array('portalcibinong','portalcibinong_3');
 				$dtmenu['role']=0;
-				$lempar['isi']=view_one('Portalcibinong/add',$dt);
-				$lempar['js']=view_one('Portalcibinong/js',array('for'=>'add'));
+				$lempar['isi']=view_one('portalcibinong/add',$dt);
+				$lempar['js']=view_one('portalcibinong/js',array('for'=>'add'));
 				$lempar['menu']=view_one('menu/menu',$dtmenu);
 				$this->load->view('template/blog_editor',$lempar);
 			break;
@@ -113,8 +115,8 @@ class Portalcibinong extends CI_Controller {
 					'url_preview' => 'OFF',
 					'url_asli_preview' => $this->input->get('url_asli_preview')
 				);
-				$this->M_general->updateData('Portalcibinong',$dtsave,$id);
-				redirect('Portalcibinong/action?ac=edit&id='.($id-1));
+				$this->M_general->updateData('portalcibinong',$dtsave,$id);
+				redirect('portalcibinong/action?ac=edit&id='.($id-1));
 			break;
 			case 'on_off':
 				$set=$this->input->get('set');
@@ -122,12 +124,12 @@ class Portalcibinong extends CI_Controller {
 				$dtsave=array(
 					'status' => $set,
 				);
-				$this->M_general->updateData('Portalcibinong',$dtsave,$id);
-				redirect('Portalcibinong');
+				$this->M_general->updateData('portalcibinong',$dtsave,$id);
+				redirect('portalcibinong');
 			break;
 			case 'delete':
-				$this->M_general->deldata('Portalcibinong',$id);
-				redirect('Portalcibinong');
+				$this->M_general->deldata('portalcibinong',$id);
+				redirect('portalcibinong');
 			break;
 			case 'rekap':
 				$laporan_get=explode(',',$this->input->get('laporan'));
@@ -137,14 +139,14 @@ class Portalcibinong extends CI_Controller {
 					'for'=>'laporan',
 					'breadcrumb'=>array(
 						array(anchor('','Home'),''),
-						array(anchor('Portalcibinong',' Semua'),''),
+						array(anchor('portalcibinong',' Semua'),''),
 						array('Rekap','class="active"')
 					),						
-					'data'=>$this->M_general->getDataWhere('Portalcibinong',array('id',$laporan_get),'in'),
+					'data'=>$this->M_general->getDataWhere('portalcibinong',array('id',$laporan_get),'in'),
 				);
-				$dtmenu['menu']=array('Portalcibinong','Portalcibinong_3');
+				$dtmenu['menu']=array('portalcibinong','portalcibinong_3');
 				$dtmenu['role']=0;
-				$lempar['isi']=view_one('Portalcibinong/rekap',$dt);
+				$lempar['isi']=view_one('portalcibinong/rekap',$dt);
 				$lempar['menu']=view_one('menu/menu',$dtmenu);
 				$this->load->view('template/blog_plain',$lempar);
 			break;
@@ -156,14 +158,14 @@ class Portalcibinong extends CI_Controller {
 					'for'=>'die',
 					'breadcrumb'=>array(
 						array(anchor('','Home'),''),
-						array(anchor('Portalcibinong',' Semua'),''),
+						array(anchor('portalcibinong',' Semua'),''),
 						array('Rekap','class="active"')
 					),						
-					'data'=>$this->M_general->getDataWhere('Portalcibinong',array('id',$laporan_get),'in'),
+					'data'=>$this->M_general->getDataWhere('portalcibinong',array('id',$laporan_get),'in'),
 				);
-				$dtmenu['menu']=array('Portalcibinong','Portalcibinong_3');
+				$dtmenu['menu']=array('portalcibinong','portalcibinong_3');
 				$dtmenu['role']=0;
-				$lempar['isi']=view_one('Portalcibinong/rekap',$dt);
+				$lempar['isi']=view_one('portalcibinong/rekap',$dt);
 				$lempar['menu']=view_one('menu/menu',$dtmenu);
 				$this->load->view('template/blog_plain',$lempar);
 			break;
@@ -174,14 +176,14 @@ class Portalcibinong extends CI_Controller {
 					'id'=>$id,
 					'breadcrumb'=>array(
 						array(anchor('','Home'),''),
-						array(anchor('Portalcibinong',' Portalcibinong'),''),
+						array(anchor('portalcibinong',' Portalcibinong'),''),
 						array('Ubah','class="active"')
 					),						
-					'dtedit'=>$this->M_general->getEdit('Portalcibinong',$id),
+					'dtedit'=>$this->M_general->getEdit('portalcibinong',$id),
 				);
-				$dtmenu['menu']=array('Portalcibinong','Portalcibinong_3');
+				$dtmenu['menu']=array('portalcibinong','portalcibinong_3');
 				$dtmenu['role']=0;
-				$lempar['isi']=view_one('Portalcibinong/rekap',$dt);
+				$lempar['isi']=view_one('portalcibinong/rekap',$dt);
 				$lempar['menu']=view_one('menu/menu',$dtmenu);
 				$this->load->view('template/blog_plain',$lempar);
 			break;
@@ -192,7 +194,7 @@ class Portalcibinong extends CI_Controller {
 					'id'=>$id,
 					'breadcrumb'=>array(
 						array(anchor('','Home'),''),
-						array(anchor('Portalcibinong',' Portalcibinong'),''),
+						array(anchor('portalcibinong',' Portalcibinong'),''),
 						array('Ubah','class="active"')
 					),						
 					'dtedit'=>$this->M_general->getEdit('Portalcibinong',$id),
@@ -330,6 +332,42 @@ class Portalcibinong extends CI_Controller {
 				$lempar['menu']=view_one('menu/menu',$dtmenu);
 				$this->load->view('template/blog_plain',$lempar);
 			break;
+			case 'level_10':
+				$dt=array(
+					'judul'=>'Portalcibinong',
+					'for'=>'level_10',
+					'id'=>$id,
+					'breadcrumb'=>array(
+						array(anchor('','Home'),''),
+						array(anchor('Portalcibinong',' Portalcibinong'),''),
+						array('Ubah','class="active"')
+					),						
+					'dtedit'=>$this->M_general->getEdit('Portalcibinong',$id),
+				);
+				$dtmenu['menu']=array('Portalcibinong','Portalcibinong_3');
+				$dtmenu['role']=0;
+				$lempar['isi']=view_one('Portalcibinong/rekap',$dt);
+				$lempar['menu']=view_one('menu/menu',$dtmenu);
+				$this->load->view('template/blog_plain',$lempar);
+			break;
+			case 'level_11':
+				$dt=array(
+					'judul'=>'Portalcibinong',
+					'for'=>'level_11',
+					'id'=>$id,
+					'breadcrumb'=>array(
+						array(anchor('','Home'),''),
+						array(anchor('Portalcibinong',' Portalcibinong'),''),
+						array('Ubah','class="active"')
+					),						
+					'dtedit'=>$this->M_general->getEdit('Portalcibinong',$id),
+				);
+				$dtmenu['menu']=array('Portalcibinong','Portalcibinong_3');
+				$dtmenu['role']=0;
+				$lempar['isi']=view_one('Portalcibinong/rekap',$dt);
+				$lempar['menu']=view_one('menu/menu',$dtmenu);
+				$this->load->view('template/blog_plain',$lempar);
+			break;
 			default:
 				$dt=array(
 					'judul'=>'Menu',
@@ -360,30 +398,53 @@ class Portalcibinong extends CI_Controller {
 				$this->M_general->deldata($table,array('id'=>$id));
 			break;
 			case 'add':
-							
 				$dtsave=array(
-					'judul' => $judul,
-					'isi' => $this->input->post('nama_gambar'),
-					'link' => strtolower($this->input->post('link')),
-					'tags' => $this->input->post('tags')
+					'title' => $this->input->post('title'),
+					'tagline' => $this->input->post('tagline'),
+					'description' => $this->input->post('description'),
+					'alamat' => $this->input->post('alamat'),
+					'Latitude' => $this->input->post('Latitude'),
+					'Longitude' => $this->input->post('Longitude'),
+					'phone' => $this->input->post('phone'),
+					'website' => $this->input->post('website'),
+					'facebook' => $this->input->post('facebook'),
+					'twitter' => $this->input->post('twitter'),
+					'email' => $this->input->post('email'),
+					'youtube' => $this->input->post('youtube'),
+					'work_hours' => $this->input->post('work_hours'),
+					'cover_img' => $this->input->post('cover_img'),
+					'instagram' => $this->input->post('instagram'),
+					'logo_img' => $this->input->post('logo_img'),
+					'category' => $this->input->post('category'),
+					'tags' => $this->input->post('tags'),
 				);
 				
-				if($this->input->post('id')!=0) $dtsave['id']=$this->input->post('id');
-				
-				$id=$this->M_general->addData('Portalcibinong',$dtsave);
-				redirect('Portalcibinong/action?ac=edit&id='.$id);
+				$this->M_general->addData('portalcibinong',$dtsave);
 			break;
 			case 'edit':
 				$dtsave=array(
-					'kat' => $this->input->post('kat'),
-					'judul' => $this->input->post('judul'),
-					'isi' => $this->input->post('isi'),
-					'img' => strtolower($this->input->post('img')),
-					'tags' => $this->input->post('tags')
+					'title' => $this->input->post('title'),
+					'tagline' => $this->input->post('tagline'),
+					'description' => $this->input->post('description'),
+					'alamat' => $this->input->post('alamat'),
+					'Latitude' => $this->input->post('Latitude'),
+					'Longitude' => $this->input->post('Longitude'),
+					'phone' => $this->input->post('phone'),
+					'website' => $this->input->post('website'),
+					'facebook' => $this->input->post('facebook'),
+					'twitter' => $this->input->post('twitter'),
+					'email' => $this->input->post('email'),
+					'youtube' => $this->input->post('youtube'),
+					'work_hours' => $this->input->post('work_hours'),
+					'cover_img' => $this->input->post('cover_img'),
+					'instagram' => $this->input->post('instagram'),
+					'logo_img' => $this->input->post('logo_img'),
+					'category' => $this->input->post('category'),
+					'tags' => $this->input->post('tags'),
 				);
-				$this->M_general->updateData('Portalcibinong',$dtsave,$id);
+				$this->M_general->updateData('portalcibinong',$dtsave,$id);
 				
-				redirect($table.'/action?ac=level_1&id='.($id-1));
+				redirect($table.'/action?ac=edit&id='.$id);
 			break;
 			case 'edit_1':
 				$cari_url_x=array('https://www.closecrowds.com/');
@@ -398,18 +459,10 @@ class Portalcibinong extends CI_Controller {
 				redirect('Portalcibinong/action?ac=edit&id='.$id);
 			break;
 			case 'edit_2':
-							
-				$dtsave=array(
-					'kat' => $this->input->post('kat'),
-					'judul' => $this->input->post('judul'),
-					'isi' => $this->input->post('isi'),
-					'img' => $this->input->post('img'),
-					'tags' => $this->input->post('tags')
-				);
-				if($this->input->post('judul')==='OFF') $dtsave['done']=1;
+				$dtsave['done']=1;
 				$this->M_general->updateData('Portalcibinong',$dtsave,$id);
 				
-				redirect($table.'/action?ac=edit_2&id='.($id-1));
+				// redirect($table.'/action?ac=edit_2&id='.($id-1));
 			break;
 			case 'edit_3':
 							

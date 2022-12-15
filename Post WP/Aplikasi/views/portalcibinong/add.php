@@ -29,21 +29,21 @@
 		<?php if(isset($dtedit)): ?>
 		<div class="row">
 			<div class="col-md-12">
-				<a href="<?php echo site_url('suarrid/action?ac=edit&id='.($dtedit->id)-1); ?>" class="btn btn-info">Previous</a>
+				<a href="<?php echo site_url('portalcibinong/action?ac=edit&id='.($dtedit->id)-1); ?>" class="btn btn-info">Previous</a>
 				<div class="btn-group">
-                  <a href="<?php echo site_url('suarrid/action?ac=level_1&id='.$dtedit->id); ?>" class="btn btn-warning" accesskey="1">Level 1</a>
+                  <a href="<?php echo site_url('portalcibinong/action?ac=level_1&id='.$dtedit->id); ?>" class="btn btn-warning" accesskey="1">Level 1</a>
                   <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
                     <span class="caret"></span>
                     <span class="sr-only">Toggle Dropdown</span>
                   </button>
                   <ul class="dropdown-menu" role="menu">
-                    <li><a href="<?php echo site_url('suarrid/action?ac=level_1&id='.($dtedit->id)-1); ?>">Prev Level 1</a></li>
-                    <li><a href="<?php echo site_url('suarrid/action?ac=level_1&id='.($dtedit->id)+1); ?>">Next Level 1</a></li>
+                    <li><a href="<?php echo site_url('portalcibinong/action?ac=level_1&id='.($dtedit->id)-1); ?>">Prev Level 1</a></li>
+                    <li><a href="<?php echo site_url('portalcibinong/action?ac=level_1&id='.($dtedit->id)+1); ?>">Next Level 1</a></li>
                     <li class="divider"></li>
-                    <li><a href="<?php echo site_url('suarrid'); ?>">ALL</a></li>
+                    <li><a href="<?php echo site_url('portalcibinong'); ?>">ALL</a></li>
                   </ul>
                 </div>
-				<a href="<?php echo site_url('suarrid/action?ac=edit&id='.($dtedit->id)+1); ?>" class="btn btn-info">Next</a>
+				<a href="<?php echo site_url('portalcibinong/action?ac=edit&id='.($dtedit->id)+1); ?>" class="btn btn-info">Next</a>
 			</div>
 		</div>
 		<?php endif; ?>
@@ -58,86 +58,207 @@
 				
 				<?php
 				$hidden=array(
-						'table'=>'suarrid',
-						'ac'=>$ac
+						'table'=>'portalcibinong',
+						'ac'=>$ac,
+						'id'=>$dtedit->id
 					);
-				echo form_open('suarrid/simpan','id="suarrid"',$hidden); ?>
+				echo form_open('portalcibinong/simpan','id="portalcibinong"',$hidden); ?>
 					<div class="form-group">
-					<?php echo form_label('ID', 'id');
+					<?php echo form_label('Title', 'title');
 					echo form_input(array(
-						'type'=>'number',
-						'name'=>'id',
-						'value'=>$dtedit->id,
+						'type'=>'text',
+						'name'=>'title',
+						'value'=>$dtedit->title,
 						'class'=>'form-control',
-						'id'=>'id',
-						'placeholder'=>'ID'
+						'id'=>'title',
+						'placeholder'=>'Title'
 						)
 					);
 					?></div>
 					<div class="form-group">
-					<?php echo form_label('Img', 'img');
-					$img_1=explode('http://suarr.id/',$dtedit->link);				
-					$img=str_replace('/','',$img_1[1]);				
+					<?php echo form_label('Tagline', 'tagline');
 					echo form_input(array(
 						'type'=>'text',
-						'name'=>'img',
-						'value'=>$img,
+						'name'=>'tagline',
+						'value'=>$dtedit->tagline,
 						'class'=>'form-control',
-						'id'=>'img',
-						'autofocus'=>'autofocus',
-						'onFocus'=>'this.select();',
-						'placeholder'=>'img'
-						)
-					);
-					?>
-					</div>
-					<div class="form-group">
-					<a href="https://web.archive.org/web/20200722161424/<?php echo $dtedit->link; ?>" target="_blank"><?php echo $dtedit->link; ?></a><br/>
-					<?php echo form_label('Link', 'link');
-					echo form_input(array(
-						'type'=>'text',
-						'name'=>'link',
-						'value'=>$dtedit->link,
-						'class'=>'form-control',
-						'id'=>'link',
-						'placeholder'=>'Link'
-						)
-					);
-					?>
-					</div>
-					<div class="form-group">
-					<?php echo form_label('Kategori', 'kat');
-					echo form_input(array(
-						'type'=>'text',
-						'name'=>'kat',
-						'value'=>$dtedit->kat,
-						'class'=>'form-control',
-						'id'=>'kat',
-						'placeholder'=>'Kategori'
-						)
-					);
-					?></div>
-					<div class="form-group <?php if($dtedit->status==='OFF') echo "bg-danger"; ?>">
-					<?php echo form_label('judul', 'judul');
-					echo form_input(array(
-						'type'=>'text',
-						'name'=>'judul',
-						'value'=>$dtedit->judul,
-						'class'=>'form-control',
-						'id'=>'judul',
-						'placeholder'=>'judul'
+						'id'=>'tagline',
+						'placeholder'=>'Tagline'
 						)
 					);
 					?></div>
 					<div class="form-group">
-					<?php echo form_label('Isi', 'isi');
+					<?php echo form_label('Description', 'description');
 					echo form_textarea(array(
-						'name'=>'isi',
-						'class'=>'form-control',
-						'id'=>'isi',
-						'placeholder'=>'Isi',
-						'value'=>$dtedit->isi	)
+						'name'=>'description',
+						'class'=>'form-control','id'=>'description',
+						'placeholder'=>'Description',
+						'value'=>$dtedit->description	)
 					);
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('Alamat', 'alamat');
+					echo form_input(array(
+						'type'=>'text',
+						'name'=>'alamat',
+						'value'=>$dtedit->alamat,
+						'class'=>'form-control',
+						'id'=>'alamat',
+						'placeholder'=>'Alamat'
+						)
+					);
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('Latitude', 'Latitude');
+					echo form_input(array(
+						'type'=>'text',
+						'name'=>'Latitude',
+						'value'=>$dtedit->Latitude,
+						'class'=>'form-control',
+						'id'=>'Latitude',
+						'placeholder'=>'Latitude'
+						)
+					);
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('Longitude', 'Longitude');
+					echo form_input(array(
+						'type'=>'text',
+						'name'=>'Longitude',
+						'value'=>$dtedit->Longitude,
+						'class'=>'form-control',
+						'id'=>'Longitude',
+						'placeholder'=>'Longitude'
+						)
+					);
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('Phone', 'phone');
+					echo form_input(array(
+						'type'=>'text',
+						'name'=>'phone',
+						'value'=>$dtedit->phone,
+						'class'=>'form-control',
+						'id'=>'phone',
+						'placeholder'=>'Phone'
+						)
+					);
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('Website', 'website');
+					echo form_input(array(
+						'type'=>'text',
+						'name'=>'website',
+						'value'=>$dtedit->website,
+						'class'=>'form-control',
+						'id'=>'website',
+						'placeholder'=>'Website'
+						)
+					);
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('Facebook', 'facebook');
+					echo form_input(array(
+						'type'=>'text',
+						'name'=>'facebook',
+						'value'=>$dtedit->facebook,
+						'class'=>'form-control',
+						'id'=>'facebook',
+						'placeholder'=>'Facebook'
+						)
+					);
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('Twitter', 'twitter');
+					echo form_input(array(
+						'type'=>'text',
+						'name'=>'twitter',
+						'value'=>$dtedit->twitter,
+						'class'=>'form-control',
+						'id'=>'twitter',
+						'placeholder'=>'Twitter'
+						)
+					);
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('Email', 'email');
+					echo form_input(array(
+						'type'=>'text',
+						'name'=>'email',
+						'value'=>$dtedit->email,
+						'class'=>'form-control',
+						'id'=>'email',
+						'placeholder'=>'Email'
+						)
+					);
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('Youtube', 'youtube');
+					echo form_input(array(
+						'type'=>'text',
+						'name'=>'youtube',
+						'value'=>$dtedit->youtube,
+						'class'=>'form-control',
+						'id'=>'youtube',
+						'placeholder'=>'Youtube'
+						)
+					);
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('Work Hours', 'work_hours');
+					echo form_input(array(
+						'type'=>'text',
+						'name'=>'work_hours',
+						'value'=>$dtedit->work_hours,
+						'class'=>'form-control',
+						'id'=>'work_hours',
+						'placeholder'=>'Work Hours'
+						)
+					);
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('cover_img', 'cover_img');
+					echo form_input(array(
+						'type'=>'text',
+						'name'=>'cover_img',
+						'value'=>$dtedit->cover_img,
+						'class'=>'form-control',
+						'id'=>'cover_img',
+						'placeholder'=>'cover_img'
+						)
+					);
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('Instagram', 'instagram');
+					echo form_input(array(
+						'type'=>'text',
+						'name'=>'instagram',
+						'value'=>$dtedit->instagram,
+						'class'=>'form-control',
+						'id'=>'instagram',
+						'placeholder'=>'Instagram'
+						)
+					);
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('logo_img', 'logo_img');
+					echo form_input(array(
+						'type'=>'text',
+						'name'=>'logo_img',
+						'value'=>$dtedit->logo_img,
+						'class'=>'form-control',
+						'id'=>'logo_img',
+						'placeholder'=>'logo_img'
+						)
+					);
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('Category', 'category');
+					$arr=array();
+					foreach($dtCategory as $key => $value){
+						$arr[$value->id]=$value->nama;
+					}
+					echo form_dropdown('category',$arr,$dtedit->category,'class="form-control" id="category" ');
 					?></div>
 					<div class="form-group">
 					<?php echo form_label('Tags', 'tags');
@@ -147,7 +268,7 @@
 						'value'=>$dtedit->tags,
 						'class'=>'form-control',
 						'id'=>'tags',
-						'placeholder'=>'tags'
+						'placeholder'=>'Tags'
 						)
 					);
 					?></div>
@@ -160,162 +281,204 @@
 				<?php else: ?>
 					<?php 
 					$hidden=array(
-						'table'=>'suarrid',
+						'table'=>'portalcibinong',
 						'ac'=>'add',
 					);
-					echo form_open('suarrid/simpan','id="suarrid"',$hidden); ?>
+					echo form_open('portalcibinong/simpan','id="portalcibinong"',$hidden); ?>
 					<div class="form-group">
-					<?php echo form_label('ID', 'id');
-					echo form_input(array(
-						'type'=>'number',
-						'name'=>'id',
-						'value'=>0,
-						'class'=>'form-control',
-						'id'=>'id',
-						'autofocus'=>'autofocus',
-						'placeholder'=>'ID'
-						)
-					);
-					?></div>
-					<div class="form-group">
-					<?php echo form_label('judul', 'judul');
+					<?php echo form_label('Title', 'title');
 					echo form_input(array(
 						'type'=>'text',
-						'name'=>'judul',
+						'name'=>'title',
 						'value'=>'',
 						'class'=>'form-control',
-						'id'=>'judul',
-						'placeholder'=>'judul'
+						'id'=>'title',
+						'placeholder'=>'Title'
 						)
 					);
 					?></div>
 					<div class="form-group">
-					<?php echo form_label('Nama Gambar', 'nama_gambar');
+					<?php echo form_label('Tagline', 'tagline');
 					echo form_input(array(
 						'type'=>'text',
-						'name'=>'nama_gambar',
+						'name'=>'tagline',
 						'value'=>'',
 						'class'=>'form-control',
-						'id'=>'nama_gambar',
-						'placeholder'=>'Nama Gambar'
+						'id'=>'tagline',
+						'placeholder'=>'Tagline'
 						)
 					);
 					?></div>
 					<div class="form-group">
-					<?php echo form_label('Id', 'kunci');
-					echo form_input(array(
-						'type'=>'text',
-						'name'=>'kunci',
-						'value'=>'',
-						'class'=>'form-control',
-						'required'=>'required',
-						'id'=>'kunci',
-						'placeholder'=>'Id'
-						)
-					);
-					?></div>
-					<div class="form-group">
-					<?php echo form_label('URL', 'url');
-					echo form_input(array(
-						'type'=>'text',
-						'name'=>'url',
-						'value'=>'',
-						'class'=>'form-control',
-						'id'=>'url',
-						'placeholder'=>'URL'
-						)
-					);
-					?></div>
-					<div class="form-group">
-					<?php echo form_label('URL X', 'url_x');
-					echo form_input(array(
-						'type'=>'text',
-						'name'=>'url_x',
-						'value'=>'',
-						'class'=>'form-control',
-						'id'=>'url_x',
-						'placeholder'=>'URL X'
-						)
-					);
-					?></div>
-					<div class="form-group">
-					<?php echo form_label('URL Preview', 'url_preview');
-					echo form_input(array(
-						'type'=>'text',
-						'name'=>'url_preview',
-						'value'=>'https://closecrowds.com/themes/?theme=',
-						'class'=>'form-control',
-						'id'=>'url_preview',
-						'placeholder'=>'URL Preview'
-						)
-					);
-					?><span class="text-red">https://closecrowds.com/themes/?theme=</span></div>
-					<div class="form-group">
-					<?php echo form_label('URL Asli', 'url_asli');
-					echo form_input(array(
-						'type'=>'text',
-						'name'=>'url_asli',
-						'value'=>'',
-						'class'=>'form-control',
-						'id'=>'url_asli',
-						'placeholder'=>'URL Asli'
-						)
-					);
-					?></div>
-					<div class="form-group">
-					<?php echo form_label('URL Asli Preview', 'url_asli_preview');
-					echo form_input(array(
-						'type'=>'text',
-						'name'=>'url_asli_preview',
-						'value'=>'',
-						'class'=>'form-control',
-						'id'=>'url_asli_preview',
-						'placeholder'=>'URL Asli Preview'
-						)
-					);
-					?></div>
-					<div class="form-group">
-					<?php echo form_label('Harga', 'harga');
-					echo form_input(array(
-						'type'=>'text',
-						'name'=>'harga',
-						'value'=>'',
-						'class'=>'form-control',
-						'id'=>'harga',
-						'placeholder'=>'Harga'
-						)
-					);
-					?></div>
-					<div class="form-group">
-					<?php echo form_label('Mega Link', 'mega_link');
-					echo form_input(array(
-						'type'=>'text',
-						'name'=>'mega_link',
-						'value'=>'',
-						'class'=>'form-control',
-						'id'=>'mega_link',
-						'placeholder'=>'Mega Link'
-						)
-					);
-					?></div>
-					<div class="form-group">
-					<?php echo form_label('Mega Download', 'mega_download');
-					echo form_input(array(
-						'type'=>'text',
-						'name'=>'mega_download',
-						'value'=>'',
-						'class'=>'form-control',
-						'id'=>'mega_download',
-						'placeholder'=>'Mega Download'
-						)
-					);
-					?></div>
-					<div class="form-group">
-					<?php echo form_label('Deskripsi', 'deskripsi');
+					<?php echo form_label('Description', 'description');
 					echo form_textarea(array(
-						'name'=>'deskripsi',
-						'class'=>'form-control','id'=>'deskripsi',
-						'placeholder'=>'Deskripsi'
+						'name'=>'description',
+						'class'=>'form-control','id'=>'description',
+						'placeholder'=>'Description'
+						)
+					);
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('cover_img', 'cover_img');
+					$arr_1=array();
+					for($i=0;$i<7;$i++){
+						if($i==-0){
+							$arr_1[]='cover_'.$i.'_'.$dtJml;
+						}else{
+							$arr_1[]='galeri_'.$i.'_'.$dtJml;
+						}
+					}
+					echo form_input(array(
+						'type'=>'text',
+						'name'=>'cover_img',
+						'value'=>implode(', ',$arr_1),
+						'class'=>'form-control',
+						'id'=>'cover_img',
+						'placeholder'=>'cover_img'
+						)
+					);
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('logo_img', 'logo_img');
+					echo form_input(array(
+						'type'=>'text',
+						'name'=>'logo_img',
+						'value'=>'logo_'.$dtJml,
+						'class'=>'form-control',
+						'id'=>'logo_img',
+						'placeholder'=>'logo_img'
+						)
+					);
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('Alamat', 'alamat');
+					echo form_input(array(
+						'type'=>'text',
+						'name'=>'alamat',
+						'value'=>'',
+						'class'=>'form-control',
+						'id'=>'alamat',
+						'placeholder'=>'Alamat'
+						)
+					);
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('Latitude', 'Latitude');
+					echo form_input(array(
+						'type'=>'text',
+						'name'=>'Latitude',
+						'value'=>'',
+						'class'=>'form-control',
+						'id'=>'Latitude',
+						'placeholder'=>'Latitude'
+						)
+					);
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('Longitude', 'Longitude');
+					echo form_input(array(
+						'type'=>'text',
+						'name'=>'Longitude',
+						'value'=>'',
+						'class'=>'form-control',
+						'id'=>'Longitude',
+						'placeholder'=>'Longitude'
+						)
+					);
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('Phone', 'phone');
+					echo form_input(array(
+						'type'=>'text',
+						'name'=>'phone',
+						'value'=>'',
+						'class'=>'form-control',
+						'id'=>'phone',
+						'placeholder'=>'Phone'
+						)
+					);
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('Website', 'website');
+					echo form_input(array(
+						'type'=>'text',
+						'name'=>'website',
+						'value'=>'',
+						'class'=>'form-control',
+						'id'=>'website',
+						'placeholder'=>'Website'
+						)
+					);
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('Facebook', 'facebook');
+					echo form_input(array(
+						'type'=>'text',
+						'name'=>'facebook',
+						'value'=>'',
+						'class'=>'form-control',
+						'id'=>'facebook',
+						'placeholder'=>'Facebook'
+						)
+					);
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('Twitter', 'twitter');
+					echo form_input(array(
+						'type'=>'text',
+						'name'=>'twitter',
+						'value'=>'',
+						'class'=>'form-control',
+						'id'=>'twitter',
+						'placeholder'=>'Twitter'
+						)
+					);
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('Email', 'email');
+					echo form_input(array(
+						'type'=>'text',
+						'name'=>'email',
+						'value'=>'',
+						'class'=>'form-control',
+						'id'=>'email',
+						'placeholder'=>'Email'
+						)
+					);
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('Youtube', 'youtube');
+					echo form_input(array(
+						'type'=>'text',
+						'name'=>'youtube',
+						'value'=>'',
+						'class'=>'form-control',
+						'id'=>'youtube',
+						'placeholder'=>'Youtube'
+						)
+					);
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('Work Hours', 'work_hours');
+					echo form_input(array(
+						'type'=>'text',
+						'name'=>'work_hours',
+						'value'=>'',
+						'class'=>'form-control',
+						'id'=>'work_hours',
+						'placeholder'=>'Work Hours'
+						)
+					);
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('Instagram', 'instagram');
+					echo form_input(array(
+						'type'=>'text',
+						'name'=>'instagram',
+						'value'=>'',
+						'class'=>'form-control',
+						'id'=>'instagram',
+						'placeholder'=>'Instagram'
 						)
 					);
 					?></div>
@@ -326,11 +489,18 @@
 						'name'=>'tags',
 						'value'=>'',
 						'class'=>'form-control',
-						'required'=>'required',
 						'id'=>'tags',
 						'placeholder'=>'Tags'
 						)
 					);
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('Category', 'category');
+					$arr=array();
+					foreach($dtCategory as $key => $value){
+						$arr[$value->id]=$value->nama;
+					}
+					echo form_dropdown('category',$arr,'','class="form-control" id="category" ');
 					?></div>
 					<div class="form-group">
 					<?php 

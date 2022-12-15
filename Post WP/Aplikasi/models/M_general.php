@@ -66,7 +66,11 @@ class M_general extends CI_Model{
 	}
 	
 	function getCountW($table,$where){
-		return $this->db->get_where($table,$where)->num_rows();
+		if($where==null){
+			return $this->db->get_where($table,$where)->num_rows();
+		}else{
+			return $this->db->get($table)->num_rows();
+		}
 	}
 	/*--------Custom---------------*/
 	

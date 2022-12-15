@@ -35,48 +35,12 @@
 		<li <?php echo (in_array('suarrid_3',$menu)) ? 'class="active"':''; ?> ><a href="<?php echo site_url('suarrid/action?ac=add'); ?>"><i class="fa fa-circle-o"></i> Tambah</a></li>
 	  </ul>
 	</li>
-	<li class="header">Pesan</li>
-	<!--<li class="treeview <?php echo (in_array('categori_tema_pesan',$menu)) ? 'active':''; ?>">
-	  <a href="#"><i class="fa fa-dashboard"></i> <span>Kategori Group Pesan</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
+	<li class="treeview <?php echo (in_array('portalcibinong',$menu)) ? 'active':''; ?>">
+	  <a href="#"><i class="fa fa-dashboard"></i> <span>Portal Cibinong</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
 	  <ul class="treeview-menu">
-		<li <?php echo (in_array('categori_tema_pesan_1',$menu)) ? 'class="active"':''; ?> ><a href="<?php echo site_url('categori_tema_pesan'); ?>"><i class="fa fa-circle-o"></i> Semua data</a></li>
-		<li <?php echo (in_array('categori_tema_pesan_2',$menu)) ? 'class="active"':''; ?> ><a href="<?php echo site_url('categori_tema_pesan/action?ac=add'); ?>"><i class="fa fa-circle-o"></i> Tambah</a></li>
-	  </ul>
-	</li> -->
-	<li class="treeview <?php echo (in_array('tema_pesan',$menu)) ? 'active':''; ?>">
-	  <a href="#"><i class="fa fa-dashboard"></i> <span>Group Pesan</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
-	  <ul class="treeview-menu">
-		<li <?php echo (in_array('tema_pesan_1',$menu)) ? 'class="active"':''; ?> ><a href="<?php echo site_url('tema_pesan'); ?>"><i class="fa fa-circle-o"></i> Semua data</a></li>
-		<li <?php echo (in_array('tema_pesan_2',$menu)) ? 'class="active"':''; ?> ><a href="<?php echo site_url('tema_pesan/action?ac=add'); ?>"><i class="fa fa-circle-o"></i> Tambah</a></li>
-	  </ul>
-	</li>
-	<li class="treeview <?php echo (in_array('bc',$menu)) ? 'active':''; ?>">
-	  <a href="#"><i class="fa fa-dashboard"></i> <span>Broadcast</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
-	  <ul class="treeview-menu">
-		<li <?php echo (in_array('bc_1',$menu)) ? 'class="active"':''; ?> ><a href="<?php echo site_url('broadcast'); ?>"><i class="fa fa-circle-o"></i> Semua data</a></li>
-		<li <?php echo (in_array('bc_2',$menu)) ? 'class="active"':''; ?> ><a href="<?php echo site_url('broadcast/action?ac=add'); ?>"><i class="fa fa-circle-o"></i> Tambah</a></li>
-	  </ul>
-	</li>
-	<li class="treeview <?php echo (in_array('kategori_pesan',$menu)) ? 'active':''; ?>">
-	  <a href="#"><i class="fa fa-dashboard"></i> <span>Kategori Pesan</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
-	  <ul class="treeview-menu">
-		<li <?php echo (in_array('kategori_pesan_1',$menu)) ? 'class="active"':''; ?> ><a href="<?php echo site_url('kategori_pesan'); ?>"><i class="fa fa-circle-o"></i> Semua data</a></li>
-		<li <?php echo (in_array('kategori_pesan_2',$menu)) ? 'class="active"':''; ?> ><a href="<?php echo site_url('kategori_pesan/action?ac=add'); ?>"><i class="fa fa-circle-o"></i> Tambah</a></li>
-	  </ul>
-	</li>
-	<li class="treeview <?php echo (in_array('pesan',$menu)) ? 'active':''; ?>">
-	  <a href="#"><i class="fa fa-dashboard"></i> <span>Pesan</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
-	  <ul class="treeview-menu">
-		<li <?php echo (in_array('pesan_1',$menu)) ? 'class="active"':''; ?> ><a href="<?php echo site_url('pesan'); ?>"><i class="fa fa-circle-o"></i> Semua data</a></li>
-		<li <?php echo (in_array('pesan_2',$menu)) ? 'class="active"':''; ?> ><a href="<?php echo site_url('pesan/action?ac=add'); ?>"><i class="fa fa-circle-o"></i> Tambah</a></li>
-	  </ul>
-	</li>
-	<li class="header">Master</li>
-	<li class="treeview <?php echo (in_array('pegawai',$menu)) ? 'active':''; ?>">
-	  <a href="#"><i class="fa fa-dashboard"></i> <span>Pegawai</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
-	  <ul class="treeview-menu">
-		<li <?php echo (in_array('pegawai_1',$menu)) ? 'class="active"':''; ?>><a href="<?php echo site_url('pegawai'); ?>"><i class="fa fa-circle-o"></i> Semua data</a></li>
-		<li <?php echo (in_array('pegawai_2',$menu)) ? 'class="active"':''; ?>><a href="<?php echo site_url('pegawai/action?ac=add'); ?>"><i class="fa fa-circle-o"></i> Tambah</a></li>
+		<li <?php echo (in_array('portalcibinong_1',$menu)) ? 'class="active"':''; ?> ><a href="<?php echo site_url('portalcibinong'); ?>"><i class="fa fa-circle-o"></i> Belum</a></li>
+		<li <?php echo (in_array('portalcibinong_2',$menu)) ? 'class="active"':''; ?> ><a href="<?php echo site_url('portalcibinong/isdone'); ?>"><i class="fa fa-circle-o"></i> Semua Data</a></li>
+		<li <?php echo (in_array('portalcibinong_3',$menu)) ? 'class="active"':''; ?> ><a href="<?php echo site_url('portalcibinong/action?ac=add'); ?>"><i class="fa fa-circle-o"></i> Tambah</a></li>
 	  </ul>
 	</li>
 </ul>
