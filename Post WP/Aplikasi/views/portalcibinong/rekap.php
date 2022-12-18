@@ -247,19 +247,29 @@
 			<?php
 				$hidden=array(
 					'ac'=>'level_5',
-					'id'=> $dtedit->id
+					'id'=>$dtedit->id
 				);
-				echo form_open('portalcibinong/action','id="portalcibinong" method="get"',$hidden);?>
+				echo form_open('portalcibinong/action','id="portalcibinong" method="get"',$hidden); ?>
 					<div class="form-group">
-					<?php echo form_label('Email', 'email');
+					<?php echo form_label('Logo ', 'logo_img');
 					echo form_input(array(
-						'name'=>'email',
+						'name'=>'logo_img',
 						'class'=>'form-control',
-						'id'=>'email',
-						'placeholder'=>'Email',
+						'id'=>'logo_img',
+						'placeholder'=>'Logo',
 						'autofocus'=>'autofocus',
 						'onFocus'=>'this.select();',
-						'value'=>$dtedit->email
+						'value'=>$dtedit->logo_img
+					));
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('Cover ', 'cover_img');
+					echo form_input(array(
+						'name'=>'cover_img',
+						'class'=>'form-control',
+						'id'=>'cover_img',
+						'placeholder'=>'Cover',
+						'value'=>$dtedit->cover_img
 					));
 					?></div>
 					<div class="form-group">
@@ -284,7 +294,7 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-<?php elseif($for=='level_5'): ?>
+<?php elseif($for=='level_6'): ?>
 	<!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -322,18 +332,17 @@
 				);
 				echo form_open('portalcibinong/action','id="portalcibinong" method="get"',$hidden);?>
 					<div class="form-group">
-					<?php echo form_label('Phone', 'phone');
+					<?php echo form_label('Email', 'email');
 					echo form_input(array(
-						'name'=>'phone',
+						'name'=>'email',
 						'class'=>'form-control',
-						'id'=>'phone',
-						'placeholder'=>'Phone',
+						'id'=>'email',
+						'placeholder'=>'Email',
 						'autofocus'=>'autofocus',
 						'onFocus'=>'this.select();',
-						'value'=>$dtedit->phone
+						'value'=>$dtedit->email
 					));
-					?>
-					</div>
+					?></div>
 					<div class="form-group">
 						<?php 
 							echo form_submit('next', ' Next','class="btn btn-info pull-right"'); 
@@ -390,19 +399,19 @@
 			<?php
 				$hidden=array(
 					'ac'=>'level_7',
-					'id'=>$dtedit->id
+					'id'=> $dtedit->id
 				);
-				echo form_open('portalcibinong/action','id="portalcibinong" method="get"',$hidden); ?>
+				echo form_open('portalcibinong/action','id="portalcibinong" method="get"',$hidden);?>
 					<div class="form-group">
-					<?php echo form_label('Website', 'website');
+					<?php echo form_label('Phone', 'phone');
 					echo form_input(array(
-						'name'=>'website',
+						'name'=>'phone',
 						'class'=>'form-control',
-						'id'=>'website',
-						'placeholder'=>'Website',
+						'id'=>'phone',
+						'placeholder'=>'Phone',
 						'autofocus'=>'autofocus',
 						'onFocus'=>'this.select();',
-						'value'=>$dtedit->website
+						'value'=>$dtedit->phone
 					));
 					?>
 					</div>
@@ -466,6 +475,78 @@
 				);
 				echo form_open('portalcibinong/action','id="portalcibinong" method="get"',$hidden); ?>
 					<div class="form-group">
+					<?php echo form_label('Website', 'website');
+					echo form_input(array(
+						'name'=>'website',
+						'class'=>'form-control',
+						'id'=>'website',
+						'placeholder'=>'Website',
+						'autofocus'=>'autofocus',
+						'onFocus'=>'this.select();',
+						'value'=>$dtedit->website
+					));
+					?>
+					</div>
+					<div class="form-group">
+						<?php 
+							echo form_submit('next', ' Next','class="btn btn-info pull-right"'); 
+						?>
+					</div>
+					<?php
+					echo form_close(); 
+					?>
+			</div>
+		</div>
+	</div>
+	<!-- /.box-body -->
+	<div class="box-footer">
+		Footer
+	</div>
+	<!-- /.box-footer-->
+</div>
+<!-- /.box -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+<?php elseif($for=='level_8'): ?>
+	<!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Level 8
+        <small>it all starts here</small>
+      </h1>
+      <ol class="breadcrumb">
+		<?php foreach($breadcrumb as $key => $value): ?>
+			<li <?php echo ($value[1]=="") ? "":$value[1]; ?>><?php echo $value[0]; ?></li>
+		<?php endforeach; ?>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+		<!-- Default box -->
+<div class="box">
+	<div class="box-header with-border">
+		<h3 class="box-title"><?php echo $judul; ?></h3>
+
+		<div class="box-tools pull-right">
+			<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
+			<button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
+		</div>
+	</div>
+	<div class="box-body">
+		<div class="row">
+			<div class="col-md-12">
+			<?php
+				$hidden=array(
+					'ac'=>'level_9',
+					'id'=>$dtedit->id
+				);
+				echo form_open('portalcibinong/action','id="portalcibinong" method="get"',$hidden); ?>
+					<div class="form-group">
 					<?php echo form_label('Facebook ', 'facebook');
 					echo form_input(array(
 						'name'=>'facebook',
@@ -478,74 +559,36 @@
 					));
 					?></div>
 					<div class="form-group">
-						<?php 
-							echo form_submit('next', ' Next','class="btn btn-info pull-right"'); 
-						?>
-					</div>
-					<?php
-					echo form_close(); 
-					?>
-			</div>
-		</div>
-	</div>
-	<!-- /.box-body -->
-	<div class="box-footer">
-		Footer
-	</div>
-	<!-- /.box-footer-->
-</div>
-<!-- /.box -->
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-<?php elseif($for=='level_8'): ?>
-	<!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Level 8
-        <small>it all starts here</small>
-      </h1>
-      <ol class="breadcrumb">
-		<?php foreach($breadcrumb as $key => $value): ?>
-			<li <?php echo ($value[1]=="") ? "":$value[1]; ?>><?php echo $value[0]; ?></li>
-		<?php endforeach; ?>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-		<!-- Default box -->
-<div class="box">
-	<div class="box-header with-border">
-		<h3 class="box-title"><?php echo $judul; ?></h3>
-
-		<div class="box-tools pull-right">
-			<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
-			<button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
-		</div>
-	</div>
-	<div class="box-body">
-		<div class="row">
-			<div class="col-md-12">
-			<?php
-				$hidden=array(
-					'ac'=>'level_9',
-					'id'=>$dtedit->id
-				);
-				echo form_open('portalcibinong/action','id="portalcibinong" method="get"',$hidden); ?>
-					<div class="form-group">
 					<?php echo form_label('Instagram ', 'instagram');
 					echo form_input(array(
 						'name'=>'instagram',
 						'class'=>'form-control',
 						'id'=>'instagram',
 						'placeholder'=>'Instagram',
-						'autofocus'=>'autofocus',
 						'onFocus'=>'this.select();',
 						'value'=>$dtedit->instagram
+					));
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('Youtube ', 'youtube');
+					echo form_input(array(
+						'name'=>'youtube',
+						'class'=>'form-control',
+						'id'=>'youtube',
+						'placeholder'=>'Youtube',
+						'onFocus'=>'this.select();',
+						'value'=>$dtedit->youtube
+					));
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('Lain-Lain ', 'twitter');
+					echo form_input(array(
+						'name'=>'twitter',
+						'class'=>'form-control',
+						'id'=>'twitter',
+						'placeholder'=>'Lain-Lain ',
+						'onFocus'=>'this.select();',
+						'value'=>$dtedit->twitter
 					));
 					?></div>
 					<div class="form-group">
@@ -570,7 +613,7 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-<?php elseif($for=='level_8'): ?>
+<?php elseif($for=='level_9'): ?>
 	<!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -603,20 +646,44 @@
 			<div class="col-md-12">
 			<?php
 				$hidden=array(
-					'ac'=>'level_9',
+					'ac'=>'edit_2',
 					'id'=>$dtedit->id
 				);
-				echo form_open('portalcibinong/action','id="portalcibinong" method="get"',$hidden); ?>
+				echo form_open('portalcibinong/simpan','id="portalcibinong"',$hidden); ?>
 					<div class="form-group">
-					<?php echo form_label('Instagram ', 'instagram');
-					echo form_input(array(
-						'name'=>'instagram',
+					<?php echo form_label('Alamat', 'alamat');
+					echo form_textarea(array(
+						'name'=>'alamat',
 						'class'=>'form-control',
-						'id'=>'instagram',
-						'placeholder'=>'Instagram',
+						'id'=>'alamat',
+						'placeholder'=>'Alamat',
 						'autofocus'=>'autofocus',
 						'onFocus'=>'this.select();',
-						'value'=>$dtedit->instagram
+						'value'=>$dtedit->alamat
+					));
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('latitude ', 'latitude');
+					echo form_input(array(
+						'name'=>'latitude',
+						'class'=>'form-control',
+						'id'=>'latitude',
+						'placeholder'=>'latitude',
+						'autofocus'=>'autofocus',
+						'onFocus'=>'this.select();',
+						'value'=>$dtedit->latitude
+					));
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('Longitude ', 'longitude');
+					echo form_input(array(
+						'name'=>'longitude',
+						'class'=>'form-control',
+						'id'=>'longitude',
+						'placeholder'=>'Longitude',
+						'autofocus'=>'autofocus',
+						'onFocus'=>'this.select();',
+						'value'=>$dtedit->longitude
 					));
 					?></div>
 					<div class="form-group">
@@ -673,11 +740,16 @@
 		<div class="row">
 			<div class="col-md-12">
 			<?php
-				$hidden=array(
+				/*$hidden=array(
 					'ac'=>'level_10',
 					'id'=>$dtedit->id
 				);
-				echo form_open('portalcibinong/action','id="portalcibinong" method="get"',$hidden); ?>
+				echo form_open('portalcibinong/action','id="portalcibinong" method="get"',$hidden); */
+				$hidden=array(
+					'ac'=>'edit_2',
+					'id'=>$dtedit->id
+				);
+				echo form_open('portalcibinong/simpan','id="portalcibinong"',$hidden); ?>
 					<div class="form-group">
 					<?php echo form_label('Alamat', 'alamat');
 					echo form_textarea(array(
@@ -688,6 +760,30 @@
 						'autofocus'=>'autofocus',
 						'onFocus'=>'this.select();',
 						'value'=>$dtedit->alamat
+					));
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('latitude ', 'latitude');
+					echo form_input(array(
+						'name'=>'latitude',
+						'class'=>'form-control',
+						'id'=>'latitude',
+						'placeholder'=>'latitude',
+						'autofocus'=>'autofocus',
+						'onFocus'=>'this.select();',
+						'value'=>$dtedit->latitude
+					));
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('Longitude ', 'longitude');
+					echo form_input(array(
+						'name'=>'longitude',
+						'class'=>'form-control',
+						'id'=>'longitude',
+						'placeholder'=>'Longitude',
+						'autofocus'=>'autofocus',
+						'onFocus'=>'this.select();',
+						'value'=>$dtedit->longitude
 					));
 					?></div>
 					<div class="form-group">

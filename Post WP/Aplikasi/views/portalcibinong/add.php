@@ -113,7 +113,7 @@
 					echo form_input(array(
 						'type'=>'text',
 						'name'=>'Latitude',
-						'value'=>$dtedit->Latitude,
+						'value'=>$dtedit->latitude,
 						'class'=>'form-control',
 						'id'=>'Latitude',
 						'placeholder'=>'Latitude'
@@ -125,7 +125,7 @@
 					echo form_input(array(
 						'type'=>'text',
 						'name'=>'Longitude',
-						'value'=>$dtedit->Longitude,
+						'value'=>$dtedit->longitude,
 						'class'=>'form-control',
 						'id'=>'Longitude',
 						'placeholder'=>'Longitude'
@@ -187,6 +187,7 @@
 						'name'=>'email',
 						'value'=>$dtedit->email,
 						'class'=>'form-control',
+						'required'=>'required',
 						'id'=>'email',
 						'placeholder'=>'Email'
 						)
@@ -366,7 +367,7 @@
 					<?php echo form_label('Latitude', 'Latitude');
 					echo form_input(array(
 						'type'=>'text',
-						'name'=>'Latitude',
+						'name'=>'latitude',
 						'value'=>'',
 						'class'=>'form-control',
 						'id'=>'Latitude',
@@ -378,7 +379,7 @@
 					<?php echo form_label('Longitude', 'Longitude');
 					echo form_input(array(
 						'type'=>'text',
-						'name'=>'Longitude',
+						'name'=>'longitude',
 						'value'=>'',
 						'class'=>'form-control',
 						'id'=>'Longitude',
@@ -441,6 +442,7 @@
 						'name'=>'email',
 						'value'=>'',
 						'class'=>'form-control',
+						'required'=>'required',
 						'id'=>'email',
 						'placeholder'=>'Email'
 						)

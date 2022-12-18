@@ -224,24 +224,6 @@ class Portalcibinong extends CI_Controller {
 				$lempar['menu']=view_one('menu/menu',$dtmenu);
 				$this->load->view('template/blog_plain',$lempar);
 			break;
-			case 'level_5':
-				$dt=array(
-					'judul'=>'Portalcibinong',
-					'for'=>'level_5',
-					'id'=>$id,
-					'breadcrumb'=>array(
-						array(anchor('','Home'),''),
-						array(anchor('Portalcibinong',' Portalcibinong'),''),
-						array('Ubah','class="active"')
-					),						
-					'dtedit'=>$this->M_general->getEdit('Portalcibinong',$id),
-				);
-				$dtmenu['menu']=array('Portalcibinong','Portalcibinong_3');
-				$dtmenu['role']=0;
-				$lempar['isi']=view_one('Portalcibinong/rekap',$dt);
-				$lempar['menu']=view_one('menu/menu',$dtmenu);
-				$this->load->view('template/blog_plain',$lempar);
-			break;
 			case 'level_4':
 				$dt=array(
 					'judul'=>'Portalcibinong',
@@ -249,14 +231,32 @@ class Portalcibinong extends CI_Controller {
 					'id'=>$id,
 					'breadcrumb'=>array(
 						array(anchor('','Home'),''),
-						array(anchor('Portalcibinong',' Portalcibinong'),''),
+						array(anchor('portalcibinong',' Portalcibinong'),''),
 						array('Ubah','class="active"')
 					),						
-					'dtedit'=>$this->M_general->getEdit('Portalcibinong',$id),
+					'dtedit'=>$this->M_general->getEdit('portalcibinong',$id),
 				);
-				$dtmenu['menu']=array('Portalcibinong','Portalcibinong_3');
+				$dtmenu['menu']=array('portalcibinong','portalcibinong_3');
 				$dtmenu['role']=0;
-				$lempar['isi']=view_one('Portalcibinong/rekap',$dt);
+				$lempar['isi']=view_one('portalcibinong/rekap',$dt);
+				$lempar['menu']=view_one('menu/menu',$dtmenu);
+				$this->load->view('template/blog_plain',$lempar);
+			break;
+			case 'level_5':
+				$dt=array(
+					'judul'=>'Portalcibinong',
+					'for'=>'level_5',
+					'id'=>$id,
+					'breadcrumb'=>array(
+						array(anchor('','Home'),''),
+						array(anchor('Portalcibinong',' portalcibinong'),''),
+						array('Ubah','class="active"')
+					),						
+					'dtedit'=>$this->M_general->getEdit('portalcibinong',$id),
+				);
+				$dtmenu['menu']=array('portalcibinong','portalcibinong_3');
+				$dtmenu['role']=0;
+				$lempar['isi']=view_one('portalcibinong/rekap',$dt);
 				$lempar['menu']=view_one('menu/menu',$dtmenu);
 				$this->load->view('template/blog_plain',$lempar);
 			break;
