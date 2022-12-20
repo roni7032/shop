@@ -294,7 +294,7 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-<?php elseif($for=='level_6'): ?>
+<?php elseif($for=='level_5'): ?>
 	<!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -619,7 +619,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Level 8
+        Level 9
         <small>it all starts here</small>
       </h1>
       <ol class="breadcrumb">
@@ -650,6 +650,18 @@
 					'id'=>$dtedit->id
 				);
 				echo form_open('portalcibinong/simpan','id="portalcibinong"',$hidden); ?>
+					<div class="form-group">
+					<?php echo form_label('Work Hours ', 'work_hours');
+					echo form_input(array(
+						'name'=>'work_hours',
+						'class'=>'form-control',
+						'id'=>'work_hours',
+						'placeholder'=>'Work Hours',
+						'autofocus'=>'autofocus',
+						'onFocus'=>'this.select();',
+						'value'=>$dtedit->work_hours
+					));
+					?></div>
 					<div class="form-group">
 					<?php echo form_label('Alamat', 'alamat');
 					echo form_textarea(array(
