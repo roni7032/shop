@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 27, 2022 at 01:38 AM
+-- Generation Time: Dec 28, 2022 at 02:49 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -603,7 +603,8 @@ INSERT INTO `riwayat_latihan` (`id`, `id_latihan`, `title`, `description`, `crea
 (85, 28, 'Tahap 1', '<ol>\r\n	<li>assets sudah masuk done</li>\r\n	<li>setting codeigniter 3 done</li>\r\n	<li>[em-merah]buat scema aplikasi[/em] =&gt; referensi todolist adminlte3</li>\r\n	<li>[em-merah]buat database[/em]</li>\r\n</ol>\r\n', '2022-12-09 18:30:17', '2022-12-10 01:30:17'),
 (86, 25, 'Link sumber data', '<p><a href=\"https://www.konsula.com/id/tempat-praktek/inDonesia/jawa-barat/rumah-sakit/cibinong\" target=\"_blank\">https://www.konsula.com/id/tempat-praktek/</a></p>\r\n', '2022-12-09 18:47:46', '2022-12-10 02:03:27'),
 (87, 25, 'Link sumber data 1', '<p><a href=\"https://www.konsula.com/id/tempat-praktek/inDonesia/jawa-barat/rumah-sakit/depok?page=1\" target=\"_blank\">https://www.konsula.com/id/tempat-praktek/inDonesia/jawa-barat/rumah-sakit/depok?page=1</a></p>\r\n', '2022-12-15 23:00:09', '2022-12-16 06:00:09'),
-(88, 19, 'Gara2 status', '<p>update users set Status=1 where Status is null</p>\r\n', '2022-12-18 23:59:19', '2022-12-19 06:59:19');
+(88, 19, 'Gara2 status', '<p>update users set Status=1 where Status is null</p>\r\n', '2022-12-18 23:59:19', '2022-12-19 06:59:19'),
+(89, 25, 'template untuk rumah makan, cafe dan resto', '<p>Apabila anda sedang akan melakukan perjalanan panjang atau berada ditrengah perjalanan panjang dan ingin beristirahat sejenak untuk melepas lelahnya perjalanan dan anda berada di wilayah area depok, sangat cocok jika anda mampir dan beristirahat di Tatap Moeka Coffee and Resto - Margonda Raya Depok cafe yang nyaman akses mudah bahkan dengan akses yang mudah bahkan dekat dengan jalan raya tepatnya Jl. Margonda Raya No.451, Pondok Cina, Kecamatan Beji, Kota Depok, Jawa Barat<br />\r\ndengan desain interior yang bagus sehingga nyaman bagi pelanggan untuk berlama-lama disana penerangan yang cukup sehingga tidak masalah jika anda berkujung baik siang maupun malam hari, selain itu anda juga bisa menikmati makanan yang enak dengan harga yang sesuai.</p>\r\n\r\n<p>Tatap Moeka Coffee and Resto - Margonda Raya Depok buka setiap hari kecuali hari senin dari jam 11(sebelas) siang hingga jam 9(sembilan) malam</p>\r\n\r\n<p>pelayanan yang ramah dan menyenangkan akan menjadi pengalaman berharga bagi anda saat berkunjung di tempat ini</p>\r\n', '2022-12-28 00:37:20', '2022-12-28 07:37:20');
 
 -- --------------------------------------------------------
 
@@ -818,7 +819,7 @@ ALTER TABLE `post_meta`
 -- AUTO_INCREMENT for table `riwayat_latihan`
 --
 ALTER TABLE `riwayat_latihan`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 
 --
 -- AUTO_INCREMENT for table `tabels`

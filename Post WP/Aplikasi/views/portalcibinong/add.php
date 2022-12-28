@@ -98,14 +98,20 @@
 					?></div>
 					<div class="form-group">
 					<?php echo form_label('Alamat', 'alamat');
-					echo form_input(array(
-						'type'=>'text',
+					echo form_textarea(array(
 						'name'=>'alamat',
-						'value'=>$dtedit->alamat,
-						'class'=>'form-control',
-						'id'=>'alamat',
-						'placeholder'=>'Alamat'
-						)
+						'class'=>'form-control','id'=>'alamat',
+						'placeholder'=>'Alamat',
+						'value'=>$dtedit->alamat	)
+					);
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('Work Hours', 'work_hours');
+					echo form_textarea(array(
+						'name'=>'work_hours',
+						'class'=>'form-control','id'=>'work_hours',
+						'placeholder'=>'Work Hours',
+						'value'=>$dtedit->work_hours	)
 					);
 					?></div>
 					<div class="form-group">
@@ -202,18 +208,6 @@
 						'class'=>'form-control',
 						'id'=>'youtube',
 						'placeholder'=>'Youtube'
-						)
-					);
-					?></div>
-					<div class="form-group">
-					<?php echo form_label('Work Hours', 'work_hours');
-					echo form_input(array(
-						'type'=>'text',
-						'name'=>'work_hours',
-						'value'=>$dtedit->work_hours,
-						'class'=>'form-control',
-						'id'=>'work_hours',
-						'placeholder'=>'Work Hours'
 						)
 					);
 					?></div>
@@ -353,13 +347,19 @@
 					?></div>
 					<div class="form-group">
 					<?php echo form_label('Alamat', 'alamat');
-					echo form_input(array(
-						'type'=>'text',
+					echo form_textarea(array(
 						'name'=>'alamat',
-						'value'=>'',
-						'class'=>'form-control',
-						'id'=>'alamat',
-						'placeholder'=>'Alamat'
+						'class'=>'form-control','id'=>'alamat',
+						'placeholder'=>'Alamat'	
+						)
+					);
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('Work Hours', 'work_hours');
+					echo form_textarea(array(
+						'name'=>'work_hours',
+						'class'=>'form-control','id'=>'work_hours',
+						'placeholder'=>'Work Hours'	
 						)
 					);
 					?></div>
@@ -457,18 +457,6 @@
 						'class'=>'form-control',
 						'id'=>'youtube',
 						'placeholder'=>'Youtube'
-						)
-					);
-					?></div>
-					<div class="form-group">
-					<?php echo form_label('Work Hours', 'work_hours');
-					echo form_input(array(
-						'type'=>'text',
-						'name'=>'work_hours',
-						'value'=>'',
-						'class'=>'form-control',
-						'id'=>'work_hours',
-						'placeholder'=>'Work Hours'
 						)
 					);
 					?></div>

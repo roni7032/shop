@@ -651,8 +651,8 @@
 				);
 				echo form_open('portalcibinong/simpan','id="portalcibinong"',$hidden); ?>
 					<div class="form-group">
-					<?php echo form_label('Work Hours ', 'work_hours');
-					echo form_input(array(
+					<?php echo form_label('Work Hours', 'work_hours');
+					echo form_textarea(array(
 						'name'=>'work_hours',
 						'class'=>'form-control',
 						'id'=>'work_hours',
