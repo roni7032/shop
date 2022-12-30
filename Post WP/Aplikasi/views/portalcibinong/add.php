@@ -212,18 +212,6 @@
 					);
 					?></div>
 					<div class="form-group">
-					<?php echo form_label('cover_img', 'cover_img');
-					echo form_input(array(
-						'type'=>'text',
-						'name'=>'cover_img',
-						'value'=>$dtedit->cover_img,
-						'class'=>'form-control',
-						'id'=>'cover_img',
-						'placeholder'=>'cover_img'
-						)
-					);
-					?></div>
-					<div class="form-group">
 					<?php echo form_label('Instagram', 'instagram');
 					echo form_input(array(
 						'type'=>'text',
@@ -232,18 +220,6 @@
 						'class'=>'form-control',
 						'id'=>'instagram',
 						'placeholder'=>'Instagram'
-						)
-					);
-					?></div>
-					<div class="form-group">
-					<?php echo form_label('logo_img', 'logo_img');
-					echo form_input(array(
-						'type'=>'text',
-						'name'=>'logo_img',
-						'value'=>$dtedit->logo_img,
-						'class'=>'form-control',
-						'id'=>'logo_img',
-						'placeholder'=>'logo_img'
 						)
 					);
 					?></div>
@@ -264,6 +240,38 @@
 						'class'=>'form-control',
 						'id'=>'tags',
 						'placeholder'=>'Tags'
+						)
+					);
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('logo_img', 'logo_img');
+					echo form_input(array(
+						'type'=>'text',
+						'name'=>'logo_img',
+						'value'=>isset($dtedit->logo_img) ? $dtedit->logo_img:'logo_'.($id-1),
+						'class'=>'form-control',
+						'id'=>'logo_img',
+						'placeholder'=>'logo_img'
+						)
+					);
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('cover_img', 'cover_img');
+					$arr_1=array();
+					for($i=0;$i<7;$i++){
+						if($i==-0){
+							$arr_1[]='cover_'.$i.'_'.($id-1);
+						}else{
+							$arr_1[]='galeri_'.$i.'_'.($id-1);
+						}
+					}
+					echo form_input(array(
+						'type'=>'text',
+						'name'=>'cover_img',
+						'value'=>isset($dtedit->cover_img) ? $dtedit->cover_img:implode(', ',$arr_1),
+						'class'=>'form-control',
+						'id'=>'cover_img',
+						'placeholder'=>'cover_img'
 						)
 					);
 					?></div>
@@ -310,38 +318,6 @@
 						'name'=>'description',
 						'class'=>'form-control','id'=>'description',
 						'placeholder'=>'Description'
-						)
-					);
-					?></div>
-					<div class="form-group">
-					<?php echo form_label('cover_img', 'cover_img');
-					$arr_1=array();
-					for($i=0;$i<7;$i++){
-						if($i==-0){
-							$arr_1[]='cover_'.$i.'_'.$dtJml;
-						}else{
-							$arr_1[]='galeri_'.$i.'_'.$dtJml;
-						}
-					}
-					echo form_input(array(
-						'type'=>'text',
-						'name'=>'cover_img',
-						'value'=>implode(', ',$arr_1),
-						'class'=>'form-control',
-						'id'=>'cover_img',
-						'placeholder'=>'cover_img'
-						)
-					);
-					?></div>
-					<div class="form-group">
-					<?php echo form_label('logo_img', 'logo_img');
-					echo form_input(array(
-						'type'=>'text',
-						'name'=>'logo_img',
-						'value'=>'logo_'.$dtJml,
-						'class'=>'form-control',
-						'id'=>'logo_img',
-						'placeholder'=>'logo_img'
 						)
 					);
 					?></div>
@@ -491,6 +467,38 @@
 						$arr[$value->id]=$value->nama;
 					}
 					echo form_dropdown('category',$arr,'','class="form-control" id="category" ');
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('logo_img', 'logo_img');
+					echo form_input(array(
+						'type'=>'text',
+						'name'=>'logo_img',
+						'value'=>'logo_'.$dtJml,
+						'class'=>'form-control',
+						'id'=>'logo_img',
+						'placeholder'=>'logo_img'
+						)
+					);
+					?></div>
+					<div class="form-group">
+					<?php echo form_label('cover_img', 'cover_img');
+					$arr_1=array();
+					for($i=0;$i<7;$i++){
+						if($i==-0){
+							$arr_1[]='cover_'.$i.'_'.$dtJml;
+						}else{
+							$arr_1[]='galeri_'.$i.'_'.$dtJml;
+						}
+					}
+					echo form_input(array(
+						'type'=>'text',
+						'name'=>'cover_img',
+						'value'=>implode(', ',$arr_1),
+						'class'=>'form-control',
+						'id'=>'cover_img',
+						'placeholder'=>'cover_img'
+						)
+					);
 					?></div>
 					<div class="form-group">
 					<?php 

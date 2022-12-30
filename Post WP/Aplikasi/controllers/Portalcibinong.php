@@ -444,7 +444,7 @@ class Portalcibinong extends CI_Controller {
 				);
 				$this->M_general->updateData('portalcibinong',$dtsave,$id);
 				
-				redirect($table.'/action?ac=edit&id='.$id);
+				redirect($table.'/action?ac=edit&id='.($id+1));
 			break;
 			case 'edit_1':
 				$cari_url_x=array('https://www.closecrowds.com/');

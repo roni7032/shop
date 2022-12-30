@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 28, 2022 at 02:49 AM
+-- Generation Time: Dec 30, 2022 at 02:22 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -604,7 +604,9 @@ INSERT INTO `riwayat_latihan` (`id`, `id_latihan`, `title`, `description`, `crea
 (86, 25, 'Link sumber data', '<p><a href=\"https://www.konsula.com/id/tempat-praktek/inDonesia/jawa-barat/rumah-sakit/cibinong\" target=\"_blank\">https://www.konsula.com/id/tempat-praktek/</a></p>\r\n', '2022-12-09 18:47:46', '2022-12-10 02:03:27'),
 (87, 25, 'Link sumber data 1', '<p><a href=\"https://www.konsula.com/id/tempat-praktek/inDonesia/jawa-barat/rumah-sakit/depok?page=1\" target=\"_blank\">https://www.konsula.com/id/tempat-praktek/inDonesia/jawa-barat/rumah-sakit/depok?page=1</a></p>\r\n', '2022-12-15 23:00:09', '2022-12-16 06:00:09'),
 (88, 19, 'Gara2 status', '<p>update users set Status=1 where Status is null</p>\r\n', '2022-12-18 23:59:19', '2022-12-19 06:59:19'),
-(89, 25, 'template untuk rumah makan, cafe dan resto', '<p>Apabila anda sedang akan melakukan perjalanan panjang atau berada ditrengah perjalanan panjang dan ingin beristirahat sejenak untuk melepas lelahnya perjalanan dan anda berada di wilayah area depok, sangat cocok jika anda mampir dan beristirahat di Tatap Moeka Coffee and Resto - Margonda Raya Depok cafe yang nyaman akses mudah bahkan dengan akses yang mudah bahkan dekat dengan jalan raya tepatnya Jl. Margonda Raya No.451, Pondok Cina, Kecamatan Beji, Kota Depok, Jawa Barat<br />\r\ndengan desain interior yang bagus sehingga nyaman bagi pelanggan untuk berlama-lama disana penerangan yang cukup sehingga tidak masalah jika anda berkujung baik siang maupun malam hari, selain itu anda juga bisa menikmati makanan yang enak dengan harga yang sesuai.</p>\r\n\r\n<p>Tatap Moeka Coffee and Resto - Margonda Raya Depok buka setiap hari kecuali hari senin dari jam 11(sebelas) siang hingga jam 9(sembilan) malam</p>\r\n\r\n<p>pelayanan yang ramah dan menyenangkan akan menjadi pengalaman berharga bagi anda saat berkunjung di tempat ini</p>\r\n', '2022-12-28 00:37:20', '2022-12-28 07:37:20');
+(89, 25, 'template untuk rumah makan, cafe dan resto', '<p>Apabila anda sedang akan melakukan perjalanan panjang atau berada ditrengah perjalanan panjang dan ingin beristirahat sejenak untuk melepas lelahnya perjalanan dan anda berada di wilayah area depok, sangat cocok jika anda mampir dan beristirahat di Tatap Moeka Coffee and Resto - Margonda Raya Depok cafe yang nyaman akses mudah bahkan dengan akses yang mudah bahkan dekat dengan jalan raya tepatnya Jl. Margonda Raya No.451, Pondok Cina, Kecamatan Beji, Kota Depok, Jawa Barat<br />\r\ndengan desain interior yang bagus sehingga nyaman bagi pelanggan untuk berlama-lama disana penerangan yang cukup sehingga tidak masalah jika anda berkujung baik siang maupun malam hari, selain itu anda juga bisa menikmati makanan yang enak dengan harga yang sesuai.</p>\r\n\r\n<p>Tatap Moeka Coffee and Resto - Margonda Raya Depok buka setiap hari kecuali hari senin dari jam 11(sebelas) siang hingga jam 9(sembilan) malam</p>\r\n\r\n<p>pelayanan yang ramah dan menyenangkan akan menjadi pengalaman berharga bagi anda saat berkunjung di tempat ini</p>\r\n', '2022-12-28 00:37:20', '2022-12-28 07:37:20'),
+(90, 25, 'Progres pekerja', '<table border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"width:500px\">\r\n	<thead>\r\n		<tr>\r\n			<th scope=\"col\">Pekerja</th>\r\n			<th scope=\"col\">Jumlah</th>\r\n		</tr>\r\n	</thead>\r\n	<tbody>\r\n		<tr>\r\n			<td>Tegar</td>\r\n			<td>5</td>\r\n		</tr>\r\n		<tr>\r\n			<td>ais</td>\r\n			<td>0</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<p>&nbsp;</p>\r\n', '2022-12-29 21:58:26', '2022-12-30 04:58:26'),
+(91, 25, 'template untuk jasa', '<p>Limatiga Studio Jasa Photography &amp; Rental Studio Photo adalah salah satu studio photo yang ada di depok studio photo ini berada di Jl. Ridwan Rais No.53, Beji Tim., Kecamatan Beji, Kota Depok, Jawa Barat tempat yang strategis peralatan photo lengkap dan tenaga photografer yang profesional menjadikan studio photo ini siap bersaing dengan studio photo-studio photo lain yang ada di kota depok.</p>\r\n\r\n<p>Limatiga Studio Jasa Photography &amp; Rental Studio Photo melayani untuk decumentasi wedding, wisuda, photo keluarga dan lain sebagainya hasil photo yang dihasilkan oleh Limatiga Studio Jasa Photography &amp; Rental Studio Photo bisa anda cek di website resminya atau di facebook dan instagram resmi dari Limatiga Studio Jasa Photography &amp; Rental Studio Photo</p>\r\n\r\n<p>Limatiga Studio Jasa Photography &amp; Rental Studio Photo sangat kami rekomendasikan untuk hasil photo yang bagus dan tentunya tidak akan membuat anda kecewa</p>\r\n', '2022-12-30 00:53:43', '2022-12-30 07:53:43');
 
 -- --------------------------------------------------------
 
@@ -819,7 +821,7 @@ ALTER TABLE `post_meta`
 -- AUTO_INCREMENT for table `riwayat_latihan`
 --
 ALTER TABLE `riwayat_latihan`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- AUTO_INCREMENT for table `tabels`
