@@ -43,6 +43,13 @@
 		<li <?php echo (in_array('portalcibinong_3',$menu)) ? 'class="active"':''; ?> ><a href="<?php echo site_url('portalcibinong/action?ac=add'); ?>"><i class="fa fa-circle-o"></i> Tambah</a></li>
 	  </ul>
 	</li>
+	<li class="treeview <?php echo (in_array('bermacam',$menu)) ? 'active':''; ?>">
+	  <a href="#"><i class="fa fa-dashboard"></i> <span>Bermacam</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
+	  <ul class="treeview-menu">
+		<li <?php echo (in_array('bermacam',$menu)) ? 'class="active"':''; ?>><a href="<?php echo site_url('bermacam'); ?>"><i class="fa fa-circle-o"></i> Semua data</a></li>
+		<li <?php echo (in_array('bermacam_1',$menu)) ? 'class="active"':''; ?>><a href="<?php echo site_url('bermacam/action?ac=add'); ?>"><i class="fa fa-circle-o"></i> Tambah</a></li>
+	  </ul>
+	</li>
 </ul>
 <?php elseif($role==1): ?>
 <ul class="sidebar-menu" data-widget="tree">

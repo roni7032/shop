@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 03, 2023 at 01:31 AM
+-- Generation Time: Jan 11, 2023 at 01:40 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -237,7 +237,8 @@ INSERT INTO `latihan` (`id`, `title`, `description`, `createAt`) VALUES
 (25, 'Data Entry, portalcibinong.com', '<p>referensi IG : @cibinongviral</p>\r\n\r\n<blockquote>\r\n<p><a href=\"https://portalcibinong.com/my-account/\" target=\"_blank\">portalcibinong.com</a></p>\r\n\r\n<p>user : admin</p>\r\n\r\n<p>password : P3matangsiantar&nbsp; ==&gt;&nbsp; P3k4nB4ru$,?.</p>\r\n</blockquote>\r\n', '2022-11-13 21:57:48'),
 (26, 'Buat Kran Dirumah', '<p>Sambungan kran<br />\r\nselang mesin cuci<br />\r\nStop kran selang<br />\r\nholder shower</p>\r\n', '2022-11-13 23:38:28'),
 (27, 'Bid Projects', '<p>Menawar projects di internet</p>\r\n', '2022-11-21 22:48:56'),
-(28, 'Proyek Faqih', '<h1>Faqih Project</h1>\r\n\r\n<p>Faqih project adalah aplikasi untuk memantau pengerjaan suatu proyek dari tahap perencanaan, pembuatan dan pengetesan</p>\r\n\r\n<hr />\r\n<p>Pengertian proyek secara umum adalah suatu pekerjaan yang tidak bersifat permanen atau jangka pendek dengan waktu penyelesaian yang telah ditentukan dengan tujuan tertentu. misalkan proyek pembangunan jalan raya pembuatan aplikasi dan lain sebagainya.</p>\r\n\r\n<p>saya akan berfokus pada pengerjaan aplikasi.</p>\r\n\r\n<p>dari pengalaman saya pembuatan aplikasi itu ada 3 tahapan penting</p>\r\n\r\n<ol>\r\n	<li>Templating</li>\r\n	<li>Pengerjaan</li>\r\n	<li>Testing</li>\r\n</ol>\r\n', '2022-12-08 00:07:44');
+(28, 'Proyek Faqih', '<h1>Faqih Project</h1>\r\n\r\n<p>Faqih project adalah aplikasi untuk memantau pengerjaan suatu proyek dari tahap perencanaan, pembuatan dan pengetesan</p>\r\n\r\n<hr />\r\n<p>Pengertian proyek secara umum adalah suatu pekerjaan yang tidak bersifat permanen atau jangka pendek dengan waktu penyelesaian yang telah ditentukan dengan tujuan tertentu. misalkan proyek pembangunan jalan raya pembuatan aplikasi dan lain sebagainya.</p>\r\n\r\n<p>saya akan berfokus pada pengerjaan aplikasi.</p>\r\n\r\n<p>dari pengalaman saya pembuatan aplikasi itu ada 3 tahapan penting</p>\r\n\r\n<ol>\r\n	<li>Templating</li>\r\n	<li>Pengerjaan</li>\r\n	<li>Testing</li>\r\n</ol>\r\n', '2022-12-08 00:07:44'),
+(29, 'bermacam.com/wp-admin', '<p>login <a href=\"https://bermacam.com/wp-admin\" target=\"_blank\">bermacam.com/wp-admin</a><br />\r\nadmin<br />\r\nprojects.co.id</p>\r\n', '2023-01-10 16:25:45');
 
 -- --------------------------------------------------------
 
@@ -288,7 +289,8 @@ INSERT INTO `latihan_category` (`id_latihan`, `id_category`) VALUES
 (27, 2),
 (28, 8),
 (19, 8),
-(25, 23);
+(25, 23),
+(29, 23);
 
 -- --------------------------------------------------------
 
@@ -799,7 +801,7 @@ ALTER TABLE `group_ganti_text`
 -- AUTO_INCREMENT for table `latihan`
 --
 ALTER TABLE `latihan`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `post`
