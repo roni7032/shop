@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 11, 2023 at 01:39 AM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 8.0.12
+-- Generation Time: Jan 11, 2023 at 10:25 AM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.0.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -71,7 +71,56 @@ INSERT INTO `bermacam` (`id`, `judul`, `done`) VALUES
 (31, 'Perbedaan Britama dan Britama X BRI', 0),
 (32, 'Kelebihan dan Kekurangan Oppo A95', 0),
 (33, 'Kelebihan dan Kekurangan Realme Narzo 50i', 0),
-(34, 'Kelebihan dan Kekurangan Realme Narzo 50A', 0);
+(34, 'Kelebihan dan Kekurangan Realme Narzo 50A', 0),
+(35, 'Kelebihan dan Kekurangan Oppo Reno 7 Pro 5G', 0),
+(36, 'Kelebihan dan Kekurangan Oppo Reno 7 5G', 0),
+(37, 'Cinta Ditolak, Sajam Dodos Sawit Bicara Kepada Calon Mertua', 0),
+(38, 'Spesifikasi Vivo Y55s 5G, Baterai Paling Besar', 0),
+(39, 'Bahagiamu Bukanlah Bahagiaku, Puisi Sedih Menguras Air Mata', 0),
+(40, 'Maaf, Aku Melangkah Ya, Puisi Cinta Sedih Untuk Mantan', 0),
+(41, 'Perbedaan Umpama dan Umpasa Batak Toba dan Contohnya', 0),
+(42, 'Jenis Tabungan BRI Britama, Syarat dan Penjelasannya', 0),
+(43, 'Cara Mengurus ATM Tertelan di Perantauan Beda Domisili dengan KTP', 0),
+(44, 'Cara Jadi Dropshipper di Marketplace Shopee, Tokopedia, Lazada, Bukalapak', 0),
+(45, 'Kits DLS PSCS Cilacap dan Logo Terbaru', 0),
+(46, 'Kits DLS Deltras FC and Logo Terbaru', 0),
+(47, 'Kits DLS Persitara Jakarta Utara and Logo Terbaru', 0),
+(48, 'Kits DLS AHHA PS Pati dan Logo Terbaru', 0),
+(49, 'Kits DLS Persiba Balikpapan dan Logo Terbaru', 0),
+(50, 'Cara Menyesuaikan Speaker dengan Amplifiernya', 0),
+(51, 'Kerusakan Umum Regulator TV China', 0),
+(52, 'Cara Menghitung Daya Speaker dan Daya Power Amplifier Supaya Output Mantap', 0),
+(53, 'Daya Transistor Power Ampifier Jenis SANKEN', 0),
+(54, 'Kit DLS Batavia Union FC and Logo Terbaru', 0),
+(55, 'Kit DLS Persema Malang and Logo Terbaru', 0),
+(56, 'Kit DLS Persiraja Banda Aceh and Logo Terbaru', 0),
+(57, 'Kit DLS Persewar Waropen and Logo Terbaru', 0),
+(58, 'Kit DLS Semen Padang FC dan Logo Terbaru', 0),
+(59, 'Kit DLS Bali United dan Logo Terbaru', 0),
+(60, 'Kit DLS PSIM Jogja dan Logo Terbaru', 0),
+(61, 'Kit DLS Persijap Jepara FC dan Logo Terbaru', 0),
+(62, 'Script Emote FF 20Jt Rampage Terbaru Belum Rilis Bisa Dilihat Musuh', 0),
+(63, 'Kelebihan dan Kekurangan Infinix Note 11 Pro Indonesia', 0),
+(64, 'Spesifikasi Oppo A95 dan Harga', 0),
+(65, 'Kelebihan dan Kekurangan Realme 8i', 0),
+(66, 'Kelebihan dan Kekurangan Realme C25Y', 0),
+(67, 'Biaya Penanganan Shopee COD Mahal Untuk Pembeli', 0),
+(68, 'Kelebihan Vivo V23e dan Spesifikasi', 0),
+(69, 'Cara Mengamankan Wordpress', 0),
+(70, 'Cara Meningkatkan Kapasitas Size Maksimum Upload File Wordpress', 0),
+(71, 'Cara Instal Ulang Core Wordpress Tanpa Kehilangan Postingan', 0),
+(72, 'Spesifikasi Realme 8i, Resmi Meluncur di Indonesia', 0),
+(73, 'Kelebihan Realme C25Y dan Spesifikasi', 0),
+(74, 'Kekurangan Vivo V23e dan Harga', 0),
+(75, 'Kekurangan Realme C25Y dan Harga', 0),
+(76, 'Oppo Find X4 Pro, Kabar dan Progress Terbaru', 0),
+(77, 'Sensor Kamera Samsung 200MP, Dibuat tapi Tidak Digunakan', 0),
+(78, 'Bocoran Spesifikasi Oppo Reno 7 Series', 0),
+(79, 'Oppo Find X4 Pro Meluncur Awal Tahun', 0),
+(80, 'Xiaomi 12 Bakal Menggunakan Snapdragon 8 Gen 1', 0),
+(81, 'Kelebihan dan Kekurangan Oppo Reno 7 SE 5G', 0),
+(82, 'Kit DLS Madura United dan Logo Terbaru', 0),
+(83, 'Tecno Pova Neo Meluncur, Baterai Badak 120Hz', 0);
 
 -- --------------------------------------------------------
 
@@ -1696,7 +1745,7 @@ ALTER TABLE `suarrid`
 -- AUTO_INCREMENT for table `bermacam`
 --
 ALTER TABLE `bermacam`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT for table `jabatan`
