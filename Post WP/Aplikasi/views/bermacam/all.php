@@ -37,11 +37,12 @@
 			);
 
 			$this->table->set_template($tmp_table);
-			$this->table->set_heading('No.','Judul','Done','Action');
+			$this->table->set_heading('No.','Judul','Judul URL','Done','Action');
 				$no=1;
 				foreach ($data as $key => $value) {
-					$link = anchor('jabatan/action?ac=edit&id='.$value->id,' <i class="fa fa-pencil"></i> Edit','class="btn btn-block btn-warning"');
-					$this->table->add_row($no++,$value->judul,$value->done,$link);
+					$link = anchor('bermacam/action?ac=edit&id='.$value->id,' <i class="fa fa-pencil"></i> Edit','class="btn btn-warning"');
+					$link .= anchor('bermacam/action?ac=level_1&id='.$value->id,' <i class="fa fa-minus"></i>','class="btn btn-success"');
+					$this->table->add_row($no++,$value->judul,$value->judul_url,$value->done,$link);
 				}
 			echo $this->table->generate();
 			?>

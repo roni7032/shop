@@ -45,7 +45,22 @@
 							'value'=>$dtedit->judul,
 							'class'=>'form-control',
 							'id'=>'judul',
+							'autofocus'=>'autofocus',
+							'onFocus'=>'this.select();',
 							'placeholder'=>'Judul'
+							)
+						);
+						?></div>
+						<div class="form-group">
+						<?php echo form_label('Judul Url', 'judul_url');
+						echo form_input(array(
+							'type'=>'text',
+							'name'=>'judul_url',
+							'value'=>str_replace(array(" ",","),array("_","-"),$dtedit->judul),
+							'class'=>'form-control',
+							'id'=>'judul_url',
+							'onFocus'=>'this.select();',
+							'placeholder'=>'Judul Url'
 							)
 						);
 						?></div>

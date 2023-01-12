@@ -42,7 +42,7 @@ class Bermacam extends CI_Controller {
 						array('Tambah','class="active"')
 					),
 				);
-				$dtmenu['menu']=array('bermacam','Bermacam_2');
+				$dtmenu['menu']=array('bermacam','bermacam_2');
 				$dtmenu['role']=0;
 				$lempar['isi']=view_one('bermacam/add',$dt);
 				$lempar['menu']=view_one('menu/menu',$dtmenu);
@@ -60,7 +60,7 @@ class Bermacam extends CI_Controller {
 					),						
 					'dtedit'=>$this->M_general->getEdit('bermacam',$id),
 				);
-				$dtmenu['menu']=array('bermacam','Bermacam_1');
+				$dtmenu['menu']=array('bermacam','bermacam_1');
 				$dtmenu['role']=0;
 				$lempar['isi']=view_one('bermacam/add',$dt);
 				$lempar['menu']=view_one('menu/menu',$dtmenu);
@@ -74,6 +74,60 @@ class Bermacam extends CI_Controller {
 				$dtedit=$this->M_general->getEdit('bermacam',$id);
 				$this->M_general->updateData('bermacam',array('sudah'=>'yes'),$id);
 				redirect($dtedit->link);
+			break;
+			case 'level_1':
+				$dt=array(
+					'judul'=>'bermacam',
+					'for'=>'level_1',
+					'id'=>$id,
+					'breadcrumb'=>array(
+						array(anchor('','Home'),''),
+						array(anchor('bermacam',' Bermacam'),''),
+						array('Ubah','class="active"')
+					),						
+					'dtedit'=>$this->M_general->getEdit('bermacam',$id),
+				);
+				$dtmenu['menu']=array('bermacam','bermacam_1');
+				$dtmenu['role']=0;
+				$lempar['isi']=view_one('bermacam/rekap',$dt);
+				$lempar['menu']=view_one('menu/menu',$dtmenu);
+				$this->load->view('template/blog_plain',$lempar);
+			break;
+			case 'level_2':
+				$dt=array(
+					'judul'=>'bermacam',
+					'for'=>'level_2',
+					'id'=>$id,
+					'breadcrumb'=>array(
+						array(anchor('','Home'),''),
+						array(anchor('bermacam',' Bermacam'),''),
+						array('Ubah','class="active"')
+					),						
+					'dtedit'=>$this->M_general->getEdit('bermacam',$id)
+				);
+				$dtmenu['menu']=array('bermacam','bermacam_1');
+				$dtmenu['role']=0;
+				$lempar['isi']=view_one('bermacam/rekap',$dt);
+				$lempar['menu']=view_one('menu/menu',$dtmenu);
+				$this->load->view('template/blog_plain',$lempar);
+			break;
+			case 'level_3':
+				$dt=array(
+					'judul'=>'bermacam',
+					'for'=>'level_3',
+					'id'=>$id,
+					'breadcrumb'=>array(
+						array(anchor('','Home'),''),
+						array(anchor('bermacam',' Bermacam'),''),
+						array('Ubah','class="active"')
+					),						
+					'dtedit'=>$this->M_general->getEdit('bermacam',$id),
+				);
+				$dtmenu['menu']=array('bermacam','bermacam_1');
+				$dtmenu['role']=0;
+				$lempar['isi']=view_one('bermacam/rekap',$dt);
+				$lempar['menu']=view_one('menu/menu',$dtmenu);
+				$this->load->view('template/blog_plain',$lempar);
 			break;
 			default:
 				$dt=array(
@@ -114,14 +168,17 @@ class Bermacam extends CI_Controller {
 			break;
 			case 'edit':
 				$dtsave=array(
-					'jml_aktif' => $this->input->post('jml_aktif'),
-					'jml_off' => $this->input->post('jml_off'),
-					'edisi' => $this->input->post('edisi'),
-					'terima_pembayaran' => $this->input->post('terima_pembayaran'),
-					'tgl_terima_pembayaran' => ($this->input->post('tgl_terima_pembayaran')!=='') ? date('Y-m-d',strtotime($this->input->post('tgl_terima_pembayaran'))):null,
-					'posisi_id_lwp' => $this->input->post('posisi_id_lwp'),
+					'judul_url' => $this->input->post('judul_url')
 				);
 				$this->M_general->updateData($table,$dtsave,$id);
+				redirect('bermacam/action?ac=edit&id='.($id-1));
+			break;
+			case 'edit_2':
+				$dtsave=array(
+					'done' => '1'
+				);
+				$this->M_general->updateData($table,$dtsave,$id);
+				redirect('bermacam/action?ac=level_1&id='.($id-1));
 			break;
 			default:
 				
